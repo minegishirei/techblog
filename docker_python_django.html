@@ -4,8 +4,9 @@
 代わりにソースと手順のみを載せました。
 
 
-<pre>
+
 ```
+<pre>
 djangoapp:
   user: root
   build: .
@@ -38,8 +39,8 @@ db:
     - ./db/mysql-init:/docker-entrypoint-initdb.d
     # 永続化するときにマウントするdir
     - ./db/mysql-data:/var/lib/mysql
-```
 </pre>
+```
 
 
 
