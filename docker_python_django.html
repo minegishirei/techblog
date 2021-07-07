@@ -4,7 +4,7 @@
 代わりにソースと手順のみを載せました。
 
 
-`dockerfile
+```dockerfile
 djangoapp:
   user: root
   build: .
@@ -39,7 +39,7 @@ db:
     - ./db/mysql-init:/docker-entrypoint-initdb.d
     # 永続化するときにマウントするdir
     - ./db/mysql-data:/var/lib/mysql
-`
+```
 
 
 
