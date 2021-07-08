@@ -1,0 +1,91 @@
+
+
+        <div id="content">
+          <h1>
+            寿司打をPython3とSeleniumで自動化したお話
+          </h1>
+          <p>
+            <a href="http://typing.sakura.ne.jp/sushida/">寿司打</a>というタイピングゲームをほとんどの人は知っていると思います<br>
+  
+            このゲームはタイピングの練習用のサイトです<br>
+            画面に次々出てくる文字列を素早く正確にタイプし、プレイヤーのタイピングの質を向上させて行きます<br>
+            (なぜ寿司なのかは不明)<br>
+            タイピングの練習用のサイトとしてはかなり有名ですね<br>
+            僕自身もこのゲームを何度か行ったことがあります<br>
+            しかし、うまくタイピングできて千点程度<br>
+            ネット上では一万点を叩き出す人が多いので、あまり高くはない方です<br>
+  
+            <br>
+            <br>
+  
+            しかし、タイピングが得意でなくとも千点を取りたいと思う人も多いはず<br>
+            その要望にお答えして<h3>PythonとSeleniumで自動的に高得点を取るスクリプトを作成しました
+            </h3>
+
+            <iframe width="100%" height="300" src="https://www.youtube.com/embed/kEuQ7LY_Nq0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+          </p>
+          <br>
+          <br>
+  
+          <h2>Seleniumのダウンロード&pythonのseleniumライブラリーのインストール</h2>
+  
+            <p>
+  
+              pythonはダウンロードしてある前提で、<br>
+              まずは、<br>
+              <a href="https://selenium.dev/downloads/">https://selenium.dev/downloads/</a><br>
+              このページからSeleniumのドライバーをインストールし、保存した先のパスを覚えておきましょう！<br>
+  
+              次に<br>
+              pip3 install selenium<br>
+              または<br>
+              このコマンドで、pythonからSeleniumを動かすライブラリを手に入れます<br>
+              このコマンドは少し時間がかかります。
+              <br>
+  
+              <br>
+              次に、ソースコードを作成
+              <br>
+              <script src="https://gist.github.com/MineOwl/417f53ce9041f6ea957c511aa3215bec.js"></script>
+              <br>
+              <br>
+              ここの「/Users/fenganling/Downloads/chromedriver」は自分自身のパスを指定してください！
+              <br>
+              を実行！
+            <br>
+            「念の為」、実行中は必ず機内モード等にしてオフラインにしましょう！<br>
+  
+  
+            <h2>pythonの寿司打自動化コードの解説</h2>
+            <p>
+  <pre><code>
+  actions = ActionChains(driver)
+  clickaction.click()
+  
+  @timeout_decorator.timeout(130)
+  def mainloop():
+    while True:
+      actions.send_keys("abcdefghijklmnopqrstuvwxyz-,").perform()
+                </code></pre>
+              基本的にやっていることは単純ですね<br>
+              「abcdefghijklnmopqrstuvwxyz」の文字列をなんどもなんども繰り返し入力しています<br>
+            </p>
+  
+  
+  
+  
+  
+            <h3>実行結果</h3>
+          
+  <iframe width="100%" height="300" src="https://www.youtube.com/embed/kEuQ7LY_Nq0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <br>
+            おめでとう!!<br>
+  
+            <br>
+  
+  
+  
+  
+        </div>
+  
