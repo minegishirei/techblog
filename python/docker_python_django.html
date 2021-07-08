@@ -1,0 +1,47 @@
+
+##注意
+このサイトには詳しい動作の説明はありません。
+代わりにソースと手順のみを載せました。
+
+
+
+<code>
+<pre>
+djangoapp:
+  user: root
+  build: .
+  dockerfile: "Dockerfile"
+  environment:
+    ENV: DEV
+  ports:
+   - "80:5000"
+  volumes:
+    - ./app:/app
+    - ./God:/God
+  command: ./cmd.sh
+  #command: python3 manage.py runserver 0.0.0.0:5000 
+  links:
+    - redis
+    - db
+db:
+  user: root
+  image: mariadb
+  command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+  environment:
+    MYSQL_ROOT_PASSWORD: rootpw
+    MYSQL_DATABASE: stock_database
+    MYSQL_USER: user
+    MYSQL_PASSWORD: passw0rd
+  ports:
+    - "3306:3306"
+  volumes:
+    # 初期データを投入するSQLが格納されているdir
+    - ./db/mysql-init:/docker-entrypoint-initdb.d
+    # 永続化するときにマウントするdir
+    - ./db/mysql-data:/var/lib/mysql
+</pre>
+</code>
+
+
+title:dockerでpython(django)の環境を作る(サンプルあり)
+description:詳しい説明よりもソースコードを優先したいあなたへ、dockerでpythonとdjangoの環境を作るためのソースコードと手順のみに絞ったサイトです。
