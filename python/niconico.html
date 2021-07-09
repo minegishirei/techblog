@@ -50,6 +50,8 @@ def niconicoRanking():
 
 
 ##コードの説明
+
+###ライブラリのインポート
 まずは必要なライブラリ各種をインストール
 <pre>
     <code>
@@ -58,7 +60,7 @@ from urllib.request import urlopen, quote
     </code>
 </pre>
 
-
+###urlの指定
 そして検索対象のurlですが
 <pre>
     <code>
@@ -70,14 +72,67 @@ url = "https://dic.nicovideo.jp/rank/hours/3/20/all/all"
 その後の
 <pre>
     <code>
-        html = urlopen(url)
-        bsObj = BeautifulSoup(html)
+html = urlopen(url)
+bsObj = BeautifulSoup(html)
     </code>
 </pre>
 はおまじないみたいなものと考えてください。
 
 
+###テーブルの取得
+__重要なのは次のコードです。
+<pre>
+    <code>
+ableObj = bsObj.find("table",{"class":"rank-list"})
+    </code>
+</pre>
+このコードの意味は
+
+<strong>tableタグでclass属性がrank-list</strong>という意味で
+ランキングが記載されいているテーブルタグを取得するという意味です。
+
+実際にサイトのページを見ると、以下のhtmlコードが含まれているはずです。
+
+<img src="https://github.com/kawadasatoshi/img/blob/main/niconico.png?raw=true" alt="ニコニコ大百科,ランキングサイトのhtml">
+上記はニコニコ大百科,ランキングサイトのhtmlです。
+urlにアクセスした後、Ctrl+右クリックから検証でページのソースを見ることができます。
+
+画像内部のtableタグのclassがrank-listのテーブルを取得するところからがスタートです。
+
+
+###for文でtdタグを全て手取り出す。
+その後、ableObj.findAll("td") というコードで全てのtdタグを取得し、for文を使って
+それぞれのタグについてfor文ないで処理します。
+<code>
+    <pre>
+    for column in tableObj.findAll("td"):
+        column = column.get_text()
+        print(column)
+        if "\n\n" in column:
+            continue
+        try:
+            nicoScrapy = NicoScrapy(column)
+            nicoScrapy.run()
+            description = nicoScrapy.getPageInfo()
+        except :
+            description = ""
+        niconico_info_dict.append({
+            "name" :column,
+            "description" : description
+        })
+    </pre>
+</code>
+
+
+###完了！
+
+##いかがだったでしょうか?
+今回はランキングだけですが、リクエストがあればページ内部の情報収集もやるかもしれないです！
+
 
 
 title:ニコニコ大百科の記事をpythonでスクレイピングする(サンプルコードあり)
+
 description:ニコニコ大百科の記事にある人気ランキング、記事のリンク一覧を取得するpythonスクリプトを紹介します。
+
+img:https://github.com/kawadasatoshi/img/blob/main/niconico.png?raw=true
