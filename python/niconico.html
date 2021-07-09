@@ -1,0 +1,59 @@
+
+##pythonでスクレイピング
+主に扱う言語はpython
+
+##スクレイピングで使用するライブラリ
+beautifulsoup4
+urllib
+
+上記のライブラリを
+<code>
+  <pre>
+  pip install beautifulsoup4,urllib
+  </pre>
+</code>
+でインストールしておきましょう
+
+
+##サンプルコード
+
+<code>
+  <pre>
+from bs4 import BeautifulSoup
+from urllib.request import urlopen, quote
+import time
+
+def niconicoRanking():
+    url = "https://dic.nicovideo.jp/rank/hours/3/20/all/all"
+    html = urlopen(url)
+    bsObj = BeautifulSoup(html)
+    tableObj = bsObj.find("table",{"class":"rank-list"})
+    niconico_info_dict = []
+    for column in tableObj.findAll("td"):
+        column = column.get_text()
+        print(column)
+        if "\n\n" in column:
+            continue
+        try:
+            nicoScrapy = NicoScrapy(column)
+            nicoScrapy.run()
+            description = nicoScrapy.getPageInfo()
+        except :
+            description = ""
+        niconico_info_dict.append({
+            "name" :column,
+            "description" : description
+        })
+    return niconico_info_dict
+</pre>
+</code>
+
+
+
+
+
+
+
+
+title:ニコニコ大百科の記事をpythonでスクレイピングする(サンプルコードあり)
+description:ニコニコ大百科の記事にある人気ランキング、記事のリンク一覧を取得するpythonスクリプトを紹介します。
