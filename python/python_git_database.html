@@ -1,0 +1,144 @@
+
+
+##注意
+githubは本来データベースを目的に作られたものではありません。
+
+それゆえ、大量のデータの登録や画像など重たいものの表示はgithubサーバーに負担をかけてしまうことになります。
+
+やりすぎないように注意しましょう。(githubはサイズの上限が決められていたはず)
+
+
+
+##必要なライブラリ一覧(PyGithub)
+
+本サイトではPythonからGithubへアクセスするためにライブラリを使用します。
+
+次のコマンドを使って、PyGithubをインストールしてください
+
+PyGithub
+<code>
+    <pre>
+pip install PyGithub
+    </pre>
+</code>
+
+
+
+##使い方
+
+###upload関数ではファイルを特定のリポジトリにアップロードできます
+has_already_createdでファイルが上がっていないか確認してから実行しましょう
+
+###load関数ではファイルの内容をダウンロードすることができます
+
+###seach_page_list関数ではアップロードしたファイルの全ての内容を取得することができます。
+get_page_listも同様の動きができますが、速度の面では劣ります...
+
+###has_already_createdはすでに同じ名前のファイルがアップロードされているかチェックできます。
+
+
+
+##ソース
+
+早速ソースコードを出します。
+
+
+<code>
+    <pre>
+
+from github import Github
+from urllib.request import urlopen, quote
+import urllib
+from bs4 import BeautifulSoup
+import os
+
+
+credit_key = " your key "
+
+def upload(repo, filename, context):
+    g = Github(credit_key)
+    repo = g.get_user().get_repo(repo)
+    repo.create_file(filename, 'commitmessage', context) 
+
+
+def load(repo,filename):
+    url = "https://raw.githubusercontent.com/kawadasatoshi/" + quote(repo) +"/master/" + quote(filename)
+    response = urlopen(url).read()
+    output = response.decode('utf-8')
+    return output
+
+
+def seach_page_list(repo, folder = None):
+    url = "https://github.com/kawadasatoshi/" + repo 
+    if folder is None:
+        url = "https://github.com/kawadasatoshi/" + repo 
+    else:
+        url = f"https://github.com/kawadasatoshi/{repo}/tree/main/{folder}"
+    html = urlopen(url)
+    bsObj = BeautifulSoup(html)
+    file_list = []
+    flag = False
+    for a_tag in  bsObj.findAll("a"):
+        text = a_tag.get_text()
+        file_list.append(text)
+    return file_list
+
+
+def has_already_created(repo, filename):
+    g = Github(credit_key)
+    repo = g.get_user().get_repo(repo)
+    obj = []
+    try:
+        obj = repo.get_dir_contents(path=filename)
+    except:
+        return False
+    
+    if type(obj) != type(list()):
+        return True
+    else:
+        return False
+
+
+def get_page_list(path="",):
+    #g = Github("kawadasatoshi", "Withyou0114")
+    g = Github(credit_key)
+    repo = g.get_user().get_repo('memo')
+    
+    dir_list = []
+    def get_path(path=""):
+        #ファイルが一つしかないとき                
+        obj = repo.get_dir_contents(path=path)
+
+
+        if type(obj) != type(list()):
+            print(obj)
+            #シングル
+            dir_list.append( path )
+            return
+        else:
+            dir_list.append( path + "/")
+            print(obj)
+            for d in obj:
+                next_path = os.path.join( path , d.name)
+                get_path(next_path)
+        
+    get_path( path)
+
+    return dir_list
+
+def delete_page(repo, filename):
+    g = Github(credit_key)
+    repo = g.get_user().get_repo(repo)
+    contents = repo.get_contents(filename ) #,  ref="test")
+    repo.delete_file(contents.path, "commitmessage" , contents.sha)
+
+
+
+    </pre>
+</code>
+
+
+
+
+title:githubをpythonのデータベースとして使う
+description:pythonの無料のオンラインデータベースを手に入れたいと感じている方へ!githubへ自動的にアップロード,読み込みを行うコードを紹介します！
