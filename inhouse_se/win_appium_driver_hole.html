@@ -1,0 +1,317 @@
+title:WinAppDriverのハマりポイントとその対策
+description:Webスクレイピングにはまってた時代にSelenium
+WebDriverを崇拝していたこともあり、利用してみることにした。AppiumはSeleniumをモデルとしているため、FindElement等の関数名がとてもよく似ていることももあり、基本的には使いやすかったが、違う点もあり、そこが使いにくいところでもあった。WinAppDriver
+UI Recoderは自動でC#のコードを生成してくれますが、必ずと言っていいほどxpathでひっかかります。
+
+
+
+<div id="content">
+
+
+    <h1>
+        WinAppDriverのハマりポイントとその対策
+    </h1>
+    <br>
+    <br>
+    <h2>WinAppDriverを使うきっかけ</h2>
+    <br>
+    <br>
+    バイト先でソフトウェアのテストを担当することになり、自動テストの調査を<br>
+    行っていた時に発見。<br>
+    <br>
+    Webスクレイピングにはまってた時代にSelenium WebDriverを崇拝していたこともあり、利用してみることにした。<br>
+    <br>
+    AppiumはSeleniumをモデルとしているため、FindElement等の関数名がとてもよく似ていることももあり、基本的には使いやすかったが、違う点もあり、そこが使いにくいところでもあった。<br>
+    <br>
+    <hr>
+    <h3>はまりポイント１：要素が見つけずらい</h3><br>
+    selenium web driver や　beautiful
+    Soupなどの場合と違い、htmlのようなしっかりとした階層構造がイメージしずらいwindowsアプリケーションでは、「どの要素が、求めるボタンと対応するのか？」がわかりずらかったです。<br>
+    <br>
+    <h4>解決策: session.PageSourceというプロパティを確認する。</h4><br>
+    そもそも求めるボタンが、扱えるのかどうか？という点を確認するために、<br>
+    session.PageSourceをConsole.WriteLineして確認しました。<br>
+    <br>
+    <pre><code>
+RemoteWebDriver session = new RemoteWebDriver(new Uri(@"http://127.0.0.1:4723"), appCapabilities);
+Console.WriteLine(session.PageSource);
+</code>
+</pre>
+    <br>
+    これらをメモ帳などのテキストエディタに保存し、ctrl+Fでボタンを探してみると、ボタンがそもそもあるのかどうかが確認できます。<br>
+    <br>
+    <hr>
+    <h3>はまりポイント２：WinAppDriver UI Recoderが使い物にならない</h3><br>
+    WinAppDriver UI Recoderは自動でC#のコードを生成してくれますが、必ずと言っていいほどxpathでひっかかります。<br>
+    <br>
+    <h4>解決策　xpathについての知識を持つ　＝＞　改良する</h4>
+    <a
+        href="https://qiita.com/rllllho/items/cb1187cec0fb17fc650a">https://qiita.com/rllllho/items/cb1187cec0fb17fc650a</a><br>
+    自分はこのサイトをみて勉強しました。<br>
+    特に重要だったのが「//」でこの記法を使うことにより、明らかに要らないxpathの要素を削ることができました。<br>
+
+    <pre><code>
+//UI Recoderで記録したパス このままでは動かない.
+string xp1 = "/Pane[@ClassName=\"#32769\"][@Name=\"デスクトップ 1\"]/Window[@ClassName=\"ApplicationFrameWindow\"][@Name=\"電卓\"]/Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"数字パッド\"][@AutomationId=\"NumberPad\"]/Button[@Name=\"5\"][@AutomationId=\"num5Button\"]";
+
+// 「//」を使うことによって途中を省略できることを利用した。 この時点でもう既に動くようになる。
+xp1  =                                                            "//Window[@ClassName=\"ApplicationFrameWindow\"][@Name=\"電卓\"]/Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"数字パッド\"][@AutomationId=\"NumberPad\"]/Button[@Name=\"5\"][@AutomationId=\"num5Button\"]";
+
+// 思いきって最後の要素以外を省略してみる。 動いた！　しかもきれい！
+xp1 = "//Button[@Name=\"5\"][@AutomationId=\"num5Button\"]";
+</code>
+</pre>
+    <br>
+    「使い物にならない」とは言ったもの、いざxpathの自動探索は使えるようになると便利で、使う人の力量を試しているようでした。（笑）<br>
+    <br>
+    以下のコードは電卓をUI Recoderを使った自動化のコードです。<br>
+    <br>
+    <pre>
+    <code>
+using System;
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium;
+
+
+namespace AppiumSample
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            //Windows Application Driver実行
+            string serverPath = System.IO.Path.Combine(
+              System.Environment.GetFolderPath(
+                System.Environment.SpecialFolder.ProgramFilesX86
+              ), @"Windows Application Driver", "WinAppDriver.exe"
+            );
+            System.Diagnostics.Process.Start(serverPath);
+
+
+            //電卓操作
+            DesiredCapabilities appCapabilities = new DesiredCapabilities();
+            appCapabilities.SetCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+            RemoteWebDriver session = new RemoteWebDriver(new Uri(@"http://127.0.0.1:4723"), appCapabilities);
+
+
+
+            // LeftClick on "One" at (75,20)
+            Console.WriteLine("LeftClick on \"One\" at (75,20)");
+            string xp1 = "//*[@ClassName=\"ApplicationFrameWindow\"]/Window[@Name=\"Calculator\"][@ClassName=\"Windows.UI.Core.CoreWindow\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@AutomationId=\"NumberPad\"][@Name=\"Number pad\"]/Button[@AutomationId=\"num1Button\"][@Name=\"One\"]";
+            xp1 = "//Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"数字パッド\"][@AutomationId=\"NumberPad\"]/Button[@Name=\"5\"][@AutomationId=\"num5Button\"]";
+            var winElem1 = session.FindElementByXPath(xp1);
+
+
+            if (winElem1 != null)
+            {
+                winElem1.Click();
+            }
+            else
+            {
+                Console.WriteLine($"Failed to find element {xp1}");
+                return;
+            }
+
+            // LeftClick on "Two" at (44,20)
+            Console.WriteLine("LeftClick on \"Two\" at (44,20)");
+            string xp2 = "//*[@ClassName=\"ApplicationFrameWindow\"]/Window[@Name=\"Calculator\"][@ClassName=\"Windows.UI.Core.CoreWindow\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@AutomationId=\"NumberPad\"][@Name=\"Number pad\"]/Button[@AutomationId=\"num2Button\"][@Name=\"Two\"]";
+            xp2 = "//Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"数字パッド\"][@AutomationId=\"NumberPad\"]/Button[@Name=\"9\"][@AutomationId=\"num9Button\"]";
+            var winElem2 = session.FindElementByXPath(xp2);
+            if (winElem2 != null)
+            {
+                winElem2.Click();
+            }
+            else
+            {
+                Console.WriteLine($"Failed to find element {xp2}");
+                return;
+            }
+
+            // LeftClick on "Plus" at (19,18)
+            Console.WriteLine("LeftClick on \"Plus\" at (19,18)");
+
+            string xp4 = "//*[@ClassName=\"ApplicationFrameWindow\"]/Window[@Name=\"Calculator\"][@ClassName=\"Windows.UI.Core.CoreWindow\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@AutomationId=\"StandardOperators\"][@Name=\"Standard operators\"]/Button[@AutomationId=\"plusButton\"][@Name=\"Plus\"]";
+            xp4 = "//Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"標準演算子\"][@AutomationId=\"StandardOperators\"]/Button[@Name=\"マイナス\"][@AutomationId=\"minusButton\"]";
+            var winElem4 = session.FindElementByXPath(xp4);
+            if (winElem4 != null)
+            {
+                winElem4.Click();
+            }
+            else
+            {
+                Console.WriteLine($"Failed to find element {xp4}");
+                return;
+            }
+
+            // LeftClick on "Four" at (57,18)
+            Console.WriteLine("LeftClick on \"Four\" at (57,18)");
+            string xp5 = "//*[@ClassName=\"ApplicationFrameWindow\"]/Window[@Name=\"Calculator\"][@ClassName=\"Windows.UI.Core.CoreWindow\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@AutomationId=\"NumberPad\"][@Name=\"Number pad\"]/Button[@AutomationId=\"num4Button\"][@Name=\"Four\"]";
+            xp5 = "//Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"数字パッド\"][@AutomationId=\"NumberPad\"]/Button[@Name=\"6\"][@AutomationId=\"num6Button\"]";
+            var winElem5 = session.FindElementByXPath(xp5);
+            if (winElem5 != null)
+            {
+                winElem5.Click();
+            }
+            else
+            {
+                Console.WriteLine($"Failed to find element {xp5}");
+                return;
+            }
+
+
+            // LeftClick on "Equals" at (59,29)
+            Console.WriteLine("LeftClick on \"Equals\" at (59,29)");
+            string xp8 = "//*[@ClassName=\"ApplicationFrameWindow\"]/Window[@Name=\"Calculator\"][@ClassName=\"Windows.UI.Core.CoreWindow\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@AutomationId=\"StandardOperators\"][@Name=\"Standard operators\"]/Button[@AutomationId=\"equalButton\"][@Name=\"Equals\"]";
+            xp8 = "//Window[@ClassName=\"Windows.UI.Core.CoreWindow\"][@Name=\"電卓\"]/Group[@ClassName=\"LandmarkTarget\"]/Group[@Name=\"標準演算子\"][@AutomationId=\"StandardOperators\"]/Button[@Name=\"等号\"][@AutomationId=\"equalButton\"]";
+            var winElem8 = session.FindElementByXPath(xp8);
+            if (winElem8 != null)
+            {
+                winElem8.Click();
+            }
+            else
+            {
+                Console.WriteLine($"Failed to find element {xp8}");
+                return;
+            }
+
+            string xp9 = "//*[@AutomationId=\"CalculatorResults\"]";
+            var winElem9 = session.FindElementByXPath(xp9);
+            if (winElem9 != null)
+            {
+                foreach( int i in new int[4])
+                {
+                    Console.WriteLine("===================================--");
+                }
+
+                Console.WriteLine("================================"+ winElem9.Text );
+            }
+            else
+            {
+                Console.WriteLine($"Failed to find element {xp8}");
+                return;
+            }
+            Console.Write("Press any key to continue . . . ");
+            Console.ReadKey(true);
+
+
+        }
+    }
+}
+</code>
+</pre>
+
+    <h2>はまりポイント３：フォーム間の移動ができない！</h2>
+    ここが大苦戦<br>
+    解決までに二日を要しました。<br>
+    <br>
+    アプリによってはフォームが2つ以上でてきますが、それらのコントロールはsessionを移動させないとできません。<br>
+    <br>
+    例<br>
+    コメント 2019-09-08 111924.png<br>
+    <br>
+    ここでの　接続待ち...　へ　sessionを移動させないと、キャンセルボタンを押すことはできません。<br>
+    <br>
+    <h3>解決策：session.SwitchTo().window(wid)関数を使う！</h3>
+    上のswitchTo()関数はフォームの移動に使えます！<br>
+    <br>
+    また、widはwindowのidですが、<br>
+    session.WindowHandles;<br>
+    によって、すべてのウィンドウのidを手に入れることができます！<br>
+    <br>
+    あとは片っ端からidを試していけばいいだけ！<br>
+    <br>
+    以下は「将棋所」というアプリの自動化のサンプルです。<br>
+    <br>
+
+    <pre><code>
+using System;
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium;
+using System.Threading.Tasks;
+
+
+namespace WinAppDriverTest3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Windows Application Driver実行
+            string serverPath = System.IO.Path.Combine(
+              System.Environment.GetFolderPath(
+                System.Environment.SpecialFolder.ProgramFilesX86
+              ), @"Windows Application Driver", "WinAppDriver.exe"
+            );
+            System.Diagnostics.Process.Start(serverPath);
+
+
+
+            //電卓操作
+            DesiredCapabilities appCapabilities = new DesiredCapabilities();
+            string appPath = @"C:\Users\mineg\Downloads\Shogidokoro\Shogidokoro\Shogidokoro.exe";
+
+            appCapabilities.SetCapability("app", appPath);
+            RemoteWebDriver session = new RemoteWebDriver(new Uri(@"http://127.0.0.1:4723"), appCapabilities);
+
+
+            String wid = session.CurrentWindowHandle;
+
+            //対局ボタンを押す
+            IWebElement meanueBattle = session.FindElementByName("対局(G)");
+            meanueBattle.Click();
+
+            //キーを2回押し
+            meanueBattle.SendKeys(Keys.Down);
+            meanueBattle.SendKeys(Keys.Down);
+            //Enterキーを押す
+            meanueBattle.SendKeys(Keys.Enter);
+
+
+            session.FindElementByName("OK").Click();
+
+
+
+
+            System.Collections.ObjectModel.ReadOnlyCollection<string> widList = session.WindowHandles;
+
+            session.SwitchTo().Window(widList[0]);
+
+
+            Console.WriteLine(session.PageSource);
+
+            string xp = "//*[@AutomationId=\"currPCLabel\"]";
+            string str = session.FindElementByXPath(xp).Text;
+
+
+            Task.Delay(1000);
+
+
+
+
+
+            session.FindElementByName("キャンセル").SendKeys(Keys.Enter);
+
+
+            Console.WriteLine(session.PageSource);
+
+
+
+
+        }
+    }
+}
+</code>
+</pre>
+
+
+    まだまだ完璧には把握できてませんが、質問等あれば一緒に考えることぐらいはできます！
+
+
+
+</div>
+
+
