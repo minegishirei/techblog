@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO -->
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6Y7NSQNF5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B6Y7NSQNF5');
+  </script>
+
+
+  <!-- URL CANONICAL -->
+  <link rel="canonical" href="https://webslides.tv/demos/keynote">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+    rel="stylesheet">
+
+  <!-- CSS Base + Colors -->
+
+  <link rel="stylesheet" type="text/css" media="all" href="/static/engineer/css/downheader.css">
+  <link rel="stylesheet" type="text/css" media="all" href="/static/engineer/css/webslides.css">
+
+  <!-- Optional - CSS SVG Icons (Font Awesome) -->
+  <link rel="stylesheet" type="text/css" media="all" href="/static/engineer/css/svg-icons.css">
+
+  <!-- SOCIAL CARDS -->
+
+  <!-- FACEBOOK -->
+  <meta property="fb:app_id" content="293222087723772">
+  <meta property="og:url" content="https://webslides.tv/demos/keynote">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Make a Keynote presentation using HTML">
+  <meta property="og:description"
+    content="WebSlides is the easiest way to make HTML presentations. 120+ free slides ready to use.">
+  <meta property="og:updated_time" content="2017-01-04T17:32:14">
+  <meta property="og:image" content="https://webslides.tv/static/engineer/images/share-keynote.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="429">
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@se_maintain">
+  <meta name="twitter:creator" content="@se_maintain">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description"
+    content="{{ description }}">
+  <meta name="twitter:image" content="{{ img }}">
+
+  <!-- Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#333333">
+  {% block headblock %}
+  {% endblock %}
+</head>
+
+
+
+<body>
+    <header role="banner">
+        <nav role="navigation">
+            <p class="logo"><a href="https://webslides.tv/" title="WebSlides">WebSlides</a></p>
+            <ul>
+                <li class="github">
+                    <a rel="external" href="https://github.com/webslides/webslides" title="Github">
+                        <svg class="fa-github">
+                            <use xlink:href="#fa-github"></use>
+                        </svg>
+                        <em>WebSlides</em>
+                    </a>
+                </li>
+                <li class="twitter">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <input type="submit" name="deleteAll" value="clear">
+                    </form>
+                </li>
+                <!--  <li class="dribbble"><a rel="external" href="http://dribbble.com/webslides" title="Dribbble"><svg class="fa-dribbble"><use xlink:href="#fa-dribbble"></use></svg> <em>webslides</em></a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <main role="main">
+        <article id="webslides">
+            <section>
+                <div class="wrap">
+                    <div class="content-center">
+                        <p>サンプル反省書🙇‍♂️</p>
+                        <small>()以外のパーツも取り換え可能です。</small>
+                        <pre>
+この度は（一時間以上も遅刻）してしまい、大変申し訳ございませんでした。
+皆様に多大なご迷惑をおかけしたことを申し上げます。
+直接の原因は（アラームを設定し忘れた）ことが原因です。
+今後はこのようなことが２度と起きぬよう 、再発防止に努めます。
+            </pre>
+            <br>
+                        <p>
+                            <a href="#slide=2">謝罪文を作る</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
+            {% for item in pageContentList %}
+            <section>
+                <div class="wrap">
+                    <div class="content-center">
+                        <h3>
+                            Q{{ item.process }}<small>/3</small>
+                        </h3>
+                        <p>{{ item.title }}</p>
+                        <small>{{ item.supp }}</small>
+                        <pre>{{ item.preface }}<form method="POST" action="{{ item.next }}">{% csrf_token %}<input name="{{ item.name }}-u" type="text" placeholder="{{ item.example }}" value="{{ item.value }}" ></input></form>{{ item.afterword }}</pre>
+                        <br>
+                        <!--
+                        <form method="POST" action="{{ item.next }}">
+                            {% csrf_token %}
+                            <input type="submit" name="{{ item.name }}-d" value="clear">
+                        </form>
+                    -->
+                    </div>
+                    <!-- end .content-left -->
+                </div>
+                <!-- .end .wrap -->
+            </section>
+            {% endfor %}
+
+
+            　
+            <section>
+                <div class="wrap">
+                    <div class="content-center">
+                        <p>反省書🙇‍♂️</p>
+                        <small></small>
+                        <pre>{{ sentense }}
+            </pre>
+            <br>
+            健闘を祈ります👍
+                    </div>
+                </div>
+            </section>
+
+        </article>
+    </main>
+    <!--main-->
+
+    <script>
+
+
+    </script>
+
+    <style>
+        input {
+            box-shadow: none;
+            border: none;
+        }
+    </style>
+
+
+
+
+    {% include 'parts/js/slide.html' %}
+</body>
+
+
+</html>
+
+
+<style>
+.thumbnailtitle {
+    width: 200px;
+    overflow-wrap:  break-word;
+}
+</style>
+
+
+
+
+
+
+#javaのフォロー文について3分で解説する試みです
+
+
+javaのfor文について解説する前に、
+まずはfor文とは何かについて解説すると、
+
+同じことを何度も繰り返す手順のことをfor文と呼び、
+大抵のプログラミング言語というパソコンを奴隷のように扱う命令言語の全てに含まれています。
+
+人間は基本的には同じことを何度も繰り返すのが嫌いなわけで
+だからこそ同じ処理に対して回数を指定して嫌いなことを避けているのです。
+
+
+例えばですが
+「一匹残らず駆逐してやる」
+を5回くりかえしたい場合
+for文がない世界線では
+
+<pre>
+「一匹残らず駆逐してやる」
+「一匹残らず駆逐してやる」
+「一匹残らず駆逐してやる」
+「一匹残らず駆逐してやる」
+「一匹残らず駆逐してやる」
+</pre>
+<pre>
+System.out.println("「一匹残らず駆逐してやる」");
+</pre>
+
+となりますが、
+for文がある世界線では
+
+<pre>
+「一匹残らず駆逐してやる」　を五回繰り返せ
+</pre>
+<pre>
+for (int i = 0; i < 2; i++){
+  System.out.println("「一匹残らず駆逐してやる」");
+}
+</pre>
+
+と簡単に記述できるのがfor文の強みなのです
+
+
+ところで、プログラミングと聞くとみなさん難しく構えがちですが、
+大抵のソフトウェアと呼ばれる頭良さげな機構は、
+この繰り返しを担当するfor文,if文,関数だけから構成される場合がほとんどで、
+
+
+それを一人ではなく大勢の人数でやろうとした結果複雑なよくわかんない手法や横文字が出てきたわけです。
+
+<pre>
+よくわかんない手法や横文字の例
+git,
+linux,
+統合開発環境
+アジャイル,
+ウォーターforル,
+DDD,
+</pre>
+
+話をfor文に戻しますが、
+
+javaのfor文には普通の書き方と怠惰な書き方があります。
+
+基本的な書き方は先ほど紹介した通り,指定回数とカウンターが必要になるわけですが,
+<pre>
+for (int i = 0; i < 5; i++){
+  System.out.println("「一匹残らず駆逐してやる」");
+}
+</pre>
+
+例えば
+「一匹残らず駆逐してやる」セットがあらかじめ5セット用意されていた場合、
+そのセットから一つずつ取り出した方が楽なわけです。
+
+それを実現するのが怠惰な書き方なわけで
+今回の例ですと、
+
+<pre>
+「一匹残らず駆逐してやる」お得5セットパック
+
+for (セリフを入れる箱 ; 「一匹残らず駆逐してやる」お得5セットパック){
+    System.out.println(セリフを入れる箱);
+}
+</pre>
+となります。
+
+以上。javaのfor文について3分で解説する試みでした。
+
+
+
+
+
+title:「java for 書き方」で調べた人へ
+description:javaのfor文の書き方について簡単な解説を行います。
+
+
