@@ -119,6 +119,9 @@ webページを作っていくうちに「これはなんのために存在す�
 
 「twitter network」は「人に話したくなるもの」としては今まで自分が作ったサイトの中では一際有用であった。
 
+<img width="80%" src="https://pbs.twimg.com/media/EjZLzTLVgAIiHaT?format=jpg&name=large">
+
+
 このサイトの役割は一つ
 
 twitterのアカウント同士のネットワークのつながりを可視化する
@@ -135,10 +138,16 @@ twitterのネットワークを見るだけでは正直なんの役に立つの�
 
 「面白く人に話したくはなるが、なんの役に立つのかがわからない」というサイトになってしまった。
 
-<img width="80%" src="https://pbs.twimg.com/media/EjZLzTLVgAIiHaT?format=jpg&name=large">
 
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">@omatchaaa 友達のアンパンマンが作ったんだけど、これすごすぎん？？？！？？<a href="https://t.co/UZ7sUKem7K">https://t.co/UZ7sUKem7K</a><a href="https://twitter.com/matuki_no_ukiwa?ref_src=twsrc%5Etfw">@matuki_no_ukiwa</a></p>&mdash; ともお兄たん (@tomoOniTan) <a href="https://twitter.com/tomoOniTan/status/1258040038601879552?ref_src=twsrc%5Etfw">May 6, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet">
+    <p lang="ja" dir="ltr">@omatchaaa 友達のアンパンマンが作ったんだけど、これすごすぎん？？？！？？<a
+            href="https://t.co/UZ7sUKem7K">https://t.co/UZ7sUKem7K</a><a
+            href="https://twitter.com/matuki_no_ukiwa?ref_src=twsrc%5Etfw">@matuki_no_ukiwa</a></p>&mdash; ともお兄たん
+    (@tomoOniTan) <a href="https://twitter.com/tomoOniTan/status/1258040038601879552?ref_src=twsrc%5Etfw">May 6,
+        2020</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 twitterでここまで褒めてくれる人がいたにも関わらず、このサイトは廃れた。
@@ -158,6 +167,154 @@ twitterでここまで褒めてくれる人がいたにも関わらず、この�
 
 
 
+#サイトを作る過程
+
+##コンテンツ*表現のマトリクス表を作る。
 
 
 
+<div class="ritz grid-container" dir="ltr">
+    <table class="waffle" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th class="row-header freezebar-origin-ltr"></th>
+                <th id="0C0" style="width:100px;" class="column-headers-background">A</th>
+                <th id="0C1" style="width:47px;" class="column-headers-background">B</th>
+                <th id="0C2" style="width:34px;" class="column-headers-background">C</th>
+                <th id="0C3" style="width:47px;" class="column-headers-background">D</th>
+                <th id="0C4" style="width:194px;" class="column-headers-background">E</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: 20px">
+                <th id="0R0" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">1</div>
+                </th>
+                <td></td>
+                <td class="s0" dir="ltr">怖い話</td>
+                <td class="s0" dir="ltr">将棋</td>
+                <td class="s0" dir="ltr">遊戯王</td>
+                <td class="s0" dir="ltr">デュエマ</td>
+            </tr>
+            <tr style="height: 20px">
+                <th id="0R1" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">2</div>
+                </th>
+                <td class="s0" dir="ltr">地図</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="height: 20px">
+                <th id="0R2" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">3</div>
+                </th>
+                <td class="s0" dir="ltr">グラフ</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="height: 20px">
+                <th id="0R3" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">4</div>
+                </th>
+                <td class="s0" dir="ltr">ランキング</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+##マトリクスの内部に可能性を感じるものを入れていく
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="resources/sheet.css">
+<style type="text/css">
+    .ritz .waffle a {
+        color: inherit;
+    }
+
+    .ritz .waffle .s0 {
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 10pt;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;
+    }
+</style>
+<div class="ritz grid-container" dir="ltr">
+    <table class="waffle" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th class="row-header freezebar-origin-ltr"></th>
+                <th id="0C0" style="width:100px;" class="column-headers-background">A</th>
+                <th id="0C1" style="width:47px;" class="column-headers-background">B</th>
+                <th id="0C2" style="width:127px;" class="column-headers-background">C</th>
+                <th id="0C3" style="width:47px;" class="column-headers-background">D</th>
+                <th id="0C4" style="width:194px;" class="column-headers-background">E</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: 20px">
+                <th id="0R0" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">1</div>
+                </th>
+                <td></td>
+                <td class="s0" dir="ltr">怖い話</td>
+                <td class="s0" dir="ltr">将棋</td>
+                <td class="s0" dir="ltr">遊戯王</td>
+                <td class="s0" dir="ltr">デュエマ</td>
+            </tr>
+            <tr style="height: 20px">
+                <th id="0R1" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">2</div>
+                </th>
+                <td class="s0" dir="ltr">地図</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="height: 20px">
+                <th id="0R2" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">3</div>
+                </th>
+                <td class="s0" dir="ltr">グラフ</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="s0" dir="ltr">デュエプレ・戦力図表一覧</td>
+            </tr>
+            <tr style="height: 20px">
+                <th id="0R3" style="height: 20px;" class="row-headers-background">
+                    <div class="row-header-wrapper" style="line-height: 20px">4</div>
+                </th>
+                <td class="s0" dir="ltr">ランキング</td>
+                <td></td>
+                <td class="s0" dir="ltr">将棋戦法ランキング</td>
+                <td></td>
+                <td class="s0" dir="ltr">デュエプレ・デッキランキング</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+###それらを全て、「人を惹きつける必要十分条件5」のふるいにかける。
+
+
+
+
+
+###残ったサイトの構築案について、
