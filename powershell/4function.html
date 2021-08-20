@@ -1,0 +1,110 @@
+<h2>
+    powershell学習サイト
+</h2>
+<a href="./1variable.html">
+    powershell 入門 学習サイト 〜変数編〜
+</a>
+<a href="./2if.html">
+    powershell 入門 学習サイト 〜条件式編〜
+</a>
+<a href="./3for.html">
+    powershell 入門 学習サイト 〜繰り返し構文編〜
+</a>
+<a href="4function.html">
+    powershell 入門 学習サイト 〜関数編〜
+</a>
+
+
+
+
+
+<h2>
+    前回までのお話はこちら
+</h2>
+<a href="./3for.html">
+    powershell 入門 学習サイト 〜繰り返し構文編〜
+</a>
+
+
+
+
+<h2>
+    関数 </h2>
+<p>
+    関数の構文 </p>
+
+
+<pre>
+function add plus 10 ($Number) [
+    $Number++; return $Number
+}
+</pre>
+
+<p>
+    関数の例文
+</p>
+<pre>
+$num1 = 0 echo "num1 is $num1"
+#2自分で関数を定義 
+function add_plus10 { 
+    param (
+        $Number
+    )
+    $Number++;
+    return $Number
+}
+$num2 = add_plus1($num1)
+echo "num2 is $num2"
+</pre>
+
+<h2>fizz buzzの判定部分を関数として独立させる </h2>
+<p>
+前回課題のfor文内のコードを関数として独立させよう 
+</p>
+<pre> 
+for ($i=1; $i -it 20; $i++) { if ($i % 15 -eq 0) {
+echo "$i is fizzbuzz" } else if ($i % 5 -eq 0) {
+echo "$i is buzz" Jelseif ($i % 3 -eq 0) {
+echo "$i is fizz"
+</pre>
+<p>
+以下回答
+</p>
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+<p>
+    回答例
+</p>
+<pre> 
+function Judgement-Fizzbuzz($i){ 
+    $answer = ""
+    if ($i % 15 -eq 0) {
+        $answer = "fizzbuzz" }
+    else if ($i % 5 -eq 0) {
+        $answer = "fizz" }
+    else if ($i % 3 -eq 0) {
+        $answer = "buzz" return $answer
+    }
+    return $answer
+}
+for ($i=1; $i -it 20; $i++) {
+    $test = Judgement-Fizzbuzz($i)
+    echo $test
+}
+</pre>
+
+
+title:powershell 入門 学習サイト 〜関数編〜
+description:プログラミング言語powershellの入門サイトです。今回は第四弾、関数編
+

@@ -1,0 +1,131 @@
+
+<h2>
+    powershell学習サイト
+</h2>
+<a href="./1variable.html">
+    powershell 入門 学習サイト 〜変数編〜
+</a>
+<a href="./2if.html">
+    powershell 入門 学習サイト 〜条件式編〜
+</a>
+<a href="./3for.html">
+    powershell 入門 学習サイト 〜繰り返し構文編〜
+</a>
+<a href="4function.html">
+    powershell 入門 学習サイト 〜関数編〜
+</a>
+
+
+
+
+
+
+<h2>
+    前回までのお話はこちら
+</h2>
+<a href="./1variable.html">
+    powershell 入門 学習サイト 〜変数編〜
+</a>
+
+    
+h2> 条件文(if文) </h2> if文の書き方は以下の通り
+<pre>
+$condition = $true 
+if ($condition ){
+    Write-Output "The condition was true" 
+} else {
+    Write-Output "The condition was false"
+    $condition = $false
+}
+$condition = $false
+if ($condition ){
+    Write-Output "The condition was true"
+}else{
+    Write-Output "The condition was false"
+}</pre>
+<p>
+    実行結果 </p>
+<pre>
+The condition was true
+The condition was false
+</pre>
+<h2>
+    if文の==は成立しない </h2>
+<pre>
+$num1 = 2
+if ($num1 == 2) {
+    Write-Output "The condition was true" } 
+else{
+    Write-Output "The condition was false"
+}
+</pre>
+ドキュメントでも以下の様に書かれている </p>
+<pre> C# のような他の言語では、等価性のチェックに ==3 を使用する (例:5 == $value)のが一般的ですが、 これは PowerShell では機能しません。 </pre>
+<small> 正直いかがなものかと思う... </small>
+<h2>
+    if文の同値評価は「-eq」 </h2>
+<pre>
+$num1 %3D2 if ($num1 -eq 2 ){
+    Write-Output "The condition was true" 
+} else{
+    Write-Output "The condition was false"
+}</pre>
+<h2>
+    等しくないは「-ne」 </h2>
+
+<pre>
+$value = 5 
+
+if ( 5 -ne $value ){
+    echo "value is not equl 5" 
+}else{
+    echo "value is equl 5"
+}
+
+echo "chenge valu" 
+$value = 4 
+if ( 5 -ne $value) {
+    echo "value is not equl 5" 
+}else
+    echo "value is equl 5"
+}
+</pre>
+<h2>
+    大小関係、 </h2>
+以下はmicrosoftドキュメントから
+<pre>
+-gt(より大きい) -igt(より大きい、大文字と小文字が区別されない) 
+-cgt(より大きい、大文字と小文字が区別される) -ge(以上)
+-ige(以上、大文字と小文字が区別されない)
+-cge(以上、大文字と小文字が区別される)
+-t(より小さい)
+-ilt(より小さい、大文字と小文字が区別されない)
+-clt(より小さい、大文字と小文字が区別される) 
+-le(以下)
+-ile(以下、大文字と小文字が区別されない)
+-cle (以下、大文字と小文字が区別される) 
+</pre>
+<strong> こんなにたくさん覚えてられねぇ... </strong>
+
+
+
+ということで抜粋。以下の4つを押さえておけば問題なさそう
+<pre>
+-gt(より大きい、greater thanの頭文字) 
+-ge(以上、greater Equalの頭文字)
+-It(より小さい、little thanの頭文字)
+-le(以下、little Equalの頭文字) 
+</pre>
+<p>
+    以下サンプルコード 初心者の方はgtを常時使用して 大きい方を右側におく癖を付けておいた方がいいかも?
+</p>
+<pre> $bignum = 50000
+if( $bignum -gt 100 ) {
+echo "$bignum > 100" </pre>
+
+
+
+
+
+title:powershell 入門 学習サイト 〜条件式編〜
+description:プログラミング言語powershellの入門サイトです。今回は第二弾、条件文編

@@ -1,0 +1,128 @@
+参考:【PowerShell】 繰り返し文(While, For)について https://soma-engineering. com/coding/power shell/loop-while-for/2018/06/09/#while
+
+
+
+<h2>
+    powershell学習サイト
+</h2>
+<a href="./1variable.html">
+    powershell 入門 学習サイト 〜変数編〜
+</a>
+<a href="./2if.html">
+    powershell 入門 学習サイト 〜条件式編〜
+</a>
+<a href="./3for.html">
+    powershell 入門 学習サイト 〜繰り返し構文編〜
+</a>
+<a href="4function.html">
+    powershell 入門 学習サイト 〜関数編〜
+</a>
+
+
+
+
+
+
+<h2>
+    前回までのお話はこちら
+</h2>
+<a href="./2if.html">
+    powershell 入門 学習サイト 〜条件式編〜
+</a>
+
+
+<h2>
+    while文 </h2>
+<pre> 基本的なwhile文は以下の通り </pre>
+<p>
+    a $i++は「iの数字を一つ増やす」という意味で </p>
+<p>
+    while ($i -le 5) {は括弧()内の条件を満たす間何度も{}中括弧を実行する。 </p>
+<pre> $i=1
+while ($i -le 5) {
+    Write-Output "$i";
+    $i++;
+}
+</pre>
+<p>
+    の実行結果
+</p>
+<pre>
+1
+2
+3
+4
+5
+</pre>
+
+
+<h2>
+    for文 </h2>
+<p>
+while文では
+ーを用意する($iのこと) 2、ループする条件を設定する($i -le 5) 3、カウンターを増やす
+の三ステップが必要であった。
+</p>
+<p>
+    このように、カウンターを増やすというループであれば
+    次のfor文で一行でまかなえる </p>
+<pre>
+for ($i=1; $i -It 10; $i+=1){
+    echo "$i"; 
+}</pre>
+<p>
+    実行結果 </p>
+<pre>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre>
+<h2>
+    課題1 fizzbuzzを作れ </h2>
+正解は以下のスロールの先
+</p>
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+<pre> 
+for($i=1; $i-It 20; $j++){ 
+    if($i % 15 -eq0) {
+        echo "$i is fizzbuzz"
+    } else if ($i % 5 -eq 0) {
+        echo "$i is buzz" 
+    } elseif ($i % 3 -eq 0){
+        echo "$i is fizz"
+    }
+}
+</pre> 
+<strong>
+    当然ながら別解もある 
+</strong>
+例えば、forの代わりにwhileを使っても良い
+</p>
+
+
+
+title:powershell 入門 学習サイト 〜繰り返し構文編〜
+description:プログラミング言語powershellの入門サイトです。今回は第三弾、繰り返し構文編
+
