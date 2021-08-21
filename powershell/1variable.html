@@ -36,7 +36,10 @@ $FilePath = "C:\Windows\System32"
 <pre> 
 NG1 : $filePath
 NG2 : $file_path 
+
+GOOD! : $FilePath
 </pre>
+
 
 <h2>
     「数値の代入 」
@@ -55,22 +58,23 @@ echo コマンドを使う。
 あるいは代入せずに$num1等でも可能 
 </p>
 <pre> 
+#方法1
 $num1 = 1 
-echo "num1 varius is "$num1
+echo "num1 varius is $num1"
 $num1 = 2 
-echo "num1 varius is"$num1
+echo "num1 varius is $num1"
+
+#方法2 
+$num1
 </pre>
 
-<p>
-#方法2 $num1
-</p>
 
 <p>
 ちなみに#で始まる行はコメント行と呼ばれ、 
 プログラムの動作に一切影響を及ぼさない。 
 コード内に書けるメモだと思っていい。
-
 </p>
+
 <h2>
     変数一覧の表示 </h2>
 <p>Get-Variableで可能 </p>
@@ -87,10 +91,14 @@ Get-Variable
 
 <pre> 
 $a = 12                         # System. Int32 
-$a =3D "Word"                   # System. String
-$a =3 12, "Word"                # array of System.
+$a = "Word"                     # System. String
+$a = 3 ,12, "Word"              # array of System.
 $a = Get-ChildItem C:\Windows   # FileInfo and DirectoryInfo types
 </pre>
+
+<p>
+    数字、文字列、配列、コマンドの実行結果まで格納できる。(後々に紹介するが、コマンドの実行結果は再利用が可能)
+</p>
 
 <p> 以下microsoftのドキュメントから </p>
 <pre> 
@@ -111,6 +119,9 @@ PowerShell 変数は緩やかに型指定されます。 つまり、特定の�
 $number = "12345" 
 $number = "Hello"  #The string is converted to an integer.
 </pre>
+<p>
+    上記のコマンドはエラーが起きる！(想定通りのエラー)
+</p>
 
 <p>
 ここの例ではintという数値を入れる変数に対して stringを代入していることでエラーが発生させることができる。
@@ -145,5 +156,6 @@ array
 
 title:powershell 入門 学習サイト 〜変数編〜
 description:プログラミング言語powershellの入門サイトです。今回は第一弾、変数編
+img:https://blog.hubfly.com/wp-content/uploads/2018/12/powershell.png
 
 
