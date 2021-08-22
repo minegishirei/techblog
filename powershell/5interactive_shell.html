@@ -1,0 +1,282 @@
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+
+##powershellから他のプログラムを実王する
+
+<p>
+    具体例
+</p>
+<pre>
+
+//フルパスを指定するときはシングルクォートで囲み、
+& 'C:\Program Files\Program\Program.exe' arguments
+
+//スペースを含まない時はシングルkウォーとで囲む必要はない
+.\Program.exe arguments
+
+//シングルクォーとで囲んだ文字列は、&で実行する。
+& '.\Program With Spaces.exe' arguments
+</pre>
+
+
+
+
+
+##オリジナルのシェル、プロファイル、プロンプトをカスタマイズする。
+
+<pre>
+notepad $profile
+</pre>
+<p>
+    解説：notepadはメモ帳を開くコマンド。引数にファイルパスを指定することでそのファイルを開くことができる。
+</p>
+
+<p>
+    $profileはプロファイルスクリプト（カスタム可能なスクリプトでユーザーごとに設定できるもの）のパスが入っているため、
+    notepad $profileはプロファイルスクリプトをメモ帳で開くことができる。
+</p>
+<p>
+カスタマイズ例
+</p>
+<pre>
+function Prompt
+{
+ "PS [$env:COMPUTERNAME] >"
+}
+</pre>
+
+<p>
+    解説：Prompt関数は特別な関数である。この関数はpowershellの画面の入力部分をカスタマイズすることができる関数。
+</p>
+
+<p>
+    本関数ではコンピューター名を表示するようにカスタマイズしている。
+</p>
+
+
+<p>
+    ちなみに、$profileを変更した直後はコードがまだ実行されていないので、すぐには適用されない。
+</p>
+
+<p>
+    $profileはpowershellを起動した際に実行されるので、再度powershellを起動し直したほうがいい。
+</p>
+
+
+###別のカスタマイズ例
+<pre>
+function Prompt
+{
+ $id = 1
+ $historyItem = Get-History -Count 1
+ if($historyItem)
+ {
+ $id = $historyItem.Id + 1
+ }
+ Write-Host -ForegroundColor DarkGray "`n[$(Get-Location)]"
+ Write-Host -NoNewLine "PS:$id > "
+ $host.UI.RawUI.WindowTitle = "$(Get-Location)"
+ "`b"
+}
+</pre>
+
+
+
+##コマンドのヘルプを表示したい。
+
+以下の構文で調べることができる。
+
+<pre>
+    Get-Help 調べたいコマンド
+</pre>
+
+
+##コマンドを見つけたい
+
+
+<pre>
+    Get-Command
+</pre>
+
+<p>
+    ところで、コマンドの一部だけ知っているがそれ以外が知らない時は、以下のようにワイルドカード(正規表現)を使うことも可能
+</p>
+
+<pre>
+Get-Command *コマンドの一部*
+</pre>
+
+###コマンドの構成について
+
+<strong>
+    Powershellのコマンドの名前には一貫性がある
+</strong>
+
+その一貫性とは
+<strong>
+    動詞-名詞
+</strong>
+の順番でコマンドが構成されているということである。
+
+
+このメリットによって以下のような芸当が可能である。
+
+<p>
+    1、動詞から検索する。
+</p>
+
+<pre>
+Get-Command -Verb Get
+</pre>
+
+
+<p>
+    2、名詞から検索する。
+</p>
+
+<pre>
+Get-Command -Noun Process
+</pre>
+
+このコマンドによって、例えばGet-Process(タスクマネージャーと同じコマンド)を手に入れられる。
+
+
+##コマンドの計測時間を調べる
+
+<pre>
+Measure-Command
+</pre>
+
+
+##(理解できなかったレシピ)シェルをカスタマイズして生産性をあげる
+
+<p>
+    以下のレシピはまだまだ理解できなかった。要修行。
+</p>
+<pre>
+Push-Location
+Set-Location HKCU:\Console
+New-Item '.\%SystemRoot%_system32_WindowsPowerShell_v1.0_powershell.exe'
+Set-Location '.\%SystemRoot%_system32_WindowsPowerShell_v1.0_powershell.exe'
+New-ItemProperty . ColorTable00 -type DWORD -value 0x00562401
+New-ItemProperty . ColorTable07 -type DWORD -value 0x00f0edee
+New-ItemProperty . FaceName -type STRING -value "Lucida Console"
+New-ItemProperty . FontFamily -type DWORD -value 0x00000036
+New-ItemProperty . FontSize -type DWORD -value 0x000c0000
+New-ItemProperty . FontWeight -type DWORD -value 0x00000190
+New-ItemProperty . HistoryNoDup -type DWORD -value 0x00000000
+New-ItemProperty . QuickEdit -type DWORD -value 0x00000001
+New-ItemProperty . ScreenBufferSize -type DWORD -value 0x0bb80078
+New-ItemProperty . WindowSize -type DWORD -value 0x00320078
+Pop-Location
+</pre>
+
+
+##以前呼び出したコマンドを実行したい
+
+<pre>
+Get-History         #履歴を調べIDを取得
+Invoke-History (ID) #IDを記述して呼び起こす
+</pre>
+
+
+
+##コマンドの出力をファイルに格納したい
+
+<pre>
+//やり方1
+Get-ChildItem | Out-File unicodeFile.txt
+Get-Content filename.cs | Out-File -Encoding ASCII file.txt
+Get-ChildItem | Out-File-Width 120 unicodeFile.cs
+
+//やり方2
+Get-ChildItem > files.txt 
+</pre>
+
+###やり方2 > を使う
+実行したいコマンドの右に > を書き、さらにその右にファイル名を書くことで、
+ファイルに実行結果を格納することができる。
+
+追記したい場合は >>　を使う。
+<pre>
+Get-ChildItem >> files.txt 
+</pre>
+
+この方法は簡単ではあるが、出力を綺麗にできない。
+
+
+###Out-File でファイル出力
+
+
+<p>
+    >を使った方法と違い、ファイルの出力幅のコントロールが可能。
+    さらに、文字コードの指定もできる等、幅広い。
+</p>
+<pre>
+Get-ChildItem | Out-File-Width 120 unicodeFile.cs
+</pre>
+
+
+
+<h2>
+    配列、表として出力したい。横幅を調節したい。
+</h2>
+
+<p>
+    パイプラインを用いて、Format-List、format-Table、Format-Widthへ渡す
+</p>
+
+
+<pre>
+$currentError = $error[0]
+$currentError | Format-List -Force
+</pre>
+<p>
+$errorは履歴で最新のコマンドの実行結果がエラーであった場合の全てを吐き出す。
+</p>
+<p>
+    上記の例ではその一列目を取り出したあと、配列として出力する。
+</p>
+
+###表として出力する
+
+<pre>
+//プロセス一覧
+Get-Process
+
+//表として出力
+Get-Process | Format-Table
+
+//Name WSの列のみ出力
+Get-Process | Format-Table Name,WS
+
+//幅を綺麗にする
+Get-Process | Format-Table Name,WS -Auto
+
+//さらにカスタマイズ
+$fields = "Name",@{
+    Label = "WS (MB)"; 
+    Expression = {$_.WS / 1mb}; 
+    Align = "Right"
+} 
+Get-Process | Format-Table $fields -Auto
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+title:powershell クックブック 備忘録、インタラクティブシェル編
+description:powershellクックブックの備忘録です。今回は一章のインタラクティブシェルについてまとめました。
+img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
+
