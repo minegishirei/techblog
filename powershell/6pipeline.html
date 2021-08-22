@@ -1,0 +1,133 @@
+title:powershell クックブック パイプライン編
+description:
+
+
+##パイプラインとは
+
+<p>
+    そもそもパイプラインとは、以下のように「｜」記号でコマンドを繋ぐことで、データの変更を可能にする仕組みである。
+</p>
+<pre>
+Get-Process | Where-Object { $_.WorkingSet -gt 500kb } | Sort-Object -Descending Name
+</pre>
+
+<p>
+    上記の例ならば
+</p>
+<pre>
+プロセス一覧  | プロセスのWorkingSetが500kb以上を取り出す    | 名前の降順で並び替える
+Get-Process | Where-Object { $_.WorkingSet -gt 500kb } | Sort-Object -Descending Name
+</pre>
+<p>
+    というように、あたかも工場の生産ラインのようにデータを変形していくことができる。
+</p>
+<p>
+    この仕組みをパイプラインという
+</p>
+
+
+
+##パイプライン1 コマンドの出力結果のフィルタリング
+
+<pre>
+Get-Process | Where-Object { $_.Name -like "*Search*" }
+</pre>
+
+-like演算子はワイルドカードと一致するかどうかを確かめる
+
+上記の例ならばSerachがName文字列に入っているかどうかで次に渡すかどうかを決める。
+
+上のコマンドはプロセス一覧を手に入れた後、名前が「Search」を含んでいるもののみ表示する
+
+
+##Where-Objectについて
+
+Where-Objectはフィルタリングのためのコマンドレットである。
+
+Where-Objectのあとの{}内でスクリプトを実行し、その実行結果がFalse出ないものを変換する
+
+また、Where-Objectは受け渡された全ての行に目を通すが、$_は現在処理している物を表す。(今回の例だと各プロセスのこと)
+
+
+
+##コマンドの出力テーブルのうち、一部を出力したい。
+
+<pre>
+Get-ChildItem | Where-Object { $_.PsIsContainer }
+</pre>
+
+<p>
+    全てのディレクトリのうちPsIsContainerプロパティを次に受け渡すことで、ディレクトリ一覧を表示できる。
+</p>
+
+
+##停止しているサービス一覧を取得する
+
+<pre>
+Get-Service | Where-Object { $_.Status -eq "Stopped" }
+</pre>
+
+
+
+##Foreach-Objectについて
+
+Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行うことができる。
+
+<pre>
+1..10 | Foreach-Object { $_ * 2 }
+</pre>
+上記の例では1..10という1から10が格納された配列に対して、各要素が$_に格納されることになり、それぞれを二倍している。
+
+よって出力は以下のようになる
+
+<pre>
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+</pre>
+
+##Foreach-Objectの応用
+
+###全てのメモ帳プロセスの終了を検知する
+
+<pre>
+ $notepadProcesses = Get-Process notepad
+ $notepadProcesses | Foreach-Object { $_.WaitForExit() }
+</pre>
+
+<p>
+    Get-Processコマンドでnotepadを指定することで、現在動いている全てのメモ帳プロセスに関するデータを手に入れることができる。
+</p>
+<p>
+    また、手に入れたメモ帳の各プロセスについてForeach-Objectを用いてWaitForExit()を実行する
+</p>
+
+<p>
+    このWaitForExitメソッドはプロセスが終了されるまで待つという意味である。
+</p>
+
+<p>
+    これらのプロセス全てが終了するまで、このプログラムは先には進まない
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
