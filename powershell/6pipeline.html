@@ -120,14 +120,62 @@ Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行�
 </p>
 
 
+#パイプラインの速度について
+
+
+##具体例1
+<pre>
+Get-ChildItem C:\ *.txt -Recurse | Out-File c:\temp\AllTextFiles.txt
+</pre>
+
+<p>
+    上のコマンドの方が以下のコマンドより早い
+</p>
+
+<pre>
+$files = Get-ChildItem C:\ *.txt –Recurse
+$files | Out-File c:\temp\AllTextFiles.txt
+</pre>
+
+<p>
+    なぜ早いのか
+</p>
 
 
 
+<p>
+    遅い方のコマンドでは$filesに一度全ての実行結果を格納している
+</p>
+
+<p>
+    その結果、filesにメモリーの容量が奪われ、CPUに負荷を与える（CPUが一度に覚えておかなければいけないことが多くなる）
+</p>
+
+<p>
+    それに対し、パイプラインはいわゆる「流れ」を形成する。
+</p>
+<p>
+    Get-ChildItemで取得したデータは止まらずにすぐにOutFileで出力されるため、CPUが覚えておかなければならない量が減る
+</p>
 
 
+##具体例2
 
+<pre>
+$output = New-Object System.Text.StringBuilder
+Get-ChildItem C:\ *.txt -Recurse |
+    Foreach-Object { [void] $output.Append($_.FullName + "`n") }
+$output.ToString()
+</pre>
+<p>
+    上のコマンドの方が以下のコマンドより早い
+</p>
 
-
+<pre>
+$output = ""
+Get-ChildItem C:\ *.txt -Recurse | Foreach-Object { $output += $_.FullName }
+$output
+</pre>
 
 
 
