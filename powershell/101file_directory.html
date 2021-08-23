@@ -1,0 +1,71 @@
+
+
+
+##powershellでサイズの大きいファイルを見つける
+
+
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+
+
+サンプルコード
+
+
+<pre>
+##############################################################################
+##
+## Get-DiskUsage.ps1
+##
+## ディスク使用率に関する情報を手に入れられる
+## -IncludeSubdirectoriesを指定した場合、ディrエレクトリ内のサブディレクトリのサイズも提示する
+##
+## 具体例)
+##
+##  PS >Get-DiskUsage
+##  PS >Get-DiskUsage -IncludeSubdirectories
+##
+##############################################################################
+param(
+    [switch] $includeSubdirectories
+)
+#サブディレクトリについての情報が欲しい時
+if($includeSubdirectories)
+{
+    Get-ChildItem | Where-Object { $_.PsIsContainer } |
+        Select-Object Name,
+            @{ Name="Size";
+            Expression={ ($_ | Get-ChildItem -Recurse |
+                Measure-Object -Sum Length).Sum + 0 } }
+}
+#それ以外はカレントディレクトリのサイズを探索
+else
+{
+    Get-ChildItem -Recurse | Where-Object { $_.PsIsContainer } |
+        Select-Object FullName,
+}
+</pre>
+
+
+
+
+
+
+
+
+
+title:powershellでサイズの大きいファイルを見つける
+description:海外版のpowershellクックブック pdfファイルを参考に、サイズの大きいファイルを全て取り出すスクリプトを紹介。
+img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
+
+
+
+
+
+
+
+
+
