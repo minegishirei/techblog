@@ -1,0 +1,235 @@
+
+
+##複数行の文字列
+
+「@"」で囲むことで文字列を複数行にかける。
+
+<pre>
+$myString = @"
+This is the first line
+of a very long string. A "here string"
+lets you to create blocks of text
+that span several lines.
+"@
+</pre>
+
+この手法はただの文字列にだけでなく、コードのコメントアウトにも使える。
+
+
+<pre>
+//This is a regular comment
+$null = @"
+function MyTest
+{
+    "This should not be considered a function"
+}
+$myVariable = 10;
+"@
+//これ以降のコードは通常のコードです。
+...
+
+</pre>
+
+
+
+##フォーマット文字列について
+
+サンプルコード
+<code>
+<pre>
+$formatString = "{0,8:D4}  {1:C}`n"
+$formatString -f 50,2.5677
+$formatString -f 3,9
+</pre>
+</code>
+
+出力結果
+<pre>
+0050  $2.57
+0003  $9.00
+</pre>
+
+解説
+
+上で定義したformatStringは{}ないに好きな文字を好きな形式で代入できる。
+
+$formatString = "{0,8:D4}  {1:C}`n"
+
+{0,8:D4} は
+
+0番目の代入を、8文字の長さの右揃えで、4桁のD(整数を表す)で表示される。
+
+$formatString -f 50,2.5677
+
+であれば、-fの後の50に値する。
+
+そしてその出力は
+
+0050  $2.57
+
+となる。
+
+
+
+二つ目の
+
+{1:C}は
+
+1番目の代入を、C(Coin、通貨)形式で表す。
+
+
+###別の例
+
+<pre>
+$number1 = 10
+$number2 = 32
+"{0} divided by {1} is {2}" -f $number2, $number1, ($number2 / $number1)
+</pre>
+
+実行結果
+
+<pre>
+32 divided by 10 is 3.2
+</pre>
+
+
+##文字列パターンと一致するかどうかがみたい
+
+###ワイルドカードを使う時
+
+<pre>
+"Hello World" –like "*llo W*"
+</pre>
+
+ワイルドカードは -like 演算子で評価できる。
+
+上の実行結果はTrueになる
+
+###正規表現で解決する
+
+<pre>
+"Hello World" –match '.*l[l-z]o W.*$'
+</pre>
+
+正規表現は -matchで評価できる。
+
+
+##ある文字列が含まれるかどうかがみたい
+
+<pre>
+"Hello World".Contains("World")
+</pre>
+
+Contains関数は文字列のメソッドとしてすでに定義されている。
+
+こちらの実行結果もTrue
+
+
+##何文字目に含まれるかが見たい
+
+<pre>
+"Hello World".IndexOf("World")
+</pre>
+
+IndexOfは文字列が含まれる最初の場所0スタートで教えてくれる。
+
+今回であれば、
+
+0123456
+
+Hello W
+
+であるので、6が返される。
+
+
+##文字列を置換したい
+
+Replaceを使おう
+
+
+<pre>
+"Hello World".Replace("World", "PowerShell")
+</pre>
+
+実行結果
+
+<pre>
+Hello PowerShell
+</pre>
+
+
+
+##大文字小文字変換
+
+.ToUpper(),.ToLower()メソッドを使おう
+
+###大文字化
+
+サンプル
+<pre>
+"Hello World".ToUpper()
+</pre>
+
+実行結果
+
+<pre>
+HELLO WORLD
+</pre>
+
+###小文字化
+
+サンプル
+
+<pre>
+"Hello World".ToLower()
+</pre>
+
+<pre>
+hello world
+</pre>
+
+
+
+
+
+#大きな文字列を生成する。
+
+
+##具体例1
+<pre>
+Get-ChildItem C:\ *.txt -Recurse | Out-File c:\temp\AllTextFiles.txt
+</pre>
+
+<p>
+    上のコマンドの方が以下のコマンドより早い
+</p>
+
+<pre>
+$files = Get-ChildItem C:\ *.txt –Recurse
+$files | Out-File c:\temp\AllTextFiles.txt
+</pre>
+
+<p>
+    なぜ早いのか
+</p>
+
+
+
+<p>
+    遅い方のコマンドでは$filesに一度全ての実行結果を格納している
+</p>
+
+<p>
+    その結果、filesにメモリーの容量が奪われ、CPUに負荷を与える（CPUが一度に覚えておかなければいけないことが多くなる）
+</p>
+
+<p>
+    それに対し、パイプラインはいわゆる「流れ」を形成する。
+</p>
+<p>
+    Get-ChildItemで取得したデータは止まらずにすぐにOutFileで出力されるため、CPUが覚えておかなければならない量が減る
+</p>
+
+
+
+
