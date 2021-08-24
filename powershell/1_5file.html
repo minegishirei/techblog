@@ -1,0 +1,192 @@
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+##powershellのxmlファイルを変数に格納する
+
+サンプルコード1
+
+<pre>
+$xml = [xml] (Get-Content powershell_blog.xml)
+$xml
+</pre>
+
+実行結果1
+
+<pre>
+xml                      xml-stylesheet           rss
+---                      --------------           ---
+                                                  rss
+</pre>
+
+サンプルコード2
+
+<pre>
+$xml.rss
+</pre>
+
+実行結果2
+
+<pre>
+version : 2.0
+dc      : http://purl.org/dc/elements/1.1/
+slash   : http://purl.org/rss/1.0/modules/slash/
+wfw     : http://wellformedweb.org/CommentAPI/
+channel : channel
+</pre>
+
+####解説
+
+powershellにはxmlを取り扱うための仕組みがすでに整っている。
+
+そしてそのライブラリを取り扱うために新しくインストールする必要はなく、powershellの標準機能として搭載されている。
+
+方法は簡単でxml文字列を[xml]として型宣言した変数に代入するだけ。
+
+次のコードではGet-Contentによってファイル名を指定してxmlテキストを取得し、その内容を変数$xmlに代入している。
+
+<pre>
+$xml = [xml] (Get-Content powershell_blog.xml)
+</pre>
+
+
+##xmlの各要素にpowershellでアクセスする。
+
+サンプルコード
+
+<pre>
+($xml)[0]
+</pre>
+
+実行結果
+
+<pre>
+guid: guid
+title: "Windows PowerShell in Action" has been released
+comment: http://blogs.msdn.com/powershell/rsscomments.aspx?PostID=171
+link: http://blogs.msdn.com/powershell/archive/2007/02/19/windows-
+pubDate: Mon, 19 Feb 2007 20:05:00 GMT
+comments: {4, http://blogs.msdn.com/powershell/comments/1718281.aspx}
+commentRss  : http://blogs.msdn.com/powershell/commentrss.aspx?PostID=1718281
+creator     : PowerShellTeam
+</pre>
+解説
+
+xmlの各要素に対しては添字を使ってアクセスすることができる。
+
+また、さらにその中の要素にタグを指定してアクセスしたい場合はドット繋ぎで指定してやればよい
+
+サンプルコード
+
+<pre>
+($xml.rss.channel.item)[0].title
+</pre>
+
+実行結果
+
+<pre>
+"Windows PowerShell in Action" has been released
+</pre>
+
+
+
+##xmlからタグを指定して全て抜き出す。
+
+
+パイプラインを用いてタグを全て抜き出すのがよい
+
+サンプル
+
+<pre>
+$xml | Sort-Object title | Select-Object title
+</pre>
+
+実行結果
+
+<pre>
+title
+-----
+"Windows PowerShell in Action" has been released
+Controlling PowerShell Function (Re)Definition
+Execution Policy and Vista
+Executive Demo
+It's All about Economics
+NetCmdlets Beta 2 is now Available.
+Payette Podcast
+</pre>
+
+
+##xmlファイルの要素の修正
+<pre>
+##ファイル名を取得する
+$filename = (Get-Item phone.xml).FullName
+
+##ファイルの中身を読み込む
+Get-Content $filename
+略）
+
+＜AddressBook>
+    ＜Person contactType="Personal">
+      ＜Name>Lee＜/Name>
+      ＜Phone type="home">555-1212＜/Phone>
+      ＜Phone type="work">555-1213＜/Phone>
+    ＜/Person>
+    ＜Person contactType="Business">
+      ＜Name>Ariel＜/Name>
+      ＜Phone>555-1234＜/Phone>
+    ＜/Person>
+  ＜/AddressBook>
+
+略ここまで)
+
+$phoneBook = [xml] (Get-Content $filename)
+
+##変更する対象を指定する。
+$person = $phoneBook.AddressBook.Person[0]
+
+##personのうち、電話番号とタイプをかえる
+$person.Phone[0]."#text" = "555-1214"
+$person.Phone[0].type = "mobile"
+
+##さらに新しい携帯番号を追加
+$newNumber = [xml] '<Phone type="home">555-1215</Phone>'
+$newNode = $phoneBook.ImportNode($newNumber.Phone, $true)
+[void] $person.AppendChild($newNode)
+
+##ここで保存可能
+$phoneBook.Save($filename)
+Get-Content $filename
+
+略）
+＜AddressBook>
+  ＜Person contactType="Personal">
+    ＜Name>Lee＜/Name>
+    ＜Phone type="mobile">555-1214＜/Phone>
+    ＜Phone type="work">555-1213＜/Phone>
+    ＜Phone type="home">555-1215＜/Phone>
+  ＜/Person>
+  ＜Person contactType="Business">
+    ＜Name>Ariel＜/Name>
+    ＜Phone>555-1234＜/Phone>
+  ＜/Person>
+＜/AddressBook>
+略ここまで
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+title:powershellによるxmlファイル取扱まとめ
+description:powershellでxmlを扱う方法を紹介します。
