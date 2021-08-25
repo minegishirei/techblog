@@ -1,0 +1,39 @@
+
+title:powershellでファイルをダウンロードする方法（サンプルあり）
+description:ファイルをダウンロードするためには.Net FrameworkのWebClientオブジェクトを使用しましょう。user-agentも追加可能です。
+
+
+
+##powershellでファイルをダウンロードするサンプルコード
+
+<pre>
+$source = "http://www.leeholmes.com/favicon.ico"
+$destination = "c:\temp\favicon.ico"
+
+$wc = New-Object System.Net.WebClient
+$wc.DownloadFile($source, $destination)
+</pre>
+
+####解説
+
+ファイルをダウンロードするためには.Net FrameworkのWebClientオブジェクトを使用する。
+
+
+##user-agentを追加する方法
+
+
+また、webブラウザからアクセスするようにヘッダーに書き込むためには以下のように$wc.Headersにuser-agentを追加する。
+
+
+<pre>
+$userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2;)"
+$wc = New-Object System.Net.WebClient
+$wc.Headers.Add("user-agent", $userAgent)
+</pre>
+
+
+
+
+
+
+

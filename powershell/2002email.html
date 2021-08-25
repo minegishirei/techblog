@@ -1,0 +1,96 @@
+title:powershellでメール自動配信(gmailも送れる)
+description:海外版のpowershellクックブックを参考に、powershellで自動メール配信システムを作成
+
+
+
+
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+
+
+
+##poewrshellでemailを送る
+
+なるべくシンプルなサンプルコード
+
+<pre>
+#初期変数
+[string[]] $to = "---@gmail.com", "-----@gmail.com"
+[string] $subject = "＜No Subject＞",
+[string] $body = "サンプルテキスト",
+[string] $smtpHost = "メールサーバーを指定(gmailならsmtp.gmail.com)",
+[string] $from = "$($env:UserName)@example.com"
+
+##メール本文作成
+$email = New-Object System.Net.Mail.MailMessage
+
+##メールを全ての to に送る
+foreach($mailTo in $to)
+{
+    $email.To.Add($mailTo)
+}
+$email.From = $from
+$email.Subject = $subject
+$email.Body = $body
+
+##メールを送る
+$client = New-Object System.Net.Mail.SmtpClient $smtpHost
+$client.UseDefaultCredentials = $true
+$client.Send($email)
+</pre>
+
+
+
+
+
+
+
+元々のコード
+
+
+<pre>
+##############################################################################
+##
+## Send-MailMessage.ps1
+##
+## Illustrate the techniques used to send an email in PowerShell.
+##
+## Example:
+##
+##  PS >$body = @"
+##  >> Hi from another satisfied customer of The PowerShell Cookbook!
+##  >> "@
+##  >>
+##  PS >$to = "guide_feedback@leeholmes.com"
+##  PS >$subject = "Thanks for all of the scripts."
+##  PS >$mailHost = "mail.leeholmes.com"
+##  PS >Send-MailMessage $to $subject $body $mailHost
+##
+##############################################################################
+param(
+    [string[]] $to = $(throw "Please specify the destination mail address"),
+    [string] $subject = "＜No Subject＞",
+    [string] $body = $(throw "Please specify the message content"),
+    [string] $smtpHost = $(throw "Please specify a mail server."),
+    [string] $from = "$($env:UserName)@example.com"
+)
+## Create the mail message
+$email = New-Object System.Net.Mail.MailMessage
+## Populate its fields
+foreach($mailTo in $to)
+{
+    $email.To.Add($mailTo)
+}
+$email.From = $from
+$email.Subject = $subject
+$email.Body = $body
+## Send the mail
+$client = New-Object System.Net.Mail.SmtpClient $smtpHost
+$client.UseDefaultCredentials = $true
+$client.Send($email)
+</pre>
+
