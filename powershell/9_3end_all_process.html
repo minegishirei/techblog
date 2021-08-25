@@ -5,12 +5,68 @@ description:powershellで全てのプロセスを終了する方法を紹介し�
 
 
 
+##Stop-Processとは
+アプリケーションを指定してプログラムを閉じることができる
+罰ボタンを押したときと同じ挙動
+
+例えば全てのchromeを止めたいとき
+
+<pre> Stop-Process -Name chrome </pre>
+
+exploreを止めたいときは
+
+<pre> Stop-Process -Name explorer </pre>
 
 
+##どのプロセス名を調べるためにはGet-Processコマンドが役に立つ
 
+<pre> Get-Process -Name ex* </pre>
 
+##(応用例)xmlファイルによるプロセス自動終了 あらかじめxmlファイルに終了するアプリを記述しておき、ps1ファイル呼び出しで全て閉じる
 
+xmlファイルの例
 
+<pre>
 
+＜process_list> 
+    ＜item>
+        ＜process_name>chrome＜/process_name> 
+    ＜/item> 
+    ＜item>
+    ＜process_name>
+        explorer
+    ＜/process_name> 
+    ＜/item> 
+    ＜item>
+        ＜process_name>
+            excel
+        ＜/process_name> 
+    ＜/item> 
+    ＜item>
+        ＜process_name>
+            notepad
+        ＜/process_name> 
+    ＜/item>
+    ＜item>
+        ＜process_name>
+            teams
+        ＜/process_name>
+    ＜/item>
+＜/process_list>
 
+</pre>
 
+サンプルコード
+
+<pre>
+#上のxmlが書かれているファイルパスを指定する。 
+[string]$filename = "..\meta\process. xml"
+
+#ファイルの内容を取得し、xml変数に代入する 
+[xml]$xml = Get-Content $filename
+
+#プロセス名を取得し、Stop-Processを実行 
+foreach($item in ($xml.process_list.item)){
+    Stop-Process -Name $item.process_name
+}
+</pre>
