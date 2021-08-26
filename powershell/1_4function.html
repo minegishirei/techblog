@@ -26,6 +26,10 @@
     </a>
 </pre>
 
+参考:海外版powershellクックブック
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
 
 
 
@@ -46,19 +50,25 @@
     関数の構文 </p>
 
 
+    
 <pre>
 function add plus 10 ($Number) [
-    $Number++; return $Number
+    $Number++; 
+    return $Number
 }
 </pre>
 
-<p>
-    関数の例文
-</p>
+
+
+
+##関数の引数
+
+
+###引数を撮る方法1： paramで指定
 <pre>
 $num1 = 0 echo "num1 is $num1"
 #2自分で関数を定義 
-function add_plus10 { 
+function add_plus1 { 
     param (
         $Number
     )
@@ -69,7 +79,164 @@ $num2 = add_plus1($num1)
 echo "num2 is $num2"
 </pre>
 
-<h2>fizz buzzの判定部分を関数として独立させる </h2>
+これは引数に対して1を加える簡単な関数
+
+$Numberに与えられた数字は$Number++で一つだけ値が増える。
+
+
+###引数を使う方法2：
+
+<pre>
+function add_plus10 ($Number) [
+    $Number++; 
+    return $Number
+}
+</pre>
+
+関数名の横に(のなかで引数を指定することもできる)
+
+
+###引数の型を指定することも可能
+<pre>
+function add_plus10 ([int]$Number) [
+    $Number++; 
+    return $Number
+}
+</pre>
+    
+引数の前に[]で型を指定することで、それ以外の型以外は代入できなくなる。
+
+万が一以下のように文字列を指定して代入してしまったとしてもエラーが出る
+
+<pre>
+add_plus10("アイウエオ")
+</pre>
+
+このコードはエラーが出る
+
+
+
+##可変長引数
+
+可変な長さの引数を取扱場合はargsを指定すればよい
+
+<pre>
+function GetArgumentsFunction
+{
+    "First positional function argument is: " + $args[0]
+    "Second positional function argument is: " + $args[1]
+}
+</pre>
+
+
+<pre>
+PS > GetArgumentsFunction One Two
+Get-Arguments First 2
+First named argument is: First
+</pre>
+
+
+
+##パイプライン入力にアクセスする
+
+サンプルコード
+
+<pre>#filename : somefunction.pms1
+function InputCounter {
+    $count = 0
+    ## Go through each element in the pipeline, and add up
+    ## how many elements there were.
+    foreach($element in $input){
+        $count++ 
+    }
+    $count
+}
+</pre>
+
+実行例
+
+<pre>
+ImportModule somefunction.pms1
+dir $env:WINDIR | InputCounter
+295
+</pre>
+
+解説
+
+$inputにはパイプラインからの入力が代入される。
+
+多くのコマンドは配列として次のパイプラインが生成されるので受け取り手の関数を作る場合はforeachで回さなければいけない
+
+
+
+##begin process end
+
+<pre>
+function InputCounter
+{
+    begin {
+        $count = 0 
+    }
+    ## Go through each element in the pipeline, and add up
+    ## how many elements there were.
+    process {
+        Write-Debug "Processing element $_"
+        $count++ 
+    }
+    end {
+        $count 
+    }
+}
+</pre>
+
+関数内の記述はbegin process end　の三段回に分けて書くことができる
+
+この記述方法が大きな影響を及ぼすわけではないが、あなたのソリューションの意図を明確にできる。
+
+
+以下のコードは同じ意味で機能的には差異がないが、どちらが見やすいだろうか
+
+
+<pre>
+function Get-InputWithKeyword($identifier)
+{
+begin {
+        Write-Host "Beginning InputWithKeyword (ID: $identifier)"
+    }
+process {
+        Write-Host "Processing element $_ (ID: $identifier)"
+$_ }
+end {
+        Write-Host "Ending InputWithKeyword (ID: $identifier)"
+    }
+}
+</pre>
+
+<pre>
+function Get-InputWithForeach($identifier)
+{
+    Write-Host "Beginning InputWithForeach (ID: $identifier)"
+    foreach($element in $input)
+    {
+        Write-Host "Processing element $element (ID: $identifier)"
+$element }
+    Write-Host "Ending InputWithForeach (ID: $identifier)"
+}
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>例題）：fizz buzzの判定部分を関数として独立させる </h2>
 <p>
 前回課題のfor文内のコードを関数として独立させよう 
 </p>
@@ -115,6 +282,71 @@ for ($i=1; $i -it 20; $i++) {
     echo $test
 }
 </pre>
+
+
+
+
+
+##パワーシェルの引数にスクリプトブロックを指定する
+
+
+<pre>
+##############################################################################
+## Map-Object.ps1
+##
+## Apply the given mapping command to each element of the input
+##
+## Example:
+##    1,2,3 | Map-Object { $_ * 2 }
+##############################################################################
+param([ScriptBlock] $mapCommand)
+process {
+    & $mapCommand
+}
+
+</pre>
+
+実行例
+
+<pre>
+PS >1,2,3 | Map-Object { $_ * 2 }
+2
+4
+6
+
+PS >1,2,3 | Map-Object { ($_ + 2) * 3 }
+9
+12
+15
+
+PS >1,2,3 | Map-Object { ($_ + 3) * $_ }
+4
+10
+18
+</pre>
+
+解説
+
+型[ScriptBlock]はその変数に{}で囲まれたpowershellコードを埋め込むことができる。
+
+$_は与えられた引数全体を配列として捉えた時に、その一つ一つの値に同じ処理を施したい時に使う。
+
+例えば
+
+PS >1,2,3 | Map-Object { $_ * 2 }
+
+の場合、1,2,3のそれぞれを表す$_に対して 「$_ * 2」つまり二倍するという処理を施している。
+
+powershellの[ScriptBlock]で定義された$mapCommand変数にはこの{ $_ * 2 }が格納されており、
+
+それをアンパサンド($)を使って実行できる。
+
+
+
+
+
+
+
 
 
 title:powershell 入門 学習サイト 〜関数編〜
