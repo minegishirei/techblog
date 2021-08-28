@@ -1,0 +1,61 @@
+##powershellによるキー入力自動化
+本記事ではpowershellでの自動化を体験してもらうべく、メモ帳に「あめんぼあかいなおい しいな」と入力する作業をワンクリックで終わらせられるコードを紹介します。
+
+全体の流れ
+<pre>
+その一 メモ帳を開きます
+その二 コピー&ペーストします 
+その三 デスクトップに保存します。
+その四 保存したファイルを右クリックし、「powershellで実行」
+</pre>
+
+##その一 メモ帳を開きます。
+
+##その二 以下のコードをコピー&ペーストします
+
+
+<pre> 
+<code>
+#Powershellをキーボードで動かすために必要な型を宣言しておく 
+#本来はC#などで使われるもの 
+add-type -AssemblyName System.Windows.Forms
+
+#23メモ帳起動 
+notepad
+
+#ペイント起動待ち 
+Start-Sleep -m 1000
+
+#「アメンボ赤いなおいしくはない」とキー入力 
+[System.Windows.Forms.SendKeys]::SendWait("アメンボ赤いなおいしくはない") 
+
+Start-Sleep -m 500 
+
+</code>
+</pre>
+
+
+##その三 デスクトップに保存します 
+
+注意!
+
+保存するときは 
+
+<storng>文字コードはANSI形式で!!!</storng> 
+
+<strong>拡張子は.ps1で!!!</strong> 
+
+<strong>ファイルの種類は「全てのファイル(**)」で!!!</strong> 
+
+名前は何でもいいですが、覚えておけるものにしましょう
+
+例)sample_code.ps1
+
+
+##その四 新しくできたファイルを右クリックして「poweershellで実行」
+
+
+
+title:誰でもできる！powershellによるキー入力自動化入門
+description:たったの4ステップでpowershellによるキー入力を自動化します。
+img:https://cdn-ak.f.st-hatena.com/images/fotolife/l/liszworks/20170602/20170602005734.png

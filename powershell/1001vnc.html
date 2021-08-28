@@ -1,0 +1,87 @@
+
+
+##今回紹介するpowershellでVNCを自動実行するコード
+
+このコードをメモ帳などに貼り付けて実行しましょう。
+
+注意! コード内のIPアドレス88.88.88.88は<strong>適当なIPアドレスです</strong> 
+
+接続するときはご自身の接続したいIPアドレスに変えましょう
+
+また、コード内のpasswordも<strong>適当なパスワードです</strong>
+
+接続するときは接続した先のパスワードに変更しましょう
+
+
+
+##コード
+<pre> 
+<code> 
+#Powershellをキーボードで動かすために必要な型を宣言しておく 
+#本来はC#などで使われるもの 
+add-type -AssemblyName System.Windows.Forms.SendKeys
+
+
+#スタートメニューで「VNC」と入力 
+#「ファイルの場所を開く」でファイルパスを特定 
+$vnc path = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs¥UltraVNC¥UTtraVNC Viewer.Ink"
+
+#VNC起動 Start-Process -FilePath $vnc_path #VNCが起動するまで1秒待つ Start-Sleep -m 1000
+
+#IPアドレスを入力し 
+[System.Windows.Forms.SendKeys]::SendWait("88. 88. 88. 88”).
+
+#Enter 
+[System.Windows.Forms.SendKeys]::SendWait(" {ENTER}") 
+
+#接続が確立するまで一秒待つ 
+Start-Sleep -m 1000
+
+#パスワードを求められるので入力し、 
+[System.Windows.Forms.SendKeys]::SendWait("password”)
+
+#Enter 
+[System.Windows.Forms.SendKeys]::SendWait("{ENTER}") 
+</code> 
+</pre>
+
+
+##ファイル作成から実行まで
+
+全体の流れ
+<pre>
+その一 メモ帳を開きます
+その二 コピー&ペーストします 
+その三 デスクトップに保存します。
+その四 保存したファイルを右クリックし、「powershellで実行」
+</pre>
+
+##その一 メモ帳を開きます。
+
+##その二 該当のコードをコピー&ペーストします
+
+
+##その三 デスクトップに保存します 
+
+注意!
+
+保存するときは 
+
+<storng>文字コードはANSI形式で!!!</storng> 
+
+<strong>拡張子は.ps1で!!!</strong> 
+
+<strong>ファイルの種類は「全てのファイル(**)」で!!!</strong> 
+
+名前は何でもいいですが、覚えておけるものにしましょう
+
+例)sample_code.ps1
+
+
+##その四 新しくできたファイルを右クリックして「powershellで実行」
+
+
+
+title:powershellでVNC接続を自動化する
+description:たったの4ステップでpowershellによるキー入力を自動化します。
+img:https://cdn-ak.f.st-hatena.com/images/fotolife/l/liszworks/20170602/20170602005734.png
