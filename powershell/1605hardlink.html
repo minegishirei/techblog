@@ -1,7 +1,73 @@
 
 
 
-#サンプルコード
+##ハードリンクとは
+
+ハードリンクとは、同じファイルを二つ作る仕組みのこと。
+
+通常のコピーとは違い、片方の編集がもう片方に影響を及ぼすということ。
+
+ファイルのハードリンクは実態を二つ作ることでもある。
+
+
+###つまり同じファイルを二箇所に設置したいときに役に立つ
+
+
+##通常のwindowsには標準搭載されていない
+
+このハードリンクというシステムをインストールなしで搭載しているのはwindowsvistaのバージョンのみ
+
+他はpowershellを使わなければ実装できません
+
+
+
+##ハードリンク作成用コード
+
+
+<pre>
+<code>
+
+##ファイル名： New-FileSystemHardLink.ps1
+
+function(){
+    param(
+        ##新しく作りたいファイル名
+        [string] $filename,
+        ##すでに存在するコピーしたいファイル名
+        [string] $existingFilename
+        )
+    ##ファイルパスが絶対パスかどうか調べる
+    $filename = $executionContext.SessionState.Path.`
+        GetUnresolvedProviderPathFromPSPath($filename)
+    $existingFilename = Resolve-Path $existingFilename
+
+    ##関数に渡された引数の型を調べる
+    $parameterTypes = [string], [string], [IntPtr]
+    $parameters = [string] $filename, [string] $existingFilename, [IntPtr]::Zero
+
+    ##Kernel32 DLLのハードリンク作成メソッドを呼び出す
+    $currentDirectory = Split-Path $myInvocation.MyCommand.Path
+    $invokeWindowsApiCommand = Join-Path $currentDirectory Invoke-WindowsApi.ps1
+    $result = & $invokeWindowsApiCommand "kernel32" `
+        ([bool]) "CreateHardLink" $parameterTypes $parameters
+
+    ##エラー管理
+    if(-not $result)
+    {
+        $message = "Could not create hard link of $filename to " +
+            "existing file $existingFilename"
+        Write-Error $message
+    }
+
+}
+</code>
+</pre>
+
+
+
+
+##元ネタのコード(powershellのハードリンク作成)
+
 
 <pre>
 <code>
