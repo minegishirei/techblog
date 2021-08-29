@@ -99,7 +99,8 @@ function Prompt
 
 <pre><code>
     Get-Help 調べたいコマンド
-</pre></code>
+</code>
+</pre>
 
 
 ##コマンドを見つけたい
@@ -107,7 +108,8 @@ function Prompt
 
 <pre><code>
     Get-Command
-</pre></code>
+</code>
+</pre>
 
 <p>
     ところで、コマンドの一部だけ知っているがそれ以外が知らない時は、以下のようにワイルドカード(正規表現)を使うことも可能
@@ -115,7 +117,8 @@ function Prompt
 
 <pre><code>
 Get-Command *コマンドの一部*
-</pre></code>
+</code>
+</pre>
 
 ###コマンドの構成について
 
@@ -138,7 +141,8 @@ Get-Command *コマンドの一部*
 
 <pre><code>
 Get-Command -Verb Get
-</pre></code>
+</code>
+</pre>
 
 
 <p>
@@ -147,7 +151,8 @@ Get-Command -Verb Get
 
 <pre><code>
 Get-Command -Noun Process
-</pre></code>
+</code>
+</pre>
 
 このコマンドによって、例えばGet-Process(タスクマネージャーと同じコマンド)を手に入れられる。
 
@@ -156,7 +161,8 @@ Get-Command -Noun Process
 
 <pre><code>
 Measure-Command
-</pre></code>
+</code>
+</pre>
 
 
 ##(理解できなかったレシピ)シェルをカスタマイズして生産性をあげる
@@ -180,7 +186,8 @@ New-ItemProperty . QuickEdit -type DWORD -value 0x00000001
 New-ItemProperty . ScreenBufferSize -type DWORD -value 0x0bb80078
 New-ItemProperty . WindowSize -type DWORD -value 0x00320078
 Pop-Location
-</pre></code>
+</code>
+</pre>
 
 
 ##以前呼び出したコマンドを実行したい
@@ -188,7 +195,8 @@ Pop-Location
 <pre><code>
 Get-History         #履歴を調べIDを取得
 Invoke-History (ID) #IDを記述して呼び起こす
-</pre></code>
+</code>
+</pre>
 
 
 
@@ -202,7 +210,8 @@ Get-ChildItem | Out-File-Width 120 unicodeFile.cs
 
 //やり方2
 Get-ChildItem > files.txt 
-</pre></code>
+</code>
+</pre>
 
 ###やり方2 > を使う
 実行したいコマンドの右に > を書き、さらにその右にファイル名を書くことで、
@@ -211,7 +220,8 @@ Get-ChildItem > files.txt
 追記したい場合は >>　を使う。
 <pre><code>
 Get-ChildItem >> files.txt 
-</pre></code>
+</code>
+</pre>
 
 この方法は簡単ではあるが、出力を綺麗にできない。
 
@@ -225,7 +235,8 @@ Get-ChildItem >> files.txt
 </p>
 <pre><code>
 Get-ChildItem | Out-File-Width 120 unicodeFile.cs
-</pre></code>
+</code>
+</pre>
 
 
 
@@ -241,7 +252,8 @@ Get-ChildItem | Out-File-Width 120 unicodeFile.cs
 <pre><code>
 $currentError = $error[0]
 $currentError | Format-List -Force
-</pre></code>
+</code>
+</pre>
 <p>
 $errorは履歴で最新のコマンドの実行結果がエラーであった場合の全てを吐き出す。
 </p>
@@ -271,7 +283,8 @@ $fields = "Name",@{
     Align = "Right"
 } 
 Get-Process | Format-Table $fields -Auto
-</pre></code>
+</code>
+</pre>
 
 
 

@@ -4,19 +4,20 @@
 
 「@"」で囲むことで文字列を複数行にかける。
 
-<pre>
+<pre><code>
 $myString = @"
 This is the first line
 of a very long string. A "here string"
 lets you to create blocks of text
 that span several lines.
 "@
+</code>
 </pre>
 
 この手法はただの文字列にだけでなく、コードのコメントアウトにも使える。
 
 
-<pre>
+<pre><code>
 //This is a regular comment
 $null = @"
 function MyTest
@@ -28,6 +29,7 @@ $myVariable = 10;
 //これ以降のコードは通常のコードです。
 ...
 
+</code>
 </pre>
 
 
@@ -36,17 +38,19 @@ $myVariable = 10;
 
 サンプルコード
 <code>
-<pre>
+<pre><code>
 $formatString = "{0,8:D4}  {1:C}`n"
 $formatString -f 50,2.5677
 $formatString -f 3,9
+</code>
 </pre>
 </code>
 
 出力結果
-<pre>
+<pre><code>
 0050  $2.57
 0003  $9.00
+</code>
 </pre>
 
 解説
@@ -80,16 +84,18 @@ $formatString -f 50,2.5677
 
 ###別の例
 
-<pre>
+<pre><code>
 $number1 = 10
 $number2 = 32
 "{0} divided by {1} is {2}" -f $number2, $number1, ($number2 / $number1)
+</code>
 </pre>
 
 実行結果
 
-<pre>
+<pre><code>
 32 divided by 10 is 3.2
+</code>
 </pre>
 
 
@@ -97,8 +103,9 @@ $number2 = 32
 
 ###ワイルドカードを使う時
 
-<pre>
+<pre><code>
 "Hello World" –like "*llo W*"
+</code>
 </pre>
 
 ワイルドカードは -like 演算子で評価できる。
@@ -107,8 +114,9 @@ $number2 = 32
 
 ###正規表現で解決する
 
-<pre>
+<pre><code>
 "Hello World" –match '.*l[l-z]o W.*$'
+</code>
 </pre>
 
 正規表現は -matchで評価できる。
@@ -116,8 +124,9 @@ $number2 = 32
 
 ##ある文字列が含まれるかどうかがみたい
 
-<pre>
+<pre><code>
 "Hello World".Contains("World")
+</code>
 </pre>
 
 Contains関数は文字列のメソッドとしてすでに定義されている。
@@ -127,8 +136,9 @@ Contains関数は文字列のメソッドとしてすでに定義されている
 
 ##何文字目に含まれるかが見たい
 
-<pre>
+<pre><code>
 "Hello World".IndexOf("World")
+</code>
 </pre>
 
 IndexOfは文字列が含まれる最初の場所0スタートで教えてくれる。
@@ -147,14 +157,16 @@ Hello W
 Replaceを使おう
 
 
-<pre>
+<pre><code>
 "Hello World".Replace("World", "PowerShell")
+</code>
 </pre>
 
 実行結果
 
-<pre>
+<pre><code>
 Hello PowerShell
+</code>
 </pre>
 
 
@@ -166,26 +178,30 @@ Hello PowerShell
 ###大文字化
 
 サンプル
-<pre>
+<pre><code>
 "Hello World".ToUpper()
+</code>
 </pre>
 
 実行結果
 
-<pre>
+<pre><code>
 HELLO WORLD
+</code>
 </pre>
 
 ###小文字化
 
 サンプル
 
-<pre>
+<pre><code>
 "Hello World".ToLower()
+</code>
 </pre>
 
-<pre>
+<pre><code>
 hello world
+</code>
 </pre>
 
 
@@ -196,17 +212,19 @@ hello world
 
 
 ##具体例1
-<pre>
+<pre><code>
 Get-ChildItem C:\ *.txt -Recurse | Out-File c:\temp\AllTextFiles.txt
+</code>
 </pre>
 
 <p>
     上のコマンドの方が以下のコマンドより早い
 </p>
 
-<pre>
+<pre><code>
 $files = Get-ChildItem C:\ *.txt –Recurse
 $files | Out-File c:\temp\AllTextFiles.txt
+</code>
 </pre>
 
 <p>

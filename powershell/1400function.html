@@ -29,11 +29,12 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 
     
-<pre>
+<pre><code>
 function add plus 10 ($Number) [
     $Number++; 
     return $Number
 }
+</code>
 </pre>
 
 
@@ -43,7 +44,7 @@ function add plus 10 ($Number) [
 
 
 ###引数を撮る方法1： paramで指定
-<pre>
+<pre><code>
 $num1 = 0 echo "num1 is $num1"
 #2自分で関数を定義 
 function add_plus1 { 
@@ -55,6 +56,7 @@ function add_plus1 {
 }
 $num2 = add_plus1($num1)
 echo "num2 is $num2"
+</code>
 </pre>
 
 これは引数に対して1を加える簡単な関数
@@ -64,30 +66,33 @@ $Numberに与えられた数字は$Number++で一つだけ値が増える。
 
 ###引数を使う方法2：
 
-<pre>
+<pre><code>
 function add_plus10 ($Number) [
     $Number++; 
     return $Number
 }
+</code>
 </pre>
 
 関数名の横に(のなかで引数を指定することもできる)
 
 
 ###引数の型を指定することも可能
-<pre>
+<pre><code>
 function add_plus10 ([int]$Number) [
     $Number++; 
     return $Number
 }
+</code>
 </pre>
     
 引数の前に[]で型を指定することで、それ以外の型以外は代入できなくなる。
 
 万が一以下のように文字列を指定して代入してしまったとしてもエラーが出る
 
-<pre>
+<pre><code>
 add_plus10("アイウエオ")
+</code>
 </pre>
 
 このコードはエラーが出る
@@ -98,19 +103,21 @@ add_plus10("アイウエオ")
 
 可変な長さの引数を取扱場合はargsを指定すればよい
 
-<pre>
+<pre><code>
 function GetArgumentsFunction
 {
     "First positional function argument is: " + $args[0]
     "Second positional function argument is: " + $args[1]
 }
+</code>
 </pre>
 
 
-<pre>
+<pre><code>
 PS > GetArgumentsFunction One Two
 Get-Arguments First 2
 First named argument is: First
+</code>
 </pre>
 
 
@@ -119,7 +126,7 @@ First named argument is: First
 
 サンプルコード
 
-<pre>#filename : somefunction.pms1
+<pre><code>#filename : somefunction.pms1
 function InputCounter {
     $count = 0
     ## Go through each element in the pipeline, and add up
@@ -129,14 +136,16 @@ function InputCounter {
     }
     $count
 }
+</code>
 </pre>
 
 実行例
 
-<pre>
+<pre><code>
 ImportModule somefunction.pms1
 dir $env:WINDIR | InputCounter
 295
+</code>
 </pre>
 
 解説
@@ -149,7 +158,7 @@ $inputにはパイプラインからの入力が代入される。
 
 ##begin process end
 
-<pre>
+<pre><code>
 function InputCounter
 {
     begin {
@@ -165,6 +174,7 @@ function InputCounter
         $count 
     }
 }
+</code>
 </pre>
 
 関数内の記述はbegin process end　の三段回に分けて書くことができる
@@ -175,7 +185,7 @@ function InputCounter
 以下のコードは同じ意味で機能的には差異がないが、どちらが見やすいだろうか
 
 
-<pre>
+<pre><code>
 function Get-InputWithKeyword($identifier)
 {
 begin {
@@ -188,9 +198,10 @@ end {
         Write-Host "Ending InputWithKeyword (ID: $identifier)"
     }
 }
+</code>
 </pre>
 
-<pre>
+<pre><code>
 function Get-InputWithForeach($identifier)
 {
     Write-Host "Beginning InputWithForeach (ID: $identifier)"
@@ -200,6 +211,7 @@ function Get-InputWithForeach($identifier)
 $element }
     Write-Host "Ending InputWithForeach (ID: $identifier)"
 }
+</code>
 </pre>
 
 
@@ -218,16 +230,17 @@ $element }
 <p>
 前回課題のfor文内のコードを関数として独立させよう 
 </p>
-<pre> 
+<pre><code> 
 for ($i=1; $i -it 20; $i++) { if ($i % 15 -eq 0) {
 echo "$i is fizzbuzz" } else if ($i % 5 -eq 0) {
 echo "$i is buzz" Jelseif ($i % 3 -eq 0) {
 echo "$i is fizz"
+</code>
 </pre>
 <p>
 以下回答
 </p>
-<pre>
+<pre><code>
 
 
 
@@ -239,11 +252,12 @@ echo "$i is fizz"
 
 
 
+</code>
 </pre>
 <p>
     回答例
 </p>
-<pre> 
+<pre><code> 
 function Judgement-Fizzbuzz($i){ 
     $answer = ""
     if ($i % 15 -eq 0) {
@@ -259,6 +273,7 @@ for ($i=1; $i -it 20; $i++) {
     $test = Judgement-Fizzbuzz($i)
     echo $test
 }
+</code>
 </pre>
 
 
@@ -268,7 +283,7 @@ for ($i=1; $i -it 20; $i++) {
 ##パワーシェルの引数にスクリプトブロックを指定する
 
 
-<pre>
+<pre><code>
 ##############################################################################
 ## Map-Object.ps1
 ##
@@ -282,11 +297,12 @@ process {
     & $mapCommand
 }
 
+</code>
 </pre>
 
 実行例
 
-<pre>
+<pre><code>
 PS >1,2,3 | Map-Object { $_ * 2 }
 2
 4
@@ -301,6 +317,7 @@ PS >1,2,3 | Map-Object { ($_ + 3) * $_ }
 4
 10
 18
+</code>
 </pre>
 
 解説

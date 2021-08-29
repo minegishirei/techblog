@@ -5,16 +5,18 @@
 <p>
     そもそもパイプラインとは、以下のように「｜」記号でコマンドを繋ぐことで、データの変更を可能にする仕組みである。
 </p>
-<pre>
+<pre><code>
 Get-Process | Where-Object { $_.WorkingSet -gt 500kb } | Sort-Object -Descending Name
+</code>
 </pre>
 
 <p>
     上記の例ならば
 </p>
-<pre>
+<pre><code>
 プロセス一覧  | プロセスのWorkingSetが500kb以上を取り出す    | 名前の降順で並び替える
 Get-Process | Where-Object { $_.WorkingSet -gt 500kb } | Sort-Object -Descending Name
+</code>
 </pre>
 <p>
     というように、あたかも工場の生産ラインのようにデータを変形していくことができる。
@@ -27,8 +29,9 @@ Get-Process | Where-Object { $_.WorkingSet -gt 500kb } | Sort-Object -Descending
 
 ##パイプライン1 コマンドの出力結果のフィルタリング
 
-<pre>
+<pre><code>
 Get-Process | Where-Object { $_.Name -like "*Search*" }
+</code>
 </pre>
 
 -like演算子はワイルドカードと一致するかどうかを確かめる
@@ -50,8 +53,9 @@ Where-Objectのあとの{}内でスクリプトを実行し、その実行結果
 
 ##コマンドの出力テーブルのうち、一部を出力したい。
 
-<pre>
+<pre><code>
 Get-ChildItem | Where-Object { $_.PsIsContainer }
+</code>
 </pre>
 
 <p>
@@ -61,8 +65,9 @@ Get-ChildItem | Where-Object { $_.PsIsContainer }
 
 ##停止しているサービス一覧を取得する
 
-<pre>
+<pre><code>
 Get-Service | Where-Object { $_.Status -eq "Stopped" }
+</code>
 </pre>
 
 
@@ -71,14 +76,15 @@ Get-Service | Where-Object { $_.Status -eq "Stopped" }
 
 Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行うことができる。
 
-<pre>
+<pre><code>
 1..10 | Foreach-Object { $_ * 2 }
+</code>
 </pre>
 上記の例では1..10という1から10が格納された配列に対して、各要素が$_に格納されることになり、それぞれを二倍している。
 
 よって出力は以下のようになる
 
-<pre>
+<pre><code>
 2
 4
 6
@@ -89,15 +95,17 @@ Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行�
 16
 18
 20
+</code>
 </pre>
 
 ##Foreach-Objectの応用
 
 ###全てのメモ帳プロセスの終了を検知する
 
-<pre>
+<pre><code>
  $notepadProcesses = Get-Process notepad
  $notepadProcesses | Foreach-Object { $_.WaitForExit() }
+</code>
 </pre>
 
 <p>
@@ -120,17 +128,19 @@ Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行�
 
 
 ##具体例1
-<pre>
+<pre><code>
 Get-ChildItem C:\ *.txt -Recurse | Out-File c:\temp\AllTextFiles.txt
+</code>
 </pre>
 
 <p>
     上のコマンドの方が以下のコマンドより早い
 </p>
 
-<pre>
+<pre><code>
 $files = Get-ChildItem C:\ *.txt –Recurse
 $files | Out-File c:\temp\AllTextFiles.txt
+</code>
 </pre>
 
 <p>
@@ -157,20 +167,22 @@ $files | Out-File c:\temp\AllTextFiles.txt
 
 ##具体例2
 
-<pre>
+<pre><code>
 $output = New-Object System.Text.StringBuilder
 Get-ChildItem C:\ *.txt -Recurse |
     Foreach-Object { [void] $output.Append($_.FullName + "`n") }
 $output.ToString()
+</code>
 </pre>
 <p>
     上のコマンドの方が以下のコマンドより早い
 </p>
 
-<pre>
+<pre><code>
 $output = ""
 Get-ChildItem C:\ *.txt -Recurse | Foreach-Object { $output += $_.FullName }
 $output
+</code>
 </pre>
 
 
