@@ -1,0 +1,128 @@
+
+
+
+##レジストリキーを表示する
+
+Get-ItemPropertyでレジストリキーを取得できる。
+
+
+
+<pre><code>
+Set-Location HKCU:
+Set-Location \Software\Microsoft\Windows\CurrentVersion\Run
+Get-ItemProperty .
+</code></pre>
+
+実行結果
+
+<pre><code>
+PSPath: Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_U
+        SER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath: Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_U
+          SER\Software\Microsoft\Windows\CurrentVersion
+PSChildName: Run
+PSDrive: HKCU
+PSProvider: Microsoft.PowerShell.Core\Registry
+FolderShare: "C:\Program Files\FolderShare\FolderShare.exe" /background
+TaskSwitchXP: d:\lee\tools\TaskSwitchXP.exe
+ctfmon.exe: C:\WINDOWS\system32\ctfmon.exe
+Ditto: C:\Program Files\Ditto\Ditto.exe
+QuickTime Task: "C:\Program Files\QuickTime Alternative\qttask.exe
+                        " -atboottime
+H/PC Connection Agent : "C:\Program Files\Microsoft ActiveSync\wcescomm.exe"
+</code></pre>
+
+
+レジストリキーはファルダーやファイルと同じ扱いであると考えてよい
+
+また、プロパティの値にアクセスするためには「.」繋ぎでキーを入力して値にアクセスできる。
+
+<pre><code>
+PS >$runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+PS >(Get-ItemProperty $runKey).TaskSwitchXp
+d:\lee\tools\TaskSwitchXP.exe
+</code></pre>
+
+
+
+
+
+##レジストリの値を設定する。
+
+<pre><code>
+#変更前のファイルパスの値
+PS >(Get-ItemProperty .).MyProgram
+c:\temp\MyProgram.exe
+
+#レジストリの変更
+PS >Set-ItemProperty . MyProgram d:\Lee\tools\MyProgram.exe
+
+#変更したレジストリを再度確認する。
+PS >(Get-ItemProperty .).MyProgram
+d:\Lee\tools\MyProgram.exe
+</code></pre>
+
+
+
+
+##新しいレジストリキーを登録する。
+
+New-ItemPropertyを使う
+
+<pre><code>
+New-ItemProperty . -Name MyProgram -Value c:\temp\MyProgram.exe
+</code></pre>
+
+ここでは「MyProgram」というキーを作成し、「c:\temp\MyProgram.exe」という値を格納している
+
+
+
+##レジストリ応用1 サイトをInternet explorerセキュリティゾーンに追加する
+
+サンプルコード
+
+<pre><code>
+Set-Location "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
+Set-Location ZoneMap\Domains
+New-Item example.com
+Set-Location example.com
+New-Item www
+Set-Location www
+New-ItemProperty . -Name http -Value 2 -Type DWORD
+</code></pre>
+
+インターネットエクスプローラーのSettingに移動した後、ZoneMap\Domainsに移動
+
+インターネットエクスプローラーのセキュリティはサイトごとにファイルが形成されている仕組みのため、追加したいサイトのドメイン名でファイルを作る。
+
+
+
+##レジストリ応用2 Internet explorerのプロキシを変更する。
+
+<pre><code>
+Set-Location "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" 
+Set-ItemProperty . -Name ProxyServer -Value http://proxy.example.com 
+Set-ItemProperty . -Name ProxyEnable -Value 1
+</code></pre>
+
+ここではプロキシサーバーをhttp://proxy.example.com に設定しています。
+
+また、セキュリティのレベルを1(イントラネット、Local intarnet)に設定
+
+ちなみに番号の識別子は以下の通り
+<pre><code>
+0. My Computer 
+1. Local intranet 
+2. Trusted sites 
+3. Internet
+4. Restricted sites
+</code></pre>
+
+
+
+
+
+
+title:レジストリをpowershellで操作する
+description:Get-ItemPropertyでレジストリキーを取得できる。レジストリの値を設定する。新しいレジストリキーを登録する。
+category_script:page_name.startswith("17")
