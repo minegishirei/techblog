@@ -15,7 +15,7 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 <p>
     具体例
 </p>
-<pre>
+<pre><code>
 <code>
 //フルパスを指定するときはシングルクォートで囲み、
 & 'C:\Program Files\Program\Program.exe' arguments
@@ -28,14 +28,12 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 </code>
 </pre>
 
-t
-
 
 
 
 ##オリジナルのシェル、プロファイル、プロンプトをカスタマイズする。
 
-<pre>
+<pre><code>
 notepad $profile
 </pre>
 <p>
@@ -49,11 +47,13 @@ notepad $profile
 <p>
 カスタマイズ例
 </p>
-<pre>
+<pre><code>
+<code>
 function Prompt
 {
  "PS [$env:COMPUTERNAME] >"
 }
+</code>
 </pre>
 
 <p>
@@ -75,7 +75,7 @@ function Prompt
 
 
 ###別のカスタマイズ例
-<pre>
+<pre><code><code>
 function Prompt
 {
  $id = 1
@@ -97,25 +97,25 @@ function Prompt
 
 以下の構文で調べることができる。
 
-<pre>
+<pre><code>
     Get-Help 調べたいコマンド
-</pre>
+</pre></code>
 
 
 ##コマンドを見つけたい
 
 
-<pre>
+<pre><code>
     Get-Command
-</pre>
+</pre></code>
 
 <p>
     ところで、コマンドの一部だけ知っているがそれ以外が知らない時は、以下のようにワイルドカード(正規表現)を使うことも可能
 </p>
 
-<pre>
+<pre><code>
 Get-Command *コマンドの一部*
-</pre>
+</pre></code>
 
 ###コマンドの構成について
 
@@ -136,27 +136,27 @@ Get-Command *コマンドの一部*
     1、動詞から検索する。
 </p>
 
-<pre>
+<pre><code>
 Get-Command -Verb Get
-</pre>
+</pre></code>
 
 
 <p>
     2、名詞から検索する。
 </p>
 
-<pre>
+<pre><code>
 Get-Command -Noun Process
-</pre>
+</pre></code>
 
 このコマンドによって、例えばGet-Process(タスクマネージャーと同じコマンド)を手に入れられる。
 
 
 ##コマンドの計測時間を調べる
 
-<pre>
+<pre><code>
 Measure-Command
-</pre>
+</pre></code>
 
 
 ##(理解できなかったレシピ)シェルをカスタマイズして生産性をあげる
@@ -164,7 +164,7 @@ Measure-Command
 <p>
     以下のレシピはまだまだ理解できなかった。要修行。
 </p>
-<pre>
+<pre><code>
 Push-Location
 Set-Location HKCU:\Console
 New-Item '.\%SystemRoot%_system32_WindowsPowerShell_v1.0_powershell.exe'
@@ -180,21 +180,21 @@ New-ItemProperty . QuickEdit -type DWORD -value 0x00000001
 New-ItemProperty . ScreenBufferSize -type DWORD -value 0x0bb80078
 New-ItemProperty . WindowSize -type DWORD -value 0x00320078
 Pop-Location
-</pre>
+</pre></code>
 
 
 ##以前呼び出したコマンドを実行したい
 
-<pre>
+<pre><code>
 Get-History         #履歴を調べIDを取得
 Invoke-History (ID) #IDを記述して呼び起こす
-</pre>
+</pre></code>
 
 
 
 ##コマンドの出力をファイルに格納したい
 
-<pre>
+<pre><code>
 //やり方1
 Get-ChildItem | Out-File unicodeFile.txt
 Get-Content filename.cs | Out-File -Encoding ASCII file.txt
@@ -202,16 +202,16 @@ Get-ChildItem | Out-File-Width 120 unicodeFile.cs
 
 //やり方2
 Get-ChildItem > files.txt 
-</pre>
+</pre></code>
 
 ###やり方2 > を使う
 実行したいコマンドの右に > を書き、さらにその右にファイル名を書くことで、
 ファイルに実行結果を格納することができる。
 
 追記したい場合は >>　を使う。
-<pre>
+<pre><code>
 Get-ChildItem >> files.txt 
-</pre>
+</pre></code>
 
 この方法は簡単ではあるが、出力を綺麗にできない。
 
@@ -223,9 +223,9 @@ Get-ChildItem >> files.txt
     >を使った方法と違い、ファイルの出力幅のコントロールが可能。
     さらに、文字コードの指定もできる等、幅広い。
 </p>
-<pre>
+<pre><code>
 Get-ChildItem | Out-File-Width 120 unicodeFile.cs
-</pre>
+</pre></code>
 
 
 
@@ -238,10 +238,10 @@ Get-ChildItem | Out-File-Width 120 unicodeFile.cs
 </p>
 
 
-<pre>
+<pre><code>
 $currentError = $error[0]
 $currentError | Format-List -Force
-</pre>
+</pre></code>
 <p>
 $errorは履歴で最新のコマンドの実行結果がエラーであった場合の全てを吐き出す。
 </p>
@@ -251,7 +251,7 @@ $errorは履歴で最新のコマンドの実行結果がエラーであった�
 
 ###表として出力する
 
-<pre>
+<pre><code>
 //プロセス一覧
 Get-Process
 
@@ -271,7 +271,7 @@ $fields = "Name",@{
     Align = "Right"
 } 
 Get-Process | Format-Table $fields -Auto
-</pre>
+</pre></code>
 
 
 
