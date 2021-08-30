@@ -1,0 +1,309 @@
+
+
+##配列の基本的な宣言、書き方
+
+
+powershellにおけるベーシックな配列は,区切りで文字列を並べたものである。
+
+サンプルコード
+
+<pre><code>
+$myArray = 1,2,"Hello World"
+$myArray
+</code></pre>
+
+実行結果
+
+<pre><code>
+1,
+2,
+Hello World
+</code></pre>
+
+
+
+
+
+##@(アットマーク)を用いた配列の宣言、書き方
+
+@と()の中に,区切りで要素を並べることでも配列の宣言は可能
+
+<pre><code>
+$jagged = @(1,2,3,4)
+</code></pre>
+
+アクセスする際は[]で何番目の要素にアクセスしたいか指定する
+
+添字は0始まりであるので
+
+<pre><code>
+$jagged[1]
+</code></pre>
+
+実行結果
+
+<pre><code>
+2
+</code></pre>
+
+
+
+
+
+
+
+
+##固定長配列の宣言、書き方
+
+固定帳の宣言はNew-Object演算子で型と大括弧を宣言した後、配列の大きさを宣言する。
+
+<pre><code>
+$myArray = New-Object string[] 10
+</code></pre>
+
+
+サンプルコード
+
+<pre><code>
+$myArray = New-Object string[] 10
+$myArray[5] = "Hello"
+$myArray[5]
+</code></pre>
+
+実行結果
+
+<pre><code>
+Hello
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+##宣言なしに代入することも可能
+
+poewrshellでは宣言なしに配列を定義して代入することも可能
+
+例えばGet-Processコマンドはプロセスを配列状で返すので
+
+<pre><code>
+$myArray = Get-Process
+</code></pre>
+
+のように、Get-Processによる配列をいきなり代入することも可能である。
+
+
+
+
+
+
+##配列のスライス
+
+配列の範囲を指定してアクセスする場合はスライスと呼ばれる仕組みを使う
+
+サンプル
+
+<pre><code>
+$myArray = 1,2,"Hello World"
+$myArray[1..2 + 0]
+</code></pre>
+
+実行例
+
+<pre><code>
+2
+Hello World
+1
+</code></pre>
+
+
+
+
+
+
+
+
+##配列の合計値
+
+配列の合計値はForeach-Objectコマンドを使える。
+
+<pre><code>
+$myArray = 1,2,3
+$sum = 0
+$myArray | Foreach-Object { $sum += $_ }
+$sum
+</code></pre>
+
+実行結果
+
+<pre><code>
+6
+</code></pre>
+
+
+
+
+
+
+
+##配列の並び替え
+
+配列の並び替えにはSort-Objectを使う
+
+<pre><code>
+Get-ChildItem | Sort-Object -Descending Length | Select Name,Length
+</code></pre>
+
+実行例
+
+<code><pre>
+Name                                                                Length
+----                                                                ------
+Convert-TextObject.ps1                                                6868
+Connect-WebService.ps1                                                4178
+Select-FilteredObject.ps1                                             3252
+Get-PageUrls.ps1                                                      2878
+Get-Characteristics.ps1                                               2515
+Get-Answer.ps1                                                        1890
+New-GenericObject.ps1                                                 1490
+Invoke-CmdScript.ps1                                                  1313
+</pre></code>
+
+
+##配列にある値が含まれているかどうか知りたい
+
+-contains　演算子を使いましょう
+
+<pre><code>
+"Hello","World" -contains "Hello"
+"Hello","World" -contains "There"
+</code></pre>
+
+実行結果
+
+<pre><code>
+true
+false
+</code></pre>
+
+
+
+
+
+
+
+##二つの配列を直列でつなぎたい
+
++演算子で配列同士をくっつけることはできる。
+
+<pre><code>
+$firstArray = "Element 1","Element 2","Element 3","Element 4"
+$secondArray = 1,2,3,4
+$result = $firstArray + $secondArray
+$result
+</code></pre>
+
+実行結果
+
+<pre><code>
+Element 1
+Element 2
+Element 3
+Element 4
+1 
+2
+3 
+4
+</code></pre>
+
+
+
+##powershellのジャグ配列、多次元配列の宣言、書き方
+
+ジャグ配列の宣言は@を使ってのみ達成可能
+
+<pre><code>
+$jagged = @(
+       (1,2,3,4),
+       (5,6,7,8)
+   )
+$jagged[0][1]
+$jagged[1][3]
+</code></pre>
+
+実行結果
+
+<pre><code>
+2
+8
+</code></pre>
+
+
+
+
+
+
+##可変なサイズの配列をpowershellで使いたい(リスト)
+
+###ここまでの配列の書き方は全て配列の大きさが変わらない前提！
+
+
+可変な配列は「System.Collections.ArrayList」を使う
+
+サンプル１
+<pre><code>
+$myArray = New-Object System.Collections.ArrayList
+[void] $myArray.Add("Hello")
+[void] $myArray.AddRange( ("World","How","Are","You") )
+$myArray
+</code></pre>
+
+実行結果
+
+<pre><code>
+Hello
+World
+How
+Are
+You
+</code></pre>
+
+
+##配列から要素を取り除きたい
+
+RemoveAtコマンドを使おう
+
+<pre><code>
+$myArray.RemoveAt(1)
+$myArray
+</code></pre>
+
+実行結果
+
+<pre><code>
+Hello
+How
+Are
+You
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+title:【powershell入門】リストの書き方
+description:powershell入門。今回は標準搭載している配列の書き方から可変な長さのリストについて、誰にでもわかるように解説します。
+
+
