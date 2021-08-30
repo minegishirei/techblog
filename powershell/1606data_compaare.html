@@ -1,0 +1,79 @@
+##powershellでデータの比較を行う
+
+##二つのデータの出力を比較する
+
+
+比較する際にはCompare-Objectの引数に二つのデータを入れてやれば良い
+
+<pre>
+<code>
+notepad
+$processes = Get-Process
+Stop-Process -ProcessName Notepad
+$newProcesses = Get-Process
+Compare-Object $processes $newProcesses
+</code>
+</pre>
+
+実行結果
+
+<pre>
+<code>
+InputObject                           SideIndicator
+-----------                           -------------
+System.Diagnostics.Process (notepad)  <=
+</code>
+</pre>
+
+この場合はメモ帳を開いてからプロセスを取得
+
+また、メモ帳を閉じてからプロセスを取得
+
+上記二つのデータを比較している。
+
+
+
+##ファイルの中身を比較する。
+
+サンプルコード
+
+<pre>
+<code>
+"Hello World" > c:\temp\file1.txt
+"Hello World" > c:\temp\file2.txt
+"More Information" >> c:\temp\file2.txt
+$content1 = Get-Content c:\temp\file1.txt
+$content2 = Get-Content c:\temp\file2.txt
+Compare-Object $content1 $content2
+</code>
+</pre>
+
+
+実行結果
+
+<pre>
+<code>
+InputObject             SideIndicator
+-----------             -------------
+More Information        =>
+</code>
+</pre>
+
+
+最初の二行でc:\temp\file1.txtファイルとc:\temp\file2.txtにはHello Worldという文字列が挿入された。
+
+次の一行でMore Informationをc:\temp\file2.txtのみに追加した。
+
+その後、二つのファイルの中身を変数に入れて、その変数をCompare-Objectで比較。
+
+結果には差分のMore Information のみ表示される。
+
+
+
+
+
+
+
+
+
+
