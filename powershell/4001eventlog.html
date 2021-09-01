@@ -1,0 +1,211 @@
+
+##基本的なコマンド
+
+###イベントログの収集
+
+PCに異常が発生した際に、基本的には一時的なエラーやユーザーの些細な操作ミスがほとんどであり、詳しい調査を行うことはございません。
+
+ですが稀にパソコンを使うにあたって致命的なエラーが発生したり、恒久的な対応が必要になる時もあります。
+
+そんな時に実行するのが以下のコマンドです。
+
+<pre><code>
+Get-EventLog -List
+</code></pre>
+
+サンプル実行結果
+
+<pre><code>
+Max(K) Retain OverflowAction        Entries Name
+------ ------ --------------        ------- ----
+   512      0 OverwriteAsNeeded       2,157 ADAM (Test)
+   512      7 OverwriteOlder          2,090 Application
+   512      7 OverwriteOlder          0 Internet Explorer
+ 8,192     45 OverwriteOlder          0 Media Center   
+   512      7 OverwriteOlder          0 ScriptEvents
+   512      7 OverwriteOlder          2,368 System
+15,360      0 OverwriteAsNeeded       0 Windows PowerShell
+</code></pre>
+
+###「Get-EventLog -List」解説
+
+システムに登録されているイベントログを手に入れるためには「Get-EventLog -List」でイベントのログをリスト形式で手に入れる必要があります。
+
+これらのイベントログは完全な.NETオブジェクトで自在な操作が可能になっています。
+
+
+
+
+
+
+
+##イベントログの履歴を手に入れる
+
+最新のイベントログを手に入れるためには -Newestオブションを指定します。
+
+<pre><code>
+Get-EventLog System -Newest 10 | Format-Table Index,Source,Message -A
+</code></pre>
+
+実行結果
+
+<pre><code>
+Index Source                  Message
+----- ------                  -------
+2922 Service Control Manager The Background Intelligent Transfer Servi...
+2921 Service Control Manager The Background Intelligent Transfer Servi...
+2920 Service Control Manager The Logical Disk Manager Administrative S...
+2919 Service Control Manager The Logical Disk Manager Administrative S...
+2918 Service Control Manager The Logical Disk Manager Administrative S...
+2917 TermServDevices         Driver Microsoft XPS Document Writer requ...
+2916 Print                   Printer Microsoft Office Document Image W...
+2915 Print                   Printer Microsoft Office Document Image W...
+2914 Print                   Printer Microsoft Office Document Image W...
+2913 TermServDevices         Driver Microsoft Shared Fax Driver requir...
+</code></pre>
+
+これらのイベントのログから
+
+・DHCPサービスがPCにアドレスを割り当てたこと
+
+・システムの稼働にかかった時間は42秒であること
+
+などが分かります。
+
+これらのログのレベルはプロセスのレベルではなくもはやスレッドレベルにまで及ぶ詳しい記述となっている。
+
+
+
+
+
+
+
+
+
+##イベントログから検索をかける
+
+イベントログでフィルターをかけるには「Where-Object」を使用します
+
+以下のコマンドは「disk」がメッセージログに含まれているログを全て取得します。
+
+<pre><code>
+Get-EventLog System | Where-Object { $_.Message -match "disk" }
+</code></pre>
+
+実行結果
+
+<pre><code>
+Index Time          Type Source                 EventID Message
+----- ----          ---- ------                 ------- -------
+ 2920 May 06 09:18  Info Service Control M...   7036 The Logical Disk...
+ 2919 May 06 09:17  Info Service Control M...   7036 The Logical Disk...
+ 2918 May 06 09:17  Info Service Control M...   7035 The Logical Disk...
+ 2884 May 06 00:28  Erro sr                     7035 The Logical Disk...
+ 2333 Apr 03 00:16  Erro Disk                   1 The System Resto...
+ 2332 Apr 03 00:16  Erro Disk                   11 The driver detec...
+ 2131 Mar 27 13:59  Info Service Control M...   11 The driver detec...
+ 2127 Mar 27 12:48  Info Service Control M...   7036 The Logical Disk...
+ 2126 Mar 27 12:48  Info Service Control M...   7036 The Logical Disk...
+ 2123 Mar 27 12:31  Info Service Control M...   7036 The Logical Disk...
+ 2122 Mar 27 12:29  Info Service Control M...   7036 The Logical Disk...
+ 2121 Mar 27 12:29  Info Service Control M...   7036 The Logical Disk...
+</code></pre>
+
+このログを確認することによってディスクレベルで変な書き込みがされていないか確認できます。
+
+
+
+
+##頻度の高いイベントログを取得したい
+
+PCの構成に不審な点が存在すると感じた場合、頻発するエラーを特定することはトラブルシューティングの第一歩となります。
+
+そこでどんなエラーがもっとも頻度が高いか
+
+それを調べる際にはGroup-Objectでグルーピングすることをお勧めします。
+
+
+<pre><code>
+Get-EventLog System | Group-Object Message
+</code></pre>
+
+実行結果
+
+<pre><code>
+Count Name                      Group
+----- ----                      -----
+23 The Background Intelli... {LEE-DESK, LEE-DESK, LEE-DESK, LEE-DESK...
+23 The Background Intelli... {LEE-DESK, LEE-DESK, LEE-DESK, LEE-DESK...
+3 The Logical Disk Manag... {LEE-DESK, LEE-DESK, LEE-DESK}
+3 The Logical Disk Manag... {LEE-DESK, LEE-DESK, LEE-DESK}
+3 The Logical Disk Manag... {LEE-DESK, LEE-DESK, LEE-DESK}
+161 Driver Microsoft XPS D... {LEE-DESK, LEE-DESK, LEE-DESK, LEE-DESK...
+(...)
+</code></pre>
+
+
+##イベントログをとっておく
+
+コードサンプル1(イベントログの保存)
+
+<pre><code>
+Get-EventLog System | Export-CliXml c:\temp\SystemLogBackup.clixml
+</code></pre>
+
+コードサンプル2(イベントログの出力)
+
+<pre><code>
+$archivedLogs = Import-CliXml c:\temp\SystemLogBackup.clixml
+$archivedLogs | Group Source
+</code></pre>
+
+実行結果
+
+<pre><code>
+Count Name                      Group
+----- ----                      -----
+23 The Background Intelli... {LEE-DESK, LEE-DESK, LEE-DESK, LEE-DESK...
+23 The Background Intelli... {LEE-DESK, LEE-DESK, LEE-DESK, LEE-DESK...
+3 The Logical Disk Manag... {LEE-DESK, LEE-DESK, LEE-DESK}
+3 The Logical Disk Manag... {LEE-DESK, LEE-DESK, LEE-DESK}
+3 The Logical Disk Manag... {LEE-DESK, LEE-DESK, LEE-DESK}
+161 Driver Microsoft XPS D... {LEE-DESK, LEE-DESK, LEE-DESK, LEE-DESK...
+(...)
+</code></pre>
+
+
+
+
+
+
+
+
+title:プロのイベントログ収集【powershell実践編】
+
+
+description:実際の業務経験(社内SE保守部門)を元にpowershellがどのような使われ方をしているのかを探ります。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
