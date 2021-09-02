@@ -1,0 +1,265 @@
+
+<a href="">
+    getchilditemとは </a> 
+<a href="">
+    </a>
+
+##getchilditemとは
+
+powershellのコマンドの一種。
+
+入力することでカレントディレクトリ配下のファイル、ディレクトリー覧を取得できる。 
+
+実行例
+
+<pre><code>
+Get-ChildItem
+</code></pre>
+
+実行結果
+
+<pre><code>
+ディレクトリ: C:\Users\MINEGISHIREI\ffmyworking\MyPowerShell
+
+
+Mode    LastWriteTime Length    Name
+d-----  2021/08/28    3178      ModAuto 
+-a----  2021/08/27    423       Start-Desktop.psm1
+-a----  2021/08/27    425       Stop-AllProcess.psm1
+</code></pre>
+
+  
+<div id="sampl"></div> 
+
+
+##getchilditemで再帰的にフォルダーを探索する。
+
+-Recurseを付けると再帰的にフォルダーを探索し、一覧表示することができる。
+
+<pre><code> 
+Get-ChildItem -Recurse
+</code></pre>
+
+
+サンプルコマンド
+
+<pre><code> Get-ChildItem --Recurse </code></pre>
+    
+
+<pre><code>
+TIL
+EU:C:Users\MINEGISHIREI¥ffmyworking\MyPowerShell
+Mode
+LastWriteTime
+Length Name
+-- -- - ---- - ----
+2021/08/28 2021/08/27 2021/08/27
+15:05 14:26 14:03
+ModAuto 3178 Start-Desktop. psm1 425 Stop-ATI Process. psm1
+T
+E : C:\Users\MINEGISHIREI\ffmyworking\MyPowerShell¥ModAuto
+Length Name
+Mode
+LastWriteTime ---- ----- 2021/08/28 15:05 - --
+2021/08/28 15:04 
+</code></pre>
+    
+
+<div id="depth"></div> 
+
+##getchilditemで再起的に探索する
+
+-Depthを付けた後に深さを指定するとカレントディレクトリから指定した数までフォルダーに入り込んで探索する
+
+<pre><code>
+Get-ChildItem -Depth 3
+</code></pre>
+
+サンプルコード
+
+<pre><code> Get-ChildItem -Depth 3</code></pre>
+
+実行結果
+
+<pre><code>
+実行結果
+以下膨大な量のフォルダー情報が出力される
+</code></pre>
+
+
+
+<div id="help"></div> 
+
+#Get-Helpでコマンドの詳細を見る
+
+サンプルコード
+
+<pre><code>
+Get-Help Get-ChildItem 
+</code></pre>
+
+構文
+
+<pre><code> 
+Get-ChildItem [[-Path] ＜string[] >] [[-Filter] ＜string>] [＜CommonParameters>] 
+Get-Child Item [[-Filter] ＜tring>] [<CommonParameters>] 
+</code></pre>
+
+エイリアス
+<pre><code>
+gci
+Is
+dir
+</code></pre>
+
+
+
+
+
+
+<div id="morehelp"></div> 
+
+##さらに詳しいGet-Childitemのヘルプ
+
+コマンドは以下のコマンドを入力
+
+<pre><code> 
+Get-Help Get-ChildItem -Online 
+</code></pre>
+
+<div id="empty"></div> 
+
+##ディレクトリが空の時どのような挙動をするか
+
+空の時は何も表示しない
+
+これは再帰的な表示でも同じ
+
+<pre><code> 
+Get-ChildItem空のディレクトリは表示されません。 
+ときにGet-ChildItemコマンドが含まれても
+深さや再帰のパラメータを、空のディレクトリは出力に含まれません。 
+</code></pre> 引用: マイクロソフト公式ドキュメント
+
+
+<div id="path"></div> 
+
+##パスを指定してファイルフォルダーを取得する
+
+パスを指定するには-Pathオプションを使う
+
+サンプルコード
+
+<pre><code>
+Get-ChildItem -Path C:\Test
+</code></pre>
+
+加えてバージョンのまれる。
+
+<div id="mode"></div> 
+
+##ファイルの属性について ディレクトリー覧を取得した時にアルファベットでフラグがついていることがあるがそれは以下のような意味を表す
+
+<pre><code>
+l (リンク) 
+d(ディレクトリ) 
+a (記録) 
+r(読み取り専用) 
+h(隠れた) 
+s (システム)
+</code></pre>
+
+例
+<pre><code> 
+ディレクトリ: C:\Users\MINEGISHIREI\ffmyworking\MyPowerShell
+
+
+Mode    LastWriteTime Length    Name
+d-----  2021/08/28    3178      ModAuto 
+-a----  2021/08/27    423       Start-Desktop.psm1
+-a----  2021/08/27    425       Stop-AllProcess.psm1
+
+</code></pre>
+
+
+<div id="onlyname"></div> 
+
+##getchilditemで名前のみ取得したい
+
+-Name で名前のみの取得が可能
+
+<pre><code>
+Get-ChildItem -Path C:\Test -Name 
+</code></pre>
+
+<div id="allof"></div> 
+
+
+##Get-Childitemで知れる全てのこと
+
+Get-Childitemによって得られるデータには以下の情報が含まれる
+
+フォルダーの場合
+
+<pre><code> 
+Name : ModAuto
+(フォルダー名) CreationTime : 2021/08/28 10:22:03 
+(作成時期) LastWriteTime : 2021/08/28 15:05:34
+(最終更新日) LastAccessTime : 2021/08/28 15:05:34 
+(モード=アクセス権限など) Mode : d-----
+(リンクがあるかどうか) Link Type
+</code></pre>
+
+
+ファイルの場合、フォルダーの情報に加えてバージョンの情報も含まれる 
+
+<pre><code> 
+Name: Start-Desktop.psm1 (ファイル名) 
+Length 3274 (ファイルサイズ) 
+CreationTime : 2021/08/26 8:11:05 (作成時期) 
+LastWriteTime : 2021/09/01 16:55:25(最終更新日) 
+LastAccessTime : 2021/09/01 16:55:25(最終アクセス) 
+Mode : -a----(モード) 
+Link Type Target Version Info : File: C:\Users¥MINEGISHIREI\ffmyworking\MyPowerShell\Start-Desktop.psm1
+InternalName: OriginalFilename: FileVersion: FileDescription: Product: ProductVersion: Debug:
+False Patched:False
+PreRelease: Private Build: Special Build:
+False False False
+</code></pre>
+
+
+<div id="fullpath"></div> 
+
+##ファイル一覧を絶対パス(フルパス)で手に入れる
+
+
+<pre><code>
+Get-ChildItem | Foreach-Object { echo $_.VersionInfo } | Select-Object Filename 
+</code></pre>
+
+
+<pre><code>
+FileName
+C:\Users\Start-Desktop.psm1 
+C:\Users\Stop-AllProcess.psm1 
+</code></pre>
+
+
+<div id="wild"></div>
+
+##getchilditemでワイルドカードを使いたい
+
+Where-Objectを使おう
+
+以下のコードは. psm1で終わるコード 
+
+<pre><code>
+Get-ChildItem  | Where-Object { $_.Name - like "*.psm1" } 
+</code></pre>
+
+
+
+
+title:getchilditemを誰よりも分かりやすく解説する【powershell】
+
+
