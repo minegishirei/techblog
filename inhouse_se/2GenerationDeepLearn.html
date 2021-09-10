@@ -1,0 +1,291 @@
+##簡単な画像クラス分類用のコード
+
+まずはサンプルコード
+
+<pre><code>
+import numpy as np
+import matplotlib.pyplot as plt
+
+from keras.layers import Input, Flatten, Dense, Conv2D
+from keras.models import Model
+from keras.optimizers import Adam
+from keras.utils import to_categorical
+
+from keras.datasets import cifar10
+
+
+#今回の学習内容
+#与えられた画像に対して10個の分類に分けることが課題
+CLASSES = np.array(['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'])
+
+#10クラス分類であることを示す。
+NUM_CLASSES = 10
+
+#データの読み込み(訓練用データ、テストデータ)
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+#計算の高速化のために型をfloat32へ固定し、
+#0-255の数値で表されたx_trainを255で割ることで0-1の間の小数点へスケールを下げる。
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+
+#One-Hotエンコーディングを行なう。
+#このコードでは画像データとそのラベルを以下のような配列に直す
+#例えば番号2のラベルは以下の配列へと変更される。
+#[0,0,1,0,0,0,0,0,0,0]
+y_train = to_categorical(y_train, NUM_CLASSES)
+y_test = to_categorical(y_test, NUM_CLASSES)
+
+
+
+
+#ネットワークの構成
+#画像の一枚一枚は32*32bitの大きさで
+#それぞれの一ビットに色の3原色それぞれを0-255で表している
+#例えば真っ赤な画像では(0,0,255)が32*32の多次元配列に格納されている。
+input_layer = Input((32,32,3))
+
+#多次元配列を全て一次元の平な列に直す
+x = Flatten()(input_layer)
+
+#ニューラルネットワークの層1
+x = Dense(200, activation = 'relu')(x)
+
+#ニューラルネットワークの層2
+x = Dense(150, activation = 'relu')(x)
+
+#ニューラルネットワークの層3
+#この層では出力結果を長さNUM_CLASSES(今回は10)の配列に直す
+#配列の一つ一つにはそれぞれのラベルの確率が格納されいている。
+#[0.3 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0.7]
+#上記の配列ならば1番目に該当する可能性が30%
+#10番目に該当する可能性が70%
+output_layer = Dense(NUM_CLASSES, activation = 'softmax')(x)
+
+#ここまでのネットワークの構成をModelクラスに詰め込んで
+#モデルの構築は終了
+model = Model(input_layer, output_layer)
+
+
+#上記のモデルの外観を見てみる。
+print(model.summary())
+
+
+#ここからは訓練を行う
+#一回の学習による更新幅は0.0005に設定
+opt = Adam(lr=0.0005)
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+
+#学習の実行
+model.fit(x_train
+          , y_train
+          , batch_size=32
+          , epochs=10
+          , shuffle=True)
+
+
+
+#作成したモデルの評価を行う
+model.evaluate(x_test, y_test)
+
+
+#グラフの描画を行うコード
+preds = model.predict(x_test)
+preds_single = CLASSES[np.argmax(preds, axis = -1)]
+actual_single = CLASSES[np.argmax(y_test, axis = -1)]
+
+n_to_show = 10
+indices = np.random.choice(range(len(x_test)), n_to_show)
+
+fig = plt.figure(figsize=(15, 3))
+fig.subplots_adjust(hspace=0.4, wspace=0.4)
+for i, idx in enumerate(indices):
+    img = x_test[idx]
+    ax = fig.add_subplot(1, n_to_show, i+1)
+    ax.axis('off')
+    ax.text(0.5, -0.35, 'pred = ' + str(preds_single[idx]), fontsize=10, ha='center', transform=ax.transAxes) 
+    ax.text(0.5, -0.7, 'act = ' + str(actual_single[idx]), fontsize=10, ha='center', transform=ax.transAxes)
+    ax.imshow(img)
+</code></pre>
+
+
+
+
+#解説はここから
+
+
+##インポート部分
+
+数値配列操作用ライブラリのnumpy
+
+グラフ描画用のplt
+
+そしてディープラーニングフレームワークのkeras
+
+最後にデータセットを準備
+
+<pre><code>
+import numpy as np
+import matplotlib.pyplot as plt
+
+from keras.layers import Input, Flatten, Dense, Conv2D
+from keras.models import Model
+from keras.optimizers import Adam
+from keras.utils import to_categorical
+
+from keras.datasets import cifar10
+</code></pre>
+
+
+
+
+
+
+
+##今回の学習内容
+
+与えられた画像に対して10個の分類に分けることが課題
+
+10クラス分類であることを示す。
+
+<pre><code>
+CLASSES = np.array(['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'])
+NUM_CLASSES = 10
+</code>
+</pre>
+
+
+
+
+
+##データの読み込み(訓練用データ、テストデータ)
+
+<pre><code>
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+</code></pre>
+
+
+計算の高速化のために型をfloat32へ固定し、
+0-255の数値で表されたx_trainを255で割ることで0-1の間の小数点へスケールを下げる。
+
+<pre><code>
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+</code></pre>
+
+
+One-Hotエンコーディングを行なう。
+
+このコードでは画像データとそのラベルを以下のような配列に直す
+
+例えば番号2のラベルは以下の配列へと変更される。
+
+[0,0,1,0,0,0,0,0,0,0]
+
+<pre><code>
+y_train = to_categorical(y_train, NUM_CLASSES)
+y_test = to_categorical(y_test, NUM_CLASSES)
+</code></pre>
+
+
+
+##ネットワークの構成
+
+画像の一枚一枚は32*32bitの大きさで
+
+それぞれの一ビットに色の3原色それぞれを0-255で表している
+
+例えば真っ赤な画像では(0,0,255)が32*32の多次元配列に格納されている。
+
+<pre><code>
+input_layer = Input((32,32,3))
+</code></pre>
+
+多次元配列を全て一次元の平な列に直す
+
+<pre><code>
+x = Flatten()(input_layer)
+</code></pre>
+
+ニューラルネットワークの層1
+
+<pre><code>
+x = Dense(200, activation = 'relu')(x)
+x = Dense(150, activation = 'relu')(x)
+</code></pre>
+
+
+#ニューラルネットワークの層3
+
+この層では出力結果を長さNUM_CLASSES(今回は10)の配列に直す
+
+配列の一つ一つにはそれぞれのラベルの確率が格納されいている。
+
+[0.3 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0.7]
+
+上記の配列ならば1番目に該当する可能性が30%
+
+10番目に該当する可能性が70%
+
+<pre><code>
+output_layer = Dense(NUM_CLASSES, activation = 'softmax')(x)
+</code></pre>
+
+ここまでのネットワークの構成をModelクラスに詰め込んで
+モデルの構築は終了
+
+<pre><code>
+model = Model(input_layer, output_layer)
+</code></pre>
+
+
+##上記のモデルの外観を見てみる。
+<pre><code>
+print(model.summary())
+</code></pre>
+
+
+##ここからは訓練を行う
+
+一回の学習による更新幅は0.0005に設定
+
+<pre><code>
+opt = Adam(lr=0.0005)
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+
+#学習の実行
+model.fit(x_train
+          , y_train
+          , batch_size=32
+          , epochs=10
+          , shuffle=True)
+</code></pre>
+
+
+##作成したモデルの評価を行う
+
+<pre><code>
+model.evaluate(x_test, y_test)
+</code></pre>
+
+##グラフの描画を行うコード
+
+<pre><code>
+preds = model.predict(x_test)
+preds_single = CLASSES[np.argmax(preds, axis = -1)]
+actual_single = CLASSES[np.argmax(y_test, axis = -1)]
+
+n_to_show = 10
+indices = np.random.choice(range(len(x_test)), n_to_show)
+
+fig = plt.figure(figsize=(15, 3))
+fig.subplots_adjust(hspace=0.4, wspace=0.4)
+for i, idx in enumerate(indices):
+    img = x_test[idx]
+    ax = fig.add_subplot(1, n_to_show, i+1)
+    ax.axis('off')
+    ax.text(0.5, -0.35, 'pred = ' + str(preds_single[idx]), fontsize=10, ha='center', transform=ax.transAxes) 
+    ax.text(0.5, -0.7, 'act = ' + str(actual_single[idx]), fontsize=10, ha='center', transform=ax.transAxes)
+    ax.imshow(img)
+</code></pre>
+
