@@ -1,0 +1,203 @@
+
+
+##ソースコード(コピペで動く)
+
+<pre><code>
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+from tensorflow.keras.layers import Input, Flatten, Dense, Conv2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.utils import to_categorical
+
+from tensorflow.keras.datasets import cifar10
+
+##10クラス分類を行う
+NUM_CLASSES = 10
+
+##データのロード
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+###float32データに直し、255で割る
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+
+###one-hotエンコーディングを行う
+y_train = to_categorical(y_train, NUM_CLASSES)
+y_test = to_categorical(y_test, NUM_CLASSES)
+
+
+
+##ニューラルネットワークのアーキテクチャ
+
+###三層構造になっているInput層
+input_layer = Input(shape=(32,32,3))
+
+##Conv2Dという「畳み込みネットワーク」を用いることで画像認識の精度は上がる
+conv_layer_1 = Conv2D(
+    filters = 10
+    , kernel_size = (4,4)
+    , strides = 2
+    , padding = 'same'
+    )(input_layer)
+
+###Conv2D二層目
+conv_layer_2 = Conv2D(
+    filters = 20
+    , kernel_size = (3,3)
+    , strides = 2
+    , padding = 'same'
+    )(conv_layer_1)
+
+###1-10ラベルそれぞれの確率を求めるために平坦化
+flatten_layer = Flatten()(conv_layer_2)
+
+###outputは10種類でsoftmax関数を用いて合計が確率の1になるようにする
+output_layer = Dense(units=10, activation = 'softmax')(flatten_layer)
+
+###モデル作成完了
+model = Model(input_layer, output_layer)
+
+###外観
+model.summary()
+
+
+
+##訓練方式を設定
+opt = Adam(lr=0.0005)
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+
+##訓練開始
+model.fit(x_train
+          , y_train
+          , batch_size=32
+          , epochs=10
+          , shuffle=True
+          , validation_data = (x_test, y_test))
+</code></pre>
+
+
+##今回使用するライブラリー
+
+<pre><code>
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+from tensorflow.keras.layers import Input, Flatten, Dense, Conv2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.utils import to_categorical
+
+from tensorflow.keras.datasets import cifar10
+</pre></code>
+
+
+##10クラス分類を行う
+
+<pre><code>
+NUM_CLASSES = 10
+</pre></code>
+
+##データのロード
+
+<pre><code>
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+</pre></code>
+
+###float32データに直し、255で割る
+<pre><code>
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+</pre></code>
+
+###one-hotエンコーディングを行う
+
+<pre><code>
+y_train = to_categorical(y_train, NUM_CLASSES)
+y_test = to_categorical(y_test, NUM_CLASSES)
+</pre></code>
+
+
+##ニューラルネットワークのアーキテクチャ
+
+###三層構造になっているInput層
+<pre><code>
+input_layer = Input(shape=(32,32,3))
+</pre></code>
+
+##Conv2Dという「畳み込みネットワーク」を用いることで画像認識の精度は上がる
+
+<pre><code>
+conv_layer_1 = Conv2D(
+    filters = 10
+    , kernel_size = (4,4)
+    , strides = 2
+    , padding = 'same'
+    )(input_layer)
+</pre></code>
+
+###Conv2D二層目
+
+<pre><code>
+conv_layer_2 = Conv2D(
+    filters = 20
+    , kernel_size = (3,3)
+    , strides = 2
+    , padding = 'same'
+    )(conv_layer_1)
+</pre></code>
+
+###1-10ラベルそれぞれの確率を求めるために平坦化
+
+<pre><code>
+flatten_layer = Flatten()(conv_layer_2)
+</pre></code>
+
+###outputは10種類でsoftmax関数を用いて合計が確率の1になるようにする
+
+<pre><code>
+output_layer = Dense(units=10, activation = 'softmax')(flatten_layer)
+</pre></code>
+
+###モデル作成完了
+
+<pre><code>
+model = Model(input_layer, output_layer)
+</pre></code>
+
+###外観
+
+<pre><code>
+model.summary()
+</pre></code>
+
+
+##訓練方式を設定
+
+<pre><code>
+opt = Adam(lr=0.0005)
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+</pre></code>
+
+
+##訓練開始
+
+<pre><code>
+model.fit(x_train
+          , y_train
+          , batch_size=32
+          , epochs=10
+          , shuffle=True
+          , validation_data = (x_test, y_test))
+</pre></code>
+
+
+
+
+
+
+title:Conv2Dを用いた画像クラス分類【python,keras】
+
