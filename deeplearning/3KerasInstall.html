@@ -1,0 +1,309 @@
+
+
+
+
+title:M1チップでも機械学習環境構築をする【keras,docker-compose】
+
+
+
+
+##1、dockerをインストールする。
+
+以下のサイトから
+
+<a href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a>
+
+
+
+
+##2、Dockerfileを作成
+
+以下の名前を「NvidiaDockerfile」という名前で保存しましょう
+
+<pre><code>
+FROM sonoisa/deep-learning-coding:pytorch1.6.0_tensorflow2.3.0
+
+WORKDIR /app
+COPY app /app
+COPY requirements.txt ./
+
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install -r requirements.txt
+
+USER root
+
+EXPOSE 8888
+
+CMD ["./cmd.sh"]
+</code></pre>
+
+
+
+
+
+##3、docker-composeファイルを作成
+
+以下のファイルを「dokcer-compose.yml」というファイルで保存しましょう
+
+<pre><code>
+deeplearning:
+  user: root
+  build: .
+  dockerfile: "NvidiaDockerfile"
+  environment:
+    ENV: DEV
+  volumes:
+    - ./app:/app
+  command: ./cmd.sh
+  ports:
+    - "8888:8888"
+  container_name: deeplearning
+  #command: python3 manage.py runserver 0.0.0.0:5000 
+</code></pre>
+
+
+##4、pythonライブラリーインストール
+
+以下のファイルを「requirements.txt」で保存しましょう
+
+<pre><code>
+jupyter
+keras
+numpy
+matplotlib
+</code></pre>
+
+
+##5、appフォルダーを作成
+
+
+##6、シェルファイル作成
+
+app配下にcmd.shという名前で以下のファイルを保存
+
+<pre><code>
+#!/bin/bash
+set -e
+python3 classfication.py
+</code></pre>
+
+
+
+##7、ソースコード作成
+
+app配下にclassification.pyで以下のファイルを作成
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+from tensorflow.keras.layers import Input, Flatten, Dense, Conv2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.utils import to_categorical
+
+from tensorflow.keras.datasets import cifar10
+
+
+#今回の学習内容
+#与えられた画像に対して10個の分類に分けることが課題
+CLASSES = np.array(['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'])
+
+#10クラス分類であることを示す。
+NUM_CLASSES = 10
+
+#データの読み込み(訓練用データ、テストデータ)
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+#計算の高速化のために型をfloat32へ固定し、
+#0-255の数値で表されたx_trainを255で割ることで0-1の間の小数点へスケールを下げる。
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+
+#One-Hotエンコーディングを行なう。
+#このコードでは画像データとそのラベルを以下のような配列に直す
+#例えば番号2のラベルは以下の配列へと変更される。
+#[0,0,1,0,0,0,0,0,0,0]
+y_train = to_categorical(y_train, NUM_CLASSES)
+y_test = to_categorical(y_test, NUM_CLASSES)
+
+
+
+
+#ネットワークの構成
+#画像の一枚一枚は32*32bitの大きさで
+#それぞれの一ビットに色の3原色それぞれを0-255で表している
+#例えば真っ赤な画像では(0,0,255)が32*32の多次元配列に格納されている。
+input_layer = Input((32,32,3))
+
+#多次元配列を全て一次元の平な列に直す
+x = Flatten()(input_layer)
+
+#ニューラルネットワークの層1
+x = Dense(200, activation = 'relu')(x)
+
+#ニューラルネットワークの層2
+x = Dense(150, activation = 'relu')(x)
+
+#ニューラルネットワークの層3
+#この層では出力結果を長さNUM_CLASSES(今回は10)の配列に直す
+#配列の一つ一つにはそれぞれのラベルの確率が格納されいている。
+#[0.3 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0.7]
+#上記の配列ならば1番目に該当する可能性が30%
+#10番目に該当する可能性が70%
+output_layer = Dense(NUM_CLASSES, activation = 'softmax')(x)
+
+#ここまでのネットワークの構成をModelクラスに詰め込んで
+#モデルの構築は終了
+model = Model(input_layer, output_layer)
+
+
+#上記のモデルの外観を見てみる。
+print(model.summary())
+
+
+#ここからは訓練を行う
+#一回の学習による更新幅は0.0005に設定
+opt = Adam(lr=0.0005)
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+
+#学習の実行
+model.fit(x_train
+          , y_train
+          , batch_size=32
+          , epochs=10
+          , shuffle=True)
+
+
+
+#作成したモデルの評価を行う
+model.evaluate(x_test, y_test)
+
+
+#グラフの描画を行うコード
+preds = model.predict(x_test)
+preds_single = CLASSES[np.argmax(preds, axis = -1)]
+actual_single = CLASSES[np.argmax(y_test, axis = -1)]
+
+n_to_show = 10
+indices = np.random.choice(range(len(x_test)), n_to_show)
+
+fig = plt.figure(figsize=(15, 3))
+fig.subplots_adjust(hspace=0.4, wspace=0.4)
+for i, idx in enumerate(indices):
+    img = x_test[idx]
+    ax = fig.add_subplot(1, n_to_show, i+1)
+    ax.axis('off')
+    ax.text(0.5, -0.35, 'pred = ' + str(preds_single[idx]), fontsize=10, ha='center', transform=ax.transAxes) 
+    ax.text(0.5, -0.7, 'act = ' + str(actual_single[idx]), fontsize=10, ha='center', transform=ax.transAxes)
+    ax.imshow(img)
+</code></pre>
+
+
+
+##7、実行
+
+以下のコマンドをターミナルで実行しましよう
+
+<pre><code>
+#環境構築用コマンド
+docker-compose build
+
+#実行用コマンド
+docker-compose up
+</code></pre>
+
+
+##8、実行結果
+
+しばらく時間がかかりますが、以下のような結果が出力されて完了です。
+
+
+
+<pre><code>
+Starting deeplearning ... done
+Attaching to deeplearning
+deeplearning    | test : 0
+deeplearning    | test : 1
+deeplearning    | test : 2
+deeplearning    | Traceback (most recent call last):
+deeplearning    |   File "3st/3st_github.py", line 9, in <module>
+deeplearning    |     from keras.utils import to_categorical
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/keras/__init__.py", line 25, in <module>
+deeplearning    |     from keras import models
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/keras/models.py", line 19, in <module>
+deeplearning    |     from keras import backend
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/keras/backend.py", line 36, in <module>
+deeplearning    |     from tensorflow.python.eager.context import get_config
+deeplearning    | ImportError: cannot import name 'get_config' from 'tensorflow.python.eager.context' (/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/eager/context.py)
+deeplearning exited with code 1
+minegishirei@minegisreinoAir deeplearning % docker-compose up 
+Starting deeplearning ... done
+Attaching to deeplearning
+deeplearning    | test : 0
+deeplearning    | test : 1
+deeplearning    | test : 2
+deeplearning    | Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping deeplearning ... 
+Killing deeplearning  ... done
+ERROR: 2
+minegishirei@minegisreinoAir deeplearning % docker-compose up 
+Starting deeplearning ... done
+Attaching to deeplearning
+deeplearning    | test : 0
+deeplearning    | test : 1
+deeplearning    | test : 2
+deeplearning    | A local file was found, but it seems to be incomplete or outdated because the auto file hash does not match the original value of 6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce so we will re-download the data.
+deeplearning    | Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+170500096/170498071 [==============================] - 139s 1us/step
+deeplearning    | 2021-09-13 01:28:29.992260: W tensorflow/core/framework/cpu_allocator_impl.cc:81] Allocation of 
+deeplearning    | Model: "functional_1"
+deeplearning    | _________________________________________________________________
+deeplearning    | Layer (type)                 Output Shape              Param #   
+deeplearning    | =================================================================
+deeplearning    | input_1 (InputLayer)         [(None, 32, 32, 3)]       0         
+deeplearning    | _________________________________________________________________
+deeplearning    | flatten (Flatten)            (None, 3072)              0         
+deeplearning    | _________________________________________________________________
+deeplearning    | dense (Dense)                (None, 200)               614600    
+deeplearning    | _________________________________________________________________
+deeplearning    | dense_1 (Dense)              (None, 150)               30150     
+deeplearning    | _________________________________________________________________
+deeplearning    | dense_2 (Dense)              (None, 10)                1510      
+deeplearning    | =================================================================
+deeplearning    | Total params: 646,260
+deeplearning    | Trainable params: 646,260
+deeplearning    | Non-trainable params: 0
+deeplearning    | _________________________________________________________________
+deeplearning    | None
+deeplearning    | Epoch 1/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.8479 - accuracy: 0.3359
+deeplearning    | Epoch 2/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.6654 - accuracy: 0.4069
+deeplearning    | Epoch 3/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.5782 - accuracy: 0.4351
+deeplearning    | Epoch 4/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.5342 - accuracy: 0.4510
+deeplearning    | Epoch 5/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.4967 - accuracy: 0.4640
+deeplearning    | Epoch 6/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.4616 - accuracy: 0.4791
+deeplearning    | Epoch 7/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.4376 - accuracy: 0.4896
+deeplearning    | Epoch 8/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.4131 - accuracy: 0.4961
+deeplearning    | Epoch 9/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.3945 - accuracy: 0.5034
+deeplearning    | Epoch 10/10
+1563/1563 [==============================] - 3s 2ms/step - loss: 1.3742 - accuracy: 0.5125
+deeplearning    | 2021-09-13 01:29:02.661430: W tensorflow/core/framework/cpu_allocator_impl.cc:81] Allocation of 
+313/313 [==============================] - 0s 773us/step - loss: 1.4480 - accuracy: 0.4880
+deeplearning    | 2021-09-13 01:29:03.083762: W tensorflow/core/framework/cpu_allocator_impl.cc:81] Allocation of 
+deeplearning exited with code 0
+</code></pre>
+
