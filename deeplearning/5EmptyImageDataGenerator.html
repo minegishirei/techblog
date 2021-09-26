@@ -1,0 +1,123 @@
+title:ImageDataGeneratorから空のリストが返される時の対策
+
+##対象読者：kerasのライブラリで以下のようなエラーが出た方へ
+
+<pre><code>
+deeplearning    | Traceback (most recent call last):
+deeplearning    |   File "6st/1st_face_training.py", line 85, in <module>
+deeplearning    |     vae.train_with_generator(     
+deeplearning    |   File "/app/6st/VAE.py", line 219, in train_with_generator
+deeplearning    |     self.model.fit_generator(
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/util/deprecation.py", line 324, in new_func
+deeplearning    |     return func(*args, **kwargs)
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 1815, in fit_generator
+deeplearning    |     return self.fit(
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 108, in _method_wrapper
+deeplearning    |     return method(self, *args, **kwargs)
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 1049, in fit
+deeplearning    |     data_handler = data_adapter.DataHandler(
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/data_adapter.py", line 1105, in __init__
+deeplearning    |     self._adapter = adapter_cls(
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/data_adapter.py", line 909, in __init__
+deeplearning    |     super(KerasSequenceAdapter, self).__init__(
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/data_adapter.py", line 786, in __init__
+deeplearning    |     peek, x = self._peek_and_restore(x)
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/data_adapter.py", line 920, in _peek_and_restore
+deeplearning    |     return x[0], x
+deeplearning    |   File "/home/ubuntu/python3-venv/lib/python3.8/site-packages/keras_preprocessing/image/iterator.py", line 54, in __getitem__
+deeplearning    |     raise ValueError('Asked to retrieve element {idx}, '
+deeplearning    | ValueError: Asked to retrieve element 0, but the Sequence has length 0
+</code></pre>
+
+
+##エラーの原因：データが読み込めていない
+
+ImageDataGeneratorのメソッド「flow_from_directory」は画像ごとのデータを返すジェネレーターであるため容易にデータを覗くことができます。
+
+<pre><code>
+deeplearning    | (array([], shape=(0, 128, 128, 3), dtype=float32), array([], shape=(0, 128, 128, 3), dtype=float32))
+deeplearning    | (array([], shape=(0, 128, 128, 3), dtype=float32), array([], shape=(0, 128, 128, 3), dtype=float32))
+deeplearning    | (array([], shape=(0, 128, 128, 3), dtype=float32), array([], shape=(0, 128, 128, 3), dtype=float32))
+deeplearning    | (array([], shape=(0, 128, 128, 3), dtype=float32), array([], shape=(0, 128, 128, 3), dtype=float32))
+deeplearning    | (array([], shape=(0, 128, 128, 3), dtype=float32), array([], shape=(0, 128, 128, 3), dtype=float32))
+deeplearning    | (array([], shape=(0, 128, 128, 3), dtype=float32), array([], shape=(0, 128, 128, 3), dtype=float32)
+</code></pre>
+
+
+###データが入っていない!
+
+
+
+##どのようにすれば読み込めるのか？：フォルダー・ディレクトリを二重構造にする。
+
+ImageDataGeneratorにフォルダのパスを渡した後は自動的にサブフォルダーを探索してくれます。
+
+しかし渡したフォルダーのパスの第一回層を捜査することはせず、第二階層からフォルダーを精査してくれます。
+
+つまり以下のフォルダーのような回想ではなく
+
+<pre><code>
+apple
+|-- apple1.jpg
+|-- apple2.jpg
+`-- apple3.jpg
+</code></pre>
+
+以下のようなカテゴリー分けしたフォルダー出ないとImageDataGeneratorは読み込んでくれません。
+
+<pre><code>
+$ tree
+.
+|-- img_increase.ipynb
+`-- img_original
+    |-- apple
+    |   |-- apple1.jpg
+    |   |-- apple2.jpg
+    |   `-- apple3.jpg
+    |-- banana
+    |   |-- banana1.jpg
+    |   |-- banana2.jpg
+    |   `-- banana3.jpg
+    `-- grape
+        |-- grape1.jpg
+        |-- grape2.jpg
+        `-- grape3.jpg
+</code></pre>
+
+
+
+##ディレクトリを二重構造にした後...
+
+
+<pre><code>
+deeplearning    |   [[0.90196085 0.6784314  0.46274513]
+deeplearning    |    [0.8980393  0.6745098  0.45882356]
+deeplearning    |    [0.8980393  0.6745098  0.45882356]
+deeplearning    |    ...
+deeplearning    |    [0.63529414 0.44705886 0.30588236]
+deeplearning    |    [0.5254902  0.34509805 0.20392159]
+deeplearning    |    [0.46274513 0.29411766 0.15686275]]
+deeplearning    | 
+deeplearning    |   [[0.90196085 0.6784314  0.46274513]
+deeplearning    |    [0.8980393  0.6745098  0.45882356]
+deeplearning    |    [0.8941177  0.67058825 0.454902  ]
+deeplearning    |    ...
+deeplearning    |    [0.6117647  0.43921572 0.29411766]
+deeplearning    |    [0.45882356 0.29411766 0.14509805]
+deeplearning    |    [0.34509805 0.19607845 0.05490196]]
+deeplearning    | 
+deeplearning    |   [[0.8941177  0.67058825 0.454902  ]
+deeplearning    |    [0.89019614 0.6666667  0.45098042]
+deeplearning    |    [0.89019614 0.6666667  0.45098042]
+deeplearning    |    ...
+deeplearning    |    [0.49803925 0.34509805 0.19215688]
+deeplearning    |    [0.3137255  0.1764706  0.01960784]
+deeplearning    |    [0.26666668 0.1254902  0.        ]]]
+deeplearning    | 
+deeplearning    | 
+</code></pre>
+
+
+データが格納されている！
+
+
