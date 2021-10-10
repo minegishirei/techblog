@@ -1,0 +1,91 @@
+
+##nginxで「REMOTE_ADDR 400 - 」とエラーが出た時の対処法
+
+docker-compose,django,nginxでの開発の出来事
+
+
+dockerのuwisgy.pyを使う方式から正式なnginxを使う接続方式に切り替えることにした
+
+すると次のようなエラーが出てきた。
+
+
+<pre><code>
+djangoapp    | Watching for file changes with StatReloader
+djangoapp    | [10/Oct/2021 06:33:12] code 400, message Bad request version ('\x00REMOTE_ADDR')
+djangoapp    | [10/Oct/2021 06:33:12] "f
+                                        QUERY_STRINGREQUEST_METHODGET
+                                                                     CONTENT_TYPECONTENT_LENGTH
+DOCUMENT_ROOT/etc/nginx/htmlSERVER_PROTOCOHTTP/1.1REQUEST_SCHEMEhttp
+                                                                    REMOTE_ADDR" 400 -
+djangoapp    | [10/Oct/2021 06:33:12] code 400, message Bad request version ('\x00REMOTE_ADDR')
+djangoapp    | [10/Oct/2021 06:33:12] "<
+                                        QUERY_STRINGREQUEST_METHODGET
+                                                                     CONTENT_TYPECONTENT_LENGTH
+               REQUEST_URI
+                          /favicon.ico	PATH_INFO
+DOCUMENT_ROOT/etc/nginx/htmlSERVER_PROTOCOHTTP/1.1REQUEST_SCHEMEhttp
+                                                                    REMOTE_ADDR" 400 -
+^CGracefully stopping... (press Ctrl+C again to force)
+</code></pre>
+
+
+
+##エラーの原因
+
+以下はnginxの元々のconfファイル
+
+ip_hash;がついていたのが原因の可能性
+
+<pre><code>
+upstream django {
+    ip_hash;
+    server djangoapp:5000;
+}
+
+server {
+    listen      8000;
+    server_name 127.0.0.1;
+    charset     utf-8;
+    access_log  /var/log/nginx/mysite_access.log;
+    error_log   /var/log/nginx/mysite_error.log;
+
+    location /static {
+        alias /static;
+    }
+
+    location / {
+        uwsgi_pass  django;
+        include     /etc/nginx/uwsgi_params;
+    }
+}
+
+server_tokens off;
+</code></pre>
+
+
+
+##正しいnginxのconfファイル
+
+<pre><code>
+upstream project {
+    server djangoapp:5000;
+}
+ 
+server {
+ 
+    listen 8000;
+ 
+    location / {
+        proxy_pass http://project;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+        access_log  /var/log/nginx/mysite_access.log;
+        error_log   /var/log/nginx/mysite_error.log;
+    }
+ 
+}
+</code></pre>
+
+title:nginxで「REMOTE_ADDR 400 - 」とエラーが出た時の対処法
+

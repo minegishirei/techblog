@@ -1,0 +1,83 @@
+
+ついに走り出したredox os プロセス 
+
+まず気になったのが次のコード
+
+device_tree::fill_memory_map 
+
+device_treeは組み込みのクラス?構造体?だと考えgoogleで検索したが全く出てこない。
+
+もしやとおもいgithubの検索機能でリポジトリを検索したところ関数の定義文が出てき
+た。
+
+https://github.com/redox-os/kernel/blob/2e38fab913d6e427f603b8a8df0cadcec130b36f/src/arch/aarch64/init/device_tree/mod.rs
+
+この関数の詳細は把握できないがfor文内部が最も重大な部分であること
+
+特にunsafeキーワードについて着目した。
+
+
+
+
+
+##unsafetãrust
+
+Unsafe Rust ここまでに議論してきたコードは全て、Rustのメモリ安全保証がコンパイル時に強制され ていました。
+
+しかしながら、 Rustには、これらのメモリ安全保証を強制しない第2の言語が中に隠され ています: 
+
+それはunsafe Rustと呼ばれ、 普通のRustのように動きますが、おまけの強大な力を与え てくれます。
+
+中略) Rustは、低レベルなシステムプログラミングを 許可する必要があります。 直接OSと相互作用したり、独自のOSを書くことさえもそうです。
+
+低レベルなシステムプログラミングに取り組むことは、言語の目標 の1つなのです。 unsafe Rustでできることとその方法を探究しましょう。
+
+引用:https://doc.rust-jp.rs/book-ja/ch19-01-unsafe-rust.html
+
+unsafeキーワードが出てきたということは低レベルなシステムプログラミングを行ってい ること。
+
+redox osは低レベルな世界でハードウェアとやりとりをしていることが分かった。
+
+ここでメモリーについて振り返る 
+
+出典:初心に戻り、C言語のポインタについて考える
+
+
+
+この記事を読むとメモリーという巨大な大地を関数、構造体、配列などの土地ごとに分けている。
+
+この記事の用語集のところをみてみると、Memory areaについて次のような記述がある。
+
+メモリ領域(名詞)
+
+Memory area
+
+プログラム内のデータが格納される場所
+
+%23%MemoryAreaの正体
+
+つまりMemoryAreaはrustにおいてはCPUのメモリ全体を表している
+
+次のコードを見ると512倍とのサイズをMemoryAreaから割り出してMEMORY_MAPとして使用 しているもとの考えられる。 
+
+pub static mut MEMORY_MAP: [MemoryArea: 512] = [MemoryArea {
+base_addr: 0.. length: 0, _type: 0,
+acpi: 0, }; 512];
+
+
+##device_tree: :fill_memory_mapo ta z 
+
+ここまで読んでも デバイスの中のメモリーにmemory_mapをfillする...という意味は掌握できていない。 
+
+一つの所だけにとどまるわけにもいかないので次に進める。
+
+##その他のfill関数、 
+
+Sevice_tree::fill_env_dataも同様のメソッド名を使っているが中身は理解できなかっ
+た。 ここからはソースを読むことによる恩恵が少ない様に感じるので飛ばしながら読む。
+
+
+
+title:redox osのソースを読み解く
+
+category_script:page_name.startswith("10")

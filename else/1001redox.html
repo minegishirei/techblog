@@ -1,0 +1,288 @@
+
+
+
+
+
+##linuxカーネルを読まなくても仕事はできる 
+
+0章 Linuxカーネルを読む前に最低限知っておくべきことより 
+
+linuxカーネルを読むメリット
+
+
+
+##カーネルの役割
+
+カーネルの役割は アプリケーションとハードウェアが 上手に連携するための、
+
+###「橋渡し」
+
+上図のようにカーネルはアプリケーションとハードウェアの中間に位置し、アプリケーシ ョン、およびハードウェアからの要求があれば、何らかの動作を行います。
+
+Linuxを起動した時に カーネルはコンピューターの状態を初期化し、アプリケーションが ハードディスクなどの 接続されている機器にアクセスする「システムコール」を実施している。
+
+アプリケーションからは ハードディスクあるファイルに 直接アクセスすることができません。
+
+そこでアプリケーションは
+
+「ファイルを読み込みたい」 ...
+
+とカーネルにシステムコールを行います。
+
+すると、 カーネルはそのアプリケーションに対して 
+
+「ファイルを開いてもいいですよ」 ・・・と、ファイルを開く権限を与えます。
+
+
+##特権モードと非特権モード 
+
+「カーネルは特権モードの権限を持ち、
+あらゆるハードウェアにアクセスすることができます。
+
+対して、 アプリケーションは 非特権モードで動作しており、
+対して することができません。
+
+アプリケーションが
+ウェアにアクセスするためには、
+システムコールをして、 カーネルから
+ハード・特権モードヘ変換できるから
+
+
+
+## 2プロセス管理 【初心者向け】 Linuxカーネルって一体なんだ?
+
+task_struct構造体
+
+task_struct構造体には、そのプロセスが動作するための様々な情報
+(PIDやプロセスが動 作しているメモリアドレス 等)が記憶されており、 Linuxカーネルがプロセスを操作する際は、このtask_struct構造体に対して操作を行いま
+す。)
+
+
+
+##2プロセススケジューラ
+
+参考:Linuxカーネルにはどんな役割があるの?
+
+
+
+
+##最低限知っておいた方がいいこと 
+
+・コンピューターアーキテクチャ
+
+・マザーボードについて
+
+・CPUについて 
+
+Intelかamdかが重要。 x86_64.armが来たらCPUだと思った方がいい 
+
+
+
+
+
+##「x86-64」「x64」「AMD64」これらは何が違うのか?」 
+
+「x86-64」も「x64」も「AMD64」も「Intel 64」も事実上同じ。 
+
+これはみたほうがいい x86-64またはx64はx86アーキテクチャを64bitに拡張したものの総称。 
+
+amdは「AMD社」が発表したx86アーキテクチャを64bitに拡張したもの。
+
+armはスマホやタブレットなどで多く利用されているARMアーキテクチャを64bitに拡張したもの。
+
+簡単に言うとWindows 「x64」が多い
+
+RHEL (Red Hat Enterprise Linux)
+
+「x86_64」 CentOS
+
+「x86_64」 Debian
+
+「amd64」Ubuntu
+
+
+##レジスタ
+簡単な命令のみを詰め込めるメモリ。
+
+
+
+
+
+
+
+##atomic 
+
+atomicとは、
+
+コンピュータ上のプログラムの動作で、 密接に関連する複数の処理が外部から一つの操作に見え、 
+途中の状態を観測したり介入できない性質を、操作のアトミック性、不可分性などという。
+
+
+このatomicという言葉はredox os kernel sourceの中で何度か出てくる。 
+
+例えば,kernel/src/arch/x86_64/device/local_apic.rsの一文 
+
+/// This must be used by the kernel to ensure that context switches are done atomically 
+/// Compare and exchange this to true when beginning a context switch on any CPU
+/// The Context::switch_to function will set it back to false, allowing other CPU's to switch
+
+意味は
+///これは、コンテキストスイッチがアトミックに行われるようにするためにカーネルが 使用する必要があります 
+///任意のCPUでコンテキストスイッチを開始するときに、これを比較してtrueに交換しま す 
+/// Context :: switch_to 関数はそれをfalseに戻し、他のCPUが切り替えられるように します
+
+この3行に渡るコメント文は次の一行を修飾している。 
+
+pub static CONTEXT_SWITCH_LOCK: AtomicBool = AtomicBool :: new (false);
+
+##Context Switch(コンテキストスイッチ)とは? コンテキストとは ユーザーと他のユーザー、ユーザーとシステムまたはデバイス間の相互作用に影響を受け る人、 場所、オブジェクトなどの現在状況を規定する情報のこと。
+
+
+ンテキストを切り替えてCPUのリソース割り当てをアプリケーションごとに割り振 をコンテキストスイッチという
+
+
+
+
+##3行のコメント
+
+
+//これは、コンテキストスイッチがアトミックに行われるようにするためにカーネルが使用 する必要があります
+///アトミックは分離不可能な一つの操作である。(似た単語だとプロシージャやコミットな どか) よって、
+
+このコメント文は次の様に言われる。
+###AtomicBoolについてのまとめ AtomicBoolはCPUのリソース切り替えが可能であるが、最小単位で行われるようにしなけ ればならない。 
+
+AtomicBoolはアプリケーションの数だけ存在し、それぞれがアプリケーションのcpuリソ ースの割り振り状態を表す。 
+
+AtomicBoolの内部にはtrueとfalseを持つプロパティが存在し、これがtrueだとcpuが使用できている状態である。
+
+AtomicBoolのswitch_toメソッドはアプリケーションのcpuリソース使用権を別のアプリケーションへ譲渡でき、
+
+自動的にアプリケーションのcpuリソースの切り替えを内部でtrueからfalseへ切り替え cpuのリソースの割り当て状態を変更する。
+
+
+
+
+
+##arch(linux)
+
+AtomicBoolが使われているコードを他にも見ていくとこんなファイルを見つけた
+
+kernel/src/arch/aarch64/start.rs
+
+このコード単体を見ていく前にどんな立ち位置なのかを軽く把握しなければならない。
+
+まずはarchについて
+
+これはarchitectureの頭文字を取ったもの
+
+日本語に直すとアーキテクチャ。
+
+linuxがこれから扱おうとするcpuがどんな会社でどんな規格で作られたのかを表してい
+
+参考文献:arch - マシンのアーキテクチャを表示 - Linuxコマンド
+
+
+
+
+
+
+##aarch64 
+
+x86 と x64 はビット数を示す 
+
+x86→32ビット x64 → 64ビット
+
+これらはIntel社が作ったCPU それに対してARM64はARM 社によるCPU
+
+AArch64(ARM64)スマホやタブレットなどで多く使われる ARM アーキテクチャを64bit に拡張したもの
+
+
+
+
+##archit
+
+CPUを作っている会社ごとに規格が違うためそれぞれに合わせないといけない。
+
+%23%2CPUのスタート時の動作
+
+本格的にコードを読み進める
+
+kernel/src/arch/aarch64/start.rsの冒頭のコメント
+
+/// This function is where the kernel sets up IRQ handlers 
+/// It is increcibly unsafe, and should be minimal in nature
+It must create the IDT with the correct entries, those entries are 
+/// defined in other files inside of the 'arch' module
+
+
+//この関数は、カーネルがIRQハンドラーを設定する場所です 
+//それは非常に安全ではなく、本質的に最小限でなければなりません 
+//正しいエントリでIDTを作成する必要があります。
+//この説明は特定のコードに対しての修飾ではないため start.rsの全体に対する説明と考えてよい
+
+
+
+##HIROとは
+
+Interrupt Requestの略でCPUに対する命令を一次中断するリクエストのこと。
+
+
+##IDTとは 
+
+IDTとは割り込みベクタ番号と割り込み処理が書かれている関数を 結びつけるためのテーブルです。
+
+
+
+
+##start.rsの役割」
+
+プロセスをスタートし、IRO(一次的なCPU中断リクエスト)でそのほかのプロセスを停止さ せIDTへ中断したプロセスの詳細を書き込む。 
+
+実際にコードを読み進めると次のコメントが見つかった。 
+
+/// The entry to Rust, all things must be initialized 
+
+///Rustへのエントリ、すべてのものを初期化する必要があります
+
+このstart.rsはkernelの開始部分であるのは間違いないようだ。
+
+63-67行目 
+
+///BSS should already be zero
+
+assert_eq! (BSS_TEST_ZERO, 0); 
+
+assert_eq! (DATA_TEST_NONZERO, OxFFFF_FFFF_FFFF_FFFF) :
+
+
+##BSSIZ 
+
+block started from symbolの略 プログラムのコード部分とデータ部分を分離して配置するのが一般的で、 キスト セグメント、後
+
+タセグメントと呼ぶ。データセグメントと隣接してヒープ領域が 配置されることが多く、 をUNIX系システムではBSSと呼ぶ
+
+
+つまりはヒープ領域のこと。
+
+プログラムを開始する前にヒープ領域にデータが入っていないかを確認している。
+(万が データが入っている場合はエ ラーが出る)
+
+69-70 ここの部分は分かりずらかったが、KERNEL_BASE変数に対して KERNEL BASE. 
+
+store(kernel base, Ordering::SeaCst); 
+KERNEL_SIZE. 
+store(kernel_size, Ordering::SeqCst);
+
+72-73 ログを行うためにデータが送信可能なシリアルポートを探す。 
+
+// Try to find serial port prior to logging 
+
+device::serial::init_early(crate::KERNEL_DEVMAP_OFFSET + dtb_base, dtb_size);
+
+
+
+
+title:RedoxOsのソースを読み解く
+
+category_script:page_name.startswith("10")
