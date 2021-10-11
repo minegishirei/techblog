@@ -1,0 +1,209 @@
+
+#djangoでオンライン対戦ゲームを作る(アーキテクチャ編)
+
+概要はこちら 
+
+<a href="./1000overall.html">    
+djangoでオンライン対戦ゲームを作る(概要編)
+</a> 
+
+セットアップはこちら 
+
+<a href="./2000setup.html">
+djangoでオンライン対戦ゲームを作る(セットアップ編) 
+</a>
+
+
+##djangoのアーキテクチャについて
+
+djangoはMVCモデルと呼ばれるデザインパターンを適用している。 
+
+MVCはModel, View, Controlの頭文字を取っており、それぞれデータベース, 画面表示, メインフレームの3つに分かれている。
+
+ゲームサーバー構築用フレームワークchannels-obstructionはdjangoフレームワークを利用しているためMVCモデルにもれなく当てはまる。
+
+###channels-obstructionのアーキテクチャの概要
+<a href="https://github.com/codyparker/channels-obstruction">
+channels-obstructionのルートディレクトリ </a>
+
+にはいると
+
+channels obstruction
+
+game
+
+static
+
+templates 
+
+のフォルダーが目に入る。
+
+templatesにはhtmlファイルが含まれており、 ブラウザに表示されるhtmlテキストのベースとなるファイルやゲーム中に必要になるチャット部分のみのファイルなどが格納されている。
+
+staticには文字通り静的なファイルが含まれており、CSS、img、javascriptから構成される。
+
+これらに対してはブラウザからアクセスできるように設定されており、ブラウ ザ上での柔軟な動きを可能にするjavascriptなどが含まれる。
+
+そして最も重要なのがgameフォルダーである。
+
+このgameフォルダーには主にpythonファイルが含まれており、ゲームユーザーの管理やゲームサーバーのコントロールを管理している。
+
+このgameフォルダーを今回は深堀していく
+
+
+
+
+
+##gameフォルダー
+<a target="_blank" href="https://github.com/codyparker/channels-obstruction/tree/master/game"> 
+    game フォルダー
+</a>
+diangoプロジェクトを初めに開いたときに最初に確認するべきはurls.pyファイルである。 
+
+なぜならurlsという名前が示す通りここにはurlによってどの機能を提供するか(もっと いうとどの関数、メソッドを実行 するか) 
+を決めるためのリストが存在するためである。 
+
+しかしここにはurls.pyというファイルは存在しなかった。
+
+
+
+
+
+##次に見るべきは一つ上の階層
+
+<a href="https://github.com/codyparker/channels-obstruction/tree/master/channels_ob struction"> 
+    channels-obstruction/channels_obstruction/ 
+</a>
+
+urls.pyというファイルは存在しなかった。 
+
+であれば次に見るべきはurls.pyを呼び出しているはずのコード。
+
+<a href="https://github.com/codyparker/channels-obstruction/blob/master/channels_ob struction/routing.py"> 
+routing
+</a> 
+
+djangoではフレームワークを利用する際、あらゆるプロジェクト設定ファイルなどは全て
+プロジェクト名と同じ名前のフォルダーに格納されている。(本プロジェクトだとgameフォルダーに当たる)
+
+そしてdjangoで複数のアプリを作動させたい場合(一つのドメインに対して複数のプロジェクトを立ち上げる時)
+
+これらのurlをコントロールする必要があるが、そのコントロール用のファイルもプロジ テクトメイト同じフォルダーに存在する。
+
+それが今回はrouting. pyファイルである。
+
+
+
+
+
+##django routing.py
+
+
+routing.pyファイルを見ると以下のコードが見て取れる。
+
+<pre>
+<code> 
+
+</code> </pre> 
+
+このコードから見て取れることは
+
+urlが「https://???.??/lobby/」であればconsumersメソッドを
+
+LobbyConsumerメソッドを、  GameConsumerメソッドを 呼び出すような設計になっている。
+ということである。
+
+<br>
+
+ちなみにこのchannel_routingは
+<a href="https://github.com/codyparker/channels-obstruction/blob/4776be7b0cb47529d9 785ec0f817a68199480f02/channels_obstruction/settings.py"> channels-obstruction/channels_obstruction/settings.py</a>
+
+から呼び出されている。
+
+settings.pyはその名の通りプロジェクト全体の設定ファイルである。
+
+つまりrouting.pyは
+###
+channel_routingというurlの設定を行うファイルでそれはsetting.pyから呼び出されることで設定が完了する。
+
+という役割をになっている。
+
+routing.pyの役割が分かったところで一度
+
+<a
+href="https://github.com/codyparker/channels-obstruction/tree/master/channels_ob struction">
+channels-obstruction/channels obstruction
+</a>
+
+へ戻る。
+
+##djangoのurls.py
+
+<a href="https://github.com/codyparker struction
+//github.com/codyparker/channels-obstruction/tree/master/channels ob" >
+channels-obstruction/channels_obstruction/ </a> 
+
+を見ると 
+
+プロジェクトのurl管理はrouting.pyだけでないことが分かる。 
+
+もう一つのurl管理ファイルがurls.pyである。
+
+<a hef="https://github.com/codyparker/channels-obstruction/blob/master/channels_obs truction/urls.py">
+     urls.py 
+</a> 
+
+このファイルを見てみると以下のコードが目につく
+
+
+このコードを見るだけでも admin, register, login, logoutといったユーザー管理のためのurlパスだけでなく、
+
+gameやlobbyのようなゲームに必要なurlが用意されており,それぞれがそれぞれのクラスメソッドに結びついている状態であるのが分かる。
+
+このurls.pyから分かる情報はそれだけではない
+
+その下にあるコードにも注目してほしい
+
+
+このコードのコメント部分にapiと書き込まれている。
+
+
+
+
+
+##api Application Programming Interface
+
+ここでコードを読む方針が固まったのでまとめる。
+
+リクエストを送ることで
+
+#1.ユーザー登録部分をみたければ 
+
+##2. ゲームサーバー部分をみたければ
+
+###3. ロビー部分を見たければ
+
+
+
+
+
+##次回 
+
+ここまでdjango/channels_obstructitonのアーキテクチャの概要を説明してきた
+
+そしてその過程でurls.pyファイルに全てのurl構成図が書かれておりその中の一文から 
+ゲームapiはSingleGameViewSet, CurrentUserViewが中心となっていることが分かった。
+
+
+
+
+次回からいよいよゲームサーバーを深く見ていく。
+
+<a href="1202django_game.html">
+djangoでオンライン対戦ゲームを作る(ゲームサーバー/api編) </a>
+
+
+title:djangoでゲームを作る。(アーキテクチャ編)
+description:djangoはMVCモデルと呼ばれるデザインパターンを適用している。MVCはModel, View, Controlの頭文字を取っており、それぞれデータベース, 画面表示, メインフレームの3つに分かれている。
+
+

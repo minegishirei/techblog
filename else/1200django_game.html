@@ -1,0 +1,66 @@
+
+
+#djangoでオンライン対戦ゲームを作る(アーキテクチャ編)
+
+概要はこちら 
+
+<a href="./1000overall.html">    
+djangoでオンライン対戦ゲームを作る(概要編)
+</a> 
+
+セットアップはこちら 
+
+<a href="./2000setup.html">
+djangoでオンライン対戦ゲームを作る(セットアップ編) 
+</a>
+
+
+このベースとなるファイルやゲーム中に必要になるチャ
+ブラウザに表示されるhtmlテキストのベースとなるファイ ット部分のみのファイルなどが格納されている。 
+
+staticには文字通り静的なファイルが含まれて
+とい格的なファイルが含まれており、CSS、img、javascriptから場がさん
+てはブラウザからアクセスできるように設定されており、ブラウ これらのファイルに対してはブラウザからアカーフ ザ上での柔軟な動きを可能にするjavascript や飾り付けを担当するcssは自由にアクセスできるようになっている。 そして最も重要なのがgameフォルダーである。
+n
+
+gameフォルダーには主にpythonファイルが含まれており、ゲームユーザーの管理やげ ームサーバーのコントロールを管理している。
+
+##セットアップ方法 
+
+セットアップ方法については本リポジトリのREADME.mdに紹介されてる 
+
+<pre><code>
+1. Fork and clone this repository 
+
+2. Create a Python virtual environemnt 
+
+3. In that environment, run pip install -r requirements. txt inside your project 
+
+4. Install node modules with npm install 
+
+5、Create the local database with python manage.py migrate
+
+6. Run webpack to build the components with npm run webpack
+
+7、Run Django development server on port 8080 - python manage.py runserver 8080 
+</code></pre>
+
+
+日本語に翻訳すると 
+<pre><code>
+1、このリポジトリをフォークしてクローンを作成します 
+2、Python virtual envを作成する
+3、その環境で、プロジェクト内でpip install -r requirements.txtを実行します
+4、npm installを使用してノードモジュールをインストールします 
+5、python manage.py migrateを使用してローカルデータベースを作成します
+6、webpackを実行して、「npm run web」を実行して、「npm run webpack」でをビルドします
+7python manage.py runserver 8080での期発サーバーを実行します
+ポートは8080でDjango開発サーバーを実行。
+</code></pre>
+
+
+
+title:djangoでゲームを作る。(概要編)
+description:githubを探すとdjangoを利用したwebブラウザゲームサーバーを展開するためのソースが見つかった。今回はこのファイルの設定が可能かどうかをみてみる。
+
+

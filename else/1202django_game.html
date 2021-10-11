@@ -1,0 +1,125 @@
+
+<a href="3000arch.html">
+    前回
+</a>
+
+ここまでdjango/channels_obstruct/channels_obstructiton
+のアーキテクチャの概要を説明してきた。
+
+そしてその過程でurls.py
+ファイルに全てのurl構成図が書かれておりその中の一文から
+
+AapildSingleGameViewSet, 
+Current,
+RinaleGameViewSet, 
+CurrentUserViewが中心となっていることが分かった。
+
+
+<a hrf="https://github.com/codyparker/channels-obstruction/blob/master/channels_obstruction/urls.py">
+urls.py </a>
+
+<pre>
+
+</pre>
+
+今回からいよいよゲームサーバーを深く見ていく。
+
+
+##SingleGameViewSet
+
+SingleGameViewSetid
+
+<a hef="https://github.com/codyparker/channels-obstruction/blob/master/channels_obs truction/urls.py">
+urls.py </a>
+
+から呼び出されているクラスでゲームのデータを全て呼び出している。 
+
+中心となるメソッドはgetであり、getは以下のコードでゲームのデータベースを全て呼び出した後に
+
+<pre><code>
+game = Game.get_by_id(kwargs['game_id']) 
+log = game.get_game_log() 
+squares = game.get_all_game_squares() 
+</code></pre>
+
+以下のコードでシリアル化(データをpythonやsal特有の形からxml形式などファイルに保存可能な形に直すこと)を行っている。
+
+<pre><code>
+game_serializer = GameSerializer (game) 
+log_serializer = GameLogSerializer (log, many=True) 
+serializer = Game SquareSerializer (squares, many=True)
+</code></pre>
+
+12日の記駅であるlogやsauresはgame変数から取り出しているため、実質全ての必要な データはgameに保存されている。
+
+
+
+##Gameデータを見てみる
+
+gagameデータを見てみると大量のプロパティが出てくる
+
+ここでも変数名に着目すると
+
+creatorがこのゲームの親?(サーバー側) 
+opponentが対戦相手(Userが第一引数に指定されているが、このuserはdjangoが用意した ユーザー管理用の変数である) 
+current turnがあることからターン性のゲームである
+これらの情報が手に入る。
+winnerが勝敗結果を保存するデータ(null=Trueでblank=Trueであることから 
+データがnullかそもそも格納されていない場合は勝敗がついていないパターンと思われる)
+
+
+
+##gameのcreate_newを見てみる
+
+create_newはuserを引数にとって新しいゲームを展開するメソッドである。 
+
+内部ではGameクラスにユーザー指定を指定して新しいゲームを作成している。 
+
+その後はGameSqure?というクラスに対してfor文を使って初期化を行っている。 
+
+このGameSqureはゲームのルールや盤面に関するデータなのでここでは割愛する。
+
+
+
+
+##気になること~gameの参加方法~ 
+
+game_newメソッドを見たとき、正直「ほうほう、なるほど、ここで対戦相手を登録するわ けだな」と予想してた。 
+
+だが実際はcreate_newメソッド内には対戦相手を指定している様子はない 
+
+そこで対戦相手が登録されるであろう「opponent」変数が代入される部分(対戦相手が代入される部分)を中心に見ていく
+
+
+##opponentはどこで代入される?
+
+Topponent」で該当ソースを検索したが中身が一向に見つからない
+
+githubの検索機能を使ったが、opponentに代入しているコードはサムネイルを見る限りは見られなった。
+
+そこでおそらくマッチング作業を行っているであろうViews部分を見てみた。
+
+すると以下のコードが見つかった。
+
+<a　href="https:github.com/codyparker/channels-obstruction/blob/4776be7b0cb47529d9 200000F817a68199480f02/game/views/views.py#L73-L77"> 
+    該当ソース</a>
+
+self.game.opponent = user
+
+githubさんの検索機能は全てを参照できるわけではないらしい、(今後はgit cloneしてローカルでvisual studiocodeの検索機能を使うか)
+
+create newメソッドではなかったが、ともかく対戦相手設定部分は見つかった。
+
+##振り返り 
+
+最初はゲームサーバーとしてAPIを振り返るつもりがデータ構造について学ぶ回になってしまった。
+
+次回こそはAPIのソースを読破していきたい。
+
+
+
+
+
+title:djangoでゲームを作る。(ゲームサーバー編)【python,webブラウザで作る】
+description:create_newはuserを引数にとって新しいゲームを展開するメソッドである。内部ではGameクラスにユーザー指定を指定して新しいゲームを作成している。その後はGameSqure?というクラスに対してfor文を使って初期化を行っている。 
+
