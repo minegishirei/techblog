@@ -1,0 +1,81 @@
+
+##nginxでhttpsを実装するためにしたこと
+
+
+##certbotは難易度が少し高い
+
+1.CUIであるためコマンド操作が難しい
+
+2.自動化してくれるがそれゆえに設定が多岐にわたる
+
+これらの要因からnginxのhttps化はcertbotを使うと難易度が上がると予測される
+
+
+
+
+
+##証明書を簡単に発行する「https://sslnow.ml/」
+
+<a href="https://sslnow.ml/">
+sslなう
+</a>
+
+certbotの設定につまづいてしまったらまずはhttps://sslnow.ml/を試してGUIを使った証明書の発行を行いましょう。
+
+優れたGUIだったので上から下にそってボタンを押していくだけで簡単に証明書を発行できました。
+
+
+
+
+
+
+##nginxへ証明書に登録する
+
+ssl_certificateはfullchainの鍵を登録しましょう
+
+ssl_certificate_keyはprivateの鍵を登録しましょう
+
+
+<pre><code>
+events {}
+
+http {
+    upstream project {
+        server djangoapp:5000;
+    }
+    server {
+        listen 80;
+        return 301 https://$host$request_uri;
+    }
+    server {
+        listen 443 ssl;
+        ssl_certificate     /etc/nginx/wildssl/fullchain.pem;
+        ssl_certificate_key /etc/nginx/wildssl/private.pem;
+        location / {
+            proxy_pass http://project;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $host;
+            proxy_redirect off;
+            access_log  /var/log/nginx/mysite_access.log;
+            error_log   /var/log/nginx/mysite_error.log;
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+ちなみにこのssl_certificate_keyは絶対に公開してはいけない奴です。
+
+私はgithubに公開してますが。
+
+
+
+
+
+
+title:nginxでhttpsを実装するためにしたこと(証明書を簡単に発行する「SSLなう」)
+description:certbotは難易度が少し高い 1.CUIであるためコマンド操作が難しい 2.自動化してくれるがそれゆえに設定が多岐にわたる これらの要因からnginxのhttps化はcertbotを使うと難易度が上がると予測される
+
