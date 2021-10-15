@@ -13,11 +13,11 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 ##powershellでhtmlテキストを手に入れる
 
-<pre>
+<pre><code>
 $source = "http://blogs.msdn.com/powershell/rss.xml"     
 $wc = New-Object System.Net.WebClient
 $content = $wc.DownloadString($source)
-</pre>
+</code></pre>
 
 WebClientのDownloadStringを使えばhtmlのソースを手に入れることができる。
 
@@ -28,7 +28,7 @@ WebClientのDownloadStringを使えばhtmlのソースを手に入れること�
 
 以下のコードはmicrosoft beingで検索するコード（現在はhtmlの形式が変わったため、更なる工夫が必要）
 
-<pre>
+<pre><code>
 [string] $question = "何かの文字列"
 $encoded = [System.Web.HttpUtility]::UrlEncode($question)
 $url = "http://search.live.com/results.aspx?q=$encoded"
@@ -61,7 +61,7 @@ function clean-html ($htmlInput)
     $tempString = [Regex]::Replace($htmlInput, "<[^>]*>", "")
     $tempString.Replace("&nbsp&nbsp", "")
 }
-</pre>
+</code></pre>
 
 ####解説
 
