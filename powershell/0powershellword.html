@@ -1,0 +1,161 @@
+
+
+
+
+<pre>
+<a href="getchilditem">1.getchilditem</a>
+<a href="for">2.for</a>
+<a href="pscustomobject">3.pscustomobject</a>
+<a href="sendkeys">4.sendkeys</a>
+<a href="git">5.git</a>
+<a href="summury">まとめ</a>
+</pre>
+
+
+<div id="getchilditem">
+</div>
+
+
+##キーワード1、getchilditem
+
+powershellはgetchilditemというコマンドを実装している。
+
+このコマンドはディレクトリを全て表示させることができる。
+
+powershellはwindowsの自動化のために使われるが、そのためにはディレクトリやファイルの取扱は必須であり、そういう意味でgetchilditemの検索順位が上がったのは必然
+
+
+検索ボリュームでも月1000～1万を記録している
+
+
+
+<div id="for">
+</div>
+##キーワード2、power shell for
+
+プログラミング言語の基本的なフロー制御の一つに繰り返しがある。（残り二つは条件分岐と関数）
+
+特に「人間にとっては耐え難い単純作業を代わりにやってくれるプログラミング言語」という意味でpowershellのfor文は他の他の言語よりも重要性が増す
+
+なぜならばpowersehllはwindowsの面倒な作業を自動化するために生まれてきたプログラミング言語といっても過言ではないからだ。
+
+
+
+<div id="pscustomobject">
+
+</div>
+
+##キーワード3、pscustomobject
+
+pscustomobjectとは何かについて触れている記事が少ないので軽く紹介
+
+
+###そもそもPSCustomObjectとは
+
+
+
+公式ドキュメント
+<pre>
+PSCustomObject は、PowerShell のツール ベルトに追加できる優れたツールです。
+基本事項から始めて、より高度な機能に進みましょう。 
+PSCustomObject を使用する背景にあるアイデアは、構造化データを簡単に作成することです。 
+最初の例を見てみると、その意味がよく理解できるでしょう。
+</pre>
+
+コード例
+<pre>
+$myObject = [PSCustomObject]@{
+    Name     = 'Kevin'
+    Language = 'PowerShell'
+    State    = 'Texas'
+}
+</pre>
+
+このように、
+<strong>
+    自分で好きな形のデータを作り出すことができ
+</strong>
+しかも
+<strong>
+    Powershellが用意した鋳型をカスタマイズしているため元々のpowershellの機能が潰れない
+</strong>
+というメリットもついてきます
+
+
+
+<div id="sendkeys">
+
+</div>
+##キーワード4、sendkeys
+
+sendkeysはキーボードの操作をユーザーの代わりにpowershellが自動で行ってくれます。
+
+例えば
+
+・寿司打のキー入力を代わりにやって欲しい
+
+・欠席報告メールを代わりに送っておいて欲しい
+
+などの操作
+
+これらを代わりにやってくれます。
+
+そしてその際のキーボード入力という作業のためにはsendkeysという仕組みを活用しなければならないのです。
+
+興味がでた方は以下の記事を実践してみることをお勧めします。
+
+<a href="./3000automation.html">
+    powershellでメモ帳を開く
+    </a>
+
+実装は3分でできます。
+
+
+
+
+
+
+
+<div id="git">
+</div>
+##キーワード5,git
+
+gitを知らない方のために説明すると
+
+gitはソースコードの管理ツールです。
+
+複数人で一つのソースファイルを編集する際などに使われ、特に大掛かりなプロジェクトでは大活躍します。
+
+このgitですが、例えば完成したソースコードをアップロードする際にもいくつかコマンドを打たなければいけません。
+
+そのコマンドを一つにまとめてくれるのがpowershellなのです。
+
+windowsの環境下で開発を行うときにはpowershellによる自動化は重宝します。
+
+
+
+
+
+<div id="summury">
+</div>
+##サマリー
+
+まとめると
+
+###powershellは自動化のためのツールである
+
+###さらにその上にユーザーが好きなようにカスタマイズできて
+
+###プロジェクトの管理にも使われたりする
+
+
+
+
+title:powershellで何ができるのか？powershellを紐解く5つのキーワード
+
+img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
+
+
+
+###元データ一覧
+
