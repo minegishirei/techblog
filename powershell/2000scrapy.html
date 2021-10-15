@@ -7,13 +7,13 @@ category_script:page_name.startswith("2")
 
 ##powershellでファイルをダウンロードするサンプルコード
 
-<pre>
+<pre><code>
 $source = "http://www.leeholmes.com/favicon.ico"
 $destination = "c:\temp\favicon.ico"
 
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($source, $destination)
-</pre>
+</code></pre>
 
 ####解説
 ファイルをダウンロードするためには.Net FrameworkのWebClientオブジェクトを使用する。
@@ -25,11 +25,11 @@ $wc.DownloadFile($source, $destination)
 また、webブラウザからアクセスするようにヘッダーに書き込むためには以下のように$wc.Headersにuser-agentを追加する。
 
 
-<pre>
+<pre><code>
 $userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2;)"
 $wc = New-Object System.Net.WebClient
 $wc.Headers.Add("user-agent", $userAgent)
-</pre>
+</code></pre>
 
 
 
