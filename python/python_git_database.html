@@ -43,8 +43,8 @@ get_page_listも同様の動きができますが、速度の面では劣りま�
 早速ソースコードを出します。
 
 
-<code>
-    <pre>
+<pre><code>
+
 
 from github import Github
 from urllib.request import urlopen, quote
@@ -133,9 +133,8 @@ def delete_page(repo, filename):
     repo.delete_file(contents.path, "commitmessage" , contents.sha)
 
 
-
-    </pre>
-</code>
+    
+</code></pre>
 
 
 
