@@ -1,0 +1,61 @@
+##0040の移行作業の対象システム: Oracle Database 11gリリース2(11.2) を使用している システム 
+
+以下は「Oracle® Objects for OLE開発者ガイド」
+
+<pre><code> 
+Oracle Database 11gリリース2(11.2) は、Oracle Objects for OLEをサポートする最後の データベース・バージョンです。
+Oracle Database 11gリリース2(11.2)の後にリリースされるOracle Databaseバージョン では、 Oracle Objects for OLEはサポートされません。 
+オラクル社のライフタイム・サポートポリシーの対象となっている既存のOracle Databaseバージョンでは、 Oracle Objects for OLEを引き続き使用できます。
+ </code></pre>
+
+まとめると ###Oracle Database 11gリリース2(11.2) 以降はOracle Objects for OLEはサポートされ ません。
+
+##具体的にはいつぐらいの時期:2009年9月から2015年1月31日の間にmicrosoftでoracle databaseを使っているシステム
+
+新規プロジェクトを立ち上げた時期が2009年でoracle databaseに対してmicrosoftのシス テムから接続している場合 0040を移行しなければ行けない可能性があります。
+
+参照:Oracle データベース 11gR2 (11.2) ライフタイム・サポートの変更(Doc ID 2068697.1)
+
+##主な言語は?
+
+VBやVC++、VB.net
+
+これらが該当する可能性が高いです。
+
+
+##2009-2015年のどこの時期が多いのか 2009年から2015年の間がOracle Database 11gの導入時期であったとはいえ
+
+
+
+
+2014年頃にはOracle Database 12gのシステムも導入されています。 
+
+この時期に立ち上げたシステムであればバージョンとしては問題ないでしょう。 
+
+特に、1998年から使われているVB6をメインに使っているようなシステムでない限りは
+
+##クライアントのバージョンを確認する。 
+
+次のコマンドをコマンドプロンプトで実行することでクライアント側のバージョンを確認 できます。 
+
+<pre><code> sqlplus -v </code></pre>
+
+
+このコマンドを打って11gが出たときに0040という接続方式を使ってれば移行作業が必須 となります。
+
+
+##データベースの接続時期を見る 
+
+データベースに接続した際に以下のコマンドを実行することでデータベースのバージョン が確認できる。 
+
+<pre><code> SELECT * FROM v$version; </code></pre>
+
+
+
+
+title:oo4oの移行作業の対象システムは?
+
+
+description:新規プロジェクトを立ち上げた時期が2009年でoracle databaseに対して microsoftのシステムから接続している場合、0040を移行しなければ行けない可能性があ ります。
+
+img:https://tech.systems-inc.com/files/9016/1423/7985/vb.png
