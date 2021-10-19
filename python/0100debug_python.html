@@ -1,0 +1,177 @@
+##djangoでバグが起きた時にやること
+
+
+
+##1,エラーとして出力された時
+
+Local Varsを確認して値を確認する(項目の4参照)
+
+
+##2,エラーは出ないが想定外の挙動をした時の対応
+
+
+##1,djangoのDEBUGフラグをオンにする
+
+djangoではプロジェクト名と同じフォルダーにsettings.pyファイルが配備されている
+
+このファイルの中にはDEBUG変数が存在しており、
+
+この変数の値がTrueであればエラー画面が表示される
+
+この値がFalseであった場合、いかなるエラーもInternal server errorとして出力されるのでTrueに変更する
+
+
+
+##3,0/0をソースコードの途中に挿入する
+
+これをすることにより意図的にエラーを引き起こし、djangoのエラーが表示されるようになる
+
+
+
+
+##4,変数を確認する。
+
+Local Varsを確認すると各変数の値が全て格納されているため、そこから0/0を書いた時点での変数の値が出力される。
+
+<li class="frame user">
+    <code class="fname">/app/techblog/views.py</code>, line 151, in page
+
+
+    <div class="context" id="c281472803411072">
+
+        <ol start="144" class="pre-context" id="pre281472803411072" style="display: none;">
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre></pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre></pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre># Create your views here.</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>def page(request, category, htmlname):</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    mk = Github.load(repo, category + "/" +htmlname)</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    tableIndex = TableIndex(mk)</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    mk = tableIndex.rebuild_mk()</pre>
+            </li>
+
+        </ol>
+
+        <ol start="151" class="context-line">
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    0/0</pre> <span>…</span>
+            </li>
+        </ol>
+
+        <ol start="152" class="post-context" id="post281472803411072" style="display: none;">
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    md = markdown.Markdown()</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    htmltext = md.convert(mk)</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>    params = {</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>        "mk" : mk,</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>        "htmltext" : htmltext,</pre>
+            </li>
+
+            <li onclick="toggle('pre281472803411072', 'post281472803411072')">
+                <pre>        "site_name" : site_name,</pre>
+            </li>
+
+        </ol>
+
+    </div>
+
+
+
+    <div class="commands">
+
+        <a href="#" onclick="return varToggle(this, '281472803411072')"><span>▼</span> Local vars</a>
+
+    </div>
+    <table class="vars" id="v281472803411072" style="display: block;">
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>category</td>
+                <td class="code">
+                    <pre>'powershell'</pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td>htmlname</td>
+                <td class="code">
+                    <pre>'1400function.html'</pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td>mk</td>
+                <td class="code">
+                    <pre>'\n'</pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td>request</td>
+                <td class="code">
+                    <pre>&lt;WSGIRequest: GET '/powershell/1400function.html'&gt;</pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td>tableIndex</td>
+                <td class="code">
+                    <pre>&lt;techblog.views.TableIndex object at 0xffff7ef09930&gt;</pre>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</li>
+
+
+
+
+##想定外の値になっている変数を確認
+
+Local varsの変数を確認することで想定外の挙動を起こしている変数を確認し、そこから逆算が可能になる
+
+
+
+title:djangoでのバグフィックスの手法
+
+
