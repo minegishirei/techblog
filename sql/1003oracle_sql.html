@@ -1,0 +1,235 @@
+
+
+title:selectの使い方【Oracle Bronze SQL基礎 単語集】
+
+description: データベースの中からデータを取り出す文
+
+img:https://itmanabi.com/wp-content/uploads/2020/01/SQL-4-major.png
+
+category_script:page_name.startswith("100")
+
+
+
+
+##射影
+
+特定の列のみを取り出す機能
+
+例）会社の雇用データベースのうちから全ての社員番号と名前を取り出すこと
+
+
+##選択
+
+特定の行を取り出す機能
+
+例）会社の雇用データベースのうち100で始まる社員を全て取り出すこと
+
+
+##結合
+
+2つ以上のデータベースを組み合わせて使うこと
+
+例）所属部署コードが記載された社員データベースと部署コードと部署名が対応したデータベースをくっつけて
+社員データベースに部署名をくっつけること
+
+
+##SELECT文
+
+データベースの中からデータを取り出す文
+
+例）
+
+SELECT カラム1, カラム2 FROM データベース
+
+
+##SELECTによる射影
+
+<pre><code>
+SELECT カラム1, カラム2 FROM データベース
+</code></pre>
+
+列としてカラム1, カラム2だけを取り出している
+
+
+##全ての列のとりだし
+
+<pre><code>
+SELECT * FROM データベース
+</code></pre>
+
+
+
+##SELECTによる選択
+
+<pre><code>
+SELECT * FROM データベース
+WHERE 条件
+</code></pre>
+
+例えば、社員データベースから部署コードが100であるものを選択したいときは
+
+<pre><code>
+SELECT * FROM データベース
+WHERE データベース.部署コード = "100"
+</code></pre>
+
+更なる複雑なWHERE句による選択は後ほど出てくる
+
+
+
+##表構造の表示
+
+<pre><code>
+DESCRIBE
+</code></pre>
+
+##SELECTでの算術使用
+
+selectの実行結果に対して計算を行うことができる。
+
+例えば給料の12倍を示したいときは給料のカラムsalに*12を付け加える
+
+<pre><code>
+SELECT
+    empno, sal, sal*12
+FROM
+    社員データベース
+</code></pre>
+
++は足し算
+
+-は引き算
+
+*は掛け算
+
+/は割り算
+
+さらに複雑な算術は()を使用して優先順位を指定する
+
+<pre><code>
+SELECT
+    empno, sal, (sal+1000)*12
+FROM
+    社員データベース
+</code></pre>
+
+
+##列別名の使用
+
+上記のsqlを実行するとsal*12がタグとして出てきてしまう。
+
+これに対して独自のラベルをつけたいときは列別名を使う
+
+列別名1
+
+<pre><code>
+SELECT
+    empno 社員番号, sal 給料, sal*12 年間給料予測
+FROM
+    社員データベース
+</code></pre>
+
+列別名2(ASを使用でも可能)
+
+<pre><code>
+SELECT
+    empno AS 社員番号, sal AS 給料, sal*12 AS 年間給料予測
+FROM
+    社員データベース
+</code></pre>
+
+列別名2(特殊文字を使用)
+
+<pre><code>
+SELECT
+    empno AS "社員No", sal AS "sal", sal*12 AS "WHERE"
+FROM
+    社員データベース
+</code></pre>
+
+
+
+##文字列の結合
+
+
+||を使う
+
+その際の文字列は'(単一引用ふ)でなければ行けない
+
+<pre><code>
+SELECT
+    empno || 'さんの入社日は' ||  hiredate
+FROM
+    社員データベース
+</code></pre>
+
+
+
+##代替引用符(q)演算子
+
+'や?などの特殊な文字列を使いたい時はqの後に指定した文字列で区切ることでその区間だけは特殊文字列を使用できる
+
+<pre><code>
+SELECT
+    name || q'?'s Salary is : ?' || sal "Monthly Salary"
+FROM
+    emplyoees;
+</code></pre>
+
+<pre><code>
+sato's Salary : 5000
+</code></pre>
+
+[]でも可能
+
+<pre><code>
+SELECT
+    name || q'['s Salary is : ]' || sal "Monthly Salary"
+FROM
+    emplyoees;
+</code></pre>
+
+
+
+
+##重複行の削除
+
+DISTINCTを使用
+
+<pre><code>
+SELECT 
+    DISTINCT 部署コード
+FROM
+    emplyoees;
+</code></pre>
+
+これにより部署コードを重複なしで一覧で出すことができる
+
+DISTINCTはselect内に一度しかかけず、二つ書くとエラーになる
+
+
+
+
+
+##複数列の重複行の削除
+
+DISTINCTを使用して
+
+部署コード, job二つが被ったものは重複としてみなすことができる
+
+<pre><code>
+SELECT 
+    DISTINCT 部署コード, job
+FROM
+    emplyoees;
+</code></pre>
+
+同じ部署コード, jobは二度出てこない
+
+
+
+
+
+
+
+
