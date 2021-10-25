@@ -1,0 +1,256 @@
+title:DOP.NETのunmanagedドライバーで使う言葉
+
+description:ODP.NETはOO4Oが廃止になった後の後釜として優秀なミドルウェアになります。
+
+
+
+
+- VB.NET
+
+ODP.NETのManagedドライバーで提供される 
+
+- OraSession オブジェクト 
+
+アプリケーションないで使用されるOraDatabase 
+
+OraConnectionOraDynasetオブジェクトを管理する。
+
+- OraDatabase 
+
+Oracleデータベースに対するユーザーセッションを表し、SQL, PL/SQLを実行するメソッドを提供する
+
+- OraDynaset 
+
+SQL SELECT から作成されたデータの参照と更新を許可する
+
+- OraFields はOraFieldオブジェクトのリストを保持する 
+
+OraField はOraDynasetオブジェクトのフィールド 
+
+- OraParameters 
+
+はOraParameterオブジェクトのリストを持っている 
+
+OraParameterはSQL, PL/SQLのバインド変数を保持する 
+
+- OraBLOB 
+
+?理解できず
+
+
+
+##OraSession 
+
+メソッド一覧 
+
+- BeginTrans 
+
+指定したセッション内でデータベースのトランザクションを開始する
+
+- CommitTrans 
+
+セッション内に存在する全てのトランザクションをコミットする 
+
+- OpenDatabase 
+
+指定されたデータベースのセッションを確立する。 
+
+- Rollback 
+
+現在のトランザクションを終了し、保留中の変更をすべて元に戻す
+
+プロパティ
+
+- LastServerErr 
+
+サーバーから帰される最新のエラーが格納される
+
+- LastServerErr
+
+エラーの内容がテキスト形式で格納される
+
+
+
+##OraDatabase
+
+-BeginTrans 
+
+トランザクションの開始
+
+- Close
+
+リソース解放
+
+- CommitTrans
+
+コミットを実行 
+
+- CreateDynaset 
+
+SQL SELECT分からOraDynasetオブジェクト(データの表みたいなもの、一次領域に保存さ れる)を作成する
+
+
+- ExecuteSQL 
+
+Select以外のSQL, PLSQLを実行する 
+
+- Lastervererror Rest 
+
+指定されたデータベースから最後に帰されたエラーを格納する
+
+
+###プロパティ 
+
+- DatabaseName 
+
+データベース名が格納 
+
+- Parameters
+
+OraParametersの値が格納されている バインド変数のこと
+
+- Connection0K 
+
+データベースの接続状況についてboolで確認する
+
+## OraDynaset 
+
+Selectの実行結果が入っているデータベースのようなもの
+
+- Close
+
+リソース開放
+
+- Edit
+
+現在の行の編集操作を行う 
+
+- FindFirst 
+
+FindNext カーソルの行を変更するためのメソッド
+
+- FindNext
+
+メソッドを次の行に移動する
+
+
+- MoveFirst 
+
+MoveTo カーソルを移動させる (PL/SQLでカーソルという概念が出てくる) 
+
+- Refresh 
+
+現在のダイナセット(データベース)を再読み込みする 
+
+- Update 
+
+Edit操作が完了した後、その変更内容をデータベースに更新する
+
+#プロパティ 
+
+- BOF 
+
+現在のカーソルの位置が最初にいるかどうかを格納
+
+- Bookmark
+
+カーソルの位置を決定する 
+
+- EOD カーソルの位置が最後にいるかどうかを格納 
+
+- Fields 
+
+現在の行のフィールドのコネクションを戻す 
+
+- RowPosition 
+
+カーソルの現在の行番号を帰す
+
+- NoMatch
+
+findから始まるメソッドの実行結果が失敗した時にTrueになる
+
+##OraBLOG 
+
+- Append 
+
+入力用のLOBのLOBデータを現行の最後に追加する 
+
+- LOB 
+
+はlarge object binaryの略ででかいデータを扱うときに使われる型 
+
+LOB値とはCompare LOB値と比較するデータベース内のLOBまたは
+
+
+
+- ISNULL 
+
+出たベース内のLOBがNULLであっと
+
+- OraField
+
+メソッド
+
+GetChunk 
+
+- LONG旗
+
+LONGrowのフィールドまたは一部のバイトを含む文字列を戻す 
+
+- GetChunkByteEx 
+
+LOGまたはLONG 。RAWのフィールドからデータを読み込んだデータの最大の サイズを戻す 
+
+プロパティ 
+
+- Count 
+
+指定したコレクションの含まれるオブジェクト数を戻す 
+
+- OraIDataType 
+
+指定したフィールドにおけるOracleno内部データ型のコードを戻す。
+
+
+##OraParamArray
+
+メソッド 
+
+- GetValue 
+
+指定した索引にある配列の特定要素の値を取得します 
+
+- PutValue 
+
+表のパラメーターに値を挿入します。
+
+プロパティ 
+
+- Arraysize 
+
+OraParameter文字列バッファの配列サイズを指定する。 
+
+- Name 
+
+指定したオブジェクトを識別するための名前
+
+##OraParameters 
+
+- Add 
+
+Oraparametersコレクションにパラメーターを追加する(OraParameter を追加する) 
+
+- AddTable 
+
+OraParametersにOraparametersを追加する 
+
+
+- Remove 
+
+OraParametersコレクションから特定のOraparameter を削除する
+
+- OraParameter
+
+
+NinimumSize Oraparameter または OraParamArray文字列バッファ、またはByteArrayの最
