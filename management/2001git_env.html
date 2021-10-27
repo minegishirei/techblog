@@ -1,14 +1,30 @@
 
-##git
+titile:gitを使って複数の端末から編集を行う
+
+description:チームでの開発だけでなく、gitは個人開発でも役に立ちます。その最も顕著な例がgitを使うコンピューターを超えた編集です。
 
 
+##その１githubリポジトリを作成する
 
-git clone
 
+##その2gitをインストールする
+
+
+##その3, 1で作成したgitのリポジトリをcloneする
+
+コマンドは以下の通り
+
+<pre><code>
+git clone https://github.com/ユーザー名/リポジトリ名.git
+</code></pre>
+
+具体的な実行コマンド
 
 <pre><code>
 git clone https://github.com/kawadasatoshi/techblog.git
 </code></pre>
+
+実行結果
 
 <pre><code>
 minegishiminami@minegishiminami-ThinkPad-X1-Yoga-4th:~$ git clone https://github.com/kawadasatoshi/techblog.git
@@ -23,19 +39,26 @@ Resolving deltas: 100% (646/646), done.
 
 
 
-edit something
+
+##その4　編集作業を行う
 
 
+##その5 git add .で編集したファイルをgitの管理ファイルとして設定
 
-
+<pre><code>
 git add .
+</code></pre>
 
-nothing is apprd
+このコマンドは基本何も出力しません。
 
 
+##その6 コミットする
 
+<pre><code>
 git commit -m "test"
+</code></pre>
 
+実行結果例
 
 <pre><code>
 minegishiminami@minegishiminami-ThinkPad-X1-Yoga-4th:~/myworking/techblog$ git commit -m "test"
@@ -44,11 +67,15 @@ minegishiminami@minegishiminami-ThinkPad-X1-Yoga-4th:~/myworking/techblog$ git c
 </code></pre>
 
 
+##pushでいよいよgithubにアップロード
 
+<pre><code>
 git push origin master
+</code></pre>
 
+その際に以下のような表示が出ることがある
 
-configure your github adress
+その際はgithubに設定したメールアドレスとユーザー名を設定しましょう
 
 <pre><code>
   git config --global user.email "you@example.com"
@@ -57,6 +84,9 @@ configure your github adress
 
 
 
+##パスワードの入力時に以下のエラーが出た時
+
+git push した時に次のエラーが出る時がある
 
 <pre><code>
 minegishiminami@minegishiminami-ThinkPad-X1-Yoga-4th:~/myworking/techblog$ git push origin main
@@ -67,10 +97,18 @@ remote: Please see https://github.blog/2020-12-15-token-authentication-requireme
 fatal: Authentication failed for 'https://github.com/kawadasatoshi/techblog.git/'
 </code></pre>
 
+<a href="https://zaitakukinmu.com/2021/08/19/git-token/">
+このエラーが出た時はこのサイトからgitのアクセストークンを取得する
+</a>
 
 
 
-https://zaitakukinmu.com/2021/08/19/git-token/
+
+
+
+
+
+
 
 
 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
