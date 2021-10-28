@@ -1,0 +1,81 @@
+
+
+##リクエストとレスポンス
+
+リクエストの例
+
+<pre><code>
+POST /ctf HTTP/1.1
+
+Host: www.example.com 
+Content-Length: 23 
+Content-Type: 
+text/plain; 
+charset=UTF-8 
+Accept: */* 
+Accept-Encoding: gzip, deflate 
+Accept-Language: en-US,en;
+q=0.9
+
+key1=value1&key2=value2
+</code></pre>
+
+- POST以外にもGETなどのリクエスト方式がある
+
+- 11_HTTP/1.1 の他にも、HTTP/0.9、HTTP/1.0、HTTP/2、HTTP/3といったバージョンが存在
+
+
+
+
+##GETとPOSTリクエストメソッド
+
+
+webブラウザーからサーバーに対して情報を渡すときに異なる方式を用いている
+
+- GETリクエスト
+
+urlにデータが含まれている状態でデータをサーバーに送る方式
+
+https://www.youtube.com/watch?v=8tsa8-HHOq8
+
+上記のURLの ?以降の部分がサーバーに対して送りたいデータ
+
+- POSTリクエスト
+
+リクエストボディにデータが含まれる状態でデータをサーバーに送る方式
+
+
+
+##サーバーの状態
+
+- 1xx(Informational) リクエストが受信され、現在その処理が行われている 
+
+- 2xx(Successful) リクエストの処理に成功した 
+
+- 3xx (Redirection) リクエストの処理を完了するために、更なる動作を必要とする 
+
+- 4xx(Client Error) リクエストの内容にエラーが存在するため処理に失敗した 
+
+- 5xx (Server Error) リクエストの内容は適切だったが、サーバーによる処理においてエラーが発生し
+
+<a href="https://www.amazon.co.jp/%E8%A9%B3%E8%A7%A3%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88-%E6%A2%85%E5%86%85%E7%BF%BC-ebook/dp/B094J7ZCJN/ref=sr_1_2?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&dchild=1&keywords=CTF&qid=1635043389&s=books&sr=1-2">
+引用元：詳解セキュリティコンテスト
+</a>
+
+
+
+
+##loctionの移動
+
+htmlで
+
+<script>
+window.location.href = 'http://localhost:5000/x/y/z'
+</script>
+
+
+
+
+
+
+
