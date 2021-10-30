@@ -83,12 +83,71 @@ iframe {
 
 
 
-##次回
-
-Same OriginとCross Origin
 
 
 
+##Originとは?
+
+
+あるコンテンツを配信している源泉のことを Origin と言います。
+
+スキーム:リソースを取得するために利用するプロトコル(例:http、https) ホスト名:リクエストの宛先となるサーバーの情報を指定するもの(例:www.example.com)
+
+webブラウザはスキームホスト名が同じかどうかで同じサーバーからデータが配信されているかどうかを判断しています。
+
+実際に、以下の4つのURLは全て異なるスキームで、iframeを埋め込んだとしてもブラウザから拒絶されてしまいます。
+
+- http://example.com:8080/bar 
+
+http example.com 8080
+
+- https://example.com:8080/foo 
+
+https example.com 8080
+
+- http://example.jp:8080/foo
+
+http example.jp 8080
+
+- http://example.com:9090/foo 
+
+http example.com 9090
+
+###これらのURLが異なる関係をCross Originと呼びます。
+
+
+##同じURLとして認識される関係
+
+- http://example.com:8080/bar 
+
+- http://example.com:8080/bar/text.html
+
+これらはブラウザから同じデータ配信源泉と認識されるため、iframeの埋め込みはブラウザから拒絶されることもありません。
+
+###これらのURLが同じである関係をSame Originと呼びます。
+
+
+
+##Cross-Originによるガード
+
+http://attacker.example.com/index.html から取得可能な HTML 
+
+に http://shopping.example.com/userinfo.html が iframe として埋め込まれており、
+
+かつ script 要素に「iframe で埋め込まれたドキュメントの内容を読み込んでhttp://attacker.example.com/に送信する」 
+
+という処理を行う JavaScript プログラムが含まれていた場合、
+
+この「iframeで埋め込まれたド キュメントの内容を読み込む」という処理は拒否されます。
+
+なぜなら、JavaScript プログラムと それによって読み込まれる iframe 内のドキュメントは 
+
+Cross-Origin だからです
+
+
+このように、同じOrigin出なければiframeとして読み込ませないという規則を
+
+###SOP(Same Origin Policy)と言います
 
 
 
