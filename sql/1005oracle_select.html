@@ -358,8 +358,47 @@ WHERE句には列別名は指定できませんが、
 ###ORDER BY 句には列別名 を指定できます
 
 
+
+
+##row_limiting_clauseを使用
+
+<pre><code>
+SELECT *
+FROM employees
+WHERE sal IS NOT NULL
+ORDER BY sal
+OFFSET ?? ROW(またはROWS)
+FETCH { FIRST | NEXT }
+{ row_count | percent PERCENT } { ROW | ROWS } | { ONLY | WITH TIES }]
+</code></pre>
+
+sample コード
+
+先頭から5行をスキップした6行目から
+
+3行分を取り出している。 
+
+<pre><code>
+SELECT 
+    empno, ename, sal
+FROM 
+    employees
+ORDER BY 
+    sal DESC 4 
+OFFSET 5 ROWS       --先頭から5行をスキップした6行目から
+FETCH FIRST 3 ROWS  --13行ぶんを取り出している
+WITH TIES;
+</code></pre>
+
+
+
+
 title:select文における条件の絞り方【Oracle Bronze SQL基礎 単語集】
 
 description:select句の基本的な文法をOracle bronze SQL基礎の資格をなぞりながら解説
+
+
+
+
 
 
