@@ -232,10 +232,134 @@ WHEERE
 
 
 
+##INとORのパフォーマンスの違い
+
+IN演算子は、内部的にはOR演算子を使用したものに置き換えられてしまう。
+
+よって、
+IN演算子を使用して書き換えても実行時のパフォーマンスは変わらない
+
+テストに出ることもあるので覚えておきましょう
+
+
+##ORDER BYによる行のソート
+
+ORDER BY句に列名を指定すると、ソートされたデータの抽出が可能になる。
+
+同時に複数の列を指定することも可能(その場合は,区切る。左に書いたものほど優先度が高い）。
+
+<pre><code>
+SELECT 
+    *
+FROM 
+    データベース
+WHERE 
+    条件 
+ORDER BY 列名[,列名 ...];
+</code></pre>
+
+ASCとDESCで並び替えを逆順にすることも可能
+
+サンプル
+
+<pre><code>
+SELECT 
+    *
+FROM employees
+ORDER BY sal;
+</code></pre>
+
+このコードでは従業員データベースから給料順に並べている
+
+
+##「ASC」
+
+昇順:小さいほうから順
+
+デフォルトの設定はこちらになっている
+
+
+##「DESC」
+
+降順:大きいほうから順
+
+<pre><code>
+SELECT 
+    *
+FROM employees
+ORDER BY sal DESC;
+</code></pre>
+
+こちらは意図的に設定しないと反映されない。
+
+
+##ORDER BYと列別名
+
+ORDER BY句では列別名は使用可能
 
 
 
+##ソートの順序はデータによって異なる
+
+例えば数値であれば、大きい順に並ぶ
+
+日付であれば、最新の値順に並ぶ
+
+
+##NULLの扱いとORDER BY
+
+<pre><code>
+NULL値は数値、日付値、文字値のいずれの場合も、デフォルトでは「最も大きい値」として扱われます。
+</code></pre>
+
+
+##NULLS FIRSTとNULLS LAST
+
+NULLの値に関しては最初に出てくるように調整するコードが「NULLS FIRST」
+
+<pre><code>
+SELECT
+    *
+FROM employees 
+ORDER BY sal NULLS FIRST;
+</code></pre>
+
+
+##WHERE句とORDER BY句
+
+この二つは同時に指定することが可能。
+
+しかし順番は入れ替えることはできない。
+
+where句の後にorder by句がくる。
+
+
+例）次のコードはNULL以外の列でsalの昇順。(グラフに並び替えたときに登っていく)
+
+<pre><code>
+SELECT
+    *
+FROM employees 
+WHERE sal IS NOT NULL
+ORDER BY sal;
+</code></pre>
+
+
+##SLECT句で指定しない列名でのORDER BY
+
+SLECT句で指定しない列名でのORDER BYは
+
+エラーにならない
+
+## 列別名とORDER BYの関係
+
+WHERE句には列別名は指定できませんが、
+
+###ORDER BY 句には列別名 を指定できます
 
 
 title:select文における条件の絞り方【Oracle Bronze SQL基礎 単語集】
+
+description:select句の基本的な文法をOracle bronze SQL基礎の資格をなぞりながら解説
+
 
