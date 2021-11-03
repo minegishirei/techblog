@@ -1,0 +1,296 @@
+
+{
+
+月給が30万円以下の従業員を炙り出すコードは次のうちどれか？
+
+<pre><code>
+1: 
+SELECT  salary FROM employees
+WHERE salary < 300000; 
+
+2: 
+SELECT  salary FROM employees
+WHERE salary <= 300000; 
+
+3:
+SELECT salary FROM employees
+WHERE NOT salary >= 300000;
+
+4:
+SELECT ename, salary FROM employees
+WHERE salary >= 300000;
+</code></pre>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:2
+
+3は
+<pre><code>
+SELECT salary FROM employees
+WHERE NOT salary >= 300000;
+</code></pre>
+とあるが
+>=をNOTで否定しているので<code><</code>と同地である。
+
+
+
+
+
+
+
+}
+
+
+
+
+{
+次のうち、鈴木が名前に入っているものを取り出すクエリはどれか
+
+<pre><code>
+1:SELECT name FROM employees WHERE name = '鈴木%'; 
+
+2: SELECT name  FROM employees WHERE  LIKE '鈴木'; 
+
+3: SELECT name  FROM employees WHERE  LIKE '%鈴木%'; 
+
+4: SELECT name FROM employees WHERE  LIKE '鈴木___';
+
+</code></pre>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:3
+
+%は任意の文字を意味する
+よって
+ある文字を%で挟み込むことで、文字列を含んでいるかどうかの判定が可能になる
+<pre><code>
+3: SELECT name  FROM employees WHERE  LIKE '%鈴木%'; 
+</code></pre>
+は,鈴木を含んでいるものを取り出している。
+
+}
+
+
+
+
+{
+次の演算子で等しくないものを全て選べ
+
+1: IS NULl
+
+2: !=
+
+3: <>
+
+4: ==
+
+5: ^=
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:2,3,5
+
+<>と^=と!=は全て等しくないという意味を表す演算子
+
+
+}
+
+
+{
+次のクエリの結果はどのようになるか？
+
+SELECT * FROM employees WHERE name != NULL;
+
+1 エラーが出る
+
+2 エラーは出ないがnameがNULLであるものは含まれる
+
+3 エラーは出ず、nameがNULL出ないものは含まれない
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+3 エラーは出ず、nameがNULL出ないものは含まれない
+
+そもそもNULLかどうかの判定は IS NOT NULL, IS NULLのどちらかしかできない。
+
+
+}
+
+
+{
+ORDER BY句を使用したデータのソートについてあっているものはどれか二つ選べ
+
+1:
+デフォルトでは昇順である
+
+2:
+列別名を指定してソートすることができる 
+
+3:
+日付データを降順にソートすると古い日付が先に表示される 
+
+4:
+デフォルトではNULL値は最大値としてソートされる
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A: 1,2,4
+
+
+
+
+}
+
+
+
+
+{
+INとORのパフォーマンスについて、正しいのはどちらか
+
+
+IN(10,30)を使ったクエリと 「20 OR 30」を使ったクエリは
+
+1: パフォーマンスは同じ
+
+2: パフォーマンスは異なり,INの方が早い
+
+3: パフォーマンスは異なり、ORの方が早い
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:1　パフォーマンスは同じ
+
+内部ではINとORはまったく同じもの
+ただただ見やすくなっただけ
+
+}
+
+
+
+
+
+{
+次のクエリのうち、「100%」を含むものを抽出できているものを二つ選べ
+
+
+1: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100$_%' ESCAPE '$';
+
+2: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100$%%' ESCAPE '$';
+
+3: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100?%%' ESCAPE '?';
+
+4: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100%$%' ESCAPE '$';
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A: 2,3が正解
+
+2: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100$%%' ESCAPE '$';
+
+3: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100?%%' ESCAPE '?';
+
+
+}
+
+
+
+
+{
+
+次のSQLはどちらが動くか答えよ
+<pre><code>
+1：
+SELECT 
+    job 仕事,
+    sal 給料
+FROM employees 
+WHERE 仕事 = '部長'
+
+2:
+SELECT 
+    job 仕事,
+    sal 給料
+FROM employees 
+WHERE job = '部長'
+ORDER BY 仕事
+</code></pre>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:2だけが動く
+
+列別名はORDER BYでは使えない
+<pre><code>
+SELECT 
+    job 仕事,
+    sal 給料
+FROM employees 
+WHERE job = '部長'
+ORDER BY 仕事
+</code></pre>
+
+}
+
+
+{
+給与成績が4番目から10番までを取り出したい。
+ただし、
+10番目の社員の給与と11番目の社員の給与が同じである場合は、その社員の情報も出力する。
+<pre><code>
+1:
+SELECT name, pasword, salary FROM employees
+OFFSET 3 ROW 
+FETCH FIRST 7 ROWS
+ORDER BY sal DESC; 
+
+2:
+SELECT name, pasword, salary FROM employees
+ORDER BY sal DESC 
+OFFSET 4 ROW
+FETCH NEXT 7 ROWS 
+ONLY WITH TIES;
+
+3:
+SELECT name, pasword, salary FROM employees
+ORDER BY sal DESC 
+FETCH NEXT 7 ROWS 
+WITH TIES OFFSET 3 ROW;
+
+4:
+SELECT name, pasword, salary 
+FROM employees
+ORDER BY sal DESC 
+OFFSET 3 ROW 
+FETCH NEXT 7 ROWS 
+WITH TIES;
+</code></pre>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+4が正解
+
+<pre><code>
+SELECT name, pasword, salary 
+FROM employees
+ORDER BY sal DESC 
+OFFSET 3 ROW 
+FETCH NEXT 7 ROWS 
+WITH TIES;
+</code></pre>
+
+
+}
+
+
+
+
+title:oracle master bronze 12c sql web問題集
+
+description:oracleマスターbronzeのweb問題集です。間違いやすい問題に厳選してあります。
+
+img:https://stat.ameba.jp/user_images/20160618/15/masahumix/64/13/g/o0590033213675777644.gif
+
