@@ -1,0 +1,142 @@
+
+{
+## 単一行関数について正しいものを選べ
+
+A:単一行関数にはネストの制限がある
+
+B:単一行関数の引数には制限がある
+
+C:単一行関数は行グループごとに一つの値を返す
+
+D:単一行関数は一行に対して一つ値を返す
+
+E:単一行関数は必ず引数を必要とする
+
+F:単一行関数にNULLを代入した結果は必ずNULLになる
+
+G:単一行関数はORDER BY句でも使用できる
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:D:単一行関数は一行に対して一つ値を返す,G:単一行関数はORDER BY句でも使用できる
+
+}
+
+
+
+{
+次のSQLの実行結果はどれか
+
+<pre><code>
+
+SELECT TRUNC(ROUND(123.45,1),1) FROM dual;
+
+A:123.5
+B:123.1
+C:123.12
+D:120.2
+E:TRUNCとROUNDはネストできないためエラーが発生する
+</code></pre>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+A:A
+
+ROUND(123.45,1)は123.5を返す。
+
+この時すでに小数点1桁で返されているので、TRUNCした結果は変わらない。
+
+}
+
+
+
+{
+次のSQLの実行結果はどれか
+
+<pre><code>
+SELECT SUBSTR('Oracle Server',-2) FROM dual;
+
+A:er 
+
+B:ra 
+
+C:racle Server 
+
+D:r
+</code></pre>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:A
+
+SUBSTR('Oracle Server',-2)は、後ろから2文字を抜き出す関数。
+
+}
+
+
+
+
+{
+sysdateを実行すると、"2014-8-18"が返される状態であるとする。
+
+次のSQLを実行した結果はどれか
+
+SELECT ROUND(SYSDATE, 'YEAR') FROM dual;
+
+A:2015-01-01 
+
+B:2014-01-01 
+
+C:2014-07-26
+
+D:2014-07-27
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:A
+
+YAER(年)でのROUND(四捨五入)を取るため、現在6月以降である状態では来年度の元旦の日付が返される。
+
+}
+
+
+
+
+{
+
+## 7日後の日付を取得するための最適なSQLはどれか
+
+
+A:SELECT ADD_DAYS(SYSDATE, 7)
+
+B:SELECT ADD_DAY(SYSDATE, 7)
+
+C:SELECT SYSDATE + 1/365
+
+D:SELECT SYSDATE + 7
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+A:D
+
+日付に対して足し算をこなうと未来の日付が取得できる。
+
+ADD_MONTHS関数は存在するが、A,BのADD_DAY,ADD_DAYS関数は存在しない
+
+
+}
+
+
+
+
+
+
+title:SQL 単一行関数マスター (Oracle bronze)
+
+description:oracleマスターbronzeのweb問題集です。間違いやすい問題に厳選してあります。
+
+img:https://www.oracle.com/a/ocom/img/social-og-advertising-logo-1200x628.png
+
+category_script:page_name.startswith("100")
+
