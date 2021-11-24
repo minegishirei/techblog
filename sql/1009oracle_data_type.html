@@ -2,7 +2,12 @@
 
 title:データ型とその変換について【SQL】
 
-description:
+description:oracleマスターbronzeのweb問題集です。間違いやすい問題に厳選してあります。
+
+img:https://stat.ameba.jp/user_images/20160618/15/masahumix/64/13/g/o0590033213675777644.gif
+
+category_script:page_name.startswith("100")
+
 
 
 
@@ -133,10 +138,158 @@ MI : 「何分」を取り出す
 
 
 
+## TO_CHAR関数について(数値から文字列)
+
+
+「数値書式」を使用して数値を 文字値に変換して戻す。
+
+例
+
+<pre><code>
+SELECT SYSDATE - TO_DATE('00-01-01')
+
+>4157.81799
+</code></pre>
+
+また、「NLS パラメータ」を指定することで、小数点文字や桁 区切り、各国通貨記号、国際通貨記号を指定することもできる。
+
+その際にはは以下の要素を指定できます。
+
+### 数値の位置(9の数で表示桁数が決まる) 
+
+例）99999
+
+結果）1234
+
+### 先頭の0を表示
+
+例）099999
+
+001234
+
+### $の表示
+
+例）$9999999
+
+$1234
+
+### 通過記号の表示
+
+例）L999999
+
+¥1234
+
+### 小数点の位置を指定
+
+例）999D999
+
+1.234
+
+### 指定された位置にカンマを表示
+
+例）999,999
+
+1,234
 
 
 
 
+
+
+## TO_NUMBER関数について
+
+次のコードはエラーになる
+
+<pre><code>
+SELECT '\5,000,000' * 2
+
+> エラー
+</code></pre>
+
+理由は
+
+### 暗黙の型変換に失敗した（SQLが忖度に失敗した）から
+
+よって、ユーザーからどのように変換するかを手取り足取り教えてあげれば良い
+
+<pre><code>
+SELECT TO_NUMBER('\5,000,000', 'L9,999,9991) * 2
+
+> 10000000
+</code></pre>
+
+
+
+
+
+
+
+## NVL関数（NULLの取扱について）
+
+<pre><code>
+NVL(式1, 式2)
+</code></pre>
+
+NVL関数は、引数の「式1」に指定された値がNULL値以外の場合は「式1」を、NULL 値の場合は「式2」を戻す関数です。
+
+例）「money」列がNULLの時は0として扱う。
+
+<pre><code>
+SELECT 
+    10 + money, 
+    10 + NVL (money, 0) 
+FROM employees
+
+> NULL,10
+</code></pre>
+
+NVLを使わずにNULLの足し算を行う場合、いかなる値でもNULLに値がたされた時点でNULLが結果として返されてしまう。
+
+
+
+## NULV2関数
+
+<pre><code>
+NVL2(式1, 式2, 式3)
+</code></pre>
+
+NVL2関数は、引数の「式1」に指定された値がNULL値以外の場合は「式2」を、NULL 値の場合は「式3」を戻す関数
+
+(この関数考えたやつ...orz)
+
+
+## COALESCE関数
+
+<pre><code>
+COALESCE(式1, 式2 [bgn ...])
+</code></pre>
+
+COALESCE関数は、引数に指定された式リストを先頭(左側)からチェックし、
+「最初 に見つかった NULL 値以外の値」を戻す関数です(すべての式がNULL値の場合、NULL 値 を戻します)。
+
+
+## CASE文
+
+caseで指定した値ごとに処理を振り分けることができる
+
+CASEからENDの間にWHENとTHENの組み合わせを分岐の数だけ入れる。
+
+例）
+
+<pre><code>
+SELECT ename, sal,
+    (CASE 
+        WHEN sal < 230000 THEN 'A'
+        WHEN sal < 380000 THEN 'B' 
+        WHEN sal < 480000 THEN 'C'
+        ELSE 'D'
+    END)　SAL_LEVEL 
+FROM 
+    employees
+ORDER BY 
+    sal_level;
+
+</code></pre>
 
 
 

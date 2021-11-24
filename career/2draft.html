@@ -5,7 +5,7 @@ description:自分の市場価値を知りたいと思い、ふと転職ドラ�
 
 img:https://job-draft.jp/images/home_facebook.png
 
-
+category_script:page_name.startswith("300")
 
 
 
@@ -97,19 +97,22 @@ img:https://job-draft.jp/images/home_facebook.png
 
 ## web系の企業について
 
+また、web系の開発についてのコメントもあり、現在の市場感覚を教えてくれた
+
+<pre><code>
 webアプリケーション「twitter network analytics」全体について
 また、こちらのプロジェクトについてはWeb系技術を使用されており、しっかり記載することをおすすめします。
 
 転職ドラフト利用企業にはWeb系自社開発企業が多く、Web開発の経験が即戦力として評価されやすい傾向にあるためです。
 
 他にもWeb系技術を用いた開発経験がある場合はプロジェクト追加してみましょう。
-
+</code></pre>
 
 
 
 ## 評価の低かった書き方
 
-<pre>
+<pre><code>
 ##個人開発
 
 Web開発の経験について
@@ -117,7 +120,8 @@ docker,python,django,nginxを用いてweb開発を行い2000アクセス/dayを�
 (参考url:http://fanstatic.short-tips.info/twitter_network/)
 開発の過程ではgit,githubを使用。
 google analytics,google seach consoleを用いて数値分析,seo対策を行い、検索順位を60位から5位以内に改善しました。
-</pre>
+
+</code></pre>
 
 
 ## 改善後の書き方
@@ -126,41 +130,63 @@ google analytics,google seach consoleを用いて数値分析,seo対策を行い
 
 ### 概要
 
-社内の全ての業務ソフトウェアのDB接続方式をOO4O形式からODP.NET形式に変更するプロジェクトに障害・品質担当として参加しました。
-障害・品質担当としてメンバーの開発の過程で発生したバグ、障害の管理を行い、
-これらの情報をナレッジとして蓄積しプロジェクト内で発生していたバグ対応時間を2/3に減らしました。
-主な使用技術はVB6,VBA,Visual Studio
+2000アクセス/dayを記録したwebアプリケーションを作成しました。
+(参考url:http://fanstatic.short-tips.info/twitter_network/)
+ローカルに開発環境を、AWS,EC2 ubuntu上に0から環境を構築し、上記二つを繋ぐためにGit,Githubを導入。
+改修、拡張、本番環境と開発環境の移行のしやすさの観点からdocker-composeを導入し、
+google analytics,google seach consoleを用いて数値分析,seo対策を行い、検索順位を60位から5位以内に改善しました。
 
 
 
 
-
-データベース接続方式刷新プロジェクト
-勤務期間：2021年7月~
+個人開発
+勤務期間：2019年4月～2021年11月
 
 ### 具体的な仕事内容
-・開発
-・障害・品質担当
 
-メンバー：5名
+・サポートデスク
+・障害分析
 
-利用言語：VBA,VB6
-フレームワーク：.NET Framework
+メンバー：1名
+
+利用言語：Javascript,Python3,Nginx
+ライブラリ：D3.js 
+フレームワーク：Django
+その他：Lets'Encrypt, Docker, Docker-compose, Git, Github, EC2
 
 
 ＜内容＞
-・社内システムのデータベース接続方式「OO4O」がoracle 11g以降使えなくなるため「ODP.NET」を使用した接続方式に変更
-・VBA,VB6で書かれたソフトウェアの品質を保ちつつ接続方式の刷新を行う
-・障害・品質の担当としてメンバーからのバグ,イレギュラー報告を集約し対応策を返答する。
-
+・twitterの会話の履歴をもとに人脈相関図を作成するwebアプリケーション
+・ローカルに開発環境を、AWS,EC2 ubuntu上に0から環境を構築
+・上記二つを繋ぐためにGit,Githubを導入
+・改修、拡張、本番環境と開発環境の移行のしやすさの観点からdocker-composeを選択
+・Let's Encryptを用いたhttps対応
+・twitterのデータはtwitter apiを利用して取得する
+・データベースはgithub上で管理
 
 
 ### プロジェクトの流れ
 
-各ソフトの刷新前に仕様を確認。同時に画面のキャプチャーを取得し、変更前の状態を保存。テスト項目についても作成。
-その後、参照設定とコードを変更しDB接続方式をOO4Oミドルウェアを利用する方式からODP.NETを利用する方式に変更。
-刷新前後でソフトウェアの品質に変更がないかどうかを確認し、問題がなければテストを通過。
-以上の流れを5人で1200ソフトウェア分行う。
+1,AWS,EC2を購入
+2,docker-composeを導入し、仮のwebアプリケーションで実装が可能か検証
+3,ローカルでの開発環境にdocker-composeを使ったdjangoアプリケーションを作成
+3,visual studioのremote機能を用いてEC2上でも動くかどうかを確認
+4,ローカル開発環境とEC2開発環境を繋ぐGithub,Githubを導入
+5,Route53を用いてドメイン取得
+
+上記の手順で本格的な開発サイクルがスタート
+
+  1,ローカルの開発環境で開発を行う
+  2,gitを用いてadd commit pushを行う
+  3,EC2からpullを行う
+  4.本番環境の動作が問題ないかを確認
+
+上記のサイクルを用いて、以下の4点を実装
+・D3.jsを用いた人脈図の可視化
+・Let's Encryptを用いたhttps対応
+・github上へのデータ保存
+・html css改良によるUIUXの改善
+・レスポンシブ化
 
 </code></pre>
 
