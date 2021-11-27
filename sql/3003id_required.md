@@ -130,7 +130,7 @@ description:次のようにPRIMARY KEY (article_id, tag_id)と言う行を追加
 
 img:https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48731/4873115892.jpg
 
-category_script:page_name.startswith("100")
+category_script:page_name.startswith("30")
 
 
 
