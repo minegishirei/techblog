@@ -135,7 +135,7 @@ title:外部キー制約(REFERENCE)とカスケードを設定する方法とそ
 
 description:外部キー制約とカスケード更新がテーブルを健全な状態に保つ。データベースを利用しているアプリケーションが、参照整合性を保つための完璧なコードを前提としているような状態は避けるべきである。
 
-img:https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48731/4873115892.jpg
+img:https://images-na.ssl-images-amazon.com/images/I/81tH5Ey647L.jpg
 
 category_script:page_name.startswith("30")
 

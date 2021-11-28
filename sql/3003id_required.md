@@ -128,7 +128,7 @@ title:SQLで「組み合わせが一意になるような」制約を付けた�
 
 description:次のようにPRIMARY KEY (article_id, tag_id)と言う行を追加することで、複数のキーを参照して重複を防ぐと言う仕組みを整えることが可能になっている。
 
-img:https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48731/4873115892.jpg
+img:https://images-na.ssl-images-amazon.com/images/I/81tH5Ey647L.jpg
 
 category_script:page_name.startswith("30")
 

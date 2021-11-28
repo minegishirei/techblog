@@ -159,7 +159,7 @@ title:SQLのテーブルを辞書のように使ってはいけない理由【SQ
 description:特に今回は5章の「エンティティ アトリビュート バリュー」と呼ばれる手法の悪い点と改善策をまとめました。
 
 
-img:https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48731/4873115892.jpg
+img:https://images-na.ssl-images-amazon.com/images/I/81tH5Ey647L.jpg
 
 category_script:page_name.startswith("30")
 
