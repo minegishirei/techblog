@@ -120,7 +120,8 @@ title:複数の親テーブルを参照する外部キー制約を宣言する�
 
 description:issuesのような基底テーブルを使うことで、外部キーによるデータ整合性制約に依存できると言うことがポイント
 
-img:https://images-na.ssl-images-amazon.com/images/I/81tH5Ey647L.jpg
+img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
+
 
 category_script:page_name.startswith("30")
 

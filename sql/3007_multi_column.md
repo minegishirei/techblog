@@ -131,7 +131,8 @@ title:SQLでむやみやたらに列を増やすのをお勧めしない理由�
 
 description:SQLテーブルに対して列に対して年度や携帯電話番号など、これから増える可能性のあるものをカラムとして設定すると厄介な事象が発生します；
 
-img:https://images-na.ssl-images-amazon.com/images/I/81tH5Ey647L.jpg
+img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
+
 
 category_script:page_name.startswith("30")
 
