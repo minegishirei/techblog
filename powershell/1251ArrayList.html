@@ -1,0 +1,114 @@
+
+
+##可変なサイズの配列をpowershellで使いたい(リスト)
+
+###ここまでの配列の書き方は全て配列の大きさが変わらない前提！
+
+
+可変な配列は「System.Collections.ArrayList」を使う
+
+サンプル１
+<pre><code>
+$myArray = New-Object System.Collections.ArrayList
+[void] $myArray.Add("Hello")
+[void] $myArray.AddRange( ("World","How","Are","You") )
+$myArray
+</code></pre>
+
+サンプル2
+<pre><code>
+[System.Collections.ArrayList]$myArray = [System.Collections.ArrayList]::new();
+[void] $myArray.Add("Hello")
+[void] $myArray.AddRange( ("World","How","Are","You") )
+$myArray
+</code></pre>
+
+
+実行結果
+
+<pre><code>
+Hello
+World
+How
+Are
+You
+</code></pre>
+
+
+## System.Collections.ArrayListの特徴
+
+- 型の指定がない
+
+例えば次のようなintとstringが混ざったリストを作り出すことも可能です。
+
+<pre><code>
+$myArray = New-Object System.Collections.ArrayList
+$myArray.Add("Hello")
+$myArray.AddRange( (1234, "How", 1234,"You") )
+$myArray.Count
+</code></pre>
+
+
+
+
+
+
+
+##配列から要素を取り除きたい
+
+RemoveAtコマンドを使おう
+
+<pre><code>
+$myArray.RemoveAt(1)
+$myArray
+</code></pre>
+
+実行結果
+
+<pre><code>
+Hello
+How
+Are
+You
+</code></pre>
+
+
+##リストの中身の長さを取得したい
+
+長さを取得するにはCountプロパティを使う
+
+<pre><code>
+$myArray = New-Object System.Collections.ArrayList
+$myArray.Add("Hello")
+$myArray.AddRange( ("World","How","Are","You") )
+$myArray.Count
+</code></pre>
+
+実行結果
+
+<pre><code>
+5
+</code></pre>
+
+
+
+
+
+
+
+
+
+title:【poewrshell入門】可変サイズなリスト(System.Collections.ArrayList)
+
+description:powershell入門。今回は標準搭載している配列の書き方から可変な長さのリストについて、誰にでもわかるように解説します。
+
+img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
+
+category_script:page_name.startswith("1")
+
+
+
+
+
+
+
