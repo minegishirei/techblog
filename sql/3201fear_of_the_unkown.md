@@ -104,7 +104,7 @@
 
 title:SQLのNULLに対する正しい解釈【SQLアンチパターン】フィア・オブ・ジ・アンノウン
 
-description:
+
 
 img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
 

@@ -123,7 +123,7 @@ CREATE TABLE AtrticleTags (
 
 
 
-title:SQLで「組み合わせが一意になるような」制約を付けたい時の書き方。(PRIMARY KEY)
+title:ID Required【SQLアンチパターンまとめ】
 
 
 description:次のようにPRIMARY KEY (article_id, tag_id)と言う行を追加することで、複数のキーを参照して重複を防ぐと言う仕組みを整えることが可能になっている。
