@@ -13,20 +13,84 @@ sql分で複数のテーブルを使用する場合の全てのパターンに�
 
 ## サンプルテーブル
 
+
 - employees
 
-|  id    |  name   |  salary | dept_id
-| ----   |  ----   | ---- | ---- |
-|  1234  |  tarou  |  10,000 | 10 |
-|  1235  |  kaiou  |  20,000 | 20 |
-|  1236  |  nanashi  |  30,000 | (NULL) |
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>salary</th>
+            <th>dept_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1234</td>
+            <td>tarou</td>
+            <td>10,00
+            </td>
+            <td>20
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1235
+            </td>
+            <td>
+            kaiou
+            </td>
+            <td>
+            20.000
+            </td>
+            <td>
+            20
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1236
+            </td>
+            <td>
+            nanashi
+            </td>
+            <td>
+            30,00
+            </td>
+            <td>
+            10000
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+
 
 - Department
 
-| id | name |
-| -- | ---- |
-| 10 | 情報システム室 |
-| 20 | 経営企画室     |
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>20</td>
+            <td>情報システム室</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>
+            品質管理室
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 
 ## 2種類の結合
@@ -108,20 +172,106 @@ where
 
 - employees
 
-|  id    |  name   |  salary | dept_id
-| ----   |  ----   | ---- | ---- |
-|  1234  |  tarou  |  10,000 | 10 |
-|  1235  |  kaiou  |  20,000 | 20 |
-|  1236  |  nanashi  |  30,000 | 10000 |
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>salary</th>
+            <th>dept_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1234</td>
+            <td>tarou</td>
+            <td>10,00
+            </td>
+            <td>20
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1235
+            </td>
+            <td>
+            kaiou
+            </td>
+            <td>
+            20.000
+            </td>
+            <td>
+            20
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1236
+            </td>
+            <td>
+            nanashi
+            </td>
+            <td>
+            30,00
+            </td>
+            <td>
+            10000
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 
 ### 実行結果
 
-|  id  |  name  |  salary | dept_id| id | name |
-| ---- | ---- | ---- | ---- | -- | ---- |
-|  1234  |  tarou  |  10,000 | 10 | 10 | 情報システム室 |
-|  1235  |  kaiou  |  20,000 | 20 | 20 | 経営企画室    |
+
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>salary</th>
+            <th>dept_id</th>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1234</td>
+            <td>tarou</td>
+            <td>10,00
+            </td>
+            <td>20
+            </td>
+            <td>20</td>
+            <td>情報システム室</td>
+        </tr>
+        <tr>
+            <td>
+            1235
+            </td>
+            <td>
+            kaiou
+            </td>
+            <td>
+            20.000
+            </td>
+            <td>
+            10
+            </td>
+            <td>10</td>
+            <td>
+            品質管理室
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 
@@ -139,6 +289,7 @@ LEFT JOINはこちらの図の通り、左側のデータを絶対的な基準�
 
 - サンプルコード
 
+
 <pre><code>
 select
     e.*,
@@ -152,11 +303,69 @@ from
 
 ### 実行結果
 
-|  id  |  name  |  salary | dept_id| id | name |
-| ---- | ---- | ---- | ---- | -- | ---- |
-|  1234  |  tarou  |  10,000 | 10 | 10 | 情報システム室 |
-|  1235  |  kaiou  |  20,000 | 20 | 20 | 経営企画室    |
-|  1234  |  nanashi  |  10,000 | 10 | NULL | NULL |
+
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>salary</th>
+            <th>dept_id</th>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1234</td>
+            <td>tarou</td>
+            <td>10,00
+            </td>
+            <td>20
+            </td>
+            <td>20</td>
+            <td>情報システム室</td>
+        </tr>
+        <tr>
+            <td>
+            1235
+            </td>
+            <td>
+            kaiou
+            </td>
+            <td>
+            20.000
+            </td>
+            <td>
+            10
+            </td>
+            <td>10</td>
+            <td>
+            品質管理室
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1236
+            </td>
+            <td>
+            nanashi
+            </td>
+            <td>
+            10.000
+            </td>
+            <td>
+            10000
+            </td>
+            <td>NULL</td>
+            <td>
+            NULL
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 先程の内部結合とは違い、idがNULLであっても表示がされている。
 
