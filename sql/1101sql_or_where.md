@@ -48,7 +48,7 @@ or  e.location = '東京'     --追加されたコード
 
 ## 備考
 
-title:すぐ分かる！where句で条件を緩くする方法【SQL】
+title:すぐ分かる！where句で条件を緩くする方法【SQL基礎】
 
 category_script:page_name.startswith("1")
 

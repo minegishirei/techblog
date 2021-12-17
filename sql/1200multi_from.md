@@ -380,7 +380,7 @@ from
 
 ## 備考欄
 
-title:「sql from 複数」で検索したあなたへ
+title:「sql from 複数」で検索したあなたへ【SQL基礎】
 
 
 description:sql分で複数のテーブルを使用する場合の全てのパターンについて解説を行います。
