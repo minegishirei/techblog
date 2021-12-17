@@ -9,17 +9,57 @@
 
 - employees
 
-|  id  |  name  |  salary | dept_id
-| ---- | ---- | ---- | ---- |
-|  1234  |  tarou  |  10,000 | 10 |
-|  1235  |  kaiou  |  20,000 | 20 |
 
-- Department
 
-| id | name |
-| -- | ---- |
-| 10 | 情報システム室 |
-| 20 | 経営企画室    |
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>salary</th>
+            <th>dept_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1234</td>
+            <td>tarou</td>
+            <td>10,00
+            </td>
+            <td>20
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1235
+            </td>
+            <td>
+            kaiou
+            </td>
+            <td>
+            20.000
+            </td>
+            <td>
+            20
+            </td>
+        </tr>
+        <tr>
+            <td>
+            1236
+            </td>
+            <td>
+            nanashi
+            </td>
+            <td>
+            30,00
+            </td>
+            <td>
+            10000
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 
@@ -37,12 +77,6 @@
 |  1234  |  tarou  |  10,000 | 10      |
 |  1235  |  kaiou  |  20,000 | 20      |
 
-- Department
-
-| id | name |
-| -- | ---- |
-| 10 | 情報システム室 |
-| 20 | 経営企画室    |
 
 <pre><code>
 
