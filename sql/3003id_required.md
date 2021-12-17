@@ -128,7 +128,7 @@ title:ID Required【SQLアンチパターンまとめ】
 
 description:次のようにPRIMARY KEY (article_id, tag_id)と言う行を追加することで、複数のキーを参照して重複を防ぐと言う仕組みを整えることが可能になっている。
 
-img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
+img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
 
 category_script:page_name.startswith("30")

@@ -135,8 +135,7 @@ title:外部キー制約【SQLアンチパターンまとめ】
 
 description:外部キー制約とカスケード更新がテーブルを健全な状態に保つ。データベースを利用しているアプリケーションが、参照整合性を保つための完璧なコードを前提としているような状態は避けるべきである。
 
-img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
-
+img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
 category_script:page_name.startswith("30")
 

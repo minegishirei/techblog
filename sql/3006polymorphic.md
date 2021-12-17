@@ -120,7 +120,7 @@ title:ポリモーフィック【SQLアンチパターンまとめ】
 
 description:issuesのような基底テーブルを使うことで、外部キーによるデータ整合性制約に依存できると言うことがポイント
 
-img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
+img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
 
 category_script:page_name.startswith("30")

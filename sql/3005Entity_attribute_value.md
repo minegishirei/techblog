@@ -159,7 +159,7 @@ title:エンティティ・アトリビュート・バリュー【SQLアンチ�
 description:特に今回は5章の「エンティティ アトリビュート バリュー」と呼ばれる手法の悪い点と改善策をまとめました。
 
 
-img:https://blog.motimotilab.com/wp-content/uploads/2017/05/picture_large978-4-87311-589-4-750x387.jpeg
+img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
 
 category_script:page_name.startswith("30")
