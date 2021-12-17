@@ -53,4 +53,4 @@ title:すぐ分かる！where句で条件を緩くする方法【SQL】
 category_script:page_name.startswith("1")
 
 
-img:https://images-na.ssl-images-amazon.com/images/I/51NUVWMKzhL._SX258_BO1,204,203,200_.jpg
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg

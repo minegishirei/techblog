@@ -386,7 +386,7 @@ title:「sql from 複数」で検索したあなたへ
 description:sql分で複数のテーブルを使用する場合の全てのパターンについて解説を行います。
 
 
-img:https://images-na.ssl-images-amazon.com/images/I/51NUVWMKzhL._SX258_BO1,204,203,200_.jpg
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
 
 
