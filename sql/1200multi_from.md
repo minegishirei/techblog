@@ -390,6 +390,9 @@ img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
 
 
+category_script:page_name.startswith("11")
+
+
 
 
 
