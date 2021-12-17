@@ -229,7 +229,14 @@ where
 
 title:「sql in」で検索したあなたへ【SQL基礎】
 
-description:SQLにはl
+description:このように「複数のキーワードのどれかに合致する」という条件を調べたい時は、INとそれに続く括弧の中に検索したいキーワードを,区切りで入力することで抽出することができます。
+
+
+category_script:page_name.startswith("11")
+
+
+
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
 
 
