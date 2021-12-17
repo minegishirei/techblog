@@ -334,7 +334,7 @@ title:「sql like」で検索したあなたへ【SQL基礎】
 
 
 
-img:https://images-na.ssl-images-amazon.com/images/I/51NUVWMKzhL._SX258_BO1,204,203,200_.jpg
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
 
 description:sqlのlikeはパターン検索を可能にするキーワードです。具体的には次のような場合に使います。ある文字を含むものを条件に入れたい。ある文字から始まるものだけを抽出したい。基本的にはこの二つの用途しか使いません。
