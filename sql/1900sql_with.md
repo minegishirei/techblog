@@ -15,7 +15,7 @@ with の後に一時テーブル名を宣言 as　のあとの括弧の内部に
 
 <pre><code>
 -- 宣言部分
-with (一時テーブル名) as (
+with 一時テーブル as (
     select ~
 )
 
@@ -251,6 +251,6 @@ img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
 
 
-category_script:page_name.startswith("11")
+category_script:page_name.startswith("1")
 
 

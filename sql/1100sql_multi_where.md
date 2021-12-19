@@ -97,8 +97,7 @@ and e.location = '東京'
 
 ## 備考
 
-title:すぐ分かる！where句の複数条件追加方法【SQL基礎
-】
+title:すぐ分かる！where句の複数条件追加方法【SQL基礎】
 
 category_script:page_name.startswith("1")
 

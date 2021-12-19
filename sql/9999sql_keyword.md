@@ -57,7 +57,6 @@ description:
 <link type="text/css" rel="stylesheet" href="resources/sheet.css">
 
 <div class="ritz grid-container" dir="ltr">
-
     <table class="waffle" cellspacing="0" cellpadding="0">
         <tbody>
             <tr style="height: 10px">
