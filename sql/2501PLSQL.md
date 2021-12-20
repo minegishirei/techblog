@@ -84,3 +84,14 @@ actually use it.
 
 title:【PL/SQL基礎入門】PLSQLのきほんの文法
 
+
+description:- IF文やCASE文. これらの大切なロジックももちろんサポートしています。例えば、「もし本の数が1,000より大きければ...」ループやイテレートコントロールなどのサポートも充実しています。 GOTO文。なんとPL/SQLはGOTO文もサポートします。もちろん、それが許されているからといって無闇やたらに使っていわけではないが。
+
+
+img:https://images.squarespace-cdn.com/content/v1/5c3cf2ac5417fc3efa512c5a/1547588142968-VWQR0WMNFIX7GW18937A/lrg.jpg
+
+
+
+category_script:page_name.startswith("25")
+
+
