@@ -325,6 +325,37 @@ where
 
 
 
+## その他の例(FRAQTAからの割り算の割り出し)
+
+
+VB6,VBAのコードの中から「 / 」が含むSQLを全て割り出す必要が出てきた。
+
+つまり割り算を炙り出さなければならないが、これがまた難しい。
+
+しかしこの無理難題にもlikeを用いることで適切に対応することができた。
+
+幸いにもFRAQTAには全てのソースコードが入っている。
+
+
+<pre><code>
+select
+    *
+from
+    FRAQTA a
+where
+    a.line like '%"%/%"%'
+and
+    a.svn_repository_path IN (
+        "",
+        "",
+        ...
+        ""
+    )
+</code></pre>
+
+
+
+
 
 
 
