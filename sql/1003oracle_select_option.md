@@ -1,89 +1,14 @@
 
 
-title:【SQL】select文の射影,選択,結合とは
-
-description: データベースの中からデータを取り出す文であるSQLのselect文。selectの構文はその使い方で射影,選択,結合の三つに分類できます。
-
-img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
-
-category_script:page_name.startswith("100")
 
 
-
-
-##射影
-
-特定の列のみを取り出す機能
-
-例）会社の雇用データベースのうちから全ての社員番号と名前を取り出すこと
-
-
-##選択
-
-特定の行を取り出す機能
-
-例）会社の雇用データベースのうち100で始まる社員を全て取り出すこと
-
-
-##結合
-
-2つ以上のデータベースを組み合わせて使うこと
-
-例）所属部署コードが記載された社員データベースと部署コードと部署名が対応したデータベースをくっつけて
-社員データベースに部署名をくっつけること
-
-
-##SELECT文
-
-データベースの中からデータを取り出す文
-
-例）
-
-SELECT カラム1, カラム2 FROM データベース
-
-
-##SELECTによる射影
-
-<pre><code>
-SELECT カラム1, カラム2 FROM データベース
-</code></pre>
-
-列としてカラム1, カラム2だけを取り出している
-
-
-##全ての列のとりだし
-
-<pre><code>
-SELECT * FROM データベース
-</code></pre>
-
-
-
-##SELECTによる選択
-
-<pre><code>
-SELECT * FROM データベース
-WHERE 条件
-</code></pre>
-
-例えば、社員データベースから部署コードが100であるものを選択したいときは
-
-<pre><code>
-SELECT * FROM データベース
-WHERE データベース.部署コード = "100"
-</code></pre>
-
-更なる複雑なWHERE句による選択は後ほど出てくる
-
-
-
-##表構造の表示
+## 表構造の表示
 
 <pre><code>
 DESCRIBE
 </code></pre>
 
-##SELECTでの算術使用
+## SELECTでの算術使用
 
 selectの実行結果に対して計算を行うことができる。
 
@@ -114,7 +39,7 @@ FROM
 </code></pre>
 
 
-##列別名の使用
+## 列別名の使用
 
 上記のsqlを実行するとsal*12がタグとして出てきてしまう。
 
@@ -149,7 +74,7 @@ FROM
 
 
 
-##文字列の結合
+## 文字列の結合
 
 
 ||を使う
@@ -165,7 +90,7 @@ FROM
 
 
 
-##代替引用符(q)演算子
+## 代替引用符(q)演算子
 
 'や?などの特殊な文字列を使いたい時はqの後に指定した文字列で区切ることでその区間だけは特殊文字列を使用できる
 
@@ -192,7 +117,7 @@ FROM
 
 
 
-##重複行の削除
+## 重複行の削除
 
 DISTINCTを使用
 
@@ -211,7 +136,7 @@ DISTINCTはselect内に一度しかかけず、二つ書くとエラーになる
 
 
 
-##複数列の重複行の削除
+## 複数列の重複行の削除
 
 DISTINCTを使用して
 
@@ -232,4 +157,12 @@ FROM
 
 
 
+
+title:select句でできること一覧【SQL基礎入門】
+
+description: データベースの中からデータを取り出す文であるSQLのselect文。select句では文字列の結合や算術計算、重複の削除などができます。
+
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
+
+category_script:page_name.startswith("1")
 

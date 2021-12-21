@@ -1,10 +1,10 @@
-title:SQL単語・用語一覧【初心者向け】
+title:SQLのデータベースにまつわる単語・用語一覧【SQL基礎入門】
 
 description:Bronze SQLの勉強の記録、主に暗記するための単語帳として使用してください。今回はDDLやDCLなどのデータベースにまつわる単語。
 
-img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
-category_script:page_name.startswith("100")
+category_script:page_name.startswith("1")
 
 
 ##リレーショナルデータベース

@@ -1,6 +1,6 @@
 
 
-##WHERE句
+## WHERE句
 
 WHERE句の基本
 
@@ -26,7 +26,7 @@ WHERE
 </code></pre>
 
 
-##文字列や日付の比較
+## 文字列や日付の比較
 
 - ""で囲まなければいけない
 
@@ -46,7 +46,7 @@ WHERE
 < 以下
 </code></pre>
 
-##WHERE句での列別名は使用ができない
+## WHERE句での列別名は使用ができない
 
 次のSLEECT文はエラーになる
 
@@ -62,7 +62,7 @@ WHERE
 原因は従業員番号がWHERE句で使用されているため
 
 
-##WHERE句では演算子が使える
+## WHERE句では演算子が使える
 
 従業員番号を2倍した時で1000と比較
 
@@ -76,7 +76,7 @@ WHERE
 </code></pre>
 
 
-##BETWEEN演算子
+## BETWEEN演算子
 
 BETWEENの後に続く二つの数字の間にあるものが当てはまる
 
@@ -94,7 +94,7 @@ WHERE
 </code></pre>
 
 
-##BETWEENの日付での比較
+## BETWEENの日付での比較
 
 日付の範囲もBETWEENで比較が可能
 
@@ -113,7 +113,7 @@ WHERE
 
 
 
-##IN演算子
+## IN演算子
 
 資子を使用すると、列値と複数の値を比較できる
 
@@ -137,7 +137,7 @@ WHERE deptno IN(10, 20);
 
 
 
-##LIKE演算子
+## LIKE演算子
 
 LIKE演算子を使うとさらに高度な文字列パターンで検索をかけられます
 
@@ -167,7 +167,7 @@ WHEERE
     empname like "%鈴木___"
 </code></pre>
 
-##ESCAPEオプション
+## ESCAPEオプション
 
 %が文字列に入るものを認識したい時はさらに高度な技が必要になります。
 
@@ -189,7 +189,7 @@ WHEERE
 </code></pre>
 
 
-##IS NULL演算子
+## IS NULL演算子
 
 IS NULLは値がNULLかどうかを比較することができます
 
@@ -219,20 +219,20 @@ WHEERE
 
 
 
-##AND演算子
+## AND演算子
 
 前後に指定された条件が両方ともTRUEの場合にTRUE 
 
 
 
-##OR演算子
+## OR演算子
 
 前後に指定された条件のどちらか一方でもTRUEの場合にTRUE 
 
 
 
 
-##INとORのパフォーマンスの違い
+## INとORのパフォーマンスの違い
 
 IN演算子は、内部的にはOR演算子を使用したものに置き換えられてしまう。
 
@@ -272,14 +272,14 @@ ORDER BY sal;
 このコードでは従業員データベースから給料順に並べている
 
 
-##「ASC」
+## 「ASC」
 
 昇順:小さいほうから順
 
 デフォルトの設定はこちらになっている
 
 
-##「DESC」
+## 「DESC」
 
 降順:大きいほうから順
 
@@ -293,13 +293,13 @@ ORDER BY sal DESC;
 こちらは意図的に設定しないと反映されない。
 
 
-##ORDER BYと列別名
+## ORDER BYと列別名
 
 ORDER BY句では列別名は使用可能
 
 
 
-##ソートの順序はデータによって異なる
+## ソートの順序はデータによって異なる
 
 例えば数値であれば、大きい順に並ぶ
 
@@ -313,7 +313,7 @@ NULL値は数値、日付値、文字値のいずれの場合も、デフォル�
 </code></pre>
 
 
-##NULLS FIRSTとNULLS LAST
+## NULLS FIRSTとNULLS LAST
 
 NULLの値に関しては最初に出てくるように調整するコードが「NULLS FIRST」
 
@@ -345,7 +345,7 @@ ORDER BY sal;
 </code></pre>
 
 
-##SLECT句で指定しない列名でのORDER BY
+## SLECT句で指定しない列名でのORDER BY
 
 SLECT句で指定しない列名でのORDER BYは
 
@@ -355,7 +355,7 @@ SLECT句で指定しない列名でのORDER BYは
 
 WHERE句には列別名は指定できませんが、
 
-###ORDER BY 句には列別名 を指定できます
+### ORDER BY 句には列別名 を指定できます
 
 
 
@@ -393,13 +393,13 @@ WITH TIES;
 
 
 
-title:【SQL】where句の基本的な使い方
+title:where句の基本的な使い方【SQL基礎入門】
 
 description:select句の基本的な文法をOracle bronze SQL基礎の資格をなぞりながら解説
 
-img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 
-category_script:page_name.startswith("100")
+category_script:page_name.startswith("1")
 
 
 

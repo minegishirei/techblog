@@ -1,13 +1,5 @@
 
 
-title:【SQL】関数一覧とその使い方
-
-description:oracleマスターbronzeのweb問題集です。間違いやすい問題に厳選してあります。
-
-img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
-
-category_script:page_name.startswith("100")
-
 
 ##二種類の関数
 
@@ -374,3 +366,12 @@ TRUNC("2021-01-21",'YEAR')
 
 
 
+
+
+title:SQLで使える関数一覧【SQL基礎入門】
+
+description:oracleマスターbronzeのweb問題集です。間違いやすい問題に厳選してあります。
+
+img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
+
+category_script:page_name.startswith("1")
