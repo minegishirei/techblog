@@ -1,0 +1,315 @@
+
+
+## 次のSQLを実行した結果を選べ
+
+<pre><code>
+SELECT
+    TO_CHAR(123456.78, '99,999')
+FROM
+    dual;
+</code></pre>
+
+<pre>
+A: 123456,78
+
+B: 123,456.78
+
+C: 指定した桁数よりも桁が多いのでエラーになる
+
+D: 1234,56.78
+
+E: ########
+</pre>
+
+
+<h3 class="title">答えはここをクリック！</h3>
+<div class="box">
+    E: ########。
+    TO_CHARの書式指定は桁数を超えると全て#になる
+</div>
+
+
+
+
+
+## NULLの取扱について
+
+COMM列がNULL出ない場合はCOMMの値を戻し、
+COMMの値がNULLでなおかつMGR(上司の社員番号)がNULL出ない場合は
+MGRを戻し、COMMもMGRもNULLの場合はEMPNOを返すSQL文として正しいものを選べ。
+
+なお、これらのカラムは全てNUMBER(7)型とする。
+
+A: SELECT COALESCE(COMM, mgr, empno) FROM employees;
+
+B: SELECT COALESCE(COMM, TO_CHAR(mgr), empno) FROM employees;
+
+B: SELECT NULLIF(com, mgr, empno) FROM employees
+
+C: SELECT NVL(com, mgr, empno) FROM employees;
+
+D: SELECT NVL2(comm, mgr, empno) FROM employees;
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    A: SELECT COALESCE(COMM, mgr, empno) FROM employees;
+  </p>
+  <p>
+    COALESCE関数は式を順番にチェックして最初に見つかったNULL出ないものを返す。
+  </p>
+  <p>
+    また、引数は全て同じ型出ないとエラーが起きるので、Bは間違い。
+  </p>
+</div>
+
+
+
+
+
+## IF-THEN-ELSEロジック
+
+IF-THEN-ELSEロジックとして間違ったものを選べ
+
+A: IF
+
+B: WHILE
+
+C: CASE
+
+D: DECODE
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    AとB
+  </p>
+  <p>
+    whileもifも通常のsqlには存在しない。
+  </p>
+</div>
+
+
+
+
+## 日付書式指定
+
+今年を2014年7月26日とする。
+
+次のSQL文の実行結果を選べ。
+
+<pre><code>
+SELECT
+  TO_CHAR(TO_DATE('07-26-95'), 'MM-DD-RR'), 'YYY-MM-DD'),
+  TO_CHAR(TO_DATE('07-26-45'), 'MM-DD-RR'), 'YYY-MM-DD)
+FROM
+  dual;
+</code></pre>
+
+A: 1995-08-26 2024-07-26
+
+B: 1995-07-26 1945-07-26
+
+C: 2007-26-95 1945-07-26
+
+D: 2095-07-26 1945-07-26
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    D: 1995-07-26と2045-07-26
+  </p>
+  <p>
+    理由： RRは「現在の年号に近い値として解釈する」
+    45をRRに当てはめた時、現在の年号に近い値は2945年ということになる
+  </p>
+</div>
+
+
+
+## 日付書式指定2
+
+今日を2014年5月26日とする。
+出力結果が次の値になるようなクエリを選べ
+
+Twenty-Sixth of May,2014
+
+A: SELECT TO_CHAR(sysdate, 'Ddspth "of" Month YYYY')
+
+B: SELECT TO_CHAR(sysdate, 'fmDdspth "of" month YYYY')
+
+C: SELECT TO_CHAR(sysdate, 'fmDdspth "of" Month YYYY')
+
+D: SELECT TO_CHAR(sysdate, 'ddthsp "of" month YYYY')
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    B: SELECT TO_CHAR(sysdate, 'fmDdspth "of" month YYYY')
+  </p>
+  <p>
+    FMを指定することで、Mayの後の空白は削除される
+  </p>
+  <p>
+    また、Ddは先頭のみが大文字の月日を表す。ddだと両方とも小文字になる
+  </p>
+  <p>
+    最後に、スペル表記を表すspthかthspを指定する。
+  </p>
+</div>
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    
+  </p>
+</div>
+
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    
+  </p>
+</div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
+
+
+<script>
+//アコーディオンをクリックした時の動作
+$('.title').on('click', function() {//タイトル要素をクリックしたら
+  var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+  $(findElm).slideToggle();//アコーディオンの上下動作
+    
+  if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+    $(this).removeClass('close');//クラス名を除去し
+  }else{//それ以外は
+    $(this).addClass('close');//クラス名closeを付与
+  }
+});
+
+//ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+$(window).on('load', function(){
+  $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+  $(".open").each(function(index, element){ //openクラスを取得
+    var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+    $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+    var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+    $(Box).slideDown(500);          //アコーディオンを開く
+  });
+});
+</script>
+
+<style>
+@charset "UTF-8";
+
+/*==================================================
+アコーディオンのためのcss
+===================================*/
+
+/*アコーディオン全体*/
+.accordion-area{
+    list-style: none;
+    width: 96%;
+    max-width: 900px;
+    margin:0 auto;
+}
+
+.accordion-area li{
+    margin: 10px 0;
+}
+
+.accordion-area section {
+  border: 1px solid #ccc;
+}
+
+/*アコーディオンタイトル*/
+.title {
+    position: relative;/*+マークの位置基準とするためrelative指定*/
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: normal;
+    padding: 3% 3% 3% 50px;
+    transition: all .5s ease;
+}
+
+/*アイコンの＋と×*/
+.title::before,
+.title::after{
+    position: absolute;
+    content:'';
+    width: 15px;
+    height: 2px;
+    background-color: #333;
+    
+}
+.title::before{
+    top:48%;
+    left: 15px;
+    transform: rotate(0deg);
+    
+}
+.title::after{    
+    top:48%;
+    left: 15px;
+    transform: rotate(90deg);
+
+}
+/*　closeというクラスがついたら形状変化　*/
+.title.close::before{
+  transform: rotate(45deg);
+}
+
+.title.close::after{
+  transform: rotate(-45deg);
+}
+
+/*アコーディオンで現れるエリア*/
+.box {
+    display: none;/*はじめは非表示*/
+    background: #f3f3f3;
+  margin:0 3% 3% 3%;
+    padding: 3%;
+}
+
+</style>
