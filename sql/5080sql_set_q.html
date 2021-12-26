@@ -1,0 +1,411 @@
+
+## 集合演算子の優先順位
+
+次の選択肢から正しいものを全て選べ
+
+A: 集合演算子には優先順位がある
+
+B: 集合演算子には優先順位がない
+
+C: 集合演算子は書いた順番で優先順位が生まれる
+
+D: 集合演算子は()を使うことで集合演算子の優先順位をつけることができる
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    B: 集合演算子には優先順位がない
+  </p>
+　  <p>
+    C: 集合演算子は書いた順番で優先順位が生まれる
+  </p>
+  <p>
+    D: 集合演算子は()を使うことで集合演算子の優先順位をつけることができる
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+## 集合演算子の使い方
+
+次のクエリの実行結果を選べ
+
+<pre><code>
+select
+    ename, empno
+from
+    employees
+where
+    job = "mgr"
+order by ename
+UNION
+select
+    ename, empno
+from
+    employees
+where
+    job IS NULL
+</code></pre>
+
+A: エラーが起きる
+
+B: 通常通り実行される
+
+C: エラーにはならないが、一件も返されない
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    A: エラーが起きる
+  </p>
+　  <p>
+  order byは集合演算子と共に使う場合、最後にしか宣言できない
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+## 集合演算子の種類
+
+一つ目の問い合わせでは戻されるが、二つ目の問い合わせで戻されないデータのみ
+(つまり差分)を表示する演算子を選べ
+
+A: UNION
+
+B: UNION ALL
+
+C: INTERSECT
+
+D: MINUS
+
+E: INTERSECT ONLY
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    D: MINUS
+  </p>
+　  <p>
+    INTERSECT ONLYは存在しない
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+## UNION ALL
+
+次のクエリの実行結果を選べ
+
+<pre><code>
+select
+    ename, deptno
+from
+    employees
+union ALL
+select
+    deptno, ename
+from
+    employees
+</code></pre>
+
+
+A: select句でエラーが生じる
+
+B: 通常通り実行される
+
+C: エラーが生じるが、UNION ALLではなくUNIONであれば実行される
+
+D: エラーではないが、実行されない
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    B: 通常通り実行される
+  </p>
+　  <p>
+  数だけあえばUNION ALLは問題なく動く。(くっつけているだけ)
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+## 共通部分
+
+共通のデータを表示する集合演算子を選べ
+
+A: UNION
+
+B: UNION ALL
+
+C: INTERSECT
+
+D: MINUS
+
+E: INTERSECT ONLY
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    C: INTERSECT
+  </p>
+　  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+
+  </p>
+　  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+
+  </p>
+　  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+
+  </p>
+　  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+
+  </p>
+　  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
+
+
+<script>
+//アコーディオンをクリックした時の動作
+$('.title').on('click', function() {//タイトル要素をクリックしたら
+  var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+  $(findElm).slideToggle();//アコーディオンの上下動作
+    
+  if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+    $(this).removeClass('close');//クラス名を除去し
+  }else{//それ以外は
+    $(this).addClass('close');//クラス名closeを付与
+  }
+});
+
+//ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+$(window).on('load', function(){
+  $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+  $(".open").each(function(index, element){ //openクラスを取得
+    var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+    $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+    var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+    $(Box).slideDown(500);          //アコーディオンを開く
+  });
+});
+</script>
+
+<style>
+@charset "UTF-8";
+
+/*==================================================
+アコーディオンのためのcss
+===================================*/
+
+/*アコーディオン全体*/
+.accordion-area{
+    list-style: none;
+    width: 96%;
+    max-width: 900px;
+    margin:0 auto;
+}
+
+.accordion-area li{
+    margin: 10px 0;
+}
+
+.accordion-area section {
+  border: 1px solid #ccc;
+}
+
+/*アコーディオンタイトル*/
+.title {
+    position: relative;/*+マークの位置基準とするためrelative指定*/
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: normal;
+    padding: 3% 3% 3% 50px;
+    transition: all .5s ease;
+}
+
+/*アイコンの＋と×*/
+.title::before,
+.title::after{
+    position: absolute;
+    content:'';
+    width: 15px;
+    height: 2px;
+    background-color: #333;
+    
+}
+.title::before{
+    top:48%;
+    left: 15px;
+    transform: rotate(0deg);
+    
+}
+.title::after{    
+    top:48%;
+    left: 15px;
+    transform: rotate(90deg);
+
+}
+/*　closeというクラスがついたら形状変化　*/
+.title.close::before{
+  transform: rotate(45deg);
+}
+
+.title.close::after{
+  transform: rotate(-45deg);
+}
+
+/*アコーディオンで現れるエリア*/
+.box {
+    display: none;/*はじめは非表示*/
+    background: #f3f3f3;
+  margin:0 3% 3% 3%;
+    padding: 3%;
+}
+
+</style>
+
+
+
+
+
+title:Oracle SQL Bronze web問題集【集合演算子】
+
+description:oracleマスターbronzeのweb問題。INTERSECTやMINUSなどの集合演算子についての問題と解説を行います。
+
+
+img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
+
+category_script:page_name.startswith("50")
+
+
+
+
+
+
