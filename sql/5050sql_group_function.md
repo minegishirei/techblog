@@ -1,5 +1,35 @@
 
 
+## MIN MAX関数
+
+文字列に対して有効なグループ関数を3つ選べ
+
+A: count
+
+B: AVG
+
+C: SUM
+
+D: MIN
+
+E: MAX
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+A: count、D: MIN、E: MAX
+  </p>
+  <p>
+  MIN,MAXは文字数を見て最もXXなものを返す。
+  </p>
+    <p>
+  
+  </p>
+</div>
+
+
+
+
 
 ## AVGグループ関数
 
@@ -244,91 +274,6 @@ D: groupとwithinが逆なのでエラーになる
   
   </p>
 </div>
-
-
-## MIN MAX関数
-
-文字列に対して有効なグループ関数を3つ選べ
-
-A: count
-
-B: AVG
-
-C: SUM
-
-D: MIN
-
-E: MAX
-
-<h3 class="title">答え</h3>
-<div class="box">
-  <p>
-A: count、D: MIN、E: MAX
-  </p>
-  <p>
-  MIN,MAXは文字数を見て最もXXなものを返す。
-  </p>
-    <p>
-  
-  </p>
-</div>
-
-
-<h3 class="title">答え</h3>
-<div class="box">
-  <p>
-
-  </p>
-  <p>
-  
-  </p>
-    <p>
-  
-  </p>
-</div>
-
-
-<h3 class="title">答え</h3>
-<div class="box">
-  <p>
-
-  </p>
-  <p>
-  
-  </p>
-    <p>
-  
-  </p>
-</div>
-
-
-<h3 class="title">答え</h3>
-<div class="box">
-  <p>
-
-  </p>
-  <p>
-  
-  </p>
-    <p>
-  
-  </p>
-</div>
-
-
-<h3 class="title">答え</h3>
-<div class="box">
-  <p>
-
-  </p>
-  <p>
-  
-  </p>
-    <p>
-  
-  </p>
-</div>
-
 
 
 
