@@ -167,13 +167,70 @@ D: SELECT TO_CHAR(sysdate, 'ddthsp "of" month YYYY')
 
 
 
+## 型変換(数値)
 
+次のSQLの実行結果はどれか
+
+SELECT TO_CHAR(999999.99, '$9,999,999.000') FROM dual;
+
+A: $0,999,999.000
+
+B: $999,999,000
+
+C: $999,999.990
+
+D: $999,999,99
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    C: $999,999.990
+  </p>
+  <p>
+    $はお金という意味
+  </p>
+  <p>
+    数値の書式「9」は通常の数字という意味
+  </p>
+  <p>
+    数値書式「0」は0梅の数字
+  </p>
+  <p>
+    ,や.はそのまま表示される。
+  </p>
+</div>
+
+
+
+## 日付書式指定3
+
+HIREDATEの曜日順(月から始まり、に社員を並び替えるSQLを選べ
+
+A: SELECT * FROM employees ORDER BY TO_CHAR(hiredate-1, 'DAY')
+
+B: SELECT * FROM employees ORDER BY TO_CHAR(hiredate, 'DAY')
+
+C: SELECT * FROM employees ORDER BY TO_CHAR(hiredate, 'D')
+
+D: SELECT * FROM employees ORDER BY TO_CHAR(hiredate-1, 'D')
+
+E: SELECT * FROM employees ORDER BY TO_CHAR(hiredate+1, 'D')
 
 
 <h3 class="title">答え</h3>
 <div class="box">
   <p>
-    
+    D: SELECT * FROM employees ORDER BY TO_CHAR(hiredate-1, 'D')
+  </p>
+  <p>
+    曜日の日付書式は'DAY','DY','D'の三つがある
+  </p>
+  <p>
+    'DAY'は「日曜日,月曜日,」'DYは「日,月,,,」'D'は「1,2,3,,,,」
+    と増えていく
+  </p>
+  <p>
+    そこから一日増やさなければならないため、hiredate-1を指定する。
   </p>
 </div>
 
@@ -182,26 +239,26 @@ D: SELECT TO_CHAR(sysdate, 'ddthsp "of" month YYYY')
 
 
 
+## NULLIF(式1,式2)
+
+NULLIFはどれが強いか
+
+A: 二つの値を比較して、等しければNULLを返す
+
+B: 二つの値を比較して等しくなければ式2を返す
+
+C: 式1にNULLを入れることはできない
+
+
+
 
 <h3 class="title">答え</h3>
 <div class="box">
   <p>
-    
+    A: 二つの値を比較して、等しければNULLを返す,C: 式1にNULLを入れることはできない
   </p>
-</div>
-
-
-
-
-
-
-
-
-
-<h3 class="title">答え</h3>
-<div class="box">
   <p>
-    
+    NULLIFは等しければNULLを返し、異なれば「式1」を返す。式1にはNULLを入れることはできない
   </p>
 </div>
 
@@ -318,11 +375,11 @@ $(window).on('load', function(){
 
 
 
-title:SQL 単一行関数マスター (Oracle bronze)
+title:Oracle SQL Bronze web問題集【変換関数】
 
 description:oracleマスターbronzeのweb問題集です。間違いやすい問題に厳選してあります。
 
 img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
 
-category_script:page_name.startswith("100")
+category_script:page_name.startswith("50")
 
