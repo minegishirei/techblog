@@ -1,14 +1,5 @@
 
 
-title:【リレーショナルデータベース、SQL】sql web問題集1
-
-
-description: データベースに関するweb問題集。
-
-img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
-
-category_script:page_name.startswith("100")
-
 {
 ##次の中からDMLではないものを選択してください。
 
@@ -25,16 +16,29 @@ category_script:page_name.startswith("100")
 6: CREATE文 
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-A: 6: CREATE文
-}
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    A: 6: CREATE文
+  </p>
+　  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
 
 
 
 
 
-{
+
+
 ##SQLコマンドと分類の組合せとして正しいものを3つ選択しなさい
 
 1: DDL RENAME文 
@@ -51,32 +55,53 @@ A: 6: CREATE文
 
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-A: 1,5,6
 
 
-1: DDL RENAME文 
 
-2: DML SELECT文
 
-3: DDL TRUNCATE文 
 
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    A: 1,5,6
+  </p>
+  <p></p>
+　  <p>
+    1: DDL RENAME文 
+  </p>
+  <p>
+    2: DML SELECT文
+
+  </p>
+  <p>
+    3: DDL TRUNCATE文 
+  </p>
+
+  <p>
 4: トランザクション言語 COMMIT文 
-
-5: DDL TRUNCATE文
-
+</p>
+<p>
+    5: DDL TRUNCATE文
+</p>
+<p>
 6: DCL GRANT文
+</p>
+</div>
 
 
-}
 
 
 
 
-{
 
-##次の説明の中で間違っているものを選択してください。 
+
+
+
+
+
+
+## 次の説明の中で間違っているものを選択してください。 
 
 1: SQLは、DML(データ操作言語)、DDL(データ定義言語)、DCL(データ制御 言語)、トランザクション制御の4つに分類される 
 
@@ -87,16 +112,38 @@ A: 1,5,6
 4: DMLは表のデータを操作する
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-A: 2: 主キー列や外部キー列にはNULL値を含むことはできない 
-
-外部キーにNULLを入れることは可能
-
-}
 
 
-{
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    A: 2: 主キー列や外部キー列にはNULL値を含むことはできない 
+  </p>
+　  <p>
+    外部キーにNULLを入れることは可能
+  </p>
+  <p>
+  
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##次の説明で正しいものを2つ選びなさい
 
@@ -108,21 +155,160 @@ A: 2: 主キー列や外部キー列にはNULL値を含むことはできない
 
 4: テーブルのROWデータの数が増えるほど、列が多くなる
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-A: 1,3
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    A: 1,3
+  </p>
+　  <p>
+    1: 外部キーには重複した値を入れることもNULLを入れることも可能
+  </p>
+  <p>
+    3: 主キーには重複した値を格納したり、NULL値を含めたりはできない。
+  </p>
+  <p>
+  
+  </p>
+</div>
 
-1: 外部キーには重複した値を入れることもNULLを入れることも可能
-
-3: 主キーには重複した値を格納したり、NULL値を含めたりはできない。
-
-
-
-}
 
 
 
 
+
+
+
+
+
+
+
+
+## 備考欄
+
+
+
+title:リレーショナルデータベースとは【oracle bronze 12c sql web問題集】
+
+description: oracleマスターbronzeのweb問題集です。今回はデータベースの単語に関する問題です。
+
+img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
+
+category_script:page_name.startswith("100")
+
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
+    
+    
 
 
 
