@@ -192,17 +192,33 @@ E: INTERSECT ONLY
 
 
 
+## UNIONのエラー
 
+次のSQLのエラーの原因はどれか
 
+<pre><code>
+SELECT empno,ename FROM empnolyees
+union
+select deptno,deptname FROM empnolyees
+ORDER BY deptno;
+</code></pre>
+
+A: 列が異なるため
+
+B: unionとselectは同時に使用できないため
+
+C: order byが2つめのselectの列名を指定しているため
+
+D: 同じテーブルを使用しているため
 
 
 <h3 class="title">答え</h3>
 <div class="box">
   <p>
-
+    C: order byが2つめのselectの列名を指定しているため
   </p>
 　  <p>
-  
+  unionを用いたselectのソートは1つ目のselectしか指定できません。
   </p>
   <p>
   
@@ -213,24 +229,45 @@ E: INTERSECT ONLY
 </div>
 
 
+## MINUS
 
+次のクエリで有効なORDER BYを選択してください。
 
+<pre><code>
+SELECT teacher_id, teacher_name, "Class Name"
+from Teachers
+WHERE classname like "2-%"
+UNION
+SELECT teacher_id, mgr_name, classname
+FROM Teachers
+WHERE classname like "2-%"
+    
+</code></pre>
 
+A: ORDER BY 2,1
+
+B: ORDER BY teacher_id, teacher_name
+
+C: ORDER BY teacher_id, "Class Name"
+
+D: ORDER BY mgr_name, "Class Name"
+
+E: ORDER BY classname, "Class Name"
 
 
 <h3 class="title">答え</h3>
 <div class="box">
   <p>
-
+    A: ORDER BY 2,1
   </p>
 　  <p>
-  
+    B: ORDER BY teacher_id, teacher_name
   </p>
   <p>
-  
+    C: ORDER BY teacher_id, "Class Name"
   </p>
   <p>
-  
+  ORDER BYでは文字列をしてすることも可能です。
   </p>
 </div>
 
@@ -392,7 +429,7 @@ $(window).on('load', function(){
 </style>
 
 
-
+## 備考欄
 
 
 title:Oracle SQL Bronze web問題集【集合演算子】
