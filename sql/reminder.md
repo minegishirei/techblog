@@ -1,4 +1,1597 @@
 
+## やばいかもしれないリスト
+
+- Union order byの位置
+
+- Union とunion allの違い
+
+関数の使い方について
+
+TO_CHAR TO_DATE TO_NUMBERについて
+
+Create文など
+
+制約について
+
+Alter table
+
+Alter table row define
+
+- Table add row
+
+行のソート
+
+- INTERVAL型
+
+曜日(月曜日,日曜日)
+
+- 画像データのデータ型
+
+- 副問い合わせを使用した表の作成時
+
+- RR指定の日付データを意図的に変えることができるか
+
+オブジェクト指向のDBとリレーショナル型のDB
+
+- REPLACE関数
+
+
+## 作戦
+
+120minで75Q
+
+1Q:1.6min
+
+30秒考えて即答できないのを飛ばす。
+かけても60秒。
+その代わりチェックは付けておくこと。
+
+0.5*75 = 37.5min
+
+60*75 = 75min
+
+
+
+
+
+
+
+
+
+
+
+## 代替引用符(q)
+
+文字リテラルの一部に「'」を使用したい時
+
+- 任意のシングルバイト文字列やダブルバイト文字列
+
+- []{}()<>の組み合わせ
+
+次の例は?を引用デリみたに指定する。
+
+<pre><code>
+SELECT
+  yomi || q'?'s Salary : ?' || sal "Monthly Salary"
+FROM
+  employees
+</code></pre>
+
+他の引用符デリミタ「[]」
+
+<pre><code>
+SELECT
+  yomi || q'['s Salary : ]' || sal "Monthly Salary"
+FROM
+  employees
+</code></pre>
+
+
+
+## 列別名とダブルクオーテーション
+
+<pre><code>
+SELECT
+  employee_id 社員番号
+  , name "Name"
+  , salary * 12 AS 年間給与
+  , salary + 10000 AS "Bonus Money"
+FROM
+  test5;
+</code></pre>
+
+
+
+
+<h3 class="title">
+覚えたほうがいいこと
+</h3>
+<div class="box">
+  <p>
+スペースや特殊文字を使用する場合は"で囲む必要がある
+  </p>
+  <p>
+
+  </p>
+  <p>
+  
+  </p>
+</div>
+
+
+## DISTINCTについて
+
+DISTINCTは一個のSELECTで一回のみ
+
+
+
+
+## ESCAPEオプション
+
+LIKE演算子では%と_をワイルドカードとして扱うため
+100%
+のような#を含む文字列を指定する場合はESCAPEオプションを設定する必要がある
+
+<pre><code>
+WHERE 列名 LIKE '文字列パターン' ESCAPE 'エスケープ文字(一文字 |¥,$,#,aなど)'
+</code></pre>
+
+- サンプルコード
+<pre><code>
+WHERE pname LIKE '100¥%%' ESCAPE '¥'
+</code></pre>
+
+- サンプルコード2(100%_で始まる文字列)
+<pre><code>
+WHERE pname LIKE '100¥%¥_%' ESCAPE '¥'
+</code></pre>
+
+
+## 演算子の優先順位
+
+<pre><code>
+select
+  *
+form
+  employees
+where
+  deptno = 10
+or
+  deptno = 30
+and 
+  sal >= 300000;
+</code></pre>
+
+- 計算結果
+- BETWEEN
+- <>
+- NOT
+- AND
+- OR
+
+の順で評価される
+
+よって、先にAND演算子が評価されるので
+
+(deptno = 30 and sal >= 30000)が先
+
+その後にORが評価される(ORは最後)
+
+
+## row_limiting_clause
+
+OFFSET ⇨ FETCHの順番
+
+<pre><code>
+select
+  *
+from
+  表名
+[where句]
+[ORDER BY句]
+[OFFSET offset { ROWS | ROWS } ]
+[FETCH { FIRST | NEXT}
+       { row_count | percent PERCENT }
+       { ROW | ROWS }
+       { ONLY | WITH TIES }
+]
+</code></pre>
+
+
+## OFFSET句
+
+スキップする行数
+
+指定しなければ0からスタートする
+
+
+
+<h3 class="title">
+OFFSET N ROW | ROWS
+</h3>
+<div class="box">
+<pre>
+Nに負の値を指定した場合は0とみなされる
+
+ROWもROWSも違いはない
+
+OFFSETが宣言されている時は省略不可
+</pre>
+</div>
+
+
+
+
+## FETCH句
+
+返される行数か行の割合を表す
+
+FETCHを省略すると +1からスタートする
+
+
+<h3 class="title">
+FETCH { FIRST | NEXT (省略不可,違いはない)} { N | N PERCENT } { ROW | ROWS(省略不可) } { ONLY | WITH TIES }
+</h3>
+<div class="box">
+<pre>
+
+ONLYは行数を正確に返す
+
+WITH TIESは同着も返す
+
+WITH TIESを指定するときはORDER BYが必須
+
+</pre>
+</div>
+
+
+
+- サンプル
+
+<pre><code>
+ORDER BY sal DESC
+OFFSET 5 ROWS
+FETCH FIRST 3 ROWS ONLY;
+</code></pre>
+
+先頭から5行をスキップし
+6行目か3行ぶんを取り出している
+
+ONLY指定のためSALの値が8行目と同じであっても9行目のデータは表示されない(ROWS WITH TIESなら9行目も取り出す)
+
+
+- PERCENTのサンプル
+
+
+<pre><code>
+ORDER BY sal DESC
+OFFSET 5 ROWS
+FETCH FIRST 50 PERCENT ROWS ONLY;
+</code></pre>
+
+最初の5行をスキップした後、
+全体の14行(50%)を取り出している
+
+
+- OFFSETの省略
+
+
+<pre><code>
+ORDER BY sal DESC
+FETCH FIRST 3 ROWS ONLY;
+</code></pre>
+
+最初の3行を取得する
+
+
+- FETCHの省略
+
+
+<pre><code>
+ORDER BY sal DESC
+OFFSET 5 ROWS
+</code></pre>
+
+最初の 5行を取得する
+
+
+
+## SUBSTR
+
+<pre><code>
+SUBSTR(文字列, m[,n])
+</code></pre>
+
+m文字目からn文字分を取り出す関数(mは負の値でも可能)
+
+- サンプルコード
+
+<pre><code>
+select
+  SUBSTR('Oracle Server', 2, 3),
+  SUBSTR('Oracle Server', 2)
+from
+  dual
+</code></pre>
+
+> rac, racle Server
+
+
+
+<h3 class="title">
+mに負の値を設定すると...
+</h3>
+<div class="box">
+<pre>
+文字の後ろから数えてm文字目からn文字ぶんを取り出す
+
+</pre>
+</div>
+
+
+- サンプルコード2
+
+<pre><code>
+select
+  SUBSTR('Oracle Server', -6, 3),
+  SUBSTR('Oracle Server', -6)
+from
+  dual
+</code></pre>
+
+> Ser, Server
+
+
+
+## INSTR
+
+指定した文字パターンが現れる位置を戻す関数
+
+<pre><code>
+INSTR(文字列1, 文字列2 [,m=1][,n=1])
+</code></pre>
+
+m文字目から検索を行い,n回目に一致した文字列の位置を返す
+
+最初から最後まで文字がない場合は0を返す
+
+<pre><code>
+select
+  INSTR('Oracle Server', 'er',1 , 2),
+  INSTR('Oracle Server', 'er')
+from
+  dual;
+</code></pre>
+
+> 12, 9
+
+
+## TRIM関数
+
+前後にある削除文字を取り除いて返す関数
+
+<pre><code>
+TRIM([LEADING | TRAILING | BOTH] [削除文字列] FROM 文字列)
+or
+TRIM(文字列)
+</code></pre>
+
+削除文字列は1文字だけ。
+
+- LEADING
+
+先頭にあるものを取り除く
+
+
+- サンプルコード
+
+<pre><code>
+select
+  TRIM(LEADING 'O' FROM 'Oracle Server')
+from
+  dual
+</code></pre>
+
+
+## REPLACE関数
+
+<pre><code>
+REPLACE(文字列, 変更前文字列)
+</code></pre>
+
+- サンプルコード
+  
+<pre><code>
+select
+  REPLACE('Oracle Server', 'Server', 'Master'),
+  REPLACE('Oracle Server', 'Server')
+from
+  dual
+</code></pre>
+
+> Oracle Master, Oracle
+
+
+
+# 日付関数
+
+日本語環境では「DD-MON-RR(日-月-年)」
+
+英語環境では「RR-MM-DD(年-月-日)」
+
+の順番
+
+
+(ALTER SESSION SET nls_data_format='表示形式')で帰ることができる
+
+
+
+## TO_CHAR関数
+
+<pre><code>
+TO_CHAR(日付 [,'日付書式'][,NLSパラメータ])
+</code></pre>
+
+
+- サンプルコード
+
+<pre><code>
+select
+  TO_CHAR(SYSDATE 'YYYY-MM-DD HH24:MI:SS')
+from
+  dual;
+</code></pre>
+
+> 2014-01-24 19:51:46
+
+
+
+<h3 class="title">
+/ - ( などの半角記号は
+</h3>
+<div class="box">
+<pre>
+そのまま結果に表示される
+</pre>
+</div>
+
+
+<h3 class="title">
+年や月、「日」などの感じやひらがな、カタカナなどは
+</h3>
+<div class="box">
+<pre>
+"で囲むと表示される(そうでなければエラー)
+</pre>
+</div>
+
+
+
+### 年関連
+
+- SCC or CC
+
+世紀。Sを指定すると紀元前に-がつく
+
+- SYYYY or YYYY
+
+年。Sを指定すると日付の先頭に-がtく
+
+- YYY or YY or Y
+
+年の下 n桁
+
+- SYEAR or YEAR
+
+スペルによる年
+
+- RR
+
+年の下2桁。
+YYとは「世紀」の扱いが異なり、
+
+
+- Q
+
+年の四半期
+
+
+### 月
+
+- MM
+
+二桁の月
+
+- MONTH
+
+空白が埋め込まれた9文字の長さの名前
+「January」など
+
+
+- MON
+
+月の名前の3文字の略称
+「Jan」など
+
+- RM
+
+ローマ数字で表した月
+
+
+### 週
+
+- WW or W
+
+年または月における週
+
+- IW
+
+ISOに基づく年間における週
+
+### 日にち
+
+- DDD or DD or D
+
+年または月、週における日にち
+
+- DAY
+
+空白がm埋め込まれた9文字の長さの曜日。
+「TUERTHDAY」など
+
+- DY
+
+曜日。3文字の略称系。「日」「月」など
+
+
+## 時間
+
+- AMorPM
+
+午前か午後かを示す要素
+
+- A.M. or P.M.
+
+ピリオドを使用したA.M.を示す要素。
+日本語だと「午前」「午後」
+
+- HH or HH12 or HH24
+
+時間,時間(1-12),時間(1-24)
+
+
+- MI
+
+分
+
+- SS
+
+秒
+
+- SSSS
+
+午前0時からの経過時間
+
+
+### その他
+
+- "of the"
+
+そのまま反映される二重引用ふ
+
+- FM
+
+埋め込みモードの有効と無効を切り替えれる
+
+
+
+- サンプルコード2
+
+
+<pre><code>
+select
+  TO_CHAR(SYSDATE, 'YYYY/MM/DD'),
+  TO_CHAR(SYSDATE, 'YYY"年"MM"月"DD"日"(DAY)')
+from
+  dual
+</code></pre>
+
+> 2014/01/24 2014年01月24日(金曜日)
+
+- サンプルコード3
+
+
+<pre><code>
+select
+  TO_CHAR(SYSDATE, 'YYYY/MM/DD'),
+  TO_CHAR(SYSDATE, 'YYY年MM月DD日(DAY)')
+from
+  dual
+</code></pre>
+
+> エラーが発生する(二重引用ふを使っていないので)
+
+
+
+## 大文字とお文字
+
+<pre><code>
+select
+  sysdate,
+  TO_CHAR(SYSDATE, 'Month:Mon:Day:Dy') 日本語環境,
+  TO_CHAR(SYSDATE, 'Month:Mon:Day:Dy','nls_date_language = AMERICA') 先頭大文字,
+  TO_CHAR(SYSDATE, 'month:mon:day:dy','nls_date_language = AMERICA')
+from
+  dual
+</code></pre>
+
+> 14-01-24
+> , 1月 :1月 :金曜日:金
+> , January :Jan:Friday :Fry
+> , javuary :jan:fryday :fri
+
+
+## 日付書式の表示形式の変更
+
+- サンプルコード
+
+<pre><code>
+select
+  TO_CHAR(hiredate, 'DDth "of" Month, YYYY','nls_data_language = AMERICA'),
+from
+  employees
+where
+  deptno = 10
+</code></pre>
+
+> 25TH of February, 2001
+> 02ND of May     , 2004
+
+
+- DDthをddthに帰ると「25th」や「02nd」に変わる
+
+- 02ndはsecondという意味か
+
+
+
+
+<h3 class="title">
+TH
+</h3>
+<div class="box">
+<pre>
+順序表記( DDTH : 4TH)
+</pre>
+</div>
+
+
+
+
+<h3 class="title">
+SP
+</h3>
+<div class="box">
+<pre>
+スペル表記( DDSP : FOUR)
+</pre>
+</div>
+
+
+
+
+<h3 class="title">
+SPTH or THSP
+</h3>
+<div class="box">
+<pre>
+スペル表記+順序表記
+
+DDSPTH : FOURTH
+</pre>
+</div>
+
+
+## FM要素
+
+
+埋め込みモードを無効にして「数値の先行0」や「文字列の前後に含まれるスペース」が取り除かれて表示される
+
+- サンプルコード
+
+<pre><code>
+select
+  ename
+    TO_CHAR(hiredate
+      'ddth "of" Month, YYYY',
+      'nls_date_language = AMERICA')
+    TO_CHAR(hiredate
+      'fmddth "of" Month, 'YYYY'),
+      'nls_data_language = AMERICA')
+from
+  employees
+</code></pre>
+
+例一)
+> 25th of Feburary , 2001
+> 25th of Feburary, 2001
+
+Monthの後のスペースがなくなる
+
+例2)
+> 02nd of May       , 2001
+> 2nd of May, 2004
+
+先行の0が取り除かれている
+
+
+
+## TODO:数値の書式
+
+
+
+## TODO:YYとRRの違い
+
+
+
+
+## NULLチェック
+
+- NVL(式一, 式2)
+
+戻り値のデータ型は式1と同じになる
+
+
+- NVL2(式1, 式２, 式3)
+
+式1がNULL以外なら式2を
+
+式1がNULLならば式3を返す
+
+常に式2と同じデータ型と同じになるようになり、
+それができない場合はエラーになる
+
+
+- NULLIF(式1, 式2)
+
+二つの値を比較して、等しい場合は「NULL」を戻し
+そうでない場合は式1を戻す。
+
+式1にはNULL以外なら設定できる
+
+
+- COALESCE(式1, 式2 [,式n])
+
+式を左からチェックして最初に式1と一致したものを選択する
+
+全て同じデータ型である必要がある
+
+<pre><code>
+select
+  comm,
+  mgr,
+  ename,
+  COALESCE(comm, mgr, ename)
+from
+  employees
+</code></pre>
+
+> データ型が一致しません：　NUMBERが予想されましたがCHARです。
+
+<pre><code>
+select
+  comm,
+  mgr,
+  ename,
+  COALESCE(TO_CHAR(comm), TO_CHAR(mgr), ename)
+from
+  employees
+</code></pre>
+
+> 正常に実行可能
+
+
+
+# IF-THEN-ELSEロジック
+
+## DECODE関数
+
+switch文みたいな感じ
+
+<pre><code>
+DECODE(式
+        ,条件1, 戻り値1
+        [,条件2, 戻り値1]
+        [, デフォルトの戻り値])
+</code></pre>
+
+<pre><code>
+select
+  dept, ename, sal
+  DECODE(deptno
+               , 10, sal * 1.1
+               , 20, sal * 1.2
+               , sal*1.5) NEW_SAL
+from
+  employees
+</code></pre>
+
+
+
+# グループ関数
+
+SELECT句とORDER BY句, HAVING句で使用可能。
+
+WHERE句では使用できない
+
+- COUNT関数
+
+COUNTの中身は*とDISTINCTとALLを選べる
+
+- *
+
+NULLも含む全てのデータの件数
+
+- ALL
+
+重複した値でもそれぞれ1としてカウント。
+NULLは無視される
+
+- DISTINCT
+
+重複した値を1回だけカウント
+NULLは無視される
+
+- MIN/MAX関数
+
+数値型,文字列型, 日付型を指定可能
+
+文字を指定した場合はアルファベット順に並べ替えられる
+
+- AVG/SUM
+
+数値型飲みの列と式のみ指定できる
+
+- LISTAGG関数
+
+<pre><code>
+LISTAGG( 連結する列名 [, デリミタ] ) WITHIN GROUP( ORDER BY ソート列名)
+</code></pre>
+
+<pre><code>
+select
+  deptno,
+  LISTAGG(ename, ':')
+  WITHIN GROUP(order by sal desc) menber_list
+from
+  employees
+GROUP BY deptno;
+</code></pre>
+
+> 10, 32500, 佐藤:中村:佐々木
+
+
+- NULLについて
+
+NULLは基本無視される
+
+AVGでヌルが入っていたら、MULLを無視したカウントで割る
+
+
+- ネストについて
+
+2レベルまでネスト可能
+
+
+
+
+
+### GROUP BYについて
+
+
+<h3 class="title">
+ 列別名は
+</h3>
+<div class="box">
+<pre>
+指定できない
+</pre>
+</div>
+
+
+<h3 class="title">
+SELECT句の選択リストには
+</h3>
+<div class="box">
+<pre>
+- GROUP BYで指定した列と
+- グループ関数のみ指定可能
+</pre>
+</div>
+
+
+
+
+<h3 class="title">
+ORDERBYには
+</h3>
+<div class="box">
+<pre>
+GROUP BYで指定した列と
+グループ関数のみ
+指定可能
+</pre>
+</div>
+
+- サンプル
+
+<pre><code>
+select
+  deptno, job, COUNT(*), AVG(sal)
+from
+  employees
+group by
+  deptno;
+</code></pre>
+
+> GROUP BYの式ではありません
+
+- GROUP BYに指定している列をselect句に必ず指定する必要はない
+
+<pre><code>
+select
+  COUNT(*), AVG(sal)
+FROM employees
+GROUP BY deptno;
+</code></pre>
+
+>エラーは出ず、カウントと平均が出てくる
+
+- ORDER BYでは必ずGROUP BYで指定している列とグループ関数しか定義できない
+
+<pre><code>
+select
+  deptno 部門番号, MAX(sal) 最高給与
+from
+  employees
+GROUP BY deptno
+ORDER BY empno
+</code></pre>
+
+> GROPU BYの式ではありません：empno
+
+
+### HAVING句
+
+グループごとに条件を指定したい場合
+
+
+<h3 class="title">
+HAVING句の位置は
+</h3>
+<div class="box">
+<pre>
+WHERE句の後ろ
+ORDER BY句の前
+</pre>
+</div>
+
+
+
+
+
+
+
+## 列別名について
+
+SQLの実行順序
+
+<pre><code>
+FROM
+ON
+JOIN
+WHERE
+GROUP BY
+HAVING
+SELECT(列別名)
+DISTINCT
+ORDER BY(列別名可能)
+TOP
+</code></pre>
+
+
+
+
+# 表の結合
+
+表接頭辞を使用した列
+
+- 両方の列に存在する列をSELECTで指定するとエラーになる
+表接とうじを付けなければならない
+
+<pre><code>
+select
+  deptno, ename, deptno
+from
+  employees, departments
+</code></pre>
+
+> 列の定義が未確定です：deptno
+
+
+
+
+
+## 自然結合
+
+- 明示的に結合条件を指定する必要はない
+
+- 共通する列が複数ある場合は、全ての列が結合条件になる
+
+
+<h3 class="title">
+データ型の異なる同名の列があると
+</h3>
+<div class="box">
+<pre>
+エラーになる
+</pre>
+</div>
+
+
+
+
+<h3 class="title">
+自然結合の結合列には
+</h3>
+<div class="box">
+<pre>
+表接頭辞を設定できない。where句でも同様
+</pre>
+</div>
+
+
+
+
+
+<pre><code>
+select
+  e.empno, e.name, d.depth, d.name
+from
+  employees e
+natural join
+  departments d
+</code></pre>
+
+> NATURAL結合で使用される列は表接頭辞を指定できません
+
+> エラー
+
+<pre><code>
+select
+  e.empno, e.name, depth/* d.depthがないのでOK*/ d.name
+from
+  employees e
+natural join
+  departments d
+</code></pre>
+
+### 3つ以上の結合
+
+NATURAL JOINもUSINGでも3つ以上の表を結合することは可能
+
+- NATURAL JOINを使用する例
+<pre><code>
+sleect
+  ordno,
+  o.data_orderd
+  ,od.quantity
+  ,product_name
+FROM
+  customer c
+NATURAL JOIN order o
+NATURAL JOIN ord_details od
+NATURAL JOIN product p
+ORDER BY ordno,prodno;
+</code></pre>
+
+- USINGを使用する例
+
+<pre><code>
+sleect
+  ordno,
+  o.data_orderd
+  ,od.quantity
+  ,product_name
+FROM
+  customer c
+JOIN order o USING(custno)
+JOIN ord_details od USING(ordno)
+JOIN product p USING(prodno)
+ORDER BY ordno,prodno;
+</code></pre>
+
+- 2つのキメラも可能
+
+<pre><code>
+sleect
+  ordno,
+  o.data_orderd
+  ,od.quantity
+  ,product_name
+FROM
+  customer c
+NATURAL JOIN order o
+JOIN ord_details od USING(ordno)
+JOIN product p ON od.prodno = p.prodno
+ORDER BY ordno,prodno;
+</code></pre>
+
+
+
+
+## USING
+
+二つの列に共通する列を指定できる
+
+<h3 class="title">
+NAtURAL JOINとUSINGは
+</h3>
+<div class="box">
+<pre>
+同時に使用できない
+</pre>
+</div>
+
+
+<h3 class="title">
+USING句もNATURAL JOINでも
+</h3>
+<div class="box">
+<pre>
+結合列に表接頭辞をつけるとエラーになる
+</pre>
+</div>
+
+
+<pre><code>
+select
+  e.name,
+  e.ename,
+  d.dname
+FROM
+  employees e 
+JOIN 
+  departs d
+USING (deptno)
+WHERE
+  e.deptno IN (10,20)
+</code></pre>
+
+> エラー
+
+
+## ONの使用
+
+異なる名前の列を結合したい時など
+
+ONは「悲透過結合」や「自己結合」などでも使える
+
+USINGは透過結合のみしか使えない
+
+- 接頭辞は同じ名前の列を使用する際は必須
+
+
+## 完全外部結合
+
+JOINの左右に指定された表データを全て取り出すための結合
+
+結合条件を満たさないものも含めて
+
+FULL OUTER JOINを使う
+
+
+# 副問い合わせについて
+
+
+<h3 class="title">
+一見も戻さない副問い合わせ
+</h3>
+<div class="box">
+<pre>
+NULLが戻されるので結果も0件になる
+
+</pre>
+</div>
+
+
+
+<h3 class="title">
+単一行用の演算子を使って( < (副問い合わせ, <>(副問い合わせなど))複数行帰ってきたとき
+</h3>
+<div class="box">
+<pre>
+エラーになる
+</pre>
+</div>
+
+
+
+
+<h3 class="title">
+NOT IN演算子とNULL
+</h3>
+<div class="box">
+<pre>
+NOT IN で指定したリストやサブクエリーの値に NULL が存在すると、常に空の結果セットが返ってきてしまいます。
+
+理由：IN は「=」であるためNOT INは「<>」となる。
+ところが、<> NULL　の結果は常にFalseになるので、
+NULLが存在するだけでどれもFalseになる。
+</pre>
+</div>
+
+
+## 複数列副問い合わせ
+
+<pre><code>
+select
+  empno,
+  ename,
+  sal,
+  deptno
+from
+  employees
+where
+  (sal, deptno) 
+  = (
+    select 
+      sal, deptno
+    from
+      employees
+    where
+      empno = 1013)
+  and
+    ename <> '山田'
+</code></pre>
+
+
+
+# 集合演算子
+
+A : B : C
+
+## UNION
+
+二つの問い合わせを連結し、重複は一度のみで戻す。
+こちらの方が一般的。
+
+A : B : C
+
+<h3 class="title">
+内部的にソートした上で重複を廃城するので
+</h3>
+<div class="box">
+<pre>
+実行結果はselectの先頭で昇順にソートされる。
+同一の値は二つ目の列でソートされる。
+</pre>
+</div>
+
+
+
+## UNION ALL
+
+二つの問い合わせを連結し、重複したものはその数だけ戻す。
+
+A : B : B : C
+
+<h3 class="title">
+内部的に重複の削除を行わないので
+</h3>
+<div class="box">
+<pre>
+唯一実行結果もソートされない
+</pre>
+</div>
+
+
+## INTERSECt
+
+二つの問い合わせの結果のうち、共通するものを戻す。
+
+ : B : 
+
+<h3 class="title">
+内部的にソートした上で共通部分を取り出すので
+</h3>
+<div class="box">
+<pre>
+実行結果はselectの先頭で昇順にソートされる。
+</pre>
+</div>
+
+
+## MINUS
+
+一つ目の問い合わせの結果のうち、二つ目にないものを返す。
+
+a :
+
+<h3 class="title">
+内部的にソートした上で
+</h3>
+<div class="box">
+<pre>
+実行結果はselectの先頭で昇順にソートされる。
+</pre>
+</div>
+
+
+<h3 class="title">
+Aだけ取り出すというその性質上、一つ目と二つ目の列を入れ替えた時に
+</h3>
+<div class="box">
+<pre>
+MINUSのみが表示されるデータが異なる。
+</pre>
+</div>
+
+## 集合演算子のガイドライン
+
+
+<h3 class="title">
+個数は
+</h3>
+<div class="box">
+<pre>
+同数に
+</pre>
+</div>
+
+
+<h3 class="title">
+データ型は
+</h3>
+<div class="box">
+<pre>
+1つ目の問い合わせのデータ型と同じか
+同じデータ型グループ(CHARとVARCHAR2など)である必要がある
+</pre>
+</div>
+
+
+- サンプルコード
+
+<pre><code>
+select
+  empno from employees
+union
+select
+  deptno from employees
+</code></pre>
+
+> 正常に実行される
+
+<pre><code>
+select
+  empno from employees
+union
+select
+  ename from employees
+</code></pre>
+
+> エラーになる(NUMBERとCHAR)
+
+
+## ORDER BYについて
+
+
+<h3 class="title">
+ORDER BYの注意
+</h3>
+<div class="box">
+<pre>
+- 最後の副問い合わせの後に指定する必要がある
+- ORDER BYの指定では最初のselect句の列と列別名のみ使用可能
+</pre>
+</div>
+
+## NULLについて
+
+NULLは無視されない
+
+<h3 class="title">
+UNION ALLでは
+</h3>
+<div class="box">
+<pre>
+重複したNULLも戻す
+</pre>
+</div>
+
+<h3 class="title">
+UNIONでは
+</h3>
+<div class="box">
+<pre>
+NULLがあれば一件だけ出てくる
+</pre>
+</div>
+
+
+
+# データ操作,トランザクション
+
+- INSERT文(想像通り)
+
+<pre><code>
+INSERT INTO 表名
+[( 列名1[,列名2, ...] )]
+
+VALUES( 値1 [,値2...] )
+</code></pre>
+
+列名は省略できるが、その場合は表の定義と同じ順番で、
+全ての値を指定する必要がある。
+
+列の値を明示的にした場合、
+列名とVALUESの一対一関係が同じである必要がある。
+
+NULLについては列の名前を省略するか、NULLキーワードを指定すれば良い
+
+ただし、NULL?が「NOT NULL」では指定できずエラーになる
+
+関数や副問い合わせの利用も可能
+
+- 副問い合わせを利用したINSERT文
+
+<pre><code>
+INSERT INTO 表名1 (列名 [,列名2 ...] )
+SELECT
+  列名 [,列名2 ...] 
+FROM
+  表名2
+...
+</code></pre>
+
+
+<h3 class="title">
+VALUES句は
+</h3>
+<div class="box">
+<pre>
+指定しない
+</pre>
+</div>
+
+
+
+<h3 class="title">
+副問い合わせの()は
+</h3>
+<div class="box">
+<pre>
+必須ではない
+</pre>
+</div>
+
+INSERTの省略も可能だが、同じ位置に同じ数ではあること。
+
+副問い合わせのSELECTの*の
+使用可能不可能のみ不明。多分できない。
+
+
+
+## UPDATEと副問い合わせ
+
+- サンプルコード1
+
+<pre><code>
+UPDATE
+  emp_compy
+SET
+  job = (
+      SELECT
+        job
+      FROM
+        employees
+      WHERE
+        empno = 1010
+  ),
+  sal = (
+      SELECT
+        sal
+      FROM
+        employees
+      WHERE
+        empno = 1010
+  )
+WHERE
+  empno = (
+    SELECT
+      empno
+    FROM
+      employees
+    WHERE
+      ename = '加藤'
+  )
+</code></pre>
+
+- サンプルコード2
+
+<pre><code>
+UPDATE
+  emp_compy
+SET
+  (job, sal) = (
+      SELECT
+        job, sal
+      FROM
+        employees
+      WHERE
+        empno = 1010
+  )
+WHERE
+  empno = (
+    SELECT
+      empno
+    FROM
+      employees
+    WHERE
+      ename = '加藤'
+  )
+</code></pre>
+
+# トランザクション
+
+DMLでエラーが出たときは
+自動コミットはされず、自動ロールバックされる
+
+
+## 読み取り一貫性
+
+：ロールバックされる可能性のある未確定のデータは他のセッションからは参照できない
+
+
+
+
+## 排他ロック
+
+FOR UPDATE句を使用すると、SELECTの実行中に行レベルの排他ロックを取得することができる
+
+排他ロックはトランザクションの終了(COMMITされるまで)続く。
+
+
+
+
+
+
+
+
+
+<h3 class="title">
+
+</h3>
+<div class="box">
+<pre>
+
+
+</pre>
+</div>
+
+
+
+
+## 文字列の結合
+
+文字列 string1 と string2 を連結した （CONCATenated） 文字列を戻す。
+引数は常に 2つしかない。3つ以上の文字列を結合するには関数の中に関数を埋め込んで表現する。
+
+<pre><code>
+CONCAT ( string1 , string2 )
+</code></pre>
+
+
 
 ## CREATE TABLE
 
@@ -67,7 +1660,9 @@ SELECT * FROM emp2;
 リテラル値、式またはSQL関数を指定できる。(SYSDATE式やUSER式など)
 
 
+## NULLの取扱
 
+NULLは無視される
 
 
 
