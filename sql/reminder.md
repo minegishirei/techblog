@@ -45,10 +45,13 @@ Alter table row define
 30秒考えて即答できないのを飛ばす。
 かけても60秒。
 その代わりチェックは付けておくこと。
+自信がないものもチェックをつけておくこと。
 
 0.5*75 = 37.5min
 
 60*75 = 75min
+
+結果として、25問/75まで間違えて良い
 
 
 
@@ -204,20 +207,36 @@ from
 
 指定しなければ0からスタートする
 
-
+<pre><code>
+OFFSET N ROW | ROWS
+</code></pre>
 
 <h3 class="title">
-OFFSET N ROW | ROWS
+Nに負の値を指定した場合
 </h3>
 <div class="box">
 <pre>
-Nに負の値を指定した場合は0とみなされる
+は0とみなされる
+</pre>
+</div>
 
-ROWもROWSも違いはない
 
+
+<h3 class="title">
+ROWもROWSも
+</h3>
+<div class="box">
+<pre>
+違いはない
 OFFSETが宣言されている時は省略不可
 </pre>
 </div>
+
+
+
+
+
+
 
 
 
@@ -226,23 +245,42 @@ OFFSETが宣言されている時は省略不可
 
 返される行数か行の割合を表す
 
-FETCHを省略すると +1からスタートする
+FETCHを省略すると 最初からスタートする
+
+<pre><code>
+FETCH { FIRST | NEXT (省略不可,違いはない)} { N | N PERCENT } { ROW | ROWS(省略不可) } { ONLY | WITH TIES }
+</code></pre>
 
 
 <h3 class="title">
-FETCH { FIRST | NEXT (省略不可,違いはない)} { N | N PERCENT } { ROW | ROWS(省略不可) } { ONLY | WITH TIES }
+ONLYは
 </h3>
 <div class="box">
 <pre>
-
-ONLYは行数を正確に返す
-
-WITH TIESは同着も返す
-
-WITH TIESを指定するときはORDER BYが必須
-
+行数を正確に返す
 </pre>
 </div>
+
+
+<h3 class="title">
+WITH TIESは
+</h3>
+<div class="box">
+<pre>
+同着も返す
+</pre>
+</div>
+
+
+<h3 class="title">
+WITH TIESを指定するときは
+</h3>
+<div class="box">
+<pre>
+ORDER BYが必須
+</pre>
+</div>
+
 
 
 
@@ -302,7 +340,21 @@ OFFSET 5 ROWS
 SUBSTR(文字列, m[,n])
 </code></pre>
 
-m文字目からn文字分を取り出す関数(mは負の値でも可能)
+m文字目からn文字分を取り出す関数
+
+
+
+<h3 class="title">
+mは
+</h3>
+<div class="box">
+<pre>
+負の値でも可能
+</pre>
+</div>
+
+
+
 
 - サンプルコード
 
@@ -353,7 +405,17 @@ INSTR(文字列1, 文字列2 [,m=1][,n=1])
 
 m文字目から検索を行い,n回目に一致した文字列の位置を返す
 
-最初から最後まで文字がない場合は0を返す
+
+<h3 class="title">
+最初から最後まで文字がない場合は
+</h3>
+<div class="box">
+<pre>
+0を返す
+</pre>
+</div>
+
+
 
 <pre><code>
 select
@@ -410,6 +472,30 @@ from
 </code></pre>
 
 > Oracle Master, Oracle
+
+
+
+## 文字列の結合
+
+文字列 string1 と string2 を連結した （CONCATenated） 文字列を戻す。
+
+
+<h3 class="title">
+引数は常に
+</h3>
+<div class="box">
+<pre>
+2つしかない。
+3つ以上の文字列を結合するには関数の中に関数を埋め込んで表現する。
+</pre>
+</div>
+
+
+<pre><code>
+CONCAT ( string1 , string2 )
+</code></pre>
+
+
 
 
 
@@ -489,7 +575,6 @@ from
 
 年の下2桁。
 YYとは「世紀」の扱いが異なり、
-
 
 - Q
 
@@ -620,14 +705,19 @@ select
   sysdate,
   TO_CHAR(SYSDATE, 'Month:Mon:Day:Dy') 日本語環境,
   TO_CHAR(SYSDATE, 'Month:Mon:Day:Dy','nls_date_language = AMERICA') 先頭大文字,
-  TO_CHAR(SYSDATE, 'month:mon:day:dy','nls_date_language = AMERICA')
+  TO_CHAR(SYSDATE, 'month:mon:day:dy','nls_date_language = AMERICA') 先頭小文字
 from
   dual
 </code></pre>
 
 > 14-01-24
+
 > , 1月 :1月 :金曜日:金
+
+
 > , January :Jan:Friday :Fry
+
+
 > , javuary :jan:fryday :fri
 
 
@@ -645,10 +735,21 @@ where
 </code></pre>
 
 > 25TH of February, 2001
+
+
 > 02ND of May     , 2004
 
 
-- DDthをddthに帰ると「25th」や「02nd」に変わる
+
+<h3 class="title">
+DDthをddthに変えると
+</h3>
+<div class="box">
+<pre>
+「25th」や「02nd」に変わる
+</pre>
+</div>
+
 
 - 02ndはsecondという意味か
 
@@ -713,12 +814,16 @@ from
 
 例一)
 > 25th of Feburary , 2001
+
+
 > 25th of Feburary, 2001
 
 Monthの後のスペースがなくなる
 
 例2)
 > 02nd of May       , 2001
+
+
 > 2nd of May, 2004
 
 先行の0が取り除かれている
@@ -738,7 +843,14 @@ Monthの後のスペースがなくなる
 
 - NVL(式一, 式2)
 
-戻り値のデータ型は式1と同じになる
+<h3 class="title">
+戻り値のデータ型は
+</h3>
+<div class="box">
+<pre>
+式1と同じになる
+</pre>
+</div>
 
 
 - NVL2(式1, 式２, 式3)
@@ -747,23 +859,50 @@ Monthの後のスペースがなくなる
 
 式1がNULLならば式3を返す
 
-常に式2と同じデータ型と同じになるようになり、
+
+<h3 class="title">
+常に式2と同じデータ型と同じになるようにデータが戻り
+</h3>
+<div class="box">
+<pre>
 それができない場合はエラーになる
+</pre>
+</div>
 
 
 - NULLIF(式1, 式2)
 
-二つの値を比較して、等しい場合は「NULL」を戻し
+二つの値を比較して、
+<strong>等しい場合は「NULL」を戻し</storng>
 そうでない場合は式1を戻す。
 
-式1にはNULL以外なら設定できる
+
+<h3 class="title">
+式1には
+</h3>
+<div class="box">
+<pre>
+NULL以外なら設定できる
+</pre>
+</div>
+
+
 
 
 - COALESCE(式1, 式2 [,式n])
 
 式を左からチェックして最初に式1と一致したものを選択する
 
+
+<h3 class="title">
+引数は
+</h3>
+<div class="box">
+<pre>
 全て同じデータ型である必要がある
+</pre>
+</div>
+
 
 <pre><code>
 select
@@ -823,7 +962,7 @@ SELECT句とORDER BY句, HAVING句で使用可能。
 
 WHERE句では使用できない
 
-- COUNT関数
+## COUNT関数
 
 COUNTの中身は*とDISTINCTとALLを選べる
 
@@ -841,17 +980,25 @@ NULLは無視される
 重複した値を1回だけカウント
 NULLは無視される
 
-- MIN/MAX関数
+## MIN/MAX関数
 
+<h3 class="title">
+引数は
+</h3>
+<div class="box">
+<pre>
 数値型,文字列型, 日付型を指定可能
+</pre>
+</div>
+
 
 文字を指定した場合はアルファベット順に並べ替えられる
 
-- AVG/SUM
+## AVG/SUM
 
 数値型飲みの列と式のみ指定できる
 
-- LISTAGG関数
+## LISTAGG関数
 
 <pre><code>
 LISTAGG( 連結する列名 [, デリミタ] ) WITHIN GROUP( ORDER BY ソート列名)
@@ -870,14 +1017,14 @@ GROUP BY deptno;
 > 10, 32500, 佐藤:中村:佐々木
 
 
-- NULLについて
+## NULLについて
 
 NULLは基本無視される
 
 AVGでヌルが入っていたら、MULLを無視したカウントで割る
 
 
-- ネストについて
+## ネストについて
 
 2レベルまでネスト可能
 
@@ -899,7 +1046,7 @@ AVGでヌルが入っていたら、MULLを無視したカウントで割る
 
 
 <h3 class="title">
-SELECT句の選択リストには
+SELECT句の選択可能な列は
 </h3>
 <div class="box">
 <pre>
@@ -912,7 +1059,7 @@ SELECT句の選択リストには
 
 
 <h3 class="title">
-ORDERBYには
+ORDERBYの指定可能な列は
 </h3>
 <div class="box">
 <pre>
@@ -935,7 +1082,8 @@ group by
 
 > GROUP BYの式ではありません
 
-- GROUP BYに指定している列をselect句に必ず指定する必要はない
+※ GROUP BYに指定している列をselect句に必ず指定する必要はない
+知ってるよね。
 
 <pre><code>
 select
@@ -1005,8 +1153,21 @@ TOP
 
 表接頭辞を使用した列
 
-- 両方の列に存在する列をSELECTで指定するとエラーになる
-表接とうじを付けなければならない
+
+
+<h3 class="title">
+両方の列に存在する列を
+</h3>
+<div class="box">
+<pre>
+SELECTで指定するとエラーになる
+
+回避するためには表接頭辞を付けなければならない
+</pre>
+</div>
+
+
+
 
 <pre><code>
 select
@@ -1206,10 +1367,12 @@ NULLが戻されるので結果も0件になる
 
 
 <h3 class="title">
-単一行用の演算子を使って( < (副問い合わせ, <>(副問い合わせなど))複数行帰ってきたとき
+単一行用の演算子を使って複数行帰ってきたとき
 </h3>
 <div class="box">
 <pre>
+( < (副問い合わせ, <>(副問い合わせなど))
+
 エラーになる
 </pre>
 </div>
@@ -1272,7 +1435,7 @@ A : B : C
 </h3>
 <div class="box">
 <pre>
-実行結果はselectの先頭で昇順にソートされる。
+実行結果は(ORDER BYを使わずとも)selectの先頭で昇順にソートされる。
 同一の値は二つ目の列でソートされる。
 </pre>
 </div>
@@ -1328,10 +1491,12 @@ a :
 
 
 <h3 class="title">
-Aだけ取り出すというその性質上、一つ目と二つ目の列を入れ替えた時に
+Aだけ取り出すというその性質上、
 </h3>
 <div class="box">
 <pre>
+一つ目と二つ目の列を入れ替えた時に
+
 MINUSのみが表示されるデータが異なる。
 </pre>
 </div>
@@ -1383,18 +1548,30 @@ select
 > エラーになる(NUMBERとCHAR)
 
 
-## ORDER BYについて
+## 集合演算子とORDER BYについて
+
+
 
 
 <h3 class="title">
-ORDER BYの注意
+ORDER BYの位置は
 </h3>
 <div class="box">
 <pre>
-- 最後の副問い合わせの後に指定する必要がある
-- ORDER BYの指定では最初のselect句の列と列別名のみ使用可能
+- 最後の集合の後に指定する必要がある
 </pre>
 </div>
+
+<h3 class="title">
+ORDER BYの列指定では
+</h3>
+<div class="box">
+<pre>
+最初のselect句の列と列別名のみ使用可能
+</pre>
+</div>
+
+
 
 ## NULLについて
 
@@ -1478,7 +1655,15 @@ VALUES句は
 INSERTの省略も可能だが、同じ位置に同じ数ではあること。
 
 副問い合わせのSELECTの*の
-使用可能不可能のみ不明。多分できない。
+使用可能不可能のみ不明。多分できない。⇨可能だった
+
+<pre><code>
+定義が同じテーブルで全件 INSERT する場合
+
+INSERT INTO テーブルA
+SELECT * 
+FROM   テーブルB
+</code></pre>
 
 
 
@@ -1569,27 +1754,6 @@ FOR UPDATE句を使用すると、SELECTの実行中に行レベルの排他ロ�
 
 
 
-<h3 class="title">
-
-</h3>
-<div class="box">
-<pre>
-
-
-</pre>
-</div>
-
-
-
-
-## 文字列の結合
-
-文字列 string1 と string2 を連結した （CONCATenated） 文字列を戻す。
-引数は常に 2つしかない。3つ以上の文字列を結合するには関数の中に関数を埋め込んで表現する。
-
-<pre><code>
-CONCAT ( string1 , string2 )
-</code></pre>
 
 
 
@@ -1676,7 +1840,7 @@ DDLコマンド3つ
 </h3>
 <div class="box">
   <p>
-    !!!ALTERコマンド(オブジェクトの定義情報を変更する)
+    ALTERコマンド(オブジェクトの定義情報を変更する)
   </p>
   <p>
   DROPコマンド
@@ -1692,9 +1856,16 @@ DDLコマンド3つ
 
 # DROP TABLE
 
-- 表ないの全てのデータが削除されう
+- 表内の全てのデータが削除されう
 
-- <strong>表に定義されている索引も削除される</strong>
+<h3 class="title">
+表に定義されている
+</h3>
+<div class="box">
+  <p>
+索引も削除される
+  </p>
+</div>
 
 - ただし、完全に削除したわけではなく、ゴミ箱に移動されるのみ
 
@@ -1777,26 +1948,67 @@ CHAR(10)の列にabcを代入すると「abc_______」が代入される。
 
 最大2Gまでの文字データを格納可能
 
-- サイズ指定不可
-
 
 <h3 class="title">
-覚えた方がいいこと
+サイズ指定
 </h3>
 <div class="box">
   <p>
-  副問い合わせを使用した表の作成時にLONG列はコピーできない
-  </p>
-    <p>
-    GROPU BYとORDER BY句に指定できない
-  </p>
-    <p>
-    一つの表に一つだけ(LONG列またはLONG RAW列)しか定義できない
-  </p>
-    <p>
-    LONG列には制約を定義できない
+  不可
   </p>
 </div>
+
+
+<h3 class="title">
+副問い合わせを使用した表の作成時に
+</h3>
+<div class="box">
+  <p>
+  LONG列はコピーできない
+  </p>
+</div>
+
+<h3 class="title">
+GROPU BYとORDER BY句に
+</h3>
+<div class="box">
+  <p>
+  指定できない
+  </p>
+</div>
+
+
+
+<h3 class="title">
+一つの表に
+</h3>
+<div class="box">
+    <p>
+    一つだけ(LONG列またはLONG RAW列)しか定義できない
+  </p>
+</div>
+
+<h3 class="title">
+LONG列には
+</h3>
+<div class="box">
+    <p>
+    制約を定義できない
+  </p>
+</div>
+
+
+# 以下LOB(Large Object )だが
+
+<h3 class="title">
+LOBは全て
+</h3>
+<div class="box">
+    <p>
+    サイズ指定不可
+  </p>
+</div>
+
 
 
 
@@ -1804,13 +2016,13 @@ CHAR(10)の列にabcを代入すると「abc_______」が代入される。
 
 最大4Gまでの文字列を格納できるデータ型
 
-- サイズ指定不可
+
 
 ## NCLOB型
 
 最大4GまでのUnicode文字列を格納できるデータ型
 
-- サイズ指定不可
+
 
 
 # 数値型
@@ -2173,7 +2385,7 @@ NULLの値を設定できなくなる
 
 - 複数行にNULLを含めることも可能(NULLは重複しても良い)
 
-- ??自動的に制約と同じ名前の一意索引(重複が許可されない索引)が作成される
+- 自動的に制約と同じ名前の一意索引(重複が許可されない索引)が作成される
 
 - 列の組み合わせについての索引は表レベルでなければいけない
 </pre>
@@ -2209,13 +2421,24 @@ CREATE TABLE emp6
 <pre>
 - NULLも許可しないことに注意(一意に定まらなければならない)
 
-- 表に一つのみ定義できる
+- 
 
 - 名前の一意索引が作成される
 
 - 組み合わせに対してもPRIMARY KEYは作成できる
 </pre>
 </div>
+
+
+<h3 class="title">
+PRIMARY KEYの数は
+</h3>
+<div class="box">
+<pre>
+表に一つのみ定義できる
+</pre>
+</div>
+
 
 
 ## FOREGN KEY(外部キー制約):REFERRENCES
