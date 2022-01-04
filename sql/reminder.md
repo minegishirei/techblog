@@ -5,17 +5,17 @@
 
 - Union とunion allの違い
 
-関数の使い方について
+- 関数の使い方について
 
 TO_CHAR TO_DATE TO_NUMBERについて
 
-Create文など
+- Create文など
 
-制約について
+- 制約について
 
-Alter table
+- Alter table
 
-Alter table row define
+- Alter table row define
 
 - Table add row
 
@@ -31,7 +31,11 @@ Alter table row define
 
 - RR指定の日付データを意図的に変えることができるか
 
-オブジェクト指向のDBとリレーショナル型のDB
+
+- オブジェクト指向のDBとリレーショナル型のDB(rdms)
+<a href="https://blog.emptyq.net/a?id=00009-0e266983-c3d9-426a-bfbb-68c03f3dccaa">
+解説
+</a>
 
 - REPLACE関数
 
@@ -42,10 +46,10 @@ Alter table row define
 
 1Q:1.6min
 
-30秒考えて即答できないのを飛ばす。
-かけても60秒。
+- 30秒-60秒考えて即答できないのを飛ばす。
 その代わりチェックは付けておくこと。
-自信がないものもチェックをつけておくこと。
+
+- 自信がないものもチェックをつけておくこと。
 
 0.5*75 = 37.5min
 
@@ -58,7 +62,44 @@ Alter table row define
 
 
 
+## 世紀形
 
+<a href="https://qiita.com/mochichoco/items/2904384b2856db2bf46c#%E6%AD%A3%E8%A6%8F%E5%8C%96%E3%81%AE%E6%89%8B%E9%A0%86-1">
+正規形
+</a>
+
+
+
+## 「&&置換」
+
+&&はユーザー変数として覚えてくれるバインド変数
+
+&は覚えてくれないバインド変数
+
+
+
+## UNUSEDマーク
+
+UNUSEDマークの付け方
+
+<pre><code>
+ALATER TABLE 表名
+SET UNUSED [COLUMN](列名)
+</code></pre>
+
+UNUSEDマークのついた列の消し方
+
+<pre><code>
+LATER TABLE 表名
+DROP UNUSED COLUMNS
+</code></pre>
+
+
+- 削除された列と同様の列の扱いになり、同じ名前の列を作れる
+
+- ただし、LONG型はUNUSEDマークをつけることができない
+
+- 列の名前の確認や取り消しができない
 
 
 
@@ -366,7 +407,9 @@ from
   dual
 </code></pre>
 
-> rac, racle Server
+> rac, 
+
+> racle Server
 
 
 
