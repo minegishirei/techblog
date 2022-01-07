@@ -1,0 +1,317 @@
+
+
+
+## 次の記述で正しいものを選べ
+
+A: NUMBER型に精度を指定しないと38桁になる
+
+B: CHARにサイズを指定しないと1桁になる
+
+C: VARCHAR2にサイズを指定しないと、2000バイトになる
+
+D: DATE型のサイズは指定可能
+
+
+
+<h3 class="title">答え</h3>
+<div class="box">
+  <p>
+    B: CHARにサイズを指定しないと1桁になる
+  </p>
+</div>
+
+
+## DROP TABLEについて謝った説明を選べ
+
+A: 表内のデータは削除される
+
+B: 表についている索引も削除される
+
+C: 表に対してのビューとシノニムは残るが、無効になる
+
+D: DROP TABLEを発行した後でもROLLBACKの実行でもどり、COMMITの後で処理が確定する。
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+  <p>
+    D: DROP TABLEを発行した後でもROLLBACKの実行でもどり、COMMITの後で処理が確定する。
+  </p>
+  <p>
+      DROP TABLEコマンドはDDLと呼ばれる分類に属し、実行直後にCOMMITされる
+  </p>
+</div>
+
+
+
+
+## CREATE TABLE 
+
+<pre><code>
+CREATE TABLE emp_copy
+AS
+SELECT * FROM employees;
+</code></pre>
+
+上記のクエリについて正しいものを選べ
+
+A: employeesテーブルの全てのデータと列名がコピーされる
+
+B: employeesテーブルのデータがコピーされる
+
+C: employeesについての索引がコピーされる
+
+D: employeesについての制約が全てコピーされる
+
+F: employeesについてのNOT NULL制約だけがコピーされる
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+  <p>
+    A: employeesテーブルの全てのデータと列名がコピーされる
+  </p>
+  <p>
+    B: employeesテーブルのデータがコピーされる
+  </p>
+  <p>
+F: employeesについてのNOT NULL制約だけがコピーされる
+  </p>
+</div>
+
+
+
+## 制約
+
+Oracleサーバーで使用できる制約を選べ
+
+A: PRIMARY KEY
+
+B: FOREGIN KEY
+
+C: NOT NULL
+
+D: CHECK
+
+F: DEFAULT
+
+G: UNIQUE
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+  <pre>
+A: PRIMARY KEY
+
+B: FOREGIN KEY
+
+C: NOT NULL
+
+D: CHECK
+
+G: UNIQUE
+  </pre>
+  <p>
+    F: DEFAULTは制約ではなくオプション
+  </p>
+</div>
+
+
+
+
+## UNUSED
+
+<pre><code>
+ALTER TABLE department SET UNUSED(location);
+</code></pre>
+
+上記のコマンドを実行した後で次のうち正しいものを選べ
+
+A: コマンドを実行した後は、同じ名前の列をDEPARTMENTに追加できる
+
+B: DROP UNUSEDコマンドを実行するまで同じ名前の列を表に追加することはできない
+
+C: LOCATION列を含むビューは自動的に修正される
+
+D: DROP UNUSEDコマンドを実行するまで列に作成してある索引は消えない。
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+  <p>
+    A: コマンドを実行した後は、同じ名前の列をDEPARTMENTに追加できる
+  </p>
+  <p>
+      Dは、UNUSEDコマンドを実行した後ですぐに索引は消える
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
+
+
+<script>
+//アコーディオンをクリックした時の動作
+$('.title').on('click', function() {//タイトル要素をクリックしたら
+  var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+  $(findElm).slideToggle();//アコーディオンの上下動作
+    
+  if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+    $(this).removeClass('close');//クラス名を除去し
+  }else{//それ以外は
+    $(this).addClass('close');//クラス名closeを付与
+  }
+});
+
+//ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+$(window).on('load', function(){
+  $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+  $(".open").each(function(index, element){ //openクラスを取得
+    var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+    $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+    var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+    $(Box).slideDown(500);          //アコーディオンを開く
+  });
+});
+</script>
+
+<style>
+@charset "UTF-8";
+
+/*==================================================
+アコーディオンのためのcss
+===================================*/
+
+/*アコーディオン全体*/
+.accordion-area{
+    list-style: none;
+    width: 96%;
+    max-width: 900px;
+    margin:0 auto;
+}
+
+.accordion-area li{
+    margin: 10px 0;
+}
+
+.accordion-area section {
+  border: 1px solid #ccc;
+}
+
+/*アコーディオンタイトル*/
+.title {
+    position: relative;/*+マークの位置基準とするためrelative指定*/
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: normal;
+    padding: 3% 3% 3% 50px;
+    transition: all .5s ease;
+}
+
+/*アイコンの＋と×*/
+.title::before,
+.title::after{
+    position: absolute;
+    content:'';
+    width: 15px;
+    height: 2px;
+    background-color: #333;
+    
+}
+.title::before{
+    top:48%;
+    left: 15px;
+    transform: rotate(0deg);
+    
+}
+.title::after{    
+    top:48%;
+    left: 15px;
+    transform: rotate(90deg);
+
+}
+/*　closeというクラスがついたら形状変化　*/
+.title.close::before{
+  transform: rotate(45deg);
+}
+
+.title.close::after{
+  transform: rotate(-45deg);
+}
+
+/*アコーディオンで現れるエリア*/
+.box {
+    display: none;/*はじめは非表示*/
+    background: #f3f3f3;
+  margin:0 3% 3% 3%;
+    padding: 3%;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 備考
+
+
+title:Oracle SQL Bronze web問題集【DDLによるテーブル作成】
+
+description:oracleマスターbronzeのweb問題集です。
+
+img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
+
+category_script:page_name.startswith("5")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
