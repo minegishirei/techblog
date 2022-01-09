@@ -1338,6 +1338,8 @@ title:DDLについてのまとめ【SQL Oralce Bronze】
 
 description:OracleMasterのために必要なDDLについての理解をまとめました。
 
+img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
+
 
 
 

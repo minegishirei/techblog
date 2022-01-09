@@ -3166,6 +3166,8 @@ $(window).on('load', function(){
 
 
 
-title:ORACLE Bronze SQL 間違いやすいところ一覧
+title:ORACLE Bronze SQL 勉強メモ
+
+
 
 
