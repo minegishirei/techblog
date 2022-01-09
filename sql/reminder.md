@@ -224,8 +224,12 @@ and
 
 ## row_limiting_clause
 
-OFFSET ⇨ FETCHの順番
 
+
+<h3 class="title">
+書き方
+</h3>
+<div class="box">
 <pre><code>
 select
   *
@@ -240,6 +244,32 @@ from
        { ONLY | WITH TIES }
 ]
 </code></pre>
+</div>
+
+
+<h3 class="title">
+FETCHのあとは
+</h3>
+<div class="box">
+<pre><code>
+NEXTかFIRSTの選択肢がある
+</code></pre>
+</div>
+
+
+<h3 class="title">
+ROWとROWSの違いは
+</h3>
+<div class="box">
+<pre><code>
+ない。
+どちらも同じだが、ないという選択肢はない
+</code></pre>
+</div>
+
+
+
+
 
 
 ## OFFSET句
@@ -481,7 +511,11 @@ or
 TRIM(文字列)
 </code></pre>
 
-削除文字列は1文字だけ。
+削除文字列は
+
+<strong>
+1文字だけ。
+</strong>
 
 - LEADING
 
