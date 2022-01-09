@@ -39,13 +39,6 @@ SELECT empno, ename FROM employees;
 
 
 
-}
-
-
-
-
-{
-
 ##SQL文として正しいものを2つ選択してください。
 
 ただし、DEPARTMENTS表にはDEPTNO、DNAME、LOCの3つの列があります。
@@ -58,18 +51,21 @@ SELECT empno, ename FROM employees;
 
 4: DESCRIBE departments
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-A: 1,3
-
-ALLという書き方はない
 
 
-}
+<h3 class="title">
+  答え
+</h3>
+<div class="box">
+<pre>
+  A: 1,3
+  ALLという書き方はない
+</pre>
+</div>
 
 
 
-{
+
 ##算術式を指定できる句として誤っていているものを選べ
 
 
@@ -81,22 +77,24 @@ ALLという書き方はない
 
 4: ORDER BY句
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-A: 2
+<h3 class="title">
+  答え
+</h3>
+<div class="box">
+<pre>
+  A: 2
+  FROMはデータベースを指定するので計算できるものがない
+</pre>
+</div>
 
-FROMはデータベースを指定するので計算できるものがない
-
-
-}
 
 
 
 
 
-{
 
-##次のselect文のうち、sal(給料)に10000円が毎月与えられた場合の年収の予測として正しいものを選べ
+## 次のselect文のうち、sal(給料)に10000円が毎月与えられた場合の年収の予測として正しいものを選べ
 
 1: SELECT ename, 12 * sal + 10000 FROM employees; 
 
@@ -107,24 +105,28 @@ FROMはデータベースを指定するので計算できるものがない
 4: SELECT ename, (12 * sal) + 10000 FROM employees
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h3 class="title">
+  答え
+</h3>
+<div class="box">
+<pre>
+  3: SELECT ename, sal + 10000 * 12 FROM employees; 
 
-A: 3
-
-
-
-}
-
-
-
-
-
+  FROMはデータベースを指定するので計算できるものがない
+</pre>
+</div>
 
 
 
-{
 
-##NULL値の扱いに関する説明のうち、正しいものを選べ
+
+
+
+
+
+
+
+## NULL値の扱いに関する説明のうち、正しいものを選べ
 
 
 1: NULL値は0や空白と同様に扱われる 
@@ -136,21 +138,26 @@ A: 3
 4: 算術式の中にNULL値がある場合は0として計算される
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-A: 3
-
-3: NULL値を含む算術式は結果もNULL値になる 
-
-
-
-
-
-}
+<h3 class="title">
+  答え
+</h3>
+<div class="box">
+<pre>
+  A: 3
+  3: NULL値を含む算術式は結果もNULL値になる 
+</pre>
+</div>
 
 
-{
-##NULL + 1を実行した結果として正しいものを選択してください。
+
+
+
+
+
+
+## NULLと足し算
+
+NULL + 1を実行した結果として正しいものを選択してください。
 
 1: NULL値
 
@@ -161,19 +168,24 @@ A: 3
 4: 不定値
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h3 class="title">
+  答え
+</h3>
+<div class="box">
+<pre>
+  A: 1
+  NULLが計算結果に入った瞬間にNULL値に変わる
+</pre>
+</div>
 
-A: 1
-
-NULLが計算結果に入った瞬間にNULL値に変わる
-
-
-}
 
 
 
-{
-##値が重複しないようにするSELECT文を選べ
+
+
+
+
+## 値が重複しないようにするSELECT文を選べ
 
 
 1: SELECT job FROM employees;
@@ -184,9 +196,17 @@ NULLが計算結果に入った瞬間にNULL値に変わる
 
 4: SELECT ALL job FROM employees;
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h3 class="title">
+  答え
+</h3>
+<div class="box">
+<pre>
+  A: 3
+</pre>
+</div>
 
-A: 3
+
+
 
 
 
@@ -208,10 +228,7 @@ category_script:page_name.startswith("50")
 
 
 <div class="question_tag">
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    
-    
     
     
     <script>
@@ -317,3 +334,11 @@ category_script:page_name.startswith("50")
 </div>
     
     
+<h3 class="title">
+
+</h3>
+<div class="box">
+<pre>
+
+</pre>
+</div>

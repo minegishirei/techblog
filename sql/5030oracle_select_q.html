@@ -1,7 +1,5 @@
 
-{
-
-###月給が30万円以下の従業員を炙り出すコードは次のうちどれか？
+## 月給が30万円以下の従業員を炙り出すコードは次のうちどれか？
 
 <pre><code>
 1: 
@@ -21,31 +19,32 @@ SELECT ename, salary FROM employees
 WHERE salary >= 300000;
 </code></pre>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-A:2
-
-3は
-<pre><code>
-SELECT salary FROM employees
-WHERE NOT salary >= 300000;
-</code></pre>
-とあるが
->=をNOTで否定しているので<code><</code>と同地である。
-
-
-
-
-
-
-
-}
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
+    A:2
+  </pre>
+  3は
+    <pre><code>
+    SELECT salary FROM employees
+    WHERE NOT salary >= 300000;
+    </code></pre>
+    とあるが
+    >=をNOTで否定しているので<code><</code>と同地である。
+</div>
 
 
 
 
-{
-###次のうち、鈴木が名前に入っているものを取り出すクエリはどれか
+
+
+
+
+
+## 次のうち、鈴木が名前に入っているものを取り出すクエリはどれか
 
 <pre><code>
 1:SELECT name FROM employees WHERE name = '鈴木%'; 
@@ -58,26 +57,32 @@ WHERE NOT salary >= 300000;
 
 </code></pre>
 
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
+    A:3
+  </pre>
+  <p>
+    %は任意の文字を意味する。
+    よって、
+    ある文字を%で挟み込むことで、文字列を含んでいるかどうかの判定が可能になる
+    <pre><code>
+    3: SELECT name  FROM employees WHERE  LIKE '%鈴木%'; 
+    </code></pre>
+    は,鈴木を含んでいるものを取り出している。
+  </p>
+</div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-A:3
-
-%は任意の文字を意味する
-よって
-ある文字を%で挟み込むことで、文字列を含んでいるかどうかの判定が可能になる
-<pre><code>
-3: SELECT name  FROM employees WHERE  LIKE '%鈴木%'; 
-</code></pre>
-は,鈴木を含んでいるものを取り出している。
-
-}
 
 
 
 
-{
-###次の演算子で等しくないものを全て選べ
+
+
+
+## 次の演算子で等しくないものを全て選べ
 
 1: IS NULl
 
@@ -89,18 +94,21 @@ A:3
 
 5: ^=
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
+    A:2,3,5
+    <>と^=と!=は全て等しくないという意味を表す演算子
+  </pre>
+</div>
 
-A:2,3,5
-
-<>と^=と!=は全て等しくないという意味を表す演算子
 
 
-}
 
 
-{
-###次のクエリの結果はどのようになるか？
+## 次のクエリの結果はどのようになるか？
 
 SELECT * FROM employees WHERE name != NULL;
 
@@ -110,18 +118,23 @@ SELECT * FROM employees WHERE name != NULL;
 
 3 エラーは出ず、nameがNULL出ないものは含まれない
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
 3 エラーは出ず、nameがNULL出ないものは含まれない
-
 そもそもNULLかどうかの判定は IS NOT NULL, IS NULLのどちらかしかできない。
+  </pre>
+</div>
 
 
-}
 
 
-{
-###ORDER BY句を使用したデータのソートについてあっているものはどれか二つ選べ
+
+
+## ORDER BY句を使用したデータのソートについてあっているものはどれか二つ選べ
 
 1:
 デフォルトでは昇順である
@@ -135,20 +148,23 @@ SELECT * FROM employees WHERE name != NULL;
 4:
 デフォルトではNULL値は最大値としてソートされる
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-A: 1,2,4
-
-
-
-
-}
-
-
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
+    A: 1,2,4
+  </pre>
+</div>
 
 
-{
-###INとORのパフォーマンスについて、正しいのはどちらか
+
+
+
+
+
+
+## INとORのパフォーマンスについて、正しいのはどちらか
 
 
 IN(10,30)を使ったクエリと 「20 OR 30」を使ったクエリは
@@ -159,21 +175,28 @@ IN(10,30)を使ったクエリと 「20 OR 30」を使ったクエリは
 
 3: パフォーマンスは異なり、ORの方が早い
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
 A:1　パフォーマンスは同じ
-
 内部ではINとORはまったく同じもの
 ただただ見やすくなっただけ
-
-}
-
-
+  </pre>
+</div>
 
 
 
-{
-###次のクエリのうち、「100%」を含むものを抽出できているものを二つ選べ
+
+
+
+
+
+
+
+
+## 次のクエリのうち、「100%」を含むものを抽出できているものを二つ選べ
 
 
 1: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100$_%' ESCAPE '$';
@@ -184,21 +207,23 @@ A:1　パフォーマンスは同じ
 
 4: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100%$%' ESCAPE '$';
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+  <pre>
 A: 2,3が正解
 
 2: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100$%%' ESCAPE '$';
 
 3: SELECT  price_rate, price FROM products WHERE price_rate LIKE '100?%%' ESCAPE '?';
+  </pre>
+</div>
 
 
-}
 
 
-
-
-{
 
 ###次のSQLはどちらが動くか答えよ
 
@@ -219,8 +244,12 @@ WHERE job = '部長'
 ORDER BY 仕事
 </code></pre>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+<h3 class="title">
+    答え
+  </h3>
+  <div class="box">
+<p>
 A:2だけが動く
 
 列別名はORDER BYでは使えない
@@ -233,11 +262,12 @@ WHERE job = '部長'
 ORDER BY 仕事
 </code></pre>
 
-}
+</p>
+</div>
 
 
-{
-###給与成績が4番目から10番までを取り出したい。
+
+## 給与成績が4番目から10番までを取り出したい。
 
 ただし、
 10番目の社員の給与と11番目の社員の給与が同じである場合は、その社員の情報も出力する。
@@ -270,9 +300,11 @@ FETCH NEXT 7 ROWS
 WITH TIES;
 </code></pre>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
+<h3 class="title">
+    答え
+</h3>
+<div class="box">
+<p>
 4が正解
 
 <pre><code>
@@ -284,10 +316,13 @@ FETCH NEXT 7 ROWS
 WITH TIES;
 </code></pre>
 
+</p>
+</div>
 
-}
 
 
+
+## 備考
 
 
 title:oracle master bronze 12c sql web問題集
@@ -297,3 +332,114 @@ description:oracleマスターbronzeのweb問題集です。間違いやすい�
 img:https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/class/600x260/3456.jpg
 
 category_script:page_name.startswith("100")
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
