@@ -60,6 +60,57 @@ TO_CHAR TO_DATE TO_NUMBERについて
 
 
 
+## 覚えた方がいい
+
+<pre>
+SELECT
+    TO_CHAR(123456.78, '99,999')
+FROM
+    dual;
+A: 123456,78
+
+B: 123,456.78
+
+C: 指定した桁数よりも桁が多いのでエラーになる
+
+D: 1234,56.78
+
+E: ########
+</pre>
+
+ ########。 TO_CHARの書式指定は桁数を超えると全て#になる
+
+
+
+? 日付書式設定
+
+
+## 覚えた方がいい2
+
+<pre>
+HIREDATEの曜日順(月から始まり、に社員を並び替えるSQLを選べ
+
+A: SELECT * FROM employees ORDER BY TO_CHAR(hiredate-1, 'DAY')
+
+B: SELECT * FROM employees ORDER BY TO_CHAR(hiredate, 'DAY')
+
+C: SELECT * FROM employees ORDER BY TO_CHAR(hiredate, 'D')
+
+D: SELECT * FROM employees ORDER BY TO_CHAR(hiredate-1, 'D')
+
+E: SELECT * FROM employees ORDER BY TO_CHAR(hiredate+1, 'D')
+
+答え
+D: SELECT * FROM employees ORDER BY TO_CHAR(hiredate-1, 'D')
+
+曜日の日付書式は'DAY','DY','D'の三つがある
+
+'DAY'は「日曜日,月曜日,」'DYは「日,月,,,」'D'は「1,2,3,,,,」 と増えていく
+
+そこから一日増やさなければならないため、hiredate-1を指定する。
+
+</pre>
+
 
 
 ## 世紀形
