@@ -65,6 +65,48 @@ DECODE
 
 
 
+
+## BETWEEN演算子
+
+A: BETWEEN演算子を指定した場合「列の値は加減以上かつ上限以下
+
+B: NOT BETWEEN演算子を指定した場合「列の値は加減より小さい、または上限より大きい」
+
+BETWEENが境界を含むことを覚えておく
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+<pre>
+
+</pre>
+</div>
+
+
+
+
+
+
+
 ## 日付書式設定の暗黙変換
 
 +や-などの算術演算子を含む式の前後は、
@@ -1004,12 +1046,312 @@ Monthの後のスペースがなくなる
 先行の0が取り除かれている
 
 
+## 大文字と小文字
 
-## TODO:数値の書式
+<pre><code>
+select  
+  TO_CHAR(SYSDATE, 'MONTH:MON:DAY:DY')
+  TO_CHAR(SYSDATE, 'Month:Mon:Day:Dy'),
+  TO_CHAR(SYSDATE, 'month:mon:day:dy'),
+from
+  dual
+</code></pre>
+
+> JANUARY     :JAN:FRIDAY   :FRI
+
+> January     :Jan:Friday   :Fri
+
+> january     :jan:friday   :fri
+
+
+
+
+## TO_CHAR関数(数値から文字列)
+
+<h3 class="title">
+9
+</h3>
+<div class="box">
+<pre>
+数値の位置
+9の位置で最大表示桁数がわかる
+先行0は表示しない
+
+例)99999
+
+結)1234
+</pre>
+</div>
+
+
+<h3 class="title">
+0
+</h3>
+<div class="box">
+<pre>
+9と同じだが、先行0を表示するという意味
+桁数を合わせてくれる
+
+例)099999
+
+結)001234
+</pre>
+</div>
+
+
+$：ドル記号
+
+
+<h3 class="title">
+L
+</h3>
+<div class="box">
+<pre>
+ローカル通過の表示
+
+例)L999999
+
+結)¥1234
+</pre>
+</div>
+
+
+<h3 class="title">
+D(or 「.」)
+</h3>
+<div class="box">
+<pre>
+Dot(小数点)
+指定した位置に小数点を表示する
+
+例)999D999
+例)999.999
+
+結)1.234
+</pre>
+</div>
+
+
+
+<h3 class="title">
+G(or「,」)
+</h3>
+<div class="box">
+<pre>
+Dot(小数点)
+指定した位置に小数点を表示する
+
+例)999G999
+例)999,999
+
+結)1,234
+</pre>
+</div>
+
+
+
+<h3 class="title">
+MI
+</h3>
+<div class="box">
+<pre>
+右に-を表示
+
+例)999999MI
+
+結)1234-
+</pre>
+</div>
+
+<h3 class="title">
+PR
+</h3>
+<div class="box">
+<pre>
+負の値は<>で囲む
+
+例)999999PR
+
+結)<1234>
+</pre>
+</div>
+
+
+<h3 class="title">
+EEEE
+</h3>
+<div class="box">
+<pre>
+数学的記法で表示
+
+例)99.999EEEE
+
+結)1.234E+03
+</pre>
+</div>
+
+
+<h3 class="title">
+V
+</h3>
+<div class="box">
+<pre>
+10のn条
+
+例)9999V99
+
+結)123400
+</pre>
+</div>
+
+<h3 class="title">
+S
+</h3>
+<div class="box">
+<pre>
+Sign
+符号つき
+
+例)S999999
+
+結)+1234
+結)-1234
+</pre>
+</div>
+
+
+
+## 適切に変換できない場合
+
+値を変換できない場合は「#」が出てくる
+
+例）指定した桁数が実際のデータよりも少ない時
+
+<pre><code>
+select
+  TO_CHAR(500000, 'L99,990')
+</code></pre>
+
+> ##########
+
+
+## 小数点以下のTO_CHARと四捨五入
+
+<h3 class="title">
+先行０の指定は
+</h3>
+<div class="box">
+<pre>
+は小数点でも影響する
+
+</pre>
+
+<pre><code>
+select
+  TO_CHAR('0.12345', '0,9999')
+  TO_CHAR('0.12345', '9.9999')
+</code></pre>
+
+>0.1235
+
+> .1235
+
+</div>
+
+
+## TO_DATEの使用
+
+日付は暗黙の変換はできない
+
+<pre><code>
+select
+  sysdate - '00-01-01'
+from
+  dual
+</code></pre>
+
+> 数値が無効です
+
+<pre><code>
+select
+  sysdate - TO_DATE('00-01-01')
+from
+  dual
+</code></pre>
+
+> 4157.81799(日数)
+
 
 
 
 ## TODO:YYとRRの違い
+
+<h3 class="title">
+YY
+</h3>
+<div class="box">
+<pre>
+受け入れた値を「常に現在の世紀」として扱う
+</pre>
+
+</div>
+
+
+
+<h3 class="title">
+RR
+</h3>
+<div class="box">
+<pre>
+受け入れた値を「現在の年に近い世紀」として扱う
+</pre>
+
+</div>
+
+
+<pre><code>
+select
+  TO_CHAR(TO_DATE('20-10-10', 'YY-MM-DD'), 'YYYY') YY20,
+  TO_CHAR(TO_DATE('20-10-10', 'RR-MM-DD'), 'YYYY') RR20,
+  TO_CHAR(TO_DATE('95-10-10', 'YY-MM-DD'), 'YYYY') YY95,
+  TO_CHAR(TO_DATE('95-10-10', 'RR-MM-DD'), 'YYYY') RR95
+from
+  dual
+</code></pre>
+
+<h3 class="title">
+実行結果
+</h3>
+<div class="box">
+<pre>
+> YY20 : 2020
+
+> RR20 : 2020
+
+> YY95 : 2095
+
+> RR95 : 1995
+
+</pre>
+</div>
+
+
+
+
+<h3 class="title">
+YY
+</h3>
+<div class="box">
+<pre>
+受け入れた値を「常に現在の世紀」として扱う
+</pre>
+
+</div>
+
+
+
+
+
 
 
 
@@ -1162,6 +1504,8 @@ from
 
 
 
+
+
 # グループ関数
 
 SELECT句とORDER BY句, HAVING句で使用可能。
@@ -1232,7 +1576,30 @@ AVGでヌルが入っていたら、MULLを無視したカウントで割る
 
 ## ネストについて
 
-2レベルまでネスト可能
+<h3 class="title">
+ネストは
+</h3>
+<div class="box">
+<pre>
+2レベルまで可能
+</pre>
+</div>
+
+
+
+## GROPU関数が使用可能な場所
+
+<h3 class="title">
+GROPU BYは
+</h3>
+<div class="box">
+<pre>
+WHERE句では使用できない
+
+HAVING句で使用可能
+</pre>
+</div>
+
 
 
 
@@ -2348,11 +2715,11 @@ BFILEはサーバー上のポインタ情報のみを格納する。
 DATE型を拡張子たデータ型
 
 <h3 class="title">
-覚えた方がいいこと
+TIMESTAMP[小数点以下桁数]
 </h3>
 <div class="box">
 <pre>
-DATEのかく列に加えて、秒の使用数点以下の値も格納可能
+秒の使用数点以下の値も格納可能
 </pre>
 </div>
 
@@ -2363,6 +2730,23 @@ TIMESTAMPではSYSTIMESTAMPの実行で容易に格納可能
 タイムゾーンの時差を含むことができる。タイムゾーンの時差は列の一部として格納される
 
 alter sessionでローカル日時を変えても変化しない
+
+<pre><code>
+> CREATE TABLE time3
+  (
+    timeA INTERVAL YEAR TO MONTH,
+    timeB INTERVAL DAY TO SECOND
+  );
+
+> INSERT INTO time3
+    VALUES(
+    INTERVAL '1-2' YEAR TO MONTH,
+    INTERVAL '10 12:30' DAY TO MINUTW);
+
+> SELECT 
+> TO_CHAR(SYSDATE, 'YYY-MM-DD HH24:MI'),
+> TO_CHAR(SYSDATE + timeA, 'YYY-MM-DD')
+</code></pre>
 
 ## TIMESTAMP WITH LOCAL TIMEZONE
 
@@ -2405,7 +2789,7 @@ CREATE TABLE time3
 </code></pre>
 
 <h3 class="title">
-覚えた方がいいこと
+サンプルコード
 </h3>
 <div class="box">
 <pre>
@@ -2660,6 +3044,7 @@ PRIMARY KEYの数は
 
 - 参照先の列は「UNIQUE制約」か「PRIMARY KEY制約」がついていないといけない
 
+- 表レベルの構文と列レベルの構文で異なる
 </pre>
 </div>
 
@@ -2668,6 +3053,7 @@ PRIMARY KEYの数は
 <pre><code>
 [CONSTRAINT 制約名] REFERENCES 親表名( 参照する列名 [, 参照する列名])
 </code></pre>
+
 
 サンプルコード
 
@@ -2688,6 +3074,17 @@ CREATE TABLE emp7
 [CONSTRAINT 制約名] FOREGN KEY(列名[,列名])
 REFERENCES 親表名(参照する列名 [,参照する列名])
 </code></pre>
+
+
+<h3 class="title">
+覚えた方がいいこと
+</h3>
+<div class="box">
+<pre>
+- FOREGN KEYは表レベルでのみ使用
+</pre>
+</div>
+
 
 サンプルコード
 
@@ -2818,6 +3215,12 @@ CREATE TABLE emp11
 
 
 
+
+
+
+
+
+
 ## 副問い合わせを使用した表の作成
 
 データ型は指定できない。
@@ -2832,14 +3235,28 @@ AS
 </code></pre>
 
 <h3 class="title">
-列名の指定は省略できる。select句で指定した列名または列別名と同じ名前の列が作成される。
+列名の指定は省略できる。
 </h3>
 <div class="box">
 <pre>
-ただし、副問い合わせのselectで計算式や関数を使用している場合は、
-列名を指定するか、列別名を指定する必要がある。
+その場合、select句で指定した列名または列別名と同じ名前の列が作成される。
 </pre>
 </div>
+
+
+
+ただし、副問い合わせのselectで計算式や関数を使用している場合は、
+
+<h3 class="title">
+列名を指定するか
+</h3>
+<div class="box">
+<pre>
+列別名を指定する必要がある。
+</pre>
+</div>
+
+
 
 
 <h3 class="title">
@@ -2850,6 +3267,8 @@ AS
 ただし、その場合はselect句のリストと同じ数にする必要がある
 </pre>
 </div>
+
+
 
 
 <h3 class="title">
@@ -2901,6 +3320,11 @@ WHERE 1 = 2;
 </code></pre>
 
 絶対にTRUEにならない条件を指定することで表構造だけをコピーすることもできる。
+
+
+
+
+
 
 
 
