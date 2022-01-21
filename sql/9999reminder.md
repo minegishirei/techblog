@@ -83,23 +83,139 @@ BETWEENが境界を含むことを覚えておく
 
 
 
+## EMPLOYEES表を使用した次の句は
+
+<pre><code>
+select
+  job_id,
+  AVG(NVL(salary,0))
+from
+  employees
+where
+  job_id IN('ST_CLERK', 'ST_MAN')
+</code></pre>
+
+<pre>
+select句の選択リストに
+「「「グループ関数と同時に指定できるのは」」」
+GROUP BYで指定された列だけ
+
+よってエラー
+</pre>
 
 
+## INSERTとVALUES
+
+こんなコードでも正常に実行される
+
+<pre><code>
+INSERT INTO employees
+VALUES(10035,
+      'Brown',
+      '06-FEB-14',
+      (SELECT job_id FROM employees
+      WHERE employee_id = 10030),
+      72000,
+      (SELECT department_id
+      FROM
+      departments
+      WHERE
+      department_name = (IT')))
+</code></pre>
 
 
+## INSER INTOで副問い合わせ
+
+<pre><code>
+INSER INTO
+(
+  SELECT
+    employee_id, 
+    last_name,
+    hire_date,
+    job_id
+  FROM employees
+)
+VALUES( 301, 'Green',SYSDATE,
+  (
+    SELECT
+      job_id
+    FROM 
+      employees
+    where 
+      employee_id = 101
+  )
+)
+</code></pre>
+
+- 副問い合わせに対してINSERTもできる
+
+- しかもその結果はemployeesにまで響く
 
 
-
-
+## DEFAULTとNOT NULL
 
 <h3 class="title">
-答え
+DEFAULTとNOT NULLは
 </h3>
 <div class="box">
 <pre>
-
+同じ列に定義できるが、
+DEFAULTが先！！！
 </pre>
 </div>
+
+
+
+
+
+## ROLLBACK TO 
+
+<h3 class="title">
+トランザクションは
+</h3>
+<div class="box">
+<pre>
+終了しない
+</pre>
+</div>
+
+
+## ROLLBACK
+
+<h3 class="title">
+トランザクションが
+</h3>
+<div class="box">
+<pre>
+終了する
+</pre>
+</div>
+
+
+
+## ALTER TABLE
+
+別の列から参照されている列を削除するには
+
+<h3 class="title">
+.
+</h3>
+<div class="box">
+<pre>
+- 外部キー制約を削除するか(無効ではない)
+
+- ALTER TABLE CASCADE CONSTRANINTS句
+を使用する
+</pre>
+</div>
+
+
+
+
+
+
+
 
 
 
