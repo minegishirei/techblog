@@ -64,6 +64,21 @@ DECODE
 結果として、25問/75まで間違えて良い
 
 
+## 飛ばすもの
+
+- クエリの長さが長いもの
+
+- 意味わからないもの
+
+この二つは瞬間でぶっ飛ばす
+
+25問ぶっ飛ばしていい
+
+## 時間かけるもの
+
+知識問題
+
+
 
 
 ## BETWEEN演算子
@@ -76,6 +91,14 @@ BETWEENが境界を含むことを覚えておく
 
 
 
+## 複数の制約
+
+CREATE TABLE product
+ (
+    product_id  INT NOT NULL PRIMARY KEY ,
+    name        CHAR(16) UNIQUE,
+    price       INT DEFAULT 2000
+ ) ;
 
 
 

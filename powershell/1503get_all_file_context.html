@@ -1,0 +1,36 @@
+
+
+## フォルダーの中にあるファイルをpowershellで一行ずつ読み込む方法
+
+
+
+<pre><code>
+$folder = Get-ChildItem -Path "調べたいファイル名"
+foreach($fileobj in $folder){
+    $context = Get-Context $fileobj -Filename
+}
+</code></pre>
+
+
+
+
+## 参考
+
+海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+
+
+
+
+title:【powershell】ファイルから一行ずつ読み込み検索する
+
+description:powershellではファイル名を
+
+
+
+category_script:page_name.startswith("1")
+
+
