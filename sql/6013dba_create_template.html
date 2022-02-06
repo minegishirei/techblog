@@ -1,0 +1,440 @@
+
+
+
+## DBCAでできる「データベース作成」以外の4つのこと
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <pre>
+- データベース・オプションの構成
+
+- データベースの削除
+
+- テンプレートの管理
+
+- プラガブル・データベースの管理
+    </pre>
+</div>
+
+今回は「テンプレートの管理」について詳しく説明する
+
+
+
+
+<h3 class="title">
+プラガブル・データベースとは
+</h3>
+<div class="box">
+    <p>
+マルチテナント・アーキテクチャの機能
+    </p>
+    <p>
+このアーキテクチャではOracleデータベースを
+    </p>
+    <p>
+コンテナ(CDB)として動作させることができ、複数のデータベース環境の統合が可能になる
+    </p>
+</div>
+
+
+
+## テンプレートとは
+
+テンプレートの実態は
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+XMLファイル
+    </p>
+</div>
+
+このファイルにはデータベース作成に必要な次の情報が含まれている
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+データベースオプション
+    </p>
+    <p>
+      初期化パラメータ
+    </p>
+    <p>
+      記憶域属性
+    </p>
+</div>
+
+DBCAを用いると、テンプレートファイルの作成、管理ができる
+
+
+## テンプレートのメリット
+
+<h3 class="title">
+作成時には
+</h3>
+<div class="box">
+    <p>
+同じ設定を何度も行う必要がなくなる
+    </p>
+</div>
+
+<h3 class="title">
+シードテンプレートでは
+</h3>
+<div class="box">
+    <p>
+既存のデータベースのクローンを迅速に作れる
+    </p>
+</div>
+
+<h3 class="title">
+設定の中の
+</h3>
+<div class="box">
+    <p>
+テンプレートの設定の中のデータベース・オプションを簡単に変更できる
+    </p>
+</div>
+
+<h3 class="title">
+コンピュータ間で
+</h3>
+<div class="box">
+    <p>
+テンプレートをコピーできる
+    </p>
+</div>
+
+
+
+
+
+
+
+## デフォルトで用意されているテンプレート
+
+
+
+
+<h3 class="title">
+デフォルト
+</h3>
+<div class="box">
+    <p>
+座席予約や受発注処理など
+    </p>
+    <p>
+多数のトランザクションを同時かつ迅速に実行することが要求される
+    </p>
+    <p>
+      OLTP向けのデータベース
+    </p>
+</div>
+
+
+
+
+
+<h3 class="title">
+データウェアハウス
+</h3>
+<div class="box">
+    <p>
+売り上げ分析や市場分析など、複雑な問い合わせを大量に実行し
+大量のデータを処理することを求められるデータウェアハウスを構成する
+    </p>
+
+</div>
+
+
+
+
+
+<h3 class="title">
+カスタム・データベース
+</h3>
+<div class="box">
+    <p>
+処理内容に合わせて各項目を個別に設定できる。
+    </p>
+    <p>
+データベースを一から作るために時間がかかる
+    </p>
+</div>
+
+
+## テンプレートのタイプ
+
+
+
+
+<h3 class="title">
+シードテンプレート
+</h3>
+<div class="box">
+    <p>
+既存のデータベースの構造と物理ファイルが両方含まれるテンプレート
+    </p>
+    <p>
+      Oracle提供のテンプレートでは、デフォルト(汎用またはトランザクション処理)またはデータ・ウェアハウスが当てはまる
+    </p>
+</div>
+
+
+
+<h3 class="title">
+非シードテンプレート
+</h3>
+<div class="box">
+    <p>
+作成するデータベースの特製が含まれたテンプレート
+    </p>
+    <p>
+      新しいデータベースを作成する際に使用する
+    </p>
+    <p>
+      データファイルが含まれていないため、データファイル、オンラインREDOログファイルを指定できる。
+    </p>
+    <p>
+      「カスタム・データベース」が当てはまる
+    </p>
+</div>
+
+
+
+
+## テンプレートの作成方法
+
+<h3 class="title">
+既存のテンプレートを使用
+</h3>
+<div class="box">
+    <p>
+既存のテンプレートを変更して、新しいテンプレートを作成する
+    </p>
+</div>
+
+<h3 class="title">
+既存のテンプレートの構造のみを使用
+</h3>
+<div class="box">
+    <p>
+既存のデータベースの構造情報をもつ新しいテンプレートを作成
+    </p>
+    <p>
+      ユーザー定義スキーマとそのデータは含まれない
+    </p>
+</div>
+
+
+<h3 class="title">
+既存のテンプレートのデータと構造を使用
+</h3>
+<div class="box">
+    <p>
+構造情報と物理データファイルの両方を含む新しいテンプレート
+    </p>
+    <p>
+      元のデータベースと全く同一になり、ユーザー定義スキーマも含まれる
+    </p>
+</div>
+
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 備考
+
+description:DBCAを使用したテンプレートの管理
+
+title:DBCAを使用すると「データベースの作成」に加えて他の処理も可能になる
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
+
+
+
+
+
+
+
