@@ -1,0 +1,211 @@
+
+
+## SQL*Plusとは何か
+
+データベースへは、SQL*PlusやSQL DeveloperといったEM Express以外のOracleツールでも管理できる。
+
+このツールはデータベース管理用のツールではないため、一般ユーザーが使用することもできる。
+
+また、管理者がデータベースの起動・停止を行ったり、管理作業を行うために使用することもできる。
+
+SQL*Plusでは、SQLコマンドベースのツールであり、直接DBに対してCRUDを行うことができる。
+
+
+## それでもSQL*Plusが使いたくない方へ
+
+SQL*Plusをグラフィカルに操作できる「SQL developer」がおすすめ
+
+
+## SQL*Plusのインストール方法
+
+Oracleソフトウェアのインストール(OUIによるインストール)時に自動的にインストールされる
+
+
+## SQL*Plusの起動方法
+
+方法は二つあり、次のコマンドで実行可能
+
+<pre><code>
+$ . oraenv
+>(接続先のインスタンスを指定)
+$ sqlplus /nolog                #no logを指定すると、データベースに接続しないでSQL*Plusを起動できる)
+$ connect ユーザー名/パスワード    #指定したユーザーでデータベースに接続する
+$ connect ユーザー名/パスワード [as sysdba | as sysoper] #管理者権限を持つユーザーで接続する
+</code></pre>
+
+
+## 対話モードで起動した場合
+
+データベースユーザーとしてログイン後、SQLコマンドを入力する
+
+<pre><code>
+SQL> SELECT * FROM regions;
+</code></pre>
+
+## ファイルを指定して起動する場合
+
+「test.sql」にコマンドが入力されている場合、それを指定して実行できる
+
+<pre><code>
+SQL> @test.sql
+</code></pre>
+
+
+
+## SQLPlusに入ったまま、linuxコマンドを操作する場合
+
+hostコマンドを実行することで対応可能
+
+<pre><code>
+host OSコマンド
+</code></pre>
+
+例)lsコマンドを実行したい場合
+
+<pre><code>
+SQL> host ls
+</code></pre>
+
+
+
+
+
+
+title:DBAのためのSQLプラス(SQL*Plus)の使い方
+
+description:SQL*Plusでは、SQLコマンドベースのツールであり、直接DBに対してCRUDを行うことができる。
+
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
+
+

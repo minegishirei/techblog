@@ -1,0 +1,274 @@
+
+
+
+
+## SQL Developerとは何か
+
+データベースへは、SQL*PlusやSQL DeveloperといったEM Express以外のOracleツールでも管理できる。
+
+このツールはデータベース管理用のツールではないため、一般ユーザーが使用することもできる。
+
+また、管理者がデータベースの起動・停止を行ったり、管理作業を行うために使用することもできる。
+
+SQL DeveloperはSQL*Plusとは異なり、GUIベースのインターフェースを提供しているため、SQLが書けない人でも使用できる。
+
+## OSQLEditとSQL Developerの比較
+
+OSQL Editとほぼ変わらない印象
+
+違いがあるとすれば以下の通り
+
+- 初期のSQL Developerは「sqldeveloper.sh」というスクリプトを動かして起動
+
+- OSQLEditはダブルクリックで起動
+
+- OSQLEditは右にナビゲータ(オブジェクトの検索用ウィンドウ)がついている
+
+- SQL Developerは左にナビゲータがついている
+
+
+
+
+
+## SQL Developerの開き方について
+
+次のコマンドで環境変数を指定する。
+
+<pre><code>
+$ . oraenv
+>(接続先のインスタンスを指定)
+</code></pre>
+
+SQL Developerは$ORACLE_HOME/sqldeveloperの配下に存在するsqldeveloper.shを実行することで立ち上げられる。
+
+つまり、次のコマンドで開くことが可能
+
+
+<pre>
+$ cd $ORACLE_HOME/sqldeveloper
+$ sh sqldeveloper.sh
+</pre>
+
+上記スクリプトを実行すると、SQL Developerが起動する
+
+
+
+
+## SQL Developerの二つのモード
+
+- 通常モードでスキーマ・オブジェクトの参照や管理を行う場合
+
+- DBAナビゲータを使用してDBA操作を行う場合
+
+
+## 通常モードでスキーマ・オブジェクトの参照や管理を行う場合
+
+1, 「接続の作成」を押す
+
+2, データベース接続の作成/選択では次の内容を入力
+
+- 接続名
+
+- ユーザー名
+
+- パスワード
+
+- ホスト名
+
+- SID
+
+
+を入力して、「テスト」ボタンをクリック
+
+接続が確認できたら、「接続」をクリックする
+
+
+##  SQL Developerによるオブジェクトの検索方法
+
+左側にあるナビゲータ画面の検索バーから可能
+
+
+
+## DBAナビゲータを使用してDBA操作を行う場合
+
+通常モードを使用しログインできた後、
+「表示」タブにある「DBA」をクリックする
+
+DBAナビゲータが費用辞されたら、「接続」を右クリックで「接続の追加」を押す
+
+選択ウィンドウで定義済みのDBAを選択して、「OK」をクリックする
+
+接続が確立すると、ツリー構造で以下の項目が出てくる
+
+- コンテナ・データベース
+
+- データベース構成
+
+- RMANバックアップ/リカバリ
+
+- スケジューラ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 備考
+
+
+title:SQL Developerとは【OSQLEditとの比較もあり】
+
+description:SQL Developerができること、OSQLEditとの違いを解説！インストールの方法からオプションの指定まで！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
+
+

@@ -1,0 +1,285 @@
+
+## Enterprise Managerの種類
+
+インスタンスやデータベースを管理する際に使用するツールのこと
+
+Enterprise Managerには2種類あるが、ここでは一種類のみ説明する
+
+- Enterprise Manager Database Express
+
+- Enterprise Manager Cloud Control
+
+Cloud ControlではOracleのインフラストラクチャ全体を単一のコンソールから監視と管理が可能
+
+
+
+
+## EM Expressとは
+
+一つのデータベースを簡易的に管理したり、パフォーマンスを監視することができるwebベースのデータベース管理ツールである
+
+<h3 class="title">
+インターフェースは
+</h3>
+<div class="box">
+    <p>
+webブラウザ
+    </p>
+</div>
+
+Oracleのソフトウェアインストール時にOUIにより自動的にインストールされる
+
+
+## 実行できる管理作業
+
+データベースがオープンしている時しか使用できないので、
+データベースの起動や停止が支持できない。
+
+このことから、EM Expressはデータベースの起動・停止を伴わない限定された管理作業を行うツール
+
+全ての管理作業を行うには、Oracle Enterprise Manager Cloud Controlを使用する
+
+
+## EM Expressの構成
+
+DBCAを使用してデータベースを作成すると、EM ExpressのHTTPSポートが自動的に構成されます。
+
+そのため通常は、追加の構成作業は必要ないが、HTTPDポートは次の手順で手動で構成できる
+
+
+<pre>
+リスナープロセスの起動
+
+初期化パラメータファイルのDISPATCHERSパラメータにPROTOCOL=TCP属性を追加し、TCPディスパッチャを有効にする
+<code>
+dispatchers = " (PROTOCOL=TCP) (SERVICE=<sid>XDB)"
+</code>
+
+DBMS_XDB_CONFIG.setHTTPSPortプロシージャを実行して、ポートを指定する。
+
+このプロシージャを実行するにはSYSDBAとして接続する必要がある
+
+<code>
+SQL > exec DBMS_XDB_CONFIG.setHTTPSPorts(5500)
+</code>
+
+</pre>
+
+
+
+## EM Expressへのアクセス
+
+アクセスURLは以下の通り
+
+<pre><code>
+https://ホスト名:ポート番号/em
+</code></pre>
+
+ポート番号がわからない場合は、次のクエリを実行する
+
+<code>
+select dbms_xdb_config.gethttpsport FROM DUAL
+</code>
+
+
+## EM Expressへのアクセス権限お付与
+
+通常はセキュリティ面を高リィよして、データベース管理者ユーザーを別途作成し、EM Expressを使用してデータベースを管理する
+
+次の二つのロールの選択肢がある
+
+<h3 class="title">
+EM_EXPRESS_BASIC
+</h3>
+<div class="box">
+    <p>
+    読み取り専用モードでページを開ける
+    </p>
+    <p>
+    データディクショナリへのselectが許可される権限
+    </p>
+    <p>
+    SELECT_CATALOG_ROLEロールも含まれる
+    </p>
+</div>
+
+
+<h3 class="title">
+EM_EXPRESS_ALL
+</h3>
+<div class="box">
+    <p>
+EM Expressにログインして全ての機能が使える
+    </p>
+    <p>
+    EM_EXPRESS_BASICロールが含まれる
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 備考
+
+title:EM Expressでデータベースをコントロールする
+
+description:データベースにアクセスする際には通常のselect文を使用する方法以外にも、webのGUIベースでアクセスすることが可能である。
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
+
+
