@@ -1,116 +1,92 @@
 
 
+## oracleネットワークを整える条件
 
 
-## SQL Developerとは何か
+## データベースサーバーの条件
 
-データベースへは、SQL*PlusやSQL DeveloperといったEM Express以外のOracleツールでも管理できる。
+- ネットワークでサーバーが稼働中であること
 
-このツールはデータベース管理用のツールではないため、一般ユーザーが使用することもできる。
+- Oracleデータベースがインストールされていること
 
-また、管理者がデータベースの起動・停止を行ったり、管理作業を行うために使用することもできる。
 
-SQL DeveloperはSQL*Plusとは異なり、GUIベースのインターフェースを提供しているため、SQLが書けない人でも使用できる。
-
-## OSQLEditとSQL Developerの比較
-
-OSQL Editとほぼ変わらない印象
-
-違いがあるとすれば以下の通り
-
-- 初期のSQL Developerは「sqldeveloper.sh」というスクリプトを動かして起動
-
-- OSQLEditはダブルクリックで起動
-
-- OSQLEditは右にナビゲータ(オブジェクトの検索用ウィンドウ)がついている
-
-- SQL Developerは左にナビゲータがついている
+<h3 class="title">
+他の条件
+</h3>
+<div class="box">
+    <p>
+TCP/IPプロトコルサポートがインストールされていること
+    </p>
+    <p>
+    リスナーが構成されていること
+    </p>
+</div>
 
 
 
+## クライアントコンピュータ
+
+- データベースサーバーにアクセスできるネットワークでクライアントコンピュータが稼働中であること
+
+<h3 class="title">
+その他の条件
+</h3>
+<div class="box">
+    <p>
+Oracleクライアントがインストールされていること
+    </p>
+    <p>
+    TCP/IPプロトコルサポートがインストールされていること
+    </p>
+</div>
 
 
-## SQL Developerの開き方について
+## Oracle Netとは
 
-次のコマンドで環境変数を指定する。
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+データベースサーバーに関するネットワーク機能を提供するコンポーネント
+    </p>
+    <p>
+    Oracle Net Servicesの一つであり、OracleデータベースソフトやOracleクライアントをインストールすると同時にインストールされる
+    </p>
+</div>
 
-<pre><code>
-$ . oraenv
->(接続先のインスタンスを指定)
-</code></pre>
+この機構はOSI参照モデルでいうところの
 
-SQL Developerは$ORACLE_HOME/sqldeveloperの配下に存在するsqldeveloper.shを実行することで立ち上げられる。
-
-つまり、次のコマンドで開くことが可能
-
-
-<pre>
-$ cd $ORACLE_HOME/sqldeveloper
-$ sh sqldeveloper.sh
-</pre>
-
-上記スクリプトを実行すると、SQL Developerが起動する
-
-
-
-
-## SQL Developerの二つのモード
-
-- 通常モードでスキーマ・オブジェクトの参照や管理を行う場合
-
-- DBAナビゲータを使用してDBA操作を行う場合
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+セッション層に値する
+    </p>
+</div>
 
 
-## 通常モードでスキーマ・オブジェクトの参照や管理を行う場合
+## データベースサーバーへの接続方法
 
-1, 「接続の作成」を押す
+- クライアント/サーバーアプリケーション
 
-2, データベース接続の作成/選択では次の内容を入力
+クライアントとデータベースサーバーの両方にOracle Netをインストールする
 
-- 接続名
+- webクライアントによる接続
 
-- ユーザー名
+(web api)による接続のこと
 
-- パスワード
+データベースの処理が必要な場合はwebサーバーがクライアントの代わりにデータベースに接続して処理を行う。
 
-- ホスト名
+データベースサーバーにとってのクライアントはwebサーバーになる
 
-- SID
-
-
-を入力して、「テスト」ボタンをクリック
-
-接続が確認できたら、「接続」をクリックする
+webサーバーとデータベースサーバーにOracle Netをインストールすることが条件(クライアントPCには必要ない)
 
 
-##  SQL Developerによるオブジェクトの検索方法
+クライアント - webサーバー - Oracleデータベースサーバー
 
-左側にあるナビゲータ画面の検索バーから可能
-
-
-
-## DBAナビゲータを使用してDBA操作を行う場合
-
-通常モードを使用しログインできた後、
-「表示」タブにある「DBA」をクリックする
-
-DBAナビゲータが費用辞されたら、「接続」を右クリックで「接続の追加」を押す
-
-選択ウィンドウで定義済みのDBAを選択して、「OK」をクリックする
-
-接続が確立すると、ツリー構造で以下の項目が出てくる
-
-- コンテナ・データベース
-
-- データベース構成
-
-- RMANバックアップ/リカバリ
-
-- スケジューラ
-
-
-
-
+の三層構造になる
 
 
 
@@ -125,20 +101,9 @@ DBAナビゲータが費用辞されたら、「接続」を右クリックで�
 
 ## 備考
 
+title:Oracleネットワークを整える(クライアントとデータベースサーバー)
 
-title:SQL Developerとは【OSQLEditとの比較もあり】
-
-description:SQL Developerができること、OSQLEditとの違いを解説！インストールの方法からオプションの指定まで！
-
-
-
-
-
-
-
-
-
-
+description:ネットワークでサーバーが稼働中であることと、Oracleデータベースがインストールされていることが絶対条件
 
 
 
@@ -158,23 +123,11 @@ description:SQL Developerができること、OSQLEditとの違いを解説！�
 
 
 
-
-
-
-
 <div class="question_tag">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     
     
-    <h3 class="title">
-    答え
-    </h3>
-    <div class="box">
-        <p>
-
-        </p>
-    </div>
 
     
     
