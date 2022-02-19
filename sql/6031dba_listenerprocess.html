@@ -1,0 +1,326 @@
+
+
+## リスナープロセスの役割
+
+リスナープロセスはデータベース側で動作しているプロセス
+
+以下のような手順で動作している
+
+<pre>
+１、データベース側でクライアントからの接続要求をまつ
+
+２、受信するとその要求をデータベースへ転送
+
+3、データベースが承認すると接続が確立される
+
+４、リスナーは再び接続要求を待つ「リスニング」状態に戻る
+</pre>
+
+クライアントとデータベースの仲介役がリスナー。
+
+リスナー無くしてデータベースへの接続はありえない
+
+## リスナーの制御
+
+リスナーの制御には次のコマンドを指定する
+
+<pre><code>
+lsnrctl
+</code></pre>
+
+## リスナーの起動
+
+<pre><code>
+lsnrctl start [リスナー名]
+</code></pre>
+
+リスナーがデフォルト名(LISTENER)の場合、指定を省略することが可能
+
+これはリスナー制御ユーティリティで使用しているデフォルトの名前がLISTENERであるため、
+それを置き換える必要がないためである
+
+## リスナーの停止
+
+<pre><code>
+lsnrctl stop [リスナー名]
+</code></pre>
+
+こちらもリスナーがデフォルト名(LISTENER)の場合、指定を省略することが可能
+
+## リスナーの状態確認及びサービス確認
+
+リスナーの状態やサービスを確認することができる。
+
+<pre><code>
+lsnrctl status [リスナー名]
+</code></pre>
+
+
+## リスナーのサポート対象サービス名の確認
+
+<pre><code>
+lsnrctl services
+</code></pre>
+
+
+## リスナーの対話形式での実行
+
+lsnrctlの引数なしでの実行
+
+対話形式で起動される。
+
+
+## リスナー情報の構成
+
+リスナー情報の構成要素
+
+-  一つ以上のプロトコルアドレス
+
+- サポート対象のサービスに関する情報
+
+- 実行時の動作を制御するパラメータ
+
+これらの構成情報は
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+$ORACLE_HOME/network/adminディレクトリ配下にあるlistener.ora
+    </p>
+</div>
+
+というファイルに格納される。
+
+具体例
+
+<pre><code>
+
+LISTENER =
+  (DESCRIPTION_LIST=
+    (DESCRIPTION =
+      (ADRESS = (PROTOCOL = TCP)(HOST = localhost)(POERT = 1521)))
+      (ADRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521)))
+  )
+</code></pre>
+
+各文の意味
+
+<pre><code>
+(ADRESS = (PROTOCOL = TCP)(HOST = localhost)(POERT = 1521)))
+</code></pre>
+
+：リスナーのプロトコルはTCP/IP、ホスト名はlocalhost、ポートは1521番
+
+<pre><code>
+(ADRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521)))
+</code></pre>
+
+：外部プロシージャーコールから呼び出されるプロセス間通信(IPC)のリスニングアドレス
+
+
+## listener.oraの作成
+
+後からDBCAを使用してデータベースを作成した場合、listener.oraファイルは作成されていない
+
+作成のためには以下のツールを使用する
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+      - Oracle Net Manager
+    </p>
+    <p>
+      - Oracle Net Configuration Assistant
+    </p>
+    <p>
+      - Enterprise Manager Cloud Control
+    </p>
+</div>
+
+
+
+## Oracle Net Configuration Assistantを使用したリスナーの作成
+
+NetCAとも呼ぶ
+
+#1 netcaコマンドを入力する
+
+<pre><code>
+netca
+</code></pre>
+
+
+#2 リスナー構成
+
+リスナー構成が選択されていることを確認して「次へ」をクリックする
+
+#3 リスナーの構成 -リスナー
+
+「追加」を選択して「次へ」
+
+#4 リスナーの構成 -リスナー名-
+
+「LISTENER」が入力されていることを確認して「次へ」
+
+#5 リスナーの構成 -プロトコルの選択
+
+「TCP」が選択されていることを確認して「次へ」
+
+#6 リスナーの構成 - TCP/IPプロトコル
+
+「標準ポート番号の1521を使用」を選択して次へ
+
+#7 リスナーを追加しますか
+
+「いいえ」を選択
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+title:Oracle Master Bronze リスナー
+
+
+
+
+
+
+
+
+<h3 class="title">
+答え
+</h3>
+<div class="box">
+    <p>
+
+    </p>
+</div>
+
+
+
+
+
+<div class="question_tag">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    
+
+    
+    
+    <script>
+    //アコーディオンをクリックした時の動作
+    $('.title').on('click', function() {//タイトル要素をクリックしたら
+      var findElm = $(this).next(".box");//直後のアコーディオンを行うエリアを取得し
+      $(findElm).slideToggle();//アコーディオンの上下動作
+        
+      if($(this).hasClass('close')){//タイトル要素にクラス名closeがあれば
+        $(this).removeClass('close');//クラス名を除去し
+      }else{//それ以外は
+        $(this).addClass('close');//クラス名closeを付与
+      }
+    });
+    
+    //ページが読み込まれた際にopenクラスをつけ、openがついていたら開く動作※不必要なら下記全て削除
+    $(window).on('load', function(){
+      $('.accordion-area li:first-of-type section').addClass("open"); //accordion-areaのはじめのliにあるsectionにopenクラスを追加
+      $(".open").each(function(index, element){ //openクラスを取得
+        var Title =$(element).children('.title'); //openクラスの子要素のtitleクラスを取得
+        $(Title).addClass('close');       //タイトルにクラス名closeを付与し
+        var Box =$(element).children('.box'); //openクラスの子要素boxクラスを取得
+        $(Box).slideDown(500);          //アコーディオンを開く
+      });
+    });
+    </script>
+    
+    <style>
+    @charset "UTF-8";
+    
+    /*==================================================
+    アコーディオンのためのcss
+    ===================================*/
+    
+    /*アコーディオン全体*/
+    .accordion-area{
+        list-style: none;
+        width: 96%;
+        max-width: 900px;
+        margin:0 auto;
+    }
+    
+    .accordion-area li{
+        margin: 10px 0;
+    }
+    
+    .accordion-area section {
+      border: 1px solid #ccc;
+    }
+    
+    /*アコーディオンタイトル*/
+    .title {
+        position: relative;/*+マークの位置基準とするためrelative指定*/
+        cursor: pointer;
+        font-size:1rem;
+        font-weight: normal;
+        padding: 3% 3% 3% 50px;
+        transition: all .5s ease;
+    }
+    
+    /*アイコンの＋と×*/
+    .title::before,
+    .title::after{
+        position: absolute;
+        content:'';
+        width: 15px;
+        height: 2px;
+        background-color: #333;
+        
+    }
+    .title::before{
+        top:48%;
+        left: 15px;
+        transform: rotate(0deg);
+        
+    }
+    .title::after{    
+        top:48%;
+        left: 15px;
+        transform: rotate(90deg);
+    
+    }
+    /*　closeというクラスがついたら形状変化　*/
+    .title.close::before{
+      transform: rotate(45deg);
+    }
+    
+    .title.close::after{
+      transform: rotate(-45deg);
+    }
+    
+    /*アコーディオンで現れるエリア*/
+    .box {
+        display: none;/*はじめは非表示*/
+        background: #f3f3f3;
+      margin:0 3% 3% 3%;
+        padding: 3%;
+    }
+    
+    </style>
+    
+    
+</div>
+
+
