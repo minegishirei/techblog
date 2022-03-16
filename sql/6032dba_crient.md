@@ -216,7 +216,11 @@ Oracle以外のネーミング
 
 
 
+title:「サービス」とは何か？【Oracle Database】
 
+description:クライアントがデータベースサーバー上のデータベースに接続する際に指定するのはデータベースの「サービス名」である
+
+category_script:page_name.startswith("6")
 
 
 

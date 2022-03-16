@@ -252,3 +252,15 @@ ALTER_SYSTEM SET SGA_TAERGET = 0 [SCOPE = {MEMORY | SPFILE | BOTH }];
 
 <ここの部分の説明は省略>
 
+
+
+
+
+title:Oracleデータベースのメモリー管理のパラメータについて
+
+description:Oracleソフトの基本インストールでデータベースを作成すると自動メモリー管理が有効になる。この場合、次の環境変数によって指定されたターゲットサイズの範囲内で調整される。
+
+category_script:page_name.startswith("6")
+
+
+

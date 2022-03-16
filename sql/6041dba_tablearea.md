@@ -556,6 +556,12 @@ oracle databaseではセグメントアドバイザが定期的に実行され�
 
 
 
+title:表領域とは何か？【Oracle Database】
+
+description:データベースのオブジェクトである表と索引など「セグメント」という論理構造が格納される先。表領域は表や索引をまとめる入れ物と考えることができる。表領域に対して一つ以上のデータファイルが作成される。
+
+category_script:page_name.startswith("6")
+
 
 
 

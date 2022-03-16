@@ -189,6 +189,11 @@ UNDOデータは不要になったら上書きされ、循環方式で再利用�
 
 
 
+title:UNDOデータとは？【Oracleデータベース解説】
+
+description:UNDOデータとは、トランザクションによって行われるデータの変更前にデータベースによって保存されるデータのコピーである。
+
+category_script:page_name.startswith("6")
 
 
 
