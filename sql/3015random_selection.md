@@ -109,6 +109,7 @@ title:ランダムセレクションとは【SQL アンチパターン】
 description:RAND関数は行ごとにランダムな数字をだすので、この数字で並び替えを行うことでランダムなソートを生み出すことができるが、これをorder byとともに使うとデータ数の上昇に応じて速度が重くなってしまう。
 
 
+img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
 
 
