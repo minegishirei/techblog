@@ -158,6 +158,97 @@ C++,C#,Perl,Ruby,Python,PHPなどのプロジェクトも存在している
 
 
 
+## 転地インデックスの作成
+
+ユーザーが検索するキーワードの一覧を **Keywords** テーブルとして
+
+多対多の関係の構築のために **BugsKeywords** 交差テーブルを作る
+
+<pre><code>
+CREATE TABLE Keywords {
+    keyword_id  SERIAL PRIMARY KEY,
+    keyword     VARCHAR2 NOT NULL,
+    UNIQUE KEY  (Keyword)
+}
+
+CRETAE TABLE BugsKeyword {
+    keyword_id  BIGINT UNSINED NOT NULL,
+    bug_id      BIGINT UNSINED NOT NULL,
+    PRIMARYKEY (keyword_id, bug_id),
+    FOREIGN KEY (keyword_id) REFERENCES Keywords(keyword_id),
+    FOREGIN KEY (bug_id) REFERENCES Bugs(bug_id)
+}
+</code></pre>
+
+BugsKeywordは Keywordテーブルと Bugsテーブルの組み合わせを **重複なしにする役割を担う**
+
+BugsKeywordにはあるバグの説明文に使われる全てのキーワードを、行として加える
+
+次に、次のようなプロシージャを作る
+
+<pre><code>
+CREATE PROCEDURE BugsSearch(keyword VARCHAR(40))
+BEGIN
+    set @keyword = keyword;
+
+    -- Keywordsに対して検索を行う
+    -- 検索結果がない場合はNULLが返される
+    PREPARE s1 FROM 'SELECT MAX(keyword_id) INTO @k FROM Keywords WHERE keyword = ?`
+    EXCUTE s1 USINF @keyword;
+    DEALLOCATE PREPARE s1;
+
+    IF (@k IS NULL) THEN
+        -- マッチしなかった時は新しい語として挿入される
+        PREPARE s2 FROM 'INSERT INTO Keywords (keyword) VALUES (?)';
+        EXCUTE s2 USING @keyword;
+        DEALLOCATE PREPARE s2;
+
+        -- Keywordsで生成された主キーを検索
+        SELECT LAST_INSRT_ID() INTO @k;
+
+        -- 新しいキーワードを含む行をBugsで検索して、交差テーブルに代入する
+        PREPARE s3 FROM '
+            INSERT INTO BugsKeywords (bug_id, keyword_id)
+            SELECT 
+                bug_id, ? 
+            FROM 
+                Bugs
+            Where
+                summary REGEXP CONCAT('' [[:<:]], ?, '' [[:>:]] '')
+            OR 
+                description REGEXP CONCAT('' [[:<:]], ?, '' [[:>:]] '')';
+        EXCUTE s3 USINF @k, @keyword, @keyword;
+        DEALLOCATE PREPARE s3;
+    END IF;
+
+    --新しいキーワードを含む行をBugsで検索して、交差テーブルに値を代入する
+    PREPARE s4 FROM '
+        SELECT 
+            b.* 
+        FROM 
+            Bugs b
+        INNER JOIN
+            BugsKeywords k USING(bug_id)
+        WHERE
+            k.kwyword_id = ?`;
+    
+    EXCUTE s4 USINF @k
+    DEALLOCATE PREPARE s4;
+END
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
