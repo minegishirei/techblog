@@ -108,6 +108,7 @@ public void assessDevice(String deviceID) {
 
 
 
+## 備考
 
 title:プラグインアーキテクチャのメリットとデメリット【アーキテクチャ詳細】
 
