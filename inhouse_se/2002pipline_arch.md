@@ -104,7 +104,7 @@ title:パイプラインのメリット・デメリット【アーキテクチ�
 
 description:関数型プログラミング言語の考え方を拡張子かのようなアーキテクチャ。bashやpowershellなどのosの言語に近い構造を持つ。プログラミング言語は低いレイヤーの話であるが、今回のアーキテクチャはより高次元である。
 
-category_script:True
+category_script:page_name.startswith("2")
 
 img:https://www.sbbit.jp/article/image/60376/OGP_bit202105141422516660.jpg
 

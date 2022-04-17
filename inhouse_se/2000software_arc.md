@@ -125,6 +125,8 @@ title:アーキテクチャパターン一覧
 
 description:アーキテクトを学ぶ意義の理解。特に、アーキテクトスタイル（アーキテクチャパターン）のことについて。アーキテクトスタイルとは、さまざまなアーキテクチャ特性をカバーする、コンポーネント同士の名付けられた関係を説明するもの。
 
-category_script:True
+
+category_script:page_name.startswith("2")
+
 
 img:https://cdn.mainichi.jp/vol1/2018/02/26/20180226oog00m010037000p/9.jpg?1
