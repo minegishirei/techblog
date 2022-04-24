@@ -47,11 +47,9 @@ H2component.jsxファイルを作り、以下の内容で記述します。
 
 ``` { .html }
 import React from 'react';
-
 function H2component (props) {
     return <h2>this is test</h2>
 }
-
 export default H2component;
 ```
 
@@ -61,19 +59,19 @@ export default H2component;
 
 一行目はimport宣言句に
 
-``` { .html }
+```{ .html }
 import H2component from './components/H2component'; //--No1. 追加して欲しい箇所
 ```
 
 もう一行は「Learn React」の後に
 
-``` { .html }
+```{ .html }
 <H2component /> //--No2. 追加して欲しい箇所
 ```
 
 完成図は以下の通り。
 
-``` { .html }
+```{ .html }
 import logo from './logo.svg';
 import './App.css';
 import H2component from './components/H2component'; //--No1. 追加して欲しい箇所
