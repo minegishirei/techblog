@@ -30,6 +30,7 @@ Reactをいじるときのトップレベルのソースは
 ソースファイルを見てみると、通常のJavascriptとは異なる点が何点か存在します。
 
 `code'
+
 src/App.js)
 
 import logo from './logo.svg'; # --- 気になる点No.1
@@ -58,6 +59,7 @@ function App() {
 }
 
 export default App;  # -- 気になる点No.3
+
 'code`
 
 それぞれ順に見ていきます。
