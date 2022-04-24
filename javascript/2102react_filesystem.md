@@ -29,10 +29,9 @@ Reactをいじるときのトップレベルのソースは
 
 ソースファイルを見てみると、通常のJavascriptとは異なる点が何点か存在します。
 
-<code>
 
+``` { .html }
 src/App.js)
-
 import logo from './logo.svg'; # --- 気になる点No.1
 import './App.css';
 
@@ -54,13 +53,10 @@ function App() {
         </a>
       </header>
     </div>
-    
   );
 }
-
 export default App;  # -- 気になる点No.3
-
-</code>
+```
 
 
 それぞれ順に見ていきます。
@@ -135,7 +131,7 @@ function App() {
 
 ページ中央にあるリンク文字列が更新されるはずです。
 
-<code>
+``` { .html }
 import logo from './logo.svg';
 import './App.css';
 
@@ -161,7 +157,7 @@ function App() {
 }
 
 export default App;
-</code>
+```
 
 
 
@@ -179,14 +175,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';  ## -- 読み込み部分
 import reportWebVitals from './reportWebVitals';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -45,7 +45,7 @@ H2component.jsxファイルを作り、以下の内容で記述します。
 
 関数名のH2componentは名前を自由に変えてもいいですが、小文字は避けてください。
 
-<pre><code>
+``` { .html }
 import React from 'react';
 
 function H2component (props) {
@@ -53,7 +53,7 @@ function H2component (props) {
 }
 
 export default H2component;
-</code></pre>
+```
 
 ## No3. App.jsで2行追加する
 
@@ -61,24 +61,23 @@ export default H2component;
 
 一行目はimport宣言句に
 
-<pre><code>
+``` { .html }
 import H2component from './components/H2component'; //--No1. 追加して欲しい箇所
-</code></pre>
+```
 
 もう一行は「Learn React」の後に
 
-<pre><code>
+``` { .html }
 <H2component /> //--No2. 追加して欲しい箇所
-</code></pre>
+```
 
 完成図は以下の通り。
 
-<pre><code>
+``` { .html }
 import logo from './logo.svg';
 import './App.css';
 import H2component from './components/H2component'; //--No1. 追加して欲しい箇所
 import React from 'react';
-
 function App() {
   return (
     <div className="App">
@@ -100,9 +99,8 @@ function App() {
     </div>
   );
 }
-
 export default App;
-</code></pre>
+```
 
 
 ## No4. 完成

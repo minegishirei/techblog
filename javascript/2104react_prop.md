@@ -41,15 +41,13 @@ componentフォルダーをsrcフォルダー配下に作成します。
 
 componentフォルダー配下にH2component.jsxファイルを作り、以下の内容で記述します。
 
-<pre><code>
+``` { .html }
 import React from 'react';
-
 function H2component (props) {
     return (<div><h2>{props.title}</h2><p>{props.description}</p></div>)
 }
-
 export default H2component;
-</code></pre>
+```
 
 
 
@@ -57,12 +55,11 @@ export default H2component;
 
 App.jsファイルを次のように編集してください。
 
-<pre><code>
+``` { .html }
 import logo from './logo.svg';
 import './App.css';
 import H2component from './components/H2component';
 import React from 'react';
-
 function App() {
   return (
     <div className="App">
@@ -92,9 +89,7 @@ function App() {
     </div>
   );
 }
-
-export default App;
-</code></pre>
+```
 
 
 ## 実行
@@ -103,7 +98,7 @@ export default App;
 
 次のように出れば編集成功です。
 
-<pre><code>
+``` { .html }
  Reactハンズオンラーニング 第2版 ―Webアプリケーション開発のベストプラクティス
 本書では実際に動くコンポーネントを作りながら、最新のReactの記法について解説しつつ、最新のツールやライブラリも紹介します。
 
@@ -112,7 +107,7 @@ export default App;
 
  プログラミングTypeScript ―スケールするJavaScriptアプリケーション開発
 TypeScriptの型に関する基礎的な内容からその応用、エラー処理の手法、非同期プログラミング、各種フレームワークの利用法、既存のJavaScriptプロジェクトのTypeScript移行の方法まで、言語全般を総合的に解説します。
-</code></pre>
+```
 
 
 
