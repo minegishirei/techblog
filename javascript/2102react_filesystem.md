@@ -101,7 +101,7 @@ import logo from './logo.svg';
 
 HTMLよく似た構文であるXMLをJavascriptにそのまま書き込めることでhtmlのjavascriptによる操作をより直感的に行えているわけです。
 
-<pre><code>
+``` { .html }
 function App() {
   return (
     <div className="App"> # -- 気になる点No.2
@@ -122,7 +122,7 @@ function App() {
     </div>
   );
 }
-</code></pre>
+```
 
 
 ## ファイルを書き換えてみる
