@@ -29,7 +29,7 @@ Reactをいじるときのトップレベルのソースは
 
 ソースファイルを見てみると、通常のJavascriptとは異なる点が何点か存在します。
 
-```
+```jsx
 src/App.js)
 
 import logo from './logo.svg'; # --- 気になる点No.1
