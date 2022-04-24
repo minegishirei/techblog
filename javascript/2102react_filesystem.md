@@ -29,7 +29,7 @@ Reactをいじるときのトップレベルのソースは
 
 ソースファイルを見てみると、通常のJavascriptとは異なる点が何点か存在します。
 
-``` { .html }
+<code>
 
 src/App.js)
 
@@ -60,7 +60,7 @@ function App() {
 
 export default App;  # -- 気になる点No.3
 
-```
+</code>
 
 
 それぞれ順に見ていきます。
@@ -135,7 +135,7 @@ function App() {
 
 ページ中央にあるリンク文字列が更新されるはずです。
 
-`
+<code>
 import logo from './logo.svg';
 import './App.css';
 
@@ -161,7 +161,7 @@ function App() {
 }
 
 export default App;
-`
+</code>
 
 
 
@@ -173,7 +173,7 @@ export default App;
 
 実際に「index.js」をみてみますと、上から4行目にはAppファイルをimportしているのが見えます。
 
-<pre><code>
+``` { .html }
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -191,7 +191,7 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-</code></pre>
+```
 
 App.jsで定義したAppクラスをexport文で外部利用可能にし、
 
