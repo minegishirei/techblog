@@ -29,7 +29,7 @@ Reactをいじるときのトップレベルのソースは
 
 ソースファイルを見てみると、通常のJavascriptとは異なる点が何点か存在します。
 
-<pre><code>
+`
 src/App.js)
 
 import logo from './logo.svg'; # --- 気になる点No.1
@@ -57,7 +57,7 @@ function App() {
 }
 
 export default App;  # -- 気になる点No.3
-</code></pre>
+`
 
 それぞれ順に見ていきます。
 
@@ -129,7 +129,7 @@ function App() {
 
 ページ中央にあるリンク文字列が更新されるはずです。
 
-<pre><code>
+`
 import logo from './logo.svg';
 import './App.css';
 
@@ -155,7 +155,7 @@ function App() {
 }
 
 export default App;
-</code></pre>
+`
 
 
 
