@@ -34,7 +34,6 @@ Reactをいじるときのトップレベルのソースは
 src/App.js)
 import logo from './logo.svg'; # --- 気になる点No.1
 import './App.css';
-
 function App() {
   return (
     < div className="App"> # -- 気になる点No.2
@@ -134,7 +133,6 @@ function App() {
 ``` { .html }
 import logo from './logo.svg';
 import './App.css';
-
 function App() {
   return (
     <div className="App">
@@ -155,7 +153,6 @@ function App() {
     </div>
   );
 }
-
 export default App;
 ```
 
