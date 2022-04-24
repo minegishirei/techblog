@@ -29,7 +29,7 @@ Reactをいじるときのトップレベルのソースは
 
 ソースファイルを見てみると、通常のJavascriptとは異なる点が何点か存在します。
 
-<pre><code>
+``` { .html }
 
 src/App.js)
 
@@ -60,7 +60,7 @@ function App() {
 
 export default App;  # -- 気になる点No.3
 
-</code></pre>
+```
 
 
 それぞれ順に見ていきます。
