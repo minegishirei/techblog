@@ -37,7 +37,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App"> # -- 気になる点No.2
+    `<div className="App"> # -- 気になる点No.2
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -53,6 +53,7 @@ function App() {
         </a>
       </header>
     </div>
+    `
   );
 }
 
