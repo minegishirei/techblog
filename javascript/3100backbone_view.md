@@ -134,7 +134,7 @@ songView.render();
 
 
 
-
+## 備考
 
 title:BackboneのViewの基礎【ビュー編】
 
