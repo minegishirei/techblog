@@ -245,6 +245,61 @@ myTodo.set({
 </code></pre>
 
 
+## データの有効性を確かめる
+
+バックボーンはmodel.validate（）によるモデル検証をサポートします。
+
+これにより、モデルを設定する前にモデルの属性値を確認できます。
+
+デフォルトでは
+
+- モデルがsaveメソッドを介して永続化されるとき
+
+- {validate：true}が引数として渡された場合にset（）が呼び出されるとき
+
+の条件で検証が行われます。
+
+<pre><code>
+var Person = new Backbone.Model({name: 'Jeremy'});
+// Validate the model name
+Person.validate = function(attrs) { if (!attrs.name) {
+return 'I need your name'; }
+};
+    // Change the name
+Person.set({name: 'Samuel'}); console.log(Person.get('name')); // 'Samuel'
+    // Remove the name attribute, force validation
+Person.unset('name', {validate: true}); // false
+</code></pre>
+
+- 少し複雑な例
+
+<pre><code>
+var Todo = Backbone.Model.extend(
+    { 
+        defaults: {completed: false },
+        //該当ソースは以下の部分
+        validate: function(attribs){ 
+            if(attribs.title === undefined){
+                return "Remember to set a title for your todo."; 
+            }
+        },
+        initialize: function(){
+            console.log('This model has been initialized.'); 
+            this.on("invalid", function(model, error){
+                console.log(error);
+            });
+        } 
+    });
+    
+var myTodo = new Todo();
+myTodo.set('completed', true, {validate: true});
+// ログの内容: Remember to set a title for your todo.
+
+console.log('completed: ' + myTodo.get('completed')); 
+// 出力結果：completed: false
+</code></pre>
+
+
 
 
 title:BackboneのModel基礎【モデル編】

@@ -55,7 +55,12 @@ Windowsの場合はShift+Enterショートカット、Macの場合はCtrl-Enter�
 
 
 
-title:backbone.jsのダウンロード方法
+title:backbone.jsの使い方【スクリプトタグ】
 
+description:backbone.jsにはダウンロードは必要ありません。次のscript要素をhtml内部に入れておくだけで完了します。
+
+category_script:True
+
+img:https://www.tutorialspoint.com/backbonejs/images/backbonearch.jpg
 
 
