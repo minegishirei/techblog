@@ -178,7 +178,8 @@ title:顧客獲得のためのブランドストーリー構築【リーンブ�
 
 description:自身の知名度を広げブランドを確立しようとしている人へ、もしくはあなた自身の作成したツールを世の中に広めたい人へ。まずは伝えるべき内容を充実させるためのトレーニングを行います。
 
+category_script:page_name.startswith("41")
 
-category_script:True
+img:https://miro.medium.com/max/1200/1*-nDt5ALBcS5cuuzty7yz-Q.jpeg
 
 
