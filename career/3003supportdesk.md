@@ -7,8 +7,6 @@ img:https://type.jp/tensyoku-knowhow/wp-content/uploads/helpdesk-1.png
 
 
 
-# サポートデスク
-
 ### 概要
 
 社内SEとして店舗からの問い合わせや障害報告に対して原因の特定、開発者への問い合わせを行いました。
@@ -34,7 +32,3 @@ img:https://type.jp/tensyoku-knowhow/wp-content/uploads/helpdesk-1.png
 ・店舗,DCからの問い合わせ対応。バッチシステム障害対応
 ・現場からの不具合の報告を受けSQL,VBA,VB6等コードレベルでのバグ解析を実施
 ・結果、現場への暫定対応の案内、開発者への恒久対応の提案
-
-
-### プロジェクトの流れ
-

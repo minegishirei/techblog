@@ -1,12 +1,5 @@
 
 
-title:2000アクセス/dayを記録したwebアプリケーションを0から構築した話【履歴書】
-
-description:ローカルに開発環境を、AWS,EC2 ubuntu上に0から環境を構築し、上記二つを繋ぐためにGit,Githubを導入。改修、拡張、本番環境と開発環境の移行のしやすさの観点からdocker-composeを導入し、
-
-img:https://fanstatic.short-tips.info/static/fanstatic/sample.png
-
-
 # サービスの概要
 
 2000アクセス/dayを記録したwebアプリケーションを作成しました。
@@ -105,3 +98,10 @@ Githubへ保存していたためソースを失わずに済んだ。
 ・レスポンシブ化
 
 
+
+
+title:2000アクセス/dayを記録したwebアプリケーションを0から構築した話【履歴書】
+
+description:ローカルに開発環境を、AWS,EC2 ubuntu上に0から環境を構築し、上記二つを繋ぐためにGit,Githubを導入。改修、拡張、本番環境と開発環境の移行のしやすさの観点からdocker-composeを導入し、
+
+img:https://fanstatic.short-tips.info/static/fanstatic/sample.png
