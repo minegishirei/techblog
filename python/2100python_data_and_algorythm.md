@@ -108,7 +108,7 @@ title:pythonで配列を個別の値に分割したい時
 
 description:pythonで配列を開封したい時の解説です。例えばN要素の配列があります。その配列を別々の変数に代入したい場合、どのようにすれば良いでしょうか？
 
-category_script:page_name.startswith("2")
+category_script:page_name.startswith("21")
 
-
+img:https://question.short-tips.info/api/ogp/?text=pythonで配列を個別の値に分割したい時
 
