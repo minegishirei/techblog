@@ -84,7 +84,7 @@ for tag, *args in records:
 
 
 
-title:pythonで可変な配列の値を変数代入したい時
+title:pythonで可変な配列の値を変数代入したい時【python学習サイト】
 
 description:配列からN個の要素を別々の変数に代入する必要がありますが、配列がN個の要素より長くなる可能性があり、「アンパックする値が多すぎる」という例外が発生します。
 

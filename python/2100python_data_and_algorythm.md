@@ -104,7 +104,7 @@ ValueError: need more than 2 values to unpack
 
 
 
-title:pythonで配列を個別の値に分割したい時
+title:pythonで配列を個別の値に分割したい時【python学習サイト】
 
 description:pythonで配列を開封したい時の解説です。例えばN要素の配列があります。その配列を別々の変数に代入したい場合、どのようにすれば良いでしょうか？
 
