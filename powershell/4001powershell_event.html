@@ -1,0 +1,94 @@
+
+
+
+## Get-Commandで解決できる課題
+
+PowerShellでタスクを実行したいが、そのタスクを実行するためのコマンドまたはコマンドレットがわからない。
+
+
+## 参考
+
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+
+## Get-Commandの主な使い方
+
+- 特定のコマンドに関する要約情報を取得するには、コマンドを指定します
+
+<pre><code>
+Get-Command コマンド名
+</code></pre>
+
+
+- 特定のコマンドに関する詳細情報を取得するには、Get-Commandの出力をFormat-Listコマンドへパイプ処理します
+
+<pre><code>
+Get-Command CommandName | Format-List
+</code></pre>
+
+- テキストを含む名前のすべてのコマンドを検索するには、テキストをアスタリスク文字で囲みます。
+
+<pre><code>
+Get-Command *Get-Child*
+</code></pre>
+
+- Get動詞を使用するすべてのコマンドを検索するには、Getを-Verbパラメーターに指定します。
+
+<pre><code>
+Get-Command -Verb Get
+</code></pre>
+
+
+## Get-Commandの詳細
+
+PowerShellが管理者に提供する利点の1つは、コマンド名の一貫性です。
+すべてのPowerShellコマンド（コマンドレットと呼ばれる）は、通常の動詞-名詞パターンに従います。
+
+> 例：Get-Process、Get-EventLog、およびSet-Location。
+
+動詞は、比較的少数の標準動詞のどれかから選択され(Get-やSet-など)、コマンドレットが実行するアクションを説明します。
+名詞はコマンドレットに固有であり、コマンドレットが何に作用するかを**明確に**説明します。
+
+この哲学を知っていると、コマンドレットのグループを操作する方法を簡単に学ぶことができます。
+
+例えば、ローカルマシンでサービスを開始する場合、その標準の動詞はStartです。
+最初にStart-Service（この場合は正しい）を試すことをお勧めしますが、Get-Command -Verb Startと入力することも、何を開始できるかを確認するための効果的な方法です。
+
+逆に、Get-Command -Noun Serviceと入力すると、サービスでサポートされているアクションを確認できます。
+
+
+## 全てのコマンドを出力する方法
+
+Get-Commandコマンドレットは、WindowsPowerShellを探索するときに最も一般的に使用する3つのコマンドの1つです。
+
+他の2つのコマンドは、Get-HelpとGet-Memberです。
+
+すべてのコマンドとその機能の簡単な説明を一覧表示する方法については、powershell cookbookのレシピ1.5「コマンドのヘルプを取得する」を参照してください。
+
+## Get-Commandのさらに詳しい内容
+
+Get-Commandコマンドレットの詳細については、「Get-Help Get-Command」と入力してください。
+
+
+
+
+
+
+
+## 備考
+
+title:Get-Commandコマンドの使い方【powershell学習サイト】
+
+description:PowerShellでタスクを実行したいが、そのタスクを実行するためのコマンドまたはコマンドレットがわからない時はGet-Commandを使いましょう
+
+category_script:True
+
+img:https://question.short-tips.info/api/ogp/?text=Get-Commandコマンドの使い方【powershell学習サイト】
+
+
+
+
