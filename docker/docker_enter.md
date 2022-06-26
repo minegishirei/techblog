@@ -18,7 +18,7 @@
 
 https://pepa.holla.cz/wp-content/uploads/2016/10/Using-Docker.pdf
 
-
+<img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg">
 
 
 ## dockerのhello world
@@ -206,4 +206,55 @@ A /basket/chgrp
 
 を確認できるのです。
 
+
+## docker logsの見方
+
+dockerコンテナのログを見たければ docker logsと入力すれば良いです
+
+<pre><code>
+$ docker logs stupefied_turing
+root@CONTRAINER:/# mv /bin /basket
+root@CONTRAINER:/# ls
+bash: ls: command not found
+</code></pre>
+
+
+## dockerコンテナの脱出方法
+
+dockerコンテナから出る時はexitコマンドを実行しましょう。
+
+これはちょうどsshコマンドでログインしていた状態を抜けるのと同じです。
+
+<pre><code>
+root@CONTRAINER:/# exit
+exit
+$
+</code></pre>
+
+シェルが唯一の実行中のプロセスであったため、これによりコンテナも停止します。
+もし、あなたがdocker psを実行すると、実行中のコンテナーがないことがわかります。
+
+## dockerコンテナの削除
+
+ただし、これですべてがわかるわけではありません。 
+
+docker ps -aと入力すると、停止したコンテナー（正式には終了コンテナーと呼ばれます）を含むすべてのコンテナーのリストが表示されます。
+
+終了したコンテナは、docker startを発行することで再起動できます（ただし、このコンテナ内のパスを削除してしまったため、この場合、開始することはできません）。
+
+コンテナを削除する場合は、dockerrmコマンドを使用します。
+
+<pre><code>
+$ docker rm stupefied_turing
+stupefied_turing
+</code></pre>
+
+
+## 備考
+
+title:5分でわかるDockerの使い方を学ぶ【docker入門】
+
+description:Dockerを使用する最初の手順について説明します。まずはDockerがどのように機能するかを理解するために、いくつかの単純なコンテナーを起動して使用します。次に、Dockerfiles（Dockerコンテナーの基本的な構成要素）とコンテナの配布をサポートするDockerレジストリ。最後にコンテナを使用して、永続ストレージを備えたKey-Valueストアを展開する方法を学びます。
+
+img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg
 
