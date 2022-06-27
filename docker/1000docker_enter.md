@@ -258,3 +258,4 @@ description:Dockerを使用する最初の手順について説明します。�
 
 img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg
 
+category_script:True
