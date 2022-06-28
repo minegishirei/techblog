@@ -7,13 +7,15 @@
 
 アーキテクト,デプロイメント力によるシステム構築を指力で高速化し、画面デザイン知識と語彙力により余す事なく表現する。
 
+を目標とするwebエンジニア。
+
 
 
 ## 何ができるのか？
 
 - アーキテクト
 - デプロイメント
-- 指先
+- 指力
 - 語彙力
 - 画面デザイン
 
@@ -70,12 +72,16 @@
 
 ## 現在取り組んでいること
 
-1. docker,アーキテクチャパターンの習得と記事化
+1. docker,アーキテクチャパターンの習得と記事化(語彙力,デザイン,アーキテクチャ)
 
-2. 指先トレーニング
+2. 指先トレーニング(指力)
+
+3. SNSによるブランディング(語彙力)
 
 
+## 最近かっこいいと思ったツイート
 
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ヘルプデスク10年間は流石にやり過ぎ。<br>もう、近づくだけでパソコン治る時あるんだけど🤔</p>&mdash; 鯛焼き@ダム巡り情シス/(はまちゃん) (@taiyaki_net) <a href="https://twitter.com/taiyaki_net/status/1541716984081285121?ref_src=twsrc%5Etfw">June 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 ## 備考
