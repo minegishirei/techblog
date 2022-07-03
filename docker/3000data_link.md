@@ -26,6 +26,7 @@ docker run --name dbdata postgres echo "Data-only container for postgres"
 
 <pre><code>
 docker run -d --volumes-from dbdata --name db1 postgres
+
 </code></pre>
 
 

@@ -155,8 +155,9 @@ f47074b60757
 
 
 
+title:dockerでコンテナのライフサイクル管理【docker入門】
 
+description:docker-runに加えて、次のdockerコマンドを使用して、dockerのライフサイクル中にコンテナーを管理します。
 
-## dockerのコンテナ管理方法
 
 
