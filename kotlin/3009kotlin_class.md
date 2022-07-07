@@ -9,7 +9,7 @@ Kotlinでクラスを定義するには以下のように書く
 
 <pre><code> 
 class Human {
-    private var name = "名無し” 
+    private var name = "名無し"
     var age = 20
     fun intro() {
         println("私の名前h$ {name} です。${age} 歳です。")
@@ -24,7 +24,7 @@ class Human {
 <pre><code> 
 
 class Human {
-    private var name = "名無し” 
+    private var name = "名無し"
     var age = 20
     protected fun intro() {
         println("私の名前h$ {name}です。${age}歳です。")
@@ -82,7 +82,7 @@ fieldはset内の特別な変数名で値の代入を受けたときに実行さ
 
 <pre><code> 
 class Human {
-    var name = "名無し” 
+    var name = "名無し"
     var age = 20 
         set (value) { 
             if(value < 0)) {
