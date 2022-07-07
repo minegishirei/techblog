@@ -1,0 +1,81 @@
+@startuml branch
+
+
+
+!include 00target.pu
+
+
+
+class RightBottom{
+右側際下段の枝
+分岐した枝が上方向を向くか下方向に向くかで
+作者の支配している意識を汲み取ることができる
+}
+RightBottom ---> sexual
+
+class SecondDown {
+樹冠の右下にある枝で
+下側に分岐された枝は喪失を表す
+}
+RightBottom ---> SecondDown
+SecondDown ---> state.喪失
+
+
+class RightUp {
+最近の恋愛などで
+自己開発や計画を行う際
+樹冠の右上の枝に現れる
+}
+RightUp ---> sexual.自己啓発
+RightUp ---> sexual.計画性
+
+
+class CrowRoot {
+樹冠の付け根には
+同性愛の印が出る
+}
+CrowRoot ---> sexual.同性愛
+
+
+class SmallBranch 
+
+class SmallBranchToDown {
+    した方向に向いた小枝の場合
+    喪失や部分的な失敗を表す
+}
+SmallBranch --> SmallBranchToDown
+SmallBranchToDown ---> state.喪失
+SmallBranchToDown ---> state.失敗
+
+
+class ManyBranch {
+    小さくて細かい枝が
+    ピピっとついている場合
+}
+SmallBranch --> ManyBranch
+ManyBranch ---> state.防衛 
+
+class NoTach {
+    隙間が生じている枝は
+    可逆性の表れ
+}
+SmallBranch --> NoTach
+NoTach --->think.可逆性
+
+
+class CrossBranch {
+    交差した枝
+}
+
+class CrossBranchToDown {
+    した方向へ向く
+    クロスした枝は
+}
+CrossBranch --> CrossBranchToDown
+CrossBranchToDown ---> state.混乱
+CrossBranchToDown ---> state.緊張
+
+
+
+@enduml
+

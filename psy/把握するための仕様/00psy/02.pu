@@ -1,0 +1,33 @@
+@startuml 02color
+
+folder Img{
+    class 金字塔{
+<img src="https://icooon-mono.com/i/icon_10105/icon_101051_64.png">
+    }
+    class 樹木図 {
+        <img src="https://icooon-mono.com/i/icon_14637/icon_146371_64.png">
+    }
+}
+
+class フレーズ
+フレーズ ---> 金字塔
+
+class 物の意味
+フレーズ -> 物の意味
+物の意味 ---> 金字塔
+
+class デザイン
+デザイン --> 金字塔
+デザイン ..> 樹木図
+
+class 仕草
+仕草 ---> 樹木図
+
+class 色
+色 --> 樹木図
+色 ..> 金字塔
+
+
+
+
+@enduml

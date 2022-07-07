@@ -1,0 +1,114 @@
+@startuml crown
+
+
+
+!include ../00target.pu
+
+
+
+
+
+class 樹冠線
+
+class Circle
+樹冠線 --> Circle
+Circle ---> type.自己中心的
+
+class SideToSide
+樹冠線 --> SideToSide
+SideToSide ---> env.不満
+
+class UpToDown
+樹冠線 --> UpToDown
+UpToDown ---> think.秘密主義
+
+class Fill
+樹冠線 --> Fill
+Fill ---> think.秘密主義
+
+class Dark
+樹冠線 --> Dark
+Fill --> Dark
+Dark ---> living.死
+
+
+
+
+class Square
+樹冠形 --> Square
+Square ---> type.頑固
+
+class SideEclipse
+樹冠形 --> SideEclipse
+SideEclipse ---> env.圧力下
+
+class FirstQuarterMoon
+樹冠形 --> FirstQuarterMoon
+FirstQuarterMoon ---> type.防衛的
+FirstQuarterMoon ---> type.羞恥心
+
+class ToRightUp{
+  樹冠が右上に伸びている木
+  批判的,現実主義であり
+  - 科学的で高度に理性的な研究
+  - 実際的な仕事
+  一つの面にしか興味がなく、言ってしまえば常識がない
+}
+樹冠形 --> ToRightUp
+ToRightUp ---> state.現実主義
+ToRightUp ---> commonsense.非常識
+
+class ToLeftUp {
+  樹冠が左上に伸びている木
+世間の動きなどには興味を示さない。
+}
+樹冠形 --> ToLeftUp
+ToLeftUp ---> think.理想主義
+ToLeftUp ---> think.逃避
+
+
+
+namespace wing {
+  class LeftToRight {
+       右から左への風を書いた人は過去に一人もいない
+  }
+  LeftToRight ---> env.女性的要素からの圧力
+}
+
+namespace 樹冠内部 {
+    class Bushes
+    Bushes --> living.充実
+    
+    class BranchBushes 
+    BranchBushes ---> env.他者との接触の増加
+    
+    class BranchLeaf {
+        葉の数が多くなればなるほど濾過機能が強くなり
+        精神年齢は上がる
+    }
+    BranchLeaf ---> type.濾過機能
+    BranchLeaf ---> type.より若い
+    
+}
+
+class StemToCrown 
+
+
+class StemToCrownTwin {
+    二手に分かれている場合
+    平和という意味と
+    優柔不断という意味がある
+}
+StemToCrown --> StemToCrownTwin
+StemToCrownTwin ---> type.平和
+StemToCrownTwin ---> type.優柔不断
+
+class SteamToCrownLeftUp {
+  　右側のみ幹の線が樹冠に伸びている
+    情緒領域からのエネルギーをせきとめる
+}
+StemToCrown --> SteamToCrownLeftUp
+SteamToCrownLeftUp ---> env.女性的要素からの圧力
+
+
+@enduml

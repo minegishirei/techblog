@@ -1,0 +1,169 @@
+@startuml 00target
+
+namespace type {
+    class 自己中心的 
+    class 頑固 
+    class 防衛的
+    class 濾過機能
+    防衛的 --> 濾過機能
+    class 羞恥心
+    class 優柔不断
+  
+    class より若い
+
+    class 平和
+    class 野心
+    class 平和
+    class 気質
+
+    class 分裂気質{
+        やせ型
+        【有名人】宮沢りえ・Mr.オクレ
+        基本的に神経質で生真面目。
+        自分の世界に閉じこもりがちで、社交的ではありません。
+        他人が口にしたちょっとした言葉に過敏に反応する反面、
+        他人の気持ちには無頓着で鈍感なところがあります。
+    }
+    気質 ----> 分裂気質
+
+    class 躁鬱気質 {
+        肥満型
+        【有名人】森久美子・伊集院光
+        基本的に社交的で温かく親切。
+        明るくて活発でユーモア精神があり一緒にいて楽しい人。
+        ただし感情にムラがあるため、
+        時には激しく怒ったり泣いたりすることもあります。
+        突然落ち込み、鬱状態になることがあります。
+    }
+    気質 ----> 躁鬱気質
+
+    class 粘着気質 {
+        【有名人】ケインコスギ・マイケル
+        几帳面で秩序を好み、物事に熱中するタイプです。
+        正義感が強く、礼儀正しいのはいいですが、
+        融通がきかず頑固といわれることもあります
+    }
+    気質 ----> 粘着気質
+    namespace ex {
+        class 物理学者
+        野心 --> 物理学者
+    }
+}
+
+namespace realtime {
+    class lie
+    class priority
+    class highcadence
+
+    class plan {
+        どこかで自分の思い通りになるようにする
+    }
+    class listen {
+        相手の話をちゃんと聞こうと努力する状態
+    }
+}
+
+
+namespace self_evaluation {
+    class 過大評価
+
+}
+
+
+namespace 思考傾向 {
+    class 伝統志向
+}
+
+
+
+namespace env {
+    class 不満
+    class 圧力下
+  
+    class 女性的要素からの圧力
+    
+    class 諦め
+    圧力下 --> 諦め
+  
+    class 他者との接触の増加
+}
+
+namespace think {
+    class 秘密主義
+    class 伝統主義
+    class 理想主義
+    class 逃避
+    class 可逆性
+    class 平和主義
+}
+
+namespace living {
+    class 死
+    class 充実
+}
+
+namespace state {
+    class 喪失
+    class 防衛
+
+    class 空想
+    class 現実
+
+    class 過去
+    class 未来
+
+    class 期待
+    未来 --> 期待
+
+    class 混乱
+    class 緊張
+}
+
+namespace time {
+    class 過去
+
+    class 未来
+}
+
+namespace parents {
+    class 母親からの影響
+    class 母親からの影響の克服
+    class 父親からの影響
+    父親からの影響 --> 憧れと諦め
+    class 憧れと諦め
+}
+
+namespace child {
+    class 不出来
+    class 異性の兄弟
+}
+
+namespace towoman {
+    class 軽蔑
+}
+
+namespace sexual {
+    class 同性愛
+    class 自己啓発 {
+        恋愛に対する自己啓発
+    }
+    class 計画性 {
+        恋愛に値する計画性
+    }
+}
+
+
+namespace freedom {
+    class 闘争
+    class 服従
+}
+
+namespace commonsense {
+    class 非常識
+    class 常識的
+}
+
+
+
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml word
+
+!include ../00target.pu
+
+
+
+
+class eng{
+    英語になった時に驚きに表現を表すのは
+    価値観が文化の単位で理解できないことを表す
+    ex) 厚切りジェイソン
+}
+language --> eng
+eng ---> 思考傾向
+eng ---> type.より若い
+
+
+class Reverse {
+    倒置法が不自然に出た時は
+    嘘をついた可能性が高い
+}
+order --> Reverse
+Reverse ---> realtime.lie
+
+
+
+class ちょっと {
+    「重く受け止めるな」という意味が込められる
+}
+habit --> ちょっと
+ちょっと ---> think.平和主義
+
+
+class つまり {
+何が大事なことかわからないと
+この言葉が出てこない
+}
+habit --> つまり
+つまり ---> realtime.riority
+つまり ---> think.highcadence
+
+
+class そうですね {
+
+}
+habit --> そうですね
+そうですね ---> realtime.plan
+そうですね ---> realtime.listen
+
+
+
+
+@enduml
+
+
+
