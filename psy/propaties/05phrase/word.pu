@@ -5,22 +5,22 @@
 
 
 
-class eng{
+class 英語 {
     英語になった時に驚きに表現を表すのは
     価値観が文化の単位で理解できないことを表す
     ex) 厚切りジェイソン
 }
-language --> eng
-eng ---> 思考傾向
-eng ---> type.より若い
+language --> 英語
+英語 ---> 思考傾向
+英語 ---> type.より若い
 
 
-class Reverse {
+class 倒置法 {
     倒置法が不自然に出た時は
     嘘をついた可能性が高い
 }
-order --> Reverse
-Reverse ---> realtime.lie
+order --> 倒置法
+倒置法 ---> realtime.lie
 
 
 

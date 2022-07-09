@@ -59,6 +59,7 @@
 # 文字でリズムを生み出したい時 
 
 <small>文字ずらし</small> 
+
 <img width="80%" src="https://i.pinimg.com/originals/27/db/50/27db509e18680e7bd9b91355a5555169.jpg">
 
  <p>文字の配列を崩すことで文字の一つ一つに個性がでる。
