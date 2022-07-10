@@ -23,7 +23,6 @@ https://paiza.jp/career/job_offers/12152
 
 https://www.nikkei.com/article/DGXLASFL15HGL_V11C15A2000000/
 
-
 株価自体は上昇傾向だったが
 
 https://finance.yahoo.co.jp/quote/2450.T/chart
