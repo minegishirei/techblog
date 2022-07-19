@@ -1,0 +1,26 @@
+@startuml blind_and_hook
+
+
+
+namespace blind {
+    class 二番手
+    class 都合の悪い出来事
+
+    namespace relation {
+        class 斜め
+        class サイドチェンジ
+    }
+}
+note left of blind
+見えないもの
+end note
+
+
+namespace hook {
+    class 銀の脇腹
+}
+
+
+@enduml
+
+

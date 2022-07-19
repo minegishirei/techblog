@@ -1,0 +1,74 @@
+@startuml abilty
+
+namespace type {
+    class 自己中心的 {
+    }
+    class 頑固 {
+    }
+    class 防衛的
+    
+    class 羞恥心
+}
+
+namespace env {
+    class 不満
+    class 圧力下
+  
+    class 女性的要素からの圧力
+    
+    class 諦め
+    圧力下 --> 諦め
+  
+  
+}
+
+namespace think {
+    class 秘密主義
+}
+
+namespace living {
+    class 死
+}
+
+
+
+namespace 樹冠線 {
+    class Circle
+    Circle ---> type.自己中心的
+  
+    class SideToSide
+    SideToSide ---> env.不満
+  
+    class UpToDown
+    UpToDown ---> think.秘密主義
+  
+    class Fill
+    Fill ---> think.秘密主義
+  
+    class Dark
+    Fill --> Dark
+    Dark ---> living.死
+}
+
+namespace 樹冠形 {
+    class Square
+    Square ---> type.頑固
+  
+    class SideEclipse
+    SideEclipse ---> env.圧力下
+
+    class FirstQuarterMoon
+    FirstQuarterMoon ---> type.防衛的
+    FirstQuarterMoon ---> type.羞恥心
+}
+
+namespace wing {
+  class LeftToRight {
+       右から左への風を書いた人は過去に一人もいない
+  }
+  LeftToRight ---> env.女性的要素からの圧力
+}
+
+
+
+@enduml
