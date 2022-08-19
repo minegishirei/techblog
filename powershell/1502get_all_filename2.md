@@ -5,7 +5,7 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 
 
-## ファイルの名前の一覧を取得するコード
+##  ファイルの名前の一覧を取得するコード
 
 <pre><code>
 $rootpathItem = Get-ChildItem -Recurse
@@ -19,7 +19,7 @@ foreach($item in $rootpathItem){
 </code></pre>
 
 
-## 拡張子を指定してファイルの一覧を取得するコード
+##  拡張子を指定してファイルの一覧を取得するコード
 
 以下は.pngで終わるファイル名を全て取得するコード
 
@@ -37,7 +37,7 @@ foreach($item in $rootpathItem){
 </code></pre>
 
 
-## 拡張子を指定してファイルの一覧を取得するコード(複数指定)
+##  拡張子を指定してファイルの一覧を取得するコード(複数指定)
 
 以下は.vbp .exeで終わるファイルを全て取り出すコード
 

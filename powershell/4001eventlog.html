@@ -1,7 +1,7 @@
 
-##基本的なコマンド
+## 基本的なコマンド
 
-###イベントログの収集
+## #イベントログの収集
 
 PCに異常が発生した際に、基本的には一時的なエラーやユーザーの些細な操作ミスがほとんどであり、詳しい調査を行うことはございません。
 
@@ -27,7 +27,7 @@ Max(K) Retain OverflowAction        Entries Name
 15,360      0 OverwriteAsNeeded       0 Windows PowerShell
 </code></pre>
 
-###「Get-EventLog -List」解説
+## #「Get-EventLog -List」解説
 
 システムに登録されているイベントログを手に入れるためには「Get-EventLog -List」でイベントのログをリスト形式で手に入れる必要があります。
 
@@ -39,7 +39,7 @@ Max(K) Retain OverflowAction        Entries Name
 
 
 
-##イベントログの履歴を手に入れる
+## イベントログの履歴を手に入れる
 
 最新のイベントログを手に入れるためには -Newestオブションを指定します。
 
@@ -82,7 +82,7 @@ Index Source                  Message
 
 
 
-##イベントログから検索をかける
+## イベントログから検索をかける
 
 イベントログでフィルターをかけるには「Where-Object」を使用します
 
@@ -116,7 +116,7 @@ Index Time          Type Source                 EventID Message
 
 
 
-##頻度の高いイベントログを取得したい
+## 頻度の高いイベントログを取得したい
 
 PCの構成に不審な点が存在すると感じた場合、頻発するエラーを特定することはトラブルシューティングの第一歩となります。
 
@@ -144,7 +144,7 @@ Count Name                      Group
 </code></pre>
 
 
-##イベントログをとっておく
+## イベントログをとっておく
 
 コードサンプル1(イベントログの保存)
 

@@ -1,7 +1,7 @@
 
 
 
-## Get-Helpコマンドが解決する課題
+##  Get-Helpコマンドが解決する課題
 
 特定のコマンドがどのように機能し、どのように使用するかについて学びたいと思います。
 
@@ -10,7 +10,7 @@
 
 これはLinuxコマンドでいうところの「man」コマンドに当たります
 
-## Get-Helpコマンドの使い方
+##  Get-Helpコマンドの使い方
 
 特定のコマンドのヘルプ情報の概要を取得するには、Get-Helpコマンドレットの引数としてコマンドの名前を指定します。
 
@@ -26,7 +26,7 @@ Get-Help CommandName
 CommandName -?
 </code></pre>
 
-## Get-Helpコマンドで詳細を確認する
+##  Get-Helpコマンドで詳細を確認する
 
 特定のコマンドの詳細なヘルプ情報を取得するには、Get-Helpコマンドレットに–Detailedフラグを指定します。
 要約ビューに加えて、これにはパラメーターの説明と例も含まれます。
@@ -35,7 +35,7 @@ CommandName -?
 Get-Help CommandName -Detailed
 </code></pre>
 
-## Get-Helpコマンドで全ての情報を確認する
+##  Get-Helpコマンドで全ての情報を確認する
 
 特定のコマンドの完全なヘルプ情報を取得するには、Get-Helpコマンドレットに–Fullフラグを指定します。
 詳細ビューに加えて、これには完全なパラメーターの説明と追加の注記も含まれます。
@@ -45,7 +45,7 @@ Get-Help CommandName -Full
 </code></pre>
 
 
-## powershellでコマンドの使用例を確認する方法
+##  powershellでコマンドの使用例を確認する方法
 
 特定のコマンドの例のみを取得するには、–Examplesフラグを指定します。
 
@@ -54,7 +54,7 @@ Get-Help CommandName -Examples
 </code></pre>
 
 
-## powershellにてコマンドを検索する方法
+##  powershellにてコマンドを検索する方法
 
 
 Get-Commandコマンドレットと同様に、Get-Helpコマンドレットはワイルドカードをサポートします。
@@ -74,13 +74,13 @@ Get-Help *File*.
 </code></pre>
 
 
-## まとめ
+##  まとめ
 
 Get-Helpコマンドレットは、WindowsPowerShellを探索するときに最も一般的に使用する3つのコマンドの1つです。他の2つのコマンドは、Get-CommandとGet-Memberです。
 
 
 
-## 備考
+##  備考
 
 Get-Helpコマンドレットは、PowerShellのヘルプシステムと対話するための主要な方法です。
 
@@ -88,7 +88,7 @@ Get-Helpコマンドレットは、PowerShellのヘルプシステムと対話�
 
 
 
-## 備考
+##  備考
 
 title:Get-Helpコマンドの使い方【powershell学習サイト】
 

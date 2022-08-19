@@ -4,7 +4,7 @@
 <a href="">
     </a>
 
-##getchilditemとは
+## getchilditemとは
 
 powershellのコマンドの一種。
 
@@ -32,7 +32,7 @@ d-----  2021/08/28    3178      ModAuto
 <div id="sampl"></div> 
 
 
-##getchilditemで再帰的にフォルダーを探索する。
+## getchilditemで再帰的にフォルダーを探索する。
 
 -Recurseを付けると再帰的にフォルダーを探索し、一覧表示することができる。
 
@@ -67,7 +67,7 @@ LastWriteTime ---- ----- 2021/08/28 15:05 - --
 
 <div id="depth"></div> 
 
-##getchilditemで再起的に探索する
+## getchilditemで再起的に探索する
 
 -Depthを付けた後に深さを指定するとカレントディレクトリから指定した数までフォルダーに入り込んで探索する
 
@@ -119,7 +119,7 @@ dir
 
 <div id="morehelp"></div> 
 
-##さらに詳しいGet-Childitemのヘルプ
+## さらに詳しいGet-Childitemのヘルプ
 
 コマンドは以下のコマンドを入力
 
@@ -129,7 +129,7 @@ Get-Help Get-ChildItem -Online
 
 <div id="empty"></div> 
 
-##ディレクトリが空の時どのような挙動をするか
+## ディレクトリが空の時どのような挙動をするか
 
 空の時は何も表示しない
 
@@ -144,7 +144,7 @@ Get-ChildItem空のディレクトリは表示されません。
 
 <div id="path"></div> 
 
-##パスを指定してファイルフォルダーを取得する
+## パスを指定してファイルフォルダーを取得する
 
 パスを指定するには-Pathオプションを使う
 
@@ -158,7 +158,7 @@ Get-ChildItem -Path C:\Test
 
 <div id="mode"></div> 
 
-##ファイルの属性について ディレクトリー覧を取得した時にアルファベットでフラグがついていることがあるがそれは以下のような意味を表す
+## ファイルの属性について ディレクトリー覧を取得した時にアルファベットでフラグがついていることがあるがそれは以下のような意味を表す
 
 <pre><code>
 l (リンク) 
@@ -184,7 +184,7 @@ d-----  2021/08/28    3178      ModAuto
 
 <div id="onlyname"></div> 
 
-##getchilditemで名前のみ取得したい
+## getchilditemで名前のみ取得したい
 
 -Name で名前のみの取得が可能
 
@@ -195,7 +195,7 @@ Get-ChildItem -Path C:\Test -Name
 <div id="allof"></div> 
 
 
-##Get-Childitemで知れる全てのこと
+## Get-Childitemで知れる全てのこと
 
 Get-Childitemによって得られるデータには以下の情報が含まれる
 
@@ -230,7 +230,7 @@ False False False
 
 <div id="fullpath"></div> 
 
-##ファイル一覧を絶対パス(フルパス)で手に入れる
+## ファイル一覧を絶対パス(フルパス)で手に入れる
 
 
 <pre><code>
@@ -247,7 +247,7 @@ C:\Users\Stop-AllProcess.psm1
 
 <div id="wild"></div>
 
-##getchilditemでワイルドカードを使いたい
+## getchilditemでワイルドカードを使いたい
 
 Where-Objectを使おう
 

@@ -10,7 +10,7 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 
 
-##powershellから他のプログラムを実行する
+## powershellから他のプログラムを実行する
 
 <p>
     具体例
@@ -31,7 +31,7 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 
 
-##オリジナルのシェル、プロファイル、プロンプトをカスタマイズする。
+## オリジナルのシェル、プロファイル、プロンプトをカスタマイズする。
 
 <pre><code>
 notepad $profile
@@ -74,7 +74,7 @@ function Prompt
 </p>
 
 
-###別のカスタマイズ例
+## #別のカスタマイズ例
 <pre><code><code>
 function Prompt
 {
@@ -93,7 +93,7 @@ function Prompt
 
 
 
-##コマンドのヘルプを表示したい。
+## コマンドのヘルプを表示したい。
 
 以下の構文で調べることができる。
 
@@ -103,7 +103,7 @@ function Prompt
 </pre>
 
 
-##コマンドを見つけたい
+## コマンドを見つけたい
 
 
 <pre><code>
@@ -120,7 +120,7 @@ Get-Command *コマンドの一部*
 </code>
 </pre>
 
-###コマンドの構成について
+## #コマンドの構成について
 
 <strong>
     Powershellのコマンドの名前には一貫性がある
@@ -157,7 +157,7 @@ Get-Command -Noun Process
 このコマンドによって、例えばGet-Process(タスクマネージャーと同じコマンド)を手に入れられる。
 
 
-##コマンドの計測時間を調べる
+## コマンドの計測時間を調べる
 
 <pre><code>
 Measure-Command
@@ -165,7 +165,7 @@ Measure-Command
 </pre>
 
 
-##(理解できなかったレシピ)シェルをカスタマイズして生産性をあげる
+## (理解できなかったレシピ)シェルをカスタマイズして生産性をあげる
 
 <p>
     以下のレシピはまだまだ理解できなかった。要修行。
@@ -190,7 +190,7 @@ Pop-Location
 </pre>
 
 
-##以前呼び出したコマンドを実行したい
+## 以前呼び出したコマンドを実行したい
 
 <pre><code>
 Get-History         #履歴を調べIDを取得
@@ -200,7 +200,7 @@ Invoke-History (ID) #IDを記述して呼び起こす
 
 
 
-##コマンドの出力をファイルに格納したい
+## コマンドの出力をファイルに格納したい
 
 <pre><code>
 //やり方1
@@ -213,7 +213,7 @@ Get-ChildItem > files.txt
 </code>
 </pre>
 
-###やり方2 > を使う
+## #やり方2 > を使う
 実行したいコマンドの右に > を書き、さらにその右にファイル名を書くことで、
 ファイルに実行結果を格納することができる。
 
@@ -226,7 +226,7 @@ Get-ChildItem >> files.txt
 この方法は簡単ではあるが、出力を綺麗にできない。
 
 
-###Out-File でファイル出力
+## #Out-File でファイル出力
 
 
 <p>
@@ -261,7 +261,7 @@ $errorは履歴で最新のコマンドの実行結果がエラーであった�
     上記の例ではその一列目を取り出したあと、配列として出力する。
 </p>
 
-###表として出力する
+## #表として出力する
 
 <pre><code>
 //プロセス一覧

@@ -1,6 +1,6 @@
 
 
-##パイプラインとは
+## パイプラインとは
 
 <p>
     そもそもパイプラインとは、以下のように「｜」記号でコマンドを繋ぐことで、データの変更を可能にする仕組みである。
@@ -27,7 +27,7 @@ Get-Process | Where-Object { $_.WorkingSet -gt 500kb } | Sort-Object -Descending
 
 
 
-##パイプライン1 コマンドの出力結果のフィルタリング
+## パイプライン1 コマンドの出力結果のフィルタリング
 
 <pre><code>
 Get-Process | Where-Object { $_.Name -like "*Search*" }
@@ -41,7 +41,7 @@ Get-Process | Where-Object { $_.Name -like "*Search*" }
 上のコマンドはプロセス一覧を手に入れた後、名前が「Search」を含んでいるもののみ表示する
 
 
-##Where-Objectについて
+## Where-Objectについて
 
 Where-Objectはフィルタリングのためのコマンドレットである。
 
@@ -51,7 +51,7 @@ Where-Objectのあとの{}内でスクリプトを実行し、その実行結果
 
 
 
-##コマンドの出力テーブルのうち、一部を出力したい。
+## コマンドの出力テーブルのうち、一部を出力したい。
 
 <pre><code>
 Get-ChildItem | Where-Object { $_.PsIsContainer }
@@ -63,7 +63,7 @@ Get-ChildItem | Where-Object { $_.PsIsContainer }
 </p>
 
 
-##停止しているサービス一覧を取得する
+## 停止しているサービス一覧を取得する
 
 <pre><code>
 Get-Service | Where-Object { $_.Status -eq "Stopped" }
@@ -72,7 +72,7 @@ Get-Service | Where-Object { $_.Status -eq "Stopped" }
 
 
 
-##Foreach-Objectについて
+## Foreach-Objectについて
 
 Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行うことができる。
 
@@ -98,9 +98,9 @@ Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行�
 </code>
 </pre>
 
-##Foreach-Objectの応用
+## Foreach-Objectの応用
 
-###全てのメモ帳プロセスの終了を検知する
+## #全てのメモ帳プロセスの終了を検知する
 
 <pre><code>
  $notepadProcesses = Get-Process notepad
@@ -127,7 +127,7 @@ Foreach-Objectは入力を受けた全ての行に対して{}内の処理を行�
 #パイプラインの速度について
 
 
-##具体例1
+## 具体例1
 <pre><code>
 Get-ChildItem C:\ *.txt -Recurse | Out-File c:\temp\AllTextFiles.txt
 </code>
@@ -165,7 +165,7 @@ $files | Out-File c:\temp\AllTextFiles.txt
 </p>
 
 
-##具体例2
+## 具体例2
 
 <pre><code>
 $output = New-Object System.Text.StringBuilder

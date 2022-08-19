@@ -14,7 +14,7 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 
 
-##powershellでhtmlテキストを手に入れる
+## powershellでhtmlテキストを手に入れる
 
 <pre><code>
 $source = "http://blogs.msdn.com/powershell/rss.xml"     
@@ -27,7 +27,7 @@ WebClientのDownloadStringを使えばhtmlのソースを手に入れること�
 しかし、このままではタグがついたままなので綺麗なテキストに直さなければならない。
 
 
-##powershellからのスクレイピングコード(サンプル)
+## powershellからのスクレイピングコード(サンプル)
 
 以下のコードはmicrosoft beingで検索するコード（現在はhtmlの形式が変わったため、更なる工夫が必要）
 
@@ -58,7 +58,7 @@ else {
     "`nNo answer found."
 }
 
-## Clean HTML from a text chunk
+##  Clean HTML from a text chunk
 function clean-html ($htmlInput)
 {
     $tempString = [Regex]::Replace($htmlInput, "<[^>]*>", "")

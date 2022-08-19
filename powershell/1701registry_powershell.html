@@ -1,7 +1,7 @@
 
 
 
-##レジストリキーを表示する
+## レジストリキーを表示する
 
 Get-ItemPropertyでレジストリキーを取得できる。
 
@@ -47,7 +47,7 @@ d:\lee\tools\TaskSwitchXP.exe
 
 
 
-##レジストリの値を設定する。
+## レジストリの値を設定する。
 
 <pre><code>
 #変更前のファイルパスの値
@@ -65,7 +65,7 @@ d:\Lee\tools\MyProgram.exe
 
 
 
-##新しいレジストリキーを登録する。
+## 新しいレジストリキーを登録する。
 
 New-ItemPropertyを使う
 
@@ -77,7 +77,7 @@ New-ItemProperty . -Name MyProgram -Value c:\temp\MyProgram.exe
 
 
 
-##レジストリ応用1 サイトをInternet explorerセキュリティゾーンに追加する
+## レジストリ応用1 サイトをInternet explorerセキュリティゾーンに追加する
 
 サンプルコード
 
@@ -97,7 +97,7 @@ New-ItemProperty . -Name http -Value 2 -Type DWORD
 
 
 
-##レジストリ応用2 Internet explorerのプロキシを変更する。
+## レジストリ応用2 Internet explorerのプロキシを変更する。
 
 <pre><code>
 Set-Location "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" 

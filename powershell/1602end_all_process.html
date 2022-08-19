@@ -7,7 +7,7 @@ category_script:page_name.startswith("16")
 img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
 
 
-##Stop-Processとは
+## Stop-Processとは
 アプリケーションを指定してプログラムを閉じることができる
 罰ボタンを押したときと同じ挙動
 
@@ -20,11 +20,11 @@ exploreを止めたいときは
 <pre> Stop-Process -Name explorer </pre>
 
 
-##どのプロセス名を調べるためにはGet-Processコマンドが役に立つ
+## どのプロセス名を調べるためにはGet-Processコマンドが役に立つ
 
 <pre> Get-Process -Name ex* </pre>
 
-##(応用例)xmlファイルによるプロセス自動終了 あらかじめxmlファイルに終了するアプリを記述しておき、ps1ファイル呼び出しで全て閉じる
+## (応用例)xmlファイルによるプロセス自動終了 あらかじめxmlファイルに終了するアプリを記述しておき、ps1ファイル呼び出しで全て閉じる
 
 xmlファイルの例
 

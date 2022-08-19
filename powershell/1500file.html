@@ -4,7 +4,7 @@
 URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
 
 
-##powershellのxmlファイルを変数に格納する
+## powershellのxmlファイルを変数に格納する
 
 サンプルコード1
 
@@ -57,7 +57,7 @@ $xml = [xml] (Get-Content powershell_blog.xml)
 </pre>
 
 
-##xmlの各要素にpowershellでアクセスする。
+## xmlの各要素にpowershellでアクセスする。
 
 サンプルコード
 
@@ -101,7 +101,7 @@ xmlの各要素に対しては添字を使ってアクセスすることがで�
 
 
 
-##xmlからタグを指定して全て抜き出す。
+## xmlからタグを指定して全て抜き出す。
 
 
 パイプラインを用いてタグを全て抜き出すのがよい
@@ -129,12 +129,12 @@ Payette Podcast
 </pre>
 
 
-##xmlファイルの要素の修正
+## xmlファイルの要素の修正
 <pre><code>
-##ファイル名を取得する
+## ファイル名を取得する
 $filename = (Get-Item phone.xml).FullName
 
-##ファイルの中身を読み込む
+## ファイルの中身を読み込む
 Get-Content $filename
 略）
 
@@ -154,19 +154,19 @@ Get-Content $filename
 
 $phoneBook = [xml] (Get-Content $filename)
 
-##変更する対象を指定する。
+## 変更する対象を指定する。
 $person = $phoneBook.AddressBook.Person[0]
 
-##personのうち、電話番号とタイプをかえる
+## personのうち、電話番号とタイプをかえる
 $person.Phone[0]."#text" = "555-1214"
 $person.Phone[0].type = "mobile"
 
-##さらに新しい携帯番号を追加
+## さらに新しい携帯番号を追加
 $newNumber = [xml] '<Phone type="home">555-1215</Phone>'
 $newNode = $phoneBook.ImportNode($newNumber.Phone, $true)
 [void] $person.AppendChild($newNode)
 
-##ここで保存可能
+## ここで保存可能
 $phoneBook.Save($filename)
 Get-Content $filename
 

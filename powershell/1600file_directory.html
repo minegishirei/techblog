@@ -9,7 +9,7 @@
 </pre>
 
 
-##powershellでサイズの大きいファイルを見つける
+## powershellでサイズの大きいファイルを見つける
 
 
 
@@ -24,19 +24,19 @@ URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.
 
 
 <pre><code>
-##############################################################################
-##
-## Get-DiskUsage.ps1
-##
-## ディスク使用率に関する情報を手に入れられる
-## -IncludeSubdirectoriesを指定した場合、ディrエレクトリ内のサブディレクトリのサイズも提示する
-##
-## 具体例)
-##
-##  PS >Get-DiskUsage
-##  PS >Get-DiskUsage -IncludeSubdirectories
-##
-##############################################################################
+############################################################################## 
+## 
+##  Get-DiskUsage.ps1
+## 
+##  ディスク使用率に関する情報を手に入れられる
+##  -IncludeSubdirectoriesを指定した場合、ディrエレクトリ内のサブディレクトリのサイズも提示する
+## 
+##  具体例)
+## 
+##   PS >Get-DiskUsage
+##   PS >Get-DiskUsage -IncludeSubdirectories
+## 
+############################################################################## 
 param(
     [switch] $includeSubdirectories
 )
