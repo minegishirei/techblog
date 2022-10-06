@@ -41,7 +41,9 @@ https://qiita.com/kawadasatoshi/items/507a10a3f6a9e83b5576
 
 
 以下Vscodeのsetting.json
-例えば、uは`json
+例えば、uは
+
+```json
 {
     "sshfs.configs": [
         {
