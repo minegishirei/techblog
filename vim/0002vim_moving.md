@@ -292,5 +292,9 @@ Aで十分(左手の小指と薬指だけで完結するので、を動かす必
 
 title:viでのカーソル移動方法を一通りまとめました【vim学習サイト】
 
-description:
+description:上下左右移動 : `hjkl`息をする様に移動できればマスターした証。移動は格ゲーの基本。ちなみに、数字を指定して上下移動することも可能です。たとえば100行分下に移動したい場合、`100h`と入力することで100行分下にカーソル移動します。
+
+img:https://m.media-amazon.com/images/I/419SM7TDHZL.jpg
+
+category_script:True
 
