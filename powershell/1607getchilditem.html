@@ -1,10 +1,9 @@
 
-<a href="">
-    getchilditemとは </a> 
-<a href="">
-    </a>
 
-## getchilditemとは
+
+
+
+## get-childitemとは
 
 powershellのコマンドの一種。
 
@@ -12,27 +11,53 @@ powershellのコマンドの一種。
 
 実行例
 
-<pre><code>
+```ps1
 Get-ChildItem
-</code></pre>
+```
 
 実行結果
 
-<pre><code>
+```
 ディレクトリ: 
-
 
 Mode    LastWriteTime Length    Name
 d-----  2021/08/28    3178      ModAuto 
 -a----  2021/08/27    423       Start-Desktop.psm1
 -a----  2021/08/27    425       Stop-AllProcess.psm1
-</code></pre>
-
-  
-<div id="sampl"></div> 
+```
 
 
-## getchilditemで再帰的にフォルダーを探索する。
+## get-childitemに「-(ハイフン)」が入っている理由
+
+そもそもpowershellの全てのコマンドには規則性がある
+
+それは、`動詞-名詞`という構成で全てのコマンドが成り立っているという規則だ。
+
+get-childitemも例外ではなく、
+
+- 「何かを手に入れる」という意味のgetと
+
+- 「子要素（この場合は特定のディレクトリは以下にあるファイル）」という意味のchilditem
+
+の二つから構成されている。
+
+
+## get-childitemの大文字小文字が覚えれない
+
+get-childitemは全てが小文字ではなく、`Get-ChildItem`というように大文字が含まれている。
+
+これは*キャメルケース*と呼ばれる類の命名方法で、*意味のある単語の先頭を大文字にすることでコマンドの文字列を解読しやすくする*という働きがある
+
+この場合だと 
+
+```ps1
+Get(手に入れる)-Child(子供)Item(要素)
+```
+
+という意味がある。
+
+
+## get-childitemで再帰的にフォルダーを探索する。
 
 -Recurseを付けると再帰的にフォルダーを探索し、一覧表示することができる。
 
@@ -43,7 +68,9 @@ Get-ChildItem -Recurse
 
 サンプルコマンド
 
-<pre><code> Get-ChildItem --Recurse </code></pre>
+```ps1
+Get-ChildItem --Recurse
+```
     
 
 <pre><code>
@@ -63,9 +90,8 @@ Mode
 LastWriteTime ---- ----- 2021/08/28 15:05 - --
 2021/08/28 15:04 
 </code></pre>
-    
 
-<div id="depth"></div> 
+
 
 ## getchilditemで再起的に探索する
 
@@ -88,17 +114,15 @@ Get-ChildItem -Depth 3
 
 
 
-<div id="help"></div> 
-
-#Get-Helpでコマンドの詳細を見る
+## Get-Helpでコマンドの詳細を見る
 
 サンプルコード
 
-<pre><code>
+```ps1
 Get-Help Get-ChildItem 
-</code></pre>
+```
 
-構文
+Get-Helpを使うと、次のように構文が出現する
 
 <pre><code> 
 Get-ChildItem [[-Path] ＜string[] >] [[-Filter] ＜string>] [＜CommonParameters>] 
@@ -260,11 +284,19 @@ Get-ChildItem  | Where-Object { $_.Name - like "*.psm1" }
 
 
 
-title:getchilditemを誰よりも分かりやすく解説する【powershell】
 
-description:powershellのコマンドの一種。入力することでカレントディレクトリ配下のファイル、ディレクトリー覧を取得できる。 
+
+## 「get-childitem」の使い方
+
+before_title_:getchilditemを誰よりも分かりやすく解説する【powershell】
+
+
+title:「get-childitem」の使い方を解説する【初心者向け】
+
+description:「get-childitem」の使い方。get-childitemはpowershellのコマンドの一種で、入力することでカレントディレクトリ配下のファイルやディレクトリのー覧を取得することができる。 
 
 img:https://boeprox.files.wordpress.com/2016/01/image2.png
+
 category_script:page_name.startswith("16")
 
 
