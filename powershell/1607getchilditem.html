@@ -33,7 +33,7 @@ d-----  2021/08/28    3178      ModAuto
 
 それは、`動詞-名詞`という構成で全てのコマンドが成り立っているという規則だ。
 
-get-childitemも例外ではなく、
+get-childitemも例外ではなく
 
 - 「何かを手に入れる」という意味のgetと
 
@@ -46,7 +46,7 @@ get-childitemも例外ではなく、
 
 get-childitemは全てが小文字ではなく、`Get-ChildItem`というように大文字が含まれている。
 
-これは*キャメルケース*と呼ばれる類の命名方法で、*意味のある単語の先頭を大文字にすることでコマンドの文字列を解読しやすくする*という働きがある
+これは**キャメルケース**と呼ばれる類の命名方法で、**意味のある単語の先頭を大文字にすることでコマンドの文字列を解読しやすくする**という働きがある
 
 この場合だと 
 
@@ -159,14 +159,15 @@ Get-Help Get-ChildItem -Online
 
 これは再帰的な表示でも同じ
 
-<pre><code> 
+```
 Get-ChildItem空のディレクトリは表示されません。 
 ときにGet-ChildItemコマンドが含まれても
 深さや再帰のパラメータを、空のディレクトリは出力に含まれません。 
-</code></pre> 引用: マイクロソフト公式ドキュメント
+```
+
+引用: マイクロソフト公式ドキュメント
 
 
-<div id="path"></div> 
 
 ## パスを指定してファイルフォルダーを取得する
 
@@ -174,49 +175,48 @@ Get-ChildItem空のディレクトリは表示されません。
 
 サンプルコード
 
-<pre><code>
-Get-ChildItem -Path C:\Test
-</code></pre>
+`Get-ChildItem -Path C:\Test`
 
-加えてバージョンのまれる。
 
-<div id="mode"></div> 
 
-## ファイルの属性について ディレクトリー覧を取得した時にアルファベットでフラグがついていることがあるがそれは以下のような意味を表す
 
-<pre><code>
-l (リンク) 
-d(ディレクトリ) 
-a (記録) 
-r(読み取り専用) 
-h(隠れた) 
-s (システム)
-</code></pre>
+## get-childitemのmode（ファイルの属性）について
+
+ディレクトリー覧を取得した時にアルファベットでフラグがついていることがあるがそれは以下のような意味を表す
+
+- l (リンク) 
+
+- d (ディレクトリ) 
+
+- a (記録) 
+
+- r(読み取り専用) 
+
+- h(隠れた) 
+
+- s (システム)
 
 例
-<pre><code> 
-ディレクトリ: C:\Users
 
+```ps1
+ディレクトリ: C:\Users
 
 Mode    LastWriteTime Length    Name
 d-----  2021/08/28    3178      ModAuto 
 -a----  2021/08/27    423       Start-Desktop.psm1
 -a----  2021/08/27    425       Stop-AllProcess.psm1
+```
 
-</code></pre>
+上記位のMode部分。
 
 
-<div id="onlyname"></div> 
 
 ## getchilditemで名前のみ取得したい
 
 -Name で名前のみの取得が可能
 
-<pre><code>
-Get-ChildItem -Path C:\Test -Name 
-</code></pre>
+`Get-ChildItem -Path C:\Test -Name `
 
-<div id="allof"></div> 
 
 
 ## Get-Childitemで知れる全てのこと
@@ -225,34 +225,46 @@ Get-Childitemによって得られるデータには以下の情報が含まれ�
 
 フォルダーの場合
 
-<pre><code> 
-Name : ModAuto
-(フォルダー名) CreationTime : 2021/08/28 10:22:03 
-(作成時期) LastWriteTime : 2021/08/28 15:05:34
-(最終更新日) LastAccessTime : 2021/08/28 15:05:34 
-(モード=アクセス権限など) Mode : d-----
-(リンクがあるかどうか) Link Type
-</code></pre>
+- 名前：Name : ModAuto
+
+- フォルダー名：CreationTime : 2021/08/28 10:22:03 
+
+- 作成時期：LastWriteTime : 2021/08/28 15:05:34
+
+- 最終更新日：LastAccessTime : 2021/08/28 15:05:34 
+
+- モード(アクセス権限など)：Mode : d-----
+
+- リンクがあるかどうか： Link Type
 
 
 ファイルの場合、フォルダーの情報に加えてバージョンの情報も含まれる 
 
-<pre><code> 
-Name: Start-Desktop.psm1 (ファイル名) 
-Length 3274 (ファイルサイズ) 
-CreationTime : 2021/08/26 8:11:05 (作成時期) 
-LastWriteTime : 2021/09/01 16:55:25(最終更新日) 
-LastAccessTime : 2021/09/01 16:55:25(最終アクセス) 
-Mode : -a----(モード) 
-Link Type Target Version Info : File: C:\UMyPowerShell\Start-Desktop.psm1
-InternalName: OriginalFilename: FileVersion: FileDescription: Product: ProductVersion: Debug:
-False Patched:False
-PreRelease: Private Build: Special Build:
-False False False
-</code></pre>
 
+- Name: Start-Desktop.psm1 (ファイル名) 
 
-<div id="fullpath"></div> 
+- Length 3274 (ファイルサイズ) 
+
+- CreationTime : 2021/08/26 8:11:05 (作成時期) 
+
+- LastWriteTime : 2021/09/01 16:55:25(最終更新日) 
+
+- LastAccessTime : 2021/09/01 16:55:25(最終アクセス) 
+
+- Mode : -a----(モード) 
+
+- Link Type Target Version Info : File: C:\UMyPowerShell\Start-Desktop.psm1
+
+- InternalName: OriginalFilename: 
+
+- FileVersion: FileDescription: Product: ProductVersion: Debug:
+
+- False Patched:False
+
+- PreRelease: Private Build: 
+
+-Special Build:False False False
+
 
 ## ファイル一覧を絶対パス(フルパス)で手に入れる
 
