@@ -43,7 +43,7 @@ CREATE TABLE Bugs {
 
 ## 外部キー制約のデメリット
 
-しかし、外部キー制約をつけないように進める考え方もあります。
+しかし、外部キー制約をつけないように進める考え方(外部キーのデメリット)もあります。
 
 それは主に次のような考え方です。
 
@@ -174,7 +174,7 @@ DELETE FROM Acounts WHERE acount_id = 1;
 
 Bugsは子テーブルの存在で、親テーブルはBugStatusとAcountsがある。
 
-<pre><code>
+```sql
 CREATE TABLE Bugs {
     reported_by     BIGINT UNSINED NOT NULL,
     status          VARCHAR(20) NOT NULL DEFAULT 'NEW'
@@ -185,7 +185,7 @@ CREATE TABLE Bugs {
         ON UPDATE CASCADE
         ON DELETE SET DEFAULT
 }
-</code></pre>
+```
 
 ポイントは二つ
 
