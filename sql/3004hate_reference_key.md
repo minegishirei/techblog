@@ -129,7 +129,7 @@ CREATE TABLE Bugs {
 
 
 
-
+## 補足
 
 title:外部キー制約のデメリットとメリット
 
