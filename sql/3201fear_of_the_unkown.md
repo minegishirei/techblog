@@ -98,7 +98,7 @@
 
 
 
-
+## SQLのNULLに対する正しい解釈【SQLアンチパターンまとめ】フィア・オブ・ジ・アンノウン
 
 
 
@@ -108,4 +108,9 @@ title:SQLのNULLに対する正しい解釈【SQLアンチパターンまとめ�
 
 img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
+
+
+description:データベース設計における重大なセキュリティリスクのうちの一つに、「SQLでパスワードを平文で格納する」というものがあります。これは重大なセキュリティ欠陥であり、権限のない人に特権的なアクセスを与えるセキュリティリスクを生じさせます。
+
+category_script:page_name.startswith("30")
 

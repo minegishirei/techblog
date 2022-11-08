@@ -262,6 +262,6 @@ description:SQLをRDMSたらしめているのは列の値がアトミックで�
 
 img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-589-4.jpeg
 
-
+category_script:page_name.startswith("30")
 
 
