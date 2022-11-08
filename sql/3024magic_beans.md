@@ -79,6 +79,7 @@ https://speakerdeck.com/minodriven/railsdekao-erudomeinqu-dong-she-ji-falsekoado
 
 モデルがDAOクラスからの継承ではなくDAOを使う関係にある場合、**対象となるドメインの全てのデータを含むようなモデルを設計**できます。
 
+
 ### ドメインモデルの使用
 
 エリック・エヴァンスは「ドメイン駆動設計」の著作の中で、**ドメインモデル**と呼ばれる設計手法を提唱しています。
