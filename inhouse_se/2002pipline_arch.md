@@ -84,7 +84,7 @@ https://qiita.com/kawadasatoshi/items/948d4b5facd53139c6c7
 
 ### 具体例2:Apache kafka
 
-スケーラビリティに優れた分散メッセージキューです。
+Apache Kafkaはスケーラビリティに優れた分散メッセージキューです。
 
 複雑なシステムをサービス単位で分割して疎結合に保つことで、迅速な機能追加や不良修正が可能なマイクロサービスが多くの企業で導入されています。
 Kafkaはこのようなサービス間で、大量のデータを受け渡すためのハブとして活用されています。
@@ -92,7 +92,6 @@ Kafkaはこのようなサービス間で、大量のデータを受け渡すた
 <img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F285851%2F36d3cad2-6d57-c982-a250-ae7d08475e66.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=c55c22eab86c9b82b02faf94dd04bd24">
 
 そのkafkaの内部ですが、Kafkaにストリームされるさまざまな種類のデータを処理するのにパイプラインアーキテクチャを使用しています。
-
 
 <img src="https://sp-ao.shortpixel.ai/client/to_auto,q_lossy,ret_img,w_700,h_540/https://www.instaclustr.com/wp-content/uploads/2021/10/image1-2.png">
 
