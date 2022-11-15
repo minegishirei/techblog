@@ -60,7 +60,7 @@
 
 多くのオンプレミスな製品は、この3つ目のパターンで顧客へと納品されるはずだ。
 
-<img href="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd2.png?raw=true">
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd2.png?raw=true">
 
 
 ## レイヤードアーキテクチャの開放レイヤーと閉鎖レイヤー
@@ -92,7 +92,7 @@
 しかしながら、開放レイヤーのクラスが多数を占めた場合、技術による分離の難易度が上がるためなにを開放レイヤーに含めるかは議論の余地がある。
 
 
-<img href="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd4.png?raw=true">
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd4.png?raw=true">
 
 
 
@@ -112,7 +112,7 @@
 レイヤードアーキテクチャは**技術によって分断された**アーキテクチャだと言える。
 
 
-<img href="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd_closed.png?raw=true">
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd_closed.png?raw=true">
 
 
 ### 安い
