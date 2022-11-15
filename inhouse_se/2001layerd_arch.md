@@ -170,7 +170,7 @@ description:レイヤードアーキテクチャは、n層アーキテクチャ�
 
 category_script:page_name.startswith("2")
 
-img:
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true
 
 
 
