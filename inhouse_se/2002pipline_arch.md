@@ -19,7 +19,7 @@ bashやpowershellなどのシェル言語に近い構造を持つ。
 
 - パイプ
 
-<img src="">
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2002pipline_arch/pipline.png?raw=true">
 
 ### パイプ
 
