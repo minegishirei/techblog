@@ -105,7 +105,9 @@ Kafkaはこのようなサービス間で、大量のデータを受け渡すた
 
 **例えば、EDIツール（電子データ交換ツール）。**
 
-CSVでブラウザ越しに渡した商用データを、パイプライン内部での変換を繰り返してコンシューマ(データベースの永続化)を実施している。
+EDIとは「Electronic Data Interchange」の略称で、日本語では「電子データ交換」を意味します。企業間における契約書や、受発注をはじめとした商取引に関する文書を専用回線や通信回線を用いてやり取りする仕組みのことです。
+
+例えば、あるWeb-EDIでは、CSVでブラウザ越しに渡した商用データを、パイプライン内部での変換を繰り返してコンシューマ(データベースの永続化)を実施している。
 
 データベース同士を連携できるTalendも同様に動いているのだろう。グラフィック画面に映るデータの変形パネルは正しくパイプラインそのものだ。
 
@@ -149,6 +151,6 @@ description:関数型プログラミング言語の考え方を拡張子かの�
 
 category_script:page_name.startswith("2")
 
-img:https://www.sbbit.jp/article/image/60376/OGP_bit202105141422516660.jpg
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2002pipline_arch/pipline.png?raw=true
 
 
