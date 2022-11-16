@@ -1,24 +1,82 @@
 
 
+## サービスベースアーキテクチャとは
+
+サービスベースアーキテクチャは、マイクロサービスアーキテクチャの要素もある、分散型のアーキテクチャだ。
+
+しかし、マイクロサービスやイベント駆動のタイプに見受けられる複雑さやコストがなく、多くのビジネスアプリケーションで選択されている。
+
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2004service_base_arch/service_base_arch.png?raw=true">
+
+
+## 参考
+
+<img src="https://m.media-amazon.com/images/I/51-RoANBXoL._SX379_BO1,204,203,200_.jpg">
+
+https://canvas.gu.se/files/4891694/download?download_frd=1
+
+https://www.amazon.co.jp/-/en/Neal-Ford/dp/1492043451
+
+
+
 ## サービスベースのアーキテクチャスタイル
 
-サービスベースのアーキテクチャの基本的なトポロジは、
+サービスベースのアーキテクチャの基本的なトポロジは分散型のマイクロなレイヤー形式をとる。
 
-- 個別に展開されたユーザーインターフェース、
+構成要素は3つ存在し
 
-- 個別に展開されたリモートの粗粒度サービス、
+- 個別にビルドされたユーザーインターフェース
 
-- およびモノリシックデータベース
+- 個別にビルドされたリモートのバックエンドサービス
 
-で構成される分散マクロ階層構造に従います。
+- モノリシックなデータベース
 
-ちなみに、「粗粒度サービス」は大抵の場合、レイヤードアーキテクチャによって構成される。
+これらがユーザー側から見て順にレイヤーとなり構成される。
 
-<img src="https://camo.githubusercontent.com/6a3bb5e7744ff17abe176ac6b7f4e9ea5727635e155a759d7be7faa97ef6dc0f/68747470733a2f2f6c6561726e696e672e6f7265696c6c792e636f6d2f6c6962726172792f766965772f66756e64616d656e74616c732d6f662d736f6674776172652f393738313439323034333434372f6173736574732f666f73615f313330312e706e67">
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2004service_base_arch/service_base_arch.png?raw=true">
 
-このアーキテクチャスタイル内のサービスは、独立して個別に展開される「アプリケーションの一部」です。
 
-通常、RESTがユーザーインターフェイスからサービスにアクセスするために使用されます
+### サービスベースアーキテクチャのインスタンスの数
+
+AWS上でこのアーキテクチャを採用する場合、サービスベースアーキテクチャのインスタンス数は基本的に1つだ。
+
+しかし、**スケーラビリティや耐障害性、スループットの必要性に応じて、ドメインサービスのインスタンスが複数存在することもある。**
+その場合、**ユーザーインターフェースとドメインサービスの間**に**何らかの負荷分散機能を必要**とする。
+
+AWSの場合は、Elastic Load Balancingなどの活用が候補に上がるだろう。
+
+<img src="https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_ALB_HIW%402x.cb3ce6cfd5dd549c99645ed51eef9e8be8a27aa3.png">
+
+[AWS-EBS公式ページより](https://aws.amazon.com/jp/elasticloadbalancing/)
+
+*ELB (Elastic Load Balancing) は、アプリケーションへのトラフィックを、1 つまたは複数のアベイラビリティーゾーン (AZ) 内の複数のターゲットおよび仮想アプライアンスに自動的に分散します。*
+
+### サービスベースアーキテクチャの通信方式
+
+ユーザーインターフェースからバックエンドにあるサービスの通信方式には、一般的にAPIが使用される。
+
+しかし、
+
+- メッセージング
+
+- リモートプロシージャーコール(RPC)
+
+- SOAP
+
+なども候補に入れて良い
+
+### サービスベースアーキテクチャのデータベース
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2004service_base_arch/service_base_arch.png?raw=true">
+
+一般的に、中央でデータベースを構えているという点が、このアーキテクチャの重要な側面である。
+これより、**元来使われてきたモノシリックなサービスでのSQLクエリの結合を活用できる。**
+
+サービスが少ない場合は、データベースへの接続が問題になることは滅多にない。
+しかし、**開発におけるデータベースの変更はリスクを伴う**
+
+
 
 
 ## サンプル例

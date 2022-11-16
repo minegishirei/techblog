@@ -221,10 +221,11 @@ title:プラグインを使用するシステムの実装方法
 
 description:マイクロカーネルアーキテクチャは別名、プラグインアーキテクチャと呼ばれている。システムは「コアシステム」「プラグインコンポーネント」の二種類から成り立ち、中央集約型の「コアシステム」に対して「プラグインコンポーネント」を取り付ける形で構成される。
 
-
 category_script:(page_name.startswith("2") or page_name.startswith("1"))
 
 img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2003micro_kernel/micro_kernel.png?raw=true
 
+title_before:プラグインアーキテクチャのメリットとデメリット
 
+diff:大幅な記事の修正3000文字→5000文字
 
