@@ -246,6 +246,26 @@ stars　= comment_list.map(function(row){return row.star})
 これらをまとめて扱うことで、開発者の多様なニーズに応えることができます！
 
 
+## 追記:とりあえずFor文回したいならこれ
+
+ただのループも実行できます。
+
+```js
+const id_list = ['a', 'b', 'c'];
+id_list.forEach(function(id){document.getElementById(id).innerHTML = `id :${id} is here`});
+
+```
+
+データの加工を行うというよりは、mapやreduceで加工したデータをエンドポイントに送るイメージです。
+
+### 使用方法
+
+```js
+配列.forEach(function(要素){return 新しい要素})
+```
+
+
+
 ## 備考
 
 title:関数型プログラミングを5分でマスターする
