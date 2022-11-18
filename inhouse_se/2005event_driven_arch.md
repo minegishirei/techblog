@@ -269,6 +269,23 @@ BPELの習得は困難なため、通常は製品に含まれるBPELエンジン
 (ソフトウェアアーキテクチャの基礎)[https://www.amazon.co.jp/%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E3%81%AE%E5%9F%BA%E7%A4%8E-%E2%80%95%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E4%BD%93%E7%B3%BB%E7%9A%84%E3%82%A2%E3%83%97%E3%83%AD%E3%83%BC%E3%83%81-Mark-Richards/dp/4873119820/ref=sr_1_1?adgrpid=131625207761&gclid=Cj0KCQiA1NebBhDDARIsAANiDD2t3qdCpELaQBYWcwVkCNTRj_WZlDhp3HAMMRjFvIZR_EtRgQRvu0EaArxhEALw_wcB&hvadid=611338421233&hvdev=c&hvlocphy=1009310&hvnetw=g&hvqmt=e&hvrand=8686801961371880672&hvtargid=kwd-1637204896522&hydadcr=21901_13398700&jp-ad-ap=0&keywords=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3+%E3%81%AE+%E5%9F%BA%E7%A4%8E&qid=1668749043&qu=eyJxc2MiOiIwLjcyIiwicXNhIjoiMC4wMCIsInFzcCI6IjAuMDAifQ%3D%3D&sr=8-1]
 
 
+## AWSでイベント駆動アーキテクチャを実装すると...
+
+Qiitaで良い記事が見つかった。
+
+```txt
+じゃあイベントドリブンアーキテクチャを構築するためにはどうすればいいのか？
+調べていたところ、DynamoDB Streamを活用した例をよく見かけました。
+DynamoDBStreamとは、テーブル操作が行われた際にキャプチャができる機能で、
+これを活用するとテーブル操作を検出しLambdaを発火させることができます。
+下図はDynamoDB Streamを活用したイベントドリブンアーキテクチャの構成図です。
+```
+
+<img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F375860%2F3e308fd5-a7b3-5271-07fc-e78337e87eee.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=164a498051a78d5fcda2b957e46c59ea">
+
+https://qiita.com/Suzuki_Cecil/items/a51d353c73e9277f46d8
+
+
 ## イベント駆動アーキテクチャの総評
 
 ワークフローの確実性と制御が必要な場合は、適切に構造化されたデータ駆動型のリクエスト（顧客プロファイルデータの取得など）に対してリクエストベースのモデルを選択することをお勧めします。
