@@ -289,7 +289,7 @@ description:イベント駆動型アーキテクチャスタイルは、非同�
 
 img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2005event_driven_arch/event_driven_arch.png?raw=true
 
-category_script:(page_name.startswith("2")orpage_name.startswith("1"))
+category_script:(page_name.startswith("2") or page_name.startswith("1"))
 
 参考資料：https://qiita.com/Suzuki_Cecil/items/a51d353c73e9277f46d8
 
