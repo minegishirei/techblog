@@ -104,6 +104,22 @@ DBは業務に必要な情報を集約的に保持していることに価値が
 
 https://www.gridgain.com/resources/blog/using-gridgainr-kafkar-connector
 
+#### サンプルコード
+
+Hazelcastを使ったJavaコードによる実装は以下の通り
+
+
+
+
+
+#### 仮想メモリ内部のデータグリッド
+
+また、このインメモリデータは、**仮想メモリ内部にあるデータグリッドにも存在することがある。**
+これは、外部からのメモリデータをコントロールする意図で設置される。
+
+仮想メモリ内部のデータグリッドを変更することで、非同期で処理ユニット内部にあるインメモリデータグリッドが同期されるのだ。
+
+
 
 
 
@@ -220,8 +236,6 @@ https://www.gridgain.com/resources/blog/using-gridgainr-kafkar-connector
 
 
 ## 備考
-
-
 
 title:スペースベースアーキテクチャのメリットデメリット
 
