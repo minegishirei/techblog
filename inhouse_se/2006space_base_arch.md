@@ -297,9 +297,9 @@ title:スペースベースアーキテクチャのメリットデメリット
 
 description:スペースベースアーキテクチャの概要と構造、メリットとデメリットを解説します。
 
-img:https://camo.githubusercontent.com/06d84761b5bd8b2e05794cd109093e10266d58990e1eefe002269ffd073d8c0b/68747470733a2f2f6c6561726e696e672e6f7265696c6c792e636f6d2f6c6962726172792f766965772f66756e64616d656e74616c732d6f662d736f6674776172652f393738313439323034333434372f6173736574732f666f73615f313530322e706e67
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2006space_base_arch/space_base_arch.png?raw=true
 
-category_script:page_name.startswith("2")
+category_script:( page_name.startswith("2") or page_name.startswith("1") )
 
 
 
