@@ -6,8 +6,7 @@
 
 以下はマイクロサービスの基本的なトポロジーである
 
-<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch.png?raw=true">
-
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch/microservice_arch.png?raw=true">
 
 マイクロサービスは分散アーキテクチャを形成し、各サービスは独自のプロセスで実行されます。
 
@@ -101,7 +100,7 @@ title:マイクロサービスアーキテクチャのメリットを3分で説�
 
 description:マイクロサービスは分散アーキテクチャを形成し、各サービスは独自のプロセスで実行されます。これは元々は物理コンピューターを意味していましたが、すぐに仮想マシンとコンテナーに進化しました。
 
-img:
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch/microservice_arch.png?raw=true
 
 category_script:( page_name.startswith("2") or page_name.startswith("1") )
 
