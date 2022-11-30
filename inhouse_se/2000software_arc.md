@@ -126,6 +126,8 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 
 このアーキテクチャは**シンプル**さや**親やすさ**、**コストの低さ**からほとんどのアプリケーションのスタンダードの形となっている。
 
+- [レイヤードアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2001layerd_arch.md)
+
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true">
 
 ### とにかくシステムの拡張性を高くしたい：マイクロカーネルアーキテクチャ
@@ -137,6 +139,8 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 - カスタムビジネス(国ごとのローカライズが発生するなど)アプリケーション
 
 このいずれかで使用される。
+
+- [マイクロカーネルアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md)
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2003micro_kernel/micro_kernel.png?raw=true">
 
@@ -157,6 +161,8 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 
 ユニット処理装置は、ユーザーの負荷が増減するにつれて動的に起動およびシャットダウンするため、スケーラビリティーが確保されるのです。
 
+- [スペースベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md)
+
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2006space_base_arch/space_base_arch.png?raw=true">
 
 
@@ -165,6 +171,8 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 イベント駆動アーキテクチャは**高度にスケーラブル(弾力性が高い)**で**高パフォーマンスなアプリケーションを実現できる**アーキテクチャです。
 
 また、適応性に優れており、小規模なアプリにも大規模なアプリにも使うことができるのも特徴です。
+
+- [イベント駆動アーキテクチャ](https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md)
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2005event_driven_arch/event_driven_arch.png?raw=true">
 
@@ -175,6 +183,9 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 サービスベースアーキテクチャは、マイクロサービスアーキテクチャの要素もある、分散型のアーキテクチャだ。
 
 しかし、マイクロサービスやイベント駆動のタイプに見受けられる複雑さやコストがなく、多くのビジネスアプリケーションで選択されている。
+
+
+- [サービスベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md)
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2004service_base_arch/service_base_arch.png?raw=true">
 
@@ -187,6 +198,8 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 そして、注文受付サービスの変更は在庫管理サービスに影響しないようにするのです。
 **そのような高度な分離による変更可能性こそがマイクロサービスアーキテクチャの真価です。**
 
+- [マイクロサービスアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md)
+
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch/microservice_arch.png?raw=true">
 
 
@@ -195,6 +208,8 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 **パイプとフィルターのそれぞれの一方向性とシンプルさは、構成の再利用を促す。**
 
 特に、powershellやbashシェル、関数型プログラミングに触れたことがある人ならばその威力を把握しているだろう。
+
+- [パイプラインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md)
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2002pipline_arch/pipline.png?raw=true">
 
