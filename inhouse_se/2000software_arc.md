@@ -61,14 +61,14 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 それではアーキテクチャの一覧を見ていく。
 今回は7種類のアーキテクチャについて触れる。
 
-- 巨大な泥団子
-- (レイヤードアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2001layerd_arch.md]
-- (パイプラインアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md]
-- (マイクロカーネルアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md]
-- (サービスベースアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md]
-- (イベント駆動アーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md]
-- (スペースベースアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md]
-- (マイクロサービスアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md]
+- [レイヤードアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2001layerd_arch.md)
+- [パイプラインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md)
+- [マイクロカーネルアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md)
+- [サービスベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md)
+- [イベント駆動アーキテクチャ](https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md)
+- [スペースベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md)
+- [マイクロサービスアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md)
+
 
 # アーキテクチャを選択する
 
@@ -84,16 +84,16 @@ https://canvas.gu.se/files/4891694/download?download_frd=1
 モノシリックとは以下のアーキテクチャのこと。単一でシンプルだが弾力性やパフォーマンスは一定しか出せない。
 
 - 巨大な泥団子
-- (レイヤードアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2001layerd_arch.md]
-- (パイプラインアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md]
-- (マイクロカーネルアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md]
+- [レイヤードアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2001layerd_arch.md)
+- [パイプラインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md)
+- [マイクロカーネルアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md)
 
 分散アーキテクチャとは以下のアーキテクチャのこと
 
-- (サービスベースアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md]
-- (イベント駆動アーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md]
-- (スペースベースアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md]
-- (マイクロサービスアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md]
+- [サービスベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md)
+- [イベント駆動アーキテクチャ](https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md)
+- [スペースベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md)
+- [マイクロサービスアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md)
 
 ## モノシリックアーキテクチャと分散アーキテクチャのメリットデメリット
 
