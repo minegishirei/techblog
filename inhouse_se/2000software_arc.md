@@ -65,9 +65,9 @@
 - (スペースベースアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md]
 - (マイクロサービスアーキテクチャ)[https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md]
 
+# アーキテクチャを選択する
 
-
-# モノシリックアーキテクチャと分散アーキテクチャ
+## アーキテクチャの選択：モノシリックアーキテクチャと分散アーキテクチャ
 
 モノシリックとは以下のアーキテクチャのこと
 
