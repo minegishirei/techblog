@@ -22,25 +22,21 @@
 
 - [レイヤードアーキテクチャ](https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true)
 
-<a href="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true">
-</a>
 
 - [パイプラインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md)
 
-<a href="https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2002pipline_arch/pipline.png?raw=true">
-</a>
+
 
 議論の余地ありで再利用性が高いが、個人的には保守性は高くない。
 
 - [イベント駆動アーキテクチャ](https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md)
 
-<a href="https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2005event_driven_arch/event_driven_arch.png?raw=true">
-</a>
 
 議論の余地ありだが、応答速度に特化したイメージ
+
 
 
 
@@ -56,23 +52,17 @@
 
 - [プラグインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md)
 
-<a href="https://techblog.short-tips.info/inhouse_se/2003micro_kernel.md">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2003micro_kernel/micro_kernel.png?raw=true">
-</a>
 
 モノシリックの中では保守性が最も高い。プラグインとして機能が独立しているため、改修後の変更範囲が予測しやすい。
 
 - [サービスベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md)
 
-<a href="https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2004service_base_arch/service_base_arch.png?raw=true">
-</a>
-
 後述
 
 - [スペースベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md)
 
-<a href="https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2006space_base_arch/space_base_arch.png?raw=true">
 </a>
 
@@ -80,9 +70,7 @@
 
 - [マイクロサービスアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md)
 
-<a href="https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md">
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch/microservice_arch.png?raw=true">
-</a>
 
 後述
 
