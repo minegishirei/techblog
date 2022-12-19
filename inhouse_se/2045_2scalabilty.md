@@ -115,7 +115,25 @@ from https://techblog.short-tips.info/inhouse_se/2001layerd_arch.md
 
 from https://techblog.short-tips.info/inhouse_se/2006space_base_arch.md
 
-このシステムは、サービスベースアーキテクチャで
+このシステムは名前をサービスベースアーキテクチャといい、ひとつ一つのビジネスロジックがコンポーネント単位で分割されている。
+そのため、アプリケーションの処理能力を向上させたい場合にはコンポーネント単位で増幅可能である。
+
+また、スペースベースアーキテクチャには本来、アプリケーションへのトラフィックを分析してコンポーネントの増減をコントロールする
+コンポーネントがある。そのため、ユーザー数のバーストにも耐えることが可能だ。
+
+
+## 備考
+
+title:スケーラビリティと弾力性の違い【具体例あり】
+
+description:システムにおけるスケーラビリティと弾力性の違いを説明するサイトです。また、スケーラビリティ/弾力性を高めるためにはどのようなシステム構成にするべきなのか、どのようなシステムがスケーラビリティが高いと言えるのかについても触れていきます。
+
+img:https://us.123rf.com/450wm/hironicons/hironicons2206/hironicons220600482/hironicons220600482.jpg?ver=6
+
+from https://jp.123rf.com/%E3%83%99%E3%82%AF%E3%82%BF%E3%83%BC/%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%A9%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3.html
+
+category_script:page_name.startswith("2")
+
 
 
 
