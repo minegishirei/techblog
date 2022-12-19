@@ -153,17 +153,3 @@ category_script:page_name.startswith("2")
 
 
 
-
-
-
-
-
-## まとめ
-
-
-
-title:スケーラビリティと弾力性の違い
-
-
-
-
