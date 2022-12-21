@@ -132,7 +132,7 @@ img:https://us.123rf.com/450wm/hironicons/hironicons2206/hironicons220600482/hir
 
 from https://jp.123rf.com/%E3%83%99%E3%82%AF%E3%82%BF%E3%83%BC/%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%A9%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3.html
 
-category_script:page_name.startswith("2")
+category_script:page_name.startswith("3")
 
 
 

@@ -107,7 +107,7 @@ https://dl.ebooksworld.ir/books/Software.Architecture.The.Hard.Parts.Neal.Ford.O
 
 title:ソースコードの行数はどのぐらいが適切か?【リファクタリング入門1】
 
-category_script:page_name.startswith("2")
+category_script:page_name.startswith("3")
 
 description:アプリケーション内のコードのサイズが一定の水準であることは重要であり、一般的にコンポーネントの平均値から偏差値1~2以内に収まっているべきである
 

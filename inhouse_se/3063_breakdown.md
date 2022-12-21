@@ -192,7 +192,7 @@ title:大規模なリファクタリングを行う2通りの方法
 
 description:大規模なリファクタリングを行うには二つの方法がある。できるところから少しずつやっていく方法は優れたリファクタリングでないことが多い。そうではなく、だ規模なリファクタリングを効率的に行う方法をこの記事で解説する。
 
-category_script:page_name.startswith("2")
+category_script:page_name.startswith("3")
 
 img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-565-8.jpeg
 

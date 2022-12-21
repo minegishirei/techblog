@@ -184,7 +184,7 @@ img:https://pakutaso.cdn.rabify.me/shared/img/thumb/kumakichi0221018.jpg?d=1420
 
 from https://www.pakutaso.com/20190249044post-18819.html
 
-category_script:page_name.startswith("2")
+category_script:page_name.startswith("3")
 
 
 

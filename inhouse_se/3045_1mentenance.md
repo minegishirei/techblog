@@ -155,7 +155,7 @@ description:機能の追加、変更、削除だけでなく、バッチファ�
 
 img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch/microservice_arch.png?raw=true
 
-category_script:page_name.startswith("2")
+category_script:page_name.startswith("3")
 
 
 
