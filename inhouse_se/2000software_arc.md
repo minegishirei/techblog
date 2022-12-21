@@ -229,4 +229,4 @@ description:アーキテクトを学ぶ意義の理解。特に、アーキテ�
 
 category_script:page_name.startswith("2")
 
-img:https://cdn.mainichi.jp/vol1/2018/02/26/20180226oog00m010037000p/9.jpg?1
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/all/all.png?raw=true

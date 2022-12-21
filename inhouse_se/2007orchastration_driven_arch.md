@@ -117,7 +117,7 @@ Customerオブジェクト自体が使われなくても、Personなど継承し
 
 ## 備考
 
-img:https://camo.githubusercontent.com/cd0520a83fba7c8c051f944856b990b5d721fba8ab71d950fd8684ca412ac2a4/68747470733a2f2f6c6561726e696e672e6f7265696c6c792e636f6d2f6c6962726172792f766965772f66756e64616d656e74616c732d6f662d736f6674776172652f393738313439323034333434372f6173736574732f666f73615f313630312e706e67
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2007orchastration_driven_arch/2007orchastration_driven_arch.png?raw=true
 
 title:オーケストレーション駆動サービス指向アーキテクチャ
 
