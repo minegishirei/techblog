@@ -153,7 +153,7 @@ title:保守性の高いシステムと低いシステムの違い
 
 description:機能の追加、変更、削除だけでなく、バッチファイルやフレームワークなどのアップグレードの適応も容易である性質を意味する。を意味する。では保守性の低いシステムとはどのようなシステムだろうか
 
-img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microservice_arch/microservice_arch.png?raw=true
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/3045/five.png?raw=true
 
 category_script:page_name.startswith("3")
 

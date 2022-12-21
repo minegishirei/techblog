@@ -128,7 +128,7 @@ title:スケーラビリティと弾力性の違い【具体例あり】
 
 description:システムにおけるスケーラビリティと弾力性の違いを説明するサイトです。また、スケーラビリティ/弾力性を高めるためにはどのようなシステム構成にするべきなのか、どのようなシステムがスケーラビリティが高いと言えるのかについても触れていきます。
 
-img:https://us.123rf.com/450wm/hironicons/hironicons2206/hironicons220600482/hironicons220600482.jpg?ver=6
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/3045/five.png?raw=true
 
 from https://jp.123rf.com/%E3%83%99%E3%82%AF%E3%82%BF%E3%83%BC/%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%A9%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3.html
 

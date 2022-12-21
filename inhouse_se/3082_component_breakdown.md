@@ -111,7 +111,7 @@ category_script:page_name.startswith("3")
 
 description:アプリケーション内のコードのサイズが一定の水準であることは重要であり、一般的にコンポーネントの平均値から偏差値1~2以内に収まっているべきである
 
-img:https://toyokeizai.net/smwimgs/8/7/-/img_8785ea6c-4668-4acf-bbf4-f7cf356dff76.jpg
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/3063/breakdown.png?raw=true
 
 
 

@@ -180,7 +180,7 @@ title:リファクタリングをするべき5つの理由
 
 description:システムのリファクタリングはタダでできるモノではありません。利害関係者にリファクタリングのメリットと必要性を訴える必要があります。そのためにはシステムのモジュール化/リファクタリングのメリットをエンジニア自身が納得しなければなりません。リファクタリングをするべき5つの理由を解説します。
 
-img:https://pakutaso.cdn.rabify.me/shared/img/thumb/kumakichi0221018.jpg?d=1420
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/3045/five.png?raw=true
 
 from https://www.pakutaso.com/20190249044post-18819.html
 

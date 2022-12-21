@@ -194,6 +194,6 @@ description:大規模なリファクタリングを行うには二つの方法�
 
 category_script:page_name.startswith("3")
 
-img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-565-8.jpeg
+img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/3063/breakdown.png?raw=true
 
 
