@@ -19,7 +19,7 @@ https://www.amazon.co.jp/Python-Cookbook-Recipes-Mastering/dp/1449340377
 
 次のクラスは、heapqモジュールを使用して、単純な優先キューを実装します。
 
-<pre><code>
+```py
 class PriorityQueue: 
     def __init__(self):
         self._queue = []
@@ -29,11 +29,11 @@ class PriorityQueue:
         self._index += 1
     def pop(self):
         return heapq.heappop(self._queue)[-1]
-</code></pre>
+```
 
 次のコードはこのクラスの使用例です。
 
-<pre><code>
+```py
 class Item:
     def __init__(self, name): 
         self.name = name
@@ -54,7 +54,7 @@ Item('foo')
 >>> q.pop() 
 Item('grok') 
 >>>
-</code></pre>
+```
 
 最初のpop（）操作が最も高い優先度のアイテムをどのように返したかを観察します。
 
@@ -66,7 +66,7 @@ Item('grok')
 
 ところで、このItemクラス自身には比較する能力は備わっていません。
 
-<pre><code>
+```py
 >>> a = Item('foo')
 >>> b = Item('bar')
 >>> a < b
@@ -74,12 +74,12 @@ Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
     TypeError: unorderable types: Item() < Item()
 >>>
-</code></pre>
+```
 
 
 ここで追加のインデックスを導入し、（priority、index、item）タプルを作成することで、この問題を完全に回避できます。
 
-<pre><code>
+```py
 >>> a = (1, 0, Item('foo')) 
 >>> b = (5, 1, Item('bar')) 
 >>> c = (1, 2, Item('grok')) 
@@ -87,7 +87,7 @@ Traceback (most recent call last):
 True
 >>> a < c
 True
-</code></pre>
+```
 
 これは、2つのタプルがインデックスに同じ値を持つことはないためです。
 （Pythonの比較級では一つ目の比較の結果が得られたら、残りのタプル値をわざわざ比較することはありません。)
