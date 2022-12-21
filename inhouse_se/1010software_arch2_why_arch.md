@@ -90,11 +90,11 @@ RDMSでの管理も可能ですが、Bigqueryなど専用のデータベース�
 
 ## 備考
 
-title:アーキテクトの勉強法
+title:【ソフトウェアアーキテクト入門】どのように勉強すればいいか？
 
 description:アーキテクトは特定の技術や実装方法については深くは触れない。広く浅く技術に触れたほうがよい。 次に、アーキテクトは「結果」よりも「過程」を重要視したほうがいい。つまり、どうやって意思決定を行い、どのようにトレードオフを見極めるのが正解かを勉強する。
 
-img:https://soco-st.com/wp-content/uploads/2021/12/bookwinter_12245_color.png
+img:https://tshop.r10s.jp/rakutenkobo-ebooks/cabinet/8849/2000008128849.jpg?fitin=560:400&composite-to=*,*|560:400
 
 category_script:page_name.startswith("2")
 

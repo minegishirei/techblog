@@ -368,12 +368,12 @@ sこの要件は、ポータブルなWebサイトかさまざまなモバイル�
 
 ## 非機能要件一覧
 
-title:非機能要件とは何か?
+title:【アーキテクチャ設計基礎】非機能要件とは何か?
 
 description:非機能要件とは、「機能以外のアプリケーションの構造に影響を与えかつサービスの成功基準となるもの」である
 
 category_script:True
 
-img:https://www.ipa.go.jp/files/000066109.png
+img:https://1048636645-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MAffO8xa1ZWmgZvfeK2%2F-MK-lT4QGYHB8LD42a_r%2F-MK-lmcxbtabXwjYp6S5%2Fimage.png?alt=media&token=a57491a8-3216-4297-bc52-4e5dd295bc4b
 
 

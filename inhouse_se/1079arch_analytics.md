@@ -200,13 +200,11 @@ Pは関数内部で呼び出している他の関数の数である。
 
 ## アーキテクトが分析するシステムの3要素
 
-title:循環的複雑度とは何か【アーキテクチャ入門】
+title:【アーキテクチャ設計基礎】循環的複雑度とは何か
 
 description:アーキテクトはプロジェクトのあらゆる局面で、さまざまな観点からシステムの要件を分析し続けなければならい。パフォーマンス、弾力性、スケーラビリティなどの運用特性から、モジュール性やデプロイ容易性までの構造的な関心ごとまで全ての分析する。
 
 category_script:True
 
-img:https://storage.googleapis.com/de-lounge/assets/uploads/images/co_brand_1/article/2021/what-is-the-role-of-an-architect-in-building-a-house-1629876140.jpg
-
-
+img:https://1048636645-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MAffO8xa1ZWmgZvfeK2%2F-MK-lT4QGYHB8LD42a_r%2F-MK-lmcxbtabXwjYp6S5%2Fimage.png?alt=media&token=a57491a8-3216-4297-bc52-4e5dd295bc4b
 

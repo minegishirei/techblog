@@ -283,11 +283,11 @@
 
 ## 備考
 
-title:アーキテクチャ用語一覧
+title:【ソフトウェアアーキテクト入門】アーキテクチャ用語一覧
 
 description:アーキテクチャ界隈にてよく出現する単語を書き出してみました。
 
-img:https://img1.kakaku.k-img.com/images/maga/11733/img015.jpg
+img:https://tshop.r10s.jp/rakutenkobo-ebooks/cabinet/8849/2000008128849.jpg?fitin=560:400&composite-to=*,*|560:400
 
 from https://kakakumag.com/houseware/?id=11733
 

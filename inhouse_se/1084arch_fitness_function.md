@@ -176,12 +176,12 @@ var result = Types.InCurrentDomain()
 
 ## アーキテクチャの成功度合い
 
-title:適応度関数とは何か?【アーキテクチャ入門】
+title:【アーキテクチャ設計基礎】適応度関数とは何か?
 
 description:アーキテクトがアーキテクチャ特性を明らかにして改善するべき優先順位をつけた後、開発者にその優先順位を守ってもらうためにはどうすれば良いか。特に、「アーキテクチャのモジュール性」は緊急ではないが重要であると誰もがわかっているはずだ。しかし、その重要項目の改善業務に開発者を充てる方法はどのような数値を指し示せば良いだろうか。
 
 category_script:( page_name.startswith("1") or page_name.startswith("2") )
 
-
+img:https://1048636645-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MAffO8xa1ZWmgZvfeK2%2F-MK-lT4QGYHB8LD42a_r%2F-MK-lmcxbtabXwjYp6S5%2Fimage.png?alt=media&token=a57491a8-3216-4297-bc52-4e5dd295bc4b
 
 
