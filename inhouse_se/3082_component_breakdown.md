@@ -104,7 +104,6 @@ https://dl.ebooksworld.ir/books/Software.Architecture.The.Hard.Parts.Neal.Ford.O
 
 ## 備考
 
-
 title:ソースコードの行数はどのぐらいが適切か?【リファクタリング入門1】
 
 category_script:page_name.startswith("3")
