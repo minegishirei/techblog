@@ -129,4 +129,8 @@ print(output)
 
 title:GoKartのサンプルコード(Pythonのパイプラインパッケージ)
 
+参考:https://github.com/m3dev/gokart/tree/master/docs
+
+
+
 
