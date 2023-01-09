@@ -120,6 +120,7 @@ output = gokart.build(task=task_b)
 print(output)
 ```
 
+実行結果:`DONE example_TASKC_TASKD`
 
 
 
