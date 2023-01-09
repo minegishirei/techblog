@@ -132,5 +132,8 @@ title:GoKartのサンプルコード(Pythonのパイプラインパッケージ)
 参考:https://github.com/m3dev/gokart/tree/master/docs
 
 
+img:https://cdn-ak.f.st-hatena.com/images/fotolife/v/vaaaaaanquish/20210415/20210415015242.png
+
+category_script:page_name.startswith("51")
 
 
