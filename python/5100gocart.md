@@ -2,7 +2,10 @@
 
 
 
+# お品書き
 
+
+- [お品書き](#お品書き)
 - [環境構築](#環境構築)
   - [インポートする必要のあるライブラリ](#インポートする必要のあるライブラリ)
 - [GoKartのサンプルコード](#gokartのサンプルコード)
@@ -10,7 +13,6 @@
   - [GoKartの合流点があるサンプルコード](#gokartの合流点があるサンプルコード)
   - [GoKartのフロー調節をTaskInstanceParameterで行う](#gokartのフロー調節をtaskinstanceparameterで行う)
   - [備考](#備考)
-
 
 
 # 環境構築
@@ -86,9 +88,9 @@ print(output)
 
 ## GoKartのフロー調節をTaskInstanceParameterで行う
 
-TaskInstaceParameterを使うことで、合流点の結合を回避することができます。
+`TaskInstaceParameter`を使うことで、合流点の結合を回避することができます。
 
-依存関係は前の例と同じですが、ExampleTaskB.requires() で定義されるのではなくタスクの外側で定義されるのが特徴です。
+依存関係は前の例と同じですが、`ExampleTaskB.requires()`で定義されるのではなく`タスクの外側で定義される`のが特徴です。
 
 ```py
 class ExampleTaskC(gokart.TaskOnKart):
@@ -105,30 +107,18 @@ class ExampleTaskB(gokart.TaskOnKart):
     task_2 = gokart.TaskInstanceParameter()
 
     def requires(self):
-        return dict(task_1=self.task_1, task_2=self.task_2)  # required tasks are decided from the task parameters `task_1` and `task_2`
+        return dict(task_1=self.task_1, task_2=self.task_2)  # 必要なタスクはタスクパラメータ「task_1」と「task_2」から決定されます`
 
     def run(self):
         task_1 = self.load('task_1')
         task_2 = self.load('task_2')
         self.dump(f'DONE {self.param}_{task_1}_{task_2}')
-    
-task_b = ExampleTaskB(param='example', task_1=ExampleTaskC(), task_2=ExampleTaskD())  # Dependent tasks are defined here
+
+# 依存関係はここで定義されます。（Task定義内部ではない）
+task_b = ExampleTaskB(param='example', task_1=ExampleTaskC(), task_2=ExampleTaskD())
 output = gokart.build(task=task_b)
 print(output)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
