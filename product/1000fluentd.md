@@ -55,3 +55,4 @@ img:https://abicky.net/assets/20171023/fluentd-architecture-faa0125437b95b2d4a53
 
 
 
+category_script:True

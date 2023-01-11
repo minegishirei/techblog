@@ -165,6 +165,7 @@ title:terraformとは何か?
 
 description:terraformの概要からインストール、サンプルコードまでを解説。キーとなるtfファイルとtfstateファイルを押さえましょう！
 
+category_script:True
 
 
 

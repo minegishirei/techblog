@@ -289,7 +289,7 @@ title:開発環境ツール一覧
 
 description:開発環境を包括的にカバーするツールを集めました。
 
-
+category_script:True
 
 
 

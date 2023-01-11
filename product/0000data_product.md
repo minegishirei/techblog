@@ -172,4 +172,5 @@ https://techplay.jp/event/885346
 
 title:データ分析基盤の作り方
 
+category_script:True
 
