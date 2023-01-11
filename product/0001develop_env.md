@@ -17,17 +17,17 @@
     - [読み方:テラフォーム](#読み方テラフォーム)
     - [イメージ図](#イメージ図-1)
     - [ユースケース](#ユースケース-1)
-  - [AWS CDK](#aws-cdk)
-    - [キャッチコピー:使い慣れたプログラミング言語を使用したクラウドアプリケーションリソースの定義](#キャッチコピー使い慣れたプログラミング言語を使用したクラウドアプリケーションリソースの定義)
-    - [メリット](#メリット)
-    - [デメリット](#デメリット)
-    - [ユースケース](#ユースケース-2)
-    - [サンプルコード](#サンプルコード)
   - [CloudFormation:AWS特化のTerraform](#cloudformationaws特化のterraform)
     - [キャッチコピー:Infrastructure as Code でクラウドプロビジョニングを高速化する](#キャッチコピーinfrastructure-as-code-でクラウドプロビジョニングを高速化する)
     - [リンク](#リンク)
-    - [ユースケース](#ユースケース-3)
+    - [ユースケース](#ユースケース-2)
+    - [デメリット](#デメリット)
+  - [AWS CDK](#aws-cdk)
+    - [キャッチコピー:使い慣れたプログラミング言語を使用したクラウドアプリケーションリソースの定義](#キャッチコピー使い慣れたプログラミング言語を使用したクラウドアプリケーションリソースの定義)
+    - [メリット](#メリット)
     - [デメリット](#デメリット-1)
+    - [ユースケース](#ユースケース-3)
+    - [サンプルコード](#サンプルコード)
   - [Ansible](#ansible)
 - [開発支援](#開発支援)
   - [vagrant:vmware/virtualboxをコードで管理するようなもの](#vagrantvmwarevirtualboxをコードで管理するようなもの)
@@ -112,6 +112,40 @@ from https://www.lac.co.jp/lacwatch/service/20200903_002270.html
 
 
 
+## CloudFormation:AWS特化のTerraform
+
+### キャッチコピー:Infrastructure as Code でクラウドプロビジョニングを高速化する
+
+### リンク
+
+https://aws.amazon.com/jp/cloudformation/
+
+
+### ユースケース
+
+[FCバルセロナ、「ワンクリック」でのインフラストラクチャデプロイを実現](https://aws.amazon.com/jp/solutions/case-studies/futbol-club-barcelona/?pg=ln&sec=c)
+
+
+### デメリット
+
+
+```
+Terraform and CloudFormation are both infrastructure-as-code (IaC) tools. CloudFormation is developed by AWS and only manages AWS resources. Terraform is developed by HashiCorp and can manage resources across a wide range of cloud vendors.
+
+CloudFormation is better than Terraform for production workloads that are limited to AWS. The main reason is that in certain circumstances, Terraform doesn’t handle dependencies properly, and this rules it out as production-ready infrastructure-as-code (IaC) software.
+```
+
+```
+CloudFormationはAWSによって開発されましたが、AWSのリソースのみしかサポートできません。
+略)
+AWSの範囲内に限っていえば、CloudFormationはTerraformを上回ります。
+```
+
+ニュースサイト:https://www.toptal.com/terraform/terraform-vs-cloudformation#:~:text=What%20is%20the%20difference%20between,wide%20range%20of%20cloud%20vendors.
+
+
+
+
 
 
 
@@ -178,40 +212,6 @@ https://qiita.com/luton-mr/items/afe70781807bf3b5016a#%E3%83%A1%E3%83%AA%E3%83%8
 `生成されるCloudFormationのテンプレートは、約400行でした。これだけで90%以上のコード量減です。AWSでIaCなら初手はCloudFormationだろう！!`
 
 `CloudFormationをラッパーしているため、CloudFormationで出来ることはCDKでもできます。`
-
-
-## CloudFormation:AWS特化のTerraform
-
-### キャッチコピー:Infrastructure as Code でクラウドプロビジョニングを高速化する
-
-### リンク
-
-https://aws.amazon.com/jp/cloudformation/
-
-
-### ユースケース
-
-[FCバルセロナ、「ワンクリック」でのインフラストラクチャデプロイを実現](https://aws.amazon.com/jp/solutions/case-studies/futbol-club-barcelona/?pg=ln&sec=c)
-
-
-### デメリット
-
-
-```
-Terraform and CloudFormation are both infrastructure-as-code (IaC) tools. CloudFormation is developed by AWS and only manages AWS resources. Terraform is developed by HashiCorp and can manage resources across a wide range of cloud vendors.
-
-CloudFormation is better than Terraform for production workloads that are limited to AWS. The main reason is that in certain circumstances, Terraform doesn’t handle dependencies properly, and this rules it out as production-ready infrastructure-as-code (IaC) software.
-```
-
-```
-CloudFormationはAWSによって開発されましたが、AWSのリソースのみしかサポートできません。
-略)
-AWSの範囲内に限っていえば、CloudFormationはTerraformを上回ります。
-```
-
-ニュースサイト:https://www.toptal.com/terraform/terraform-vs-cloudformation#:~:text=What%20is%20the%20difference%20between,wide%20range%20of%20cloud%20vendors.
-
-
 
 
 ## Ansible
