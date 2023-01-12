@@ -26,6 +26,7 @@
     - [実際の環境構築の様子](#実際の環境構築の様子)
     - [公式ドキュメントのチュートリアル](#公式ドキュメントのチュートリアル)
     - [terraformはsnowflakeのsqlを実行できるか?](#terraformはsnowflakeのsqlを実行できるか)
+  - [EC2を立ち上げてコマンド実行できるか?](#ec2を立ち上げてコマンド実行できるか)
   - [その他のサポートしているプロバイダー](#その他のサポートしているプロバイダー)
   - [備考](#備考)
 
@@ -301,6 +302,9 @@ resource "aws_vpc" "demo" {
 
 公式ドキュメントも存在:https://quickstarts.snowflake.com/guide/terraforming_snowflake/index.html?index=..%2F..index#0
 
+
+
+
 ### 実際の環境構築の様子
 
 結論:**snowflake側でterraform用のユーザーを作成して、terraform側ではtfファイルにsnowflakeの認証情報を書き込む**
@@ -397,6 +401,16 @@ resource "snowflake_task" "test_task" {
   enabled                     = true
 }
 ```
+
+
+## EC2を立ち上げてコマンド実行できるか?
+
+結論:できる
+
+https://dev.classmethod.jp/articles/terraform-ec2-linux-settings-userdata-cloud-init/
+
+
+
 
 ## その他のサポートしているプロバイダー
 
