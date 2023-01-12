@@ -21,6 +21,12 @@
     - [ローカル上に作成する場合](#ローカル上に作成する場合)
     - [terraform init](#terraform-init)
   - [resourceファイルを更新してシステムをいじる(VPCをいじる)](#resourceファイルを更新してシステムをいじるvpcをいじる)
+- [できることできないこと](#できることできないこと)
+  - [TerraformはSnow flakeをサポートしているのか?](#terraformはsnow-flakeをサポートしているのか)
+    - [実際の環境構築の様子](#実際の環境構築の様子)
+    - [公式ドキュメントのチュートリアル](#公式ドキュメントのチュートリアル)
+    - [terraformはsnowflakeのsqlを実行できるか?](#terraformはsnowflakeのsqlを実行できるか)
+  - [その他のサポートしているプロバイダー](#その他のサポートしているプロバイダー)
   - [備考](#備考)
 
 
@@ -248,6 +254,7 @@ terraform {
 ## resourceファイルを更新してシステムをいじる(VPCをいじる)
 
 たとえば、VPCをいじりたい時は次のような`.tf`ファイルを作る。
+ファイル名は任意だが、拡張子は`.tf`であること。
 
 ```tf
 resource "aws_vpc" "demo" {
@@ -263,17 +270,144 @@ resource "aws_vpc" "demo" {
 
 - `cidr_block = "192.168.1.0/24"` : IPv4 CIDRブロックに、"192.168.1.0/24"を指定する
 
-つまり、AWSのコンソール上だと
+つまり、
+
+↓ AWSのコンソール上からVPCを選択して
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/terraform/vpc1.png?raw=true">
+
+↓ この画面にて、"192.168.1.0/24"をCIDRブロックに指定したことと**同等のことをコードで行える。**
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/terraform/vpc2.png?raw=true">
 
 
 
-この画面にて、"192.168.1.0/24"をCIDRブロックに指定したことと同等のことをコードで行える。
+
+# できることできないこと
+
+## TerraformはSnow flakeをサポートしているのか?
+
+- ユーザー
+
+- ロール
+
+- DB
+
+- スキーマ
+
+- 仮想ウェアハウス
+
+出所:https://dev.classmethod.jp/articles/snowflake-terraform-try/
+
+公式ドキュメントも存在:https://quickstarts.snowflake.com/guide/terraforming_snowflake/index.html?index=..%2F..index#0
+
+### 実際の環境構築の様子
+
+結論:**snowflake側でterraform用のユーザーを作成して、terraform側ではtfファイルにsnowflakeの認証情報を書き込む**
+
+Terraformが（ユーザーに代わって）Snowflakeのリソースを作成するので、まずはTerraform用のユーザーを作成します。割当ロールについて、今回はとりあえずSYSADMINとSECURITYADMINを使えるようにしていますが、本番運用する際は、より適切なカスタムロールを作って、それを割り当てる方が良いです。
+
+```sql
+CREATE USER "tf-snow" DEFAULT_ROLE=PUBLIC MUST_CHANGE_PASSWORD=FALSE;
+GRANT ROLE SYSADMIN TO USER "tf-snow";
+GRANT ROLE SECURITYADMIN TO USER "tf-snow";
+```
+
+続いて、Terraformが使用するSnowflakeに対する認証情報の準備です。公式ドキュメントを見るに、tfファイルにベタ書きすることもできそうですが、今回は、冒頭で紹介したチュートリアルにならって、環境変数に認証に必要な情報を入れて、それをProvider側で使用する方法をとります。
+
+環境変数にぶちこんでいきます。
+
+```sh
+> export SNOWFLAKE_USER="tf-snow"
+> export SNOWFLAKE_ACCOUNT="Snowflakeのアカウント名（URLの最初）"
+> export SNOWFLAKE_REGION="Snowflakeのリージョン名（URLの真ん中）"
+```
+
+### 公式ドキュメントのチュートリアル
+
+```
+すべてのデータベースにはテーブルを格納するためのスキーマが必要なので、
+それとサービス ユーザーを追加して、
+アプリケーション/クライアントがデータベースとスキーマに接続できるようにします。
+```
+
+https://quickstarts.snowflake.com/guide/terraforming_snowflake/index.html?index=..%2F..index#8
 
 
 
+### terraformはsnowflakeのsqlを実行できるか?
 
- 
+https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/task
 
+snowflake_taskというプロバイダーを使用して、sql_statementにsqlを記述することで実行できる。
+
+```sq;
+resource "snowflake_task" "task" {
+  comment = "my task"
+
+  database  = "database"
+  schema    = "schema"
+  warehouse = "warehouse"
+
+  name          = "task"
+  schedule      = "10 MINUTE"
+  sql_statement = "select * from foo;"
+
+  session_parameters = {
+    "foo" : "bar",
+  }
+
+  user_task_timeout_ms = 10000
+  after                = "preceding_task"
+  when                 = "foo AND bar"
+  enabled              = true
+}
+
+resource "snowflake_task" "serverless_task" {
+  comment = "my serverless task"
+
+  database = "db"
+  schema   = "schema"
+
+  name          = "serverless_task"
+  schedule      = "10 MINUTE"
+  sql_statement = "select * from foo;"
+
+  session_parameters = {
+    "foo" : "bar",
+  }
+
+  user_task_timeout_ms                     = 10000
+  user_task_managed_initial_warehouse_size = "XSMALL"
+  after                                    = [snowflake_task.task.name]
+  when                                     = "foo AND bar"
+  enabled                                  = true
+}
+
+resource "snowflake_task" "test_task" {
+  comment = "task with allow_overlapping_execution"
+
+  database = "database"
+  schema   = "schema"
+
+  name          = "test_task"
+  sql_statement = "select 1 as c;"
+
+  allow_overlapping_execution = true
+  enabled                     = true
+}
+```
+
+## その他のサポートしているプロバイダー
+
+dockerhubのように、terraformもgithubで管理するossプロジェクトが複数存在する。
+その数12009個。
+
+https://registry.terraform.io/browse/modules
+
+redshiftなども上記のリンクから検索すると、ドキュメントが出現する
+
+https://registry.terraform.io/modules/terraform-aws-modules/redshift/aws/latest
 
 
 
