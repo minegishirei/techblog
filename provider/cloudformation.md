@@ -15,6 +15,9 @@
   - [コンソールからの操作](#コンソールからの操作)
 - [できるできない](#できるできない)
   - [Snowflakeを利用できるか](#snowflakeを利用できるか)
+  - [ソースの長さについて](#ソースの長さについて)
+    - [Terraform](#terraform)
+    - [AWS Cloudformation](#aws-cloudformation)
   - [備考](#備考)
 
 
@@ -29,7 +32,7 @@
 
 ## cloudformationとは?
 
-AWS CloudFormation を使用すると、AWS インフラストラクチャのデプロイを予測どおりに繰り返し作成およびプロビジョニングできます。
+AWS CloudFormation を使用すると、AWS インフラストラクチャのデプロイを再現可能な状態でプロビジョニングできます。
 
 from 公式ドキュメントより
 
@@ -45,13 +48,15 @@ from 公式ドキュメントより
 
 ## 他のサービスとの違い
 
-- **コード(JSON/YAML)**で定義した**AWSリソース**をプロビジョニングしてくれるサービス(AWS内部に限定される)
+- **コード(JSON/YAML)**で定義
 
-- **CloudFormation自体の利用は無料**
+- **AWSリソース**をプロビジョニングしてくれるサービス(AWS内部に限定される)
+
+- **CloudFormation自体の利用は無料**(立てたサービスから料金が発生する)
 
 from https://www.youtube.com/watch?v=8uvWfCs6orE
 
-- コードはGUIで作成可能(AWS CloudFormation デザイナー)
+- コードはGUIで作成可能:名前を **AWS CloudFormation デザイナー**と呼ぶ
 
 <img src="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/images/designer-overview.png">
 
@@ -64,7 +69,7 @@ from https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/workin
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/cloudformation/image.png?raw=true">
 
-
+ぶっちゃけterraformの下位互換
 
 
 
@@ -176,33 +181,70 @@ AWSの最小単位
 
 https://docs.snowflake.com/ja/sql-reference/external-functions-creating-aws-planning.html
 
+`AWSにベンダロックインします。AWS以外のリソースの作成を行うことはできません。`
+
+from https://qiita.com/answer_d/items/74c3d317058d48394d21#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E6%80%A7
 
 
+## ソースの長さについて
+
+terraformもcloudformationもほとんど変わらない
+
+### Terraform
+
+```sh
+provider "aws" {
+  region = "ap-northeast-1"
+}
+
+resource "aws_vpc" "main" {
+  cidr_block = "10.2.0.0/24"
+  enable_dns_hostnames = true
+}
+
+resource "aws_subnet" "private" {
+  vpc_id = aws_vpc.main.id
+  cidr_block = "10.2.0.0/25"
+  map_public_ip_on_launch = false
+}
+
+resource "aws_instance" "sample" {
+  ami = "ami-0a1c2ec61571737db"
+  subnet_id = aws_subnet.private.id
+  key_name = "test"
+  instance_type = "t2.micro"
+}
+```
 
 
+### AWS Cloudformation
 
+```yml
+---
+AWSTemplateFormatVersion: 2010-09-09
 
+Resources:
+  mainVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.2.1.0/24
+      EnableDnsHostnames: true
 
+  privateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref mainVpc
+      CidrBlock: 10.2.1.0/25
+      MapPublicIpOnLaunch: false
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  sampleInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0a1c2ec61571737db
+      SubnetId: !Ref privateSubnet
+      KeyName: test
+      InstanceType: t2.micro
+```
 
 
 
@@ -210,9 +252,9 @@ https://docs.snowflake.com/ja/sql-reference/external-functions-creating-aws-plan
 
 ## 備考
 
-title:cloudformationとは何か?
+title:cloudformationとは何か?(製品比較)
 
-
+description:terraform vs cloudformationの比較についての記事です。ですが、cloudformationよりもterraformを使った方が対応できる場面が多く、特にvenderロックの有無でterraformを優先した方が環境構築の面で優れていると言わざるを得ません。
 
 
 
