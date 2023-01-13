@@ -317,6 +317,8 @@ description:開発環境を包括的にカバーするツールを集めまし�
 
 category_script:True
 
+img:https://www.kagoya.jp/howto/wp-content/uploads/202104b01.jpg
+
 
 
 

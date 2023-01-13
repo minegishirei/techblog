@@ -282,7 +282,9 @@ title:cloudformationとは何か?(製品比較)
 
 description:terraform vs cloudformationの比較についての記事です。ですが、cloudformationよりもterraformを使った方が対応できる場面が多く、特にvenderロックの有無でterraformを優先した方が環境構築の面で優れていると言わざるを得ません。
 
+category_script:True
 
+img:https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2014/05/aws_icon-cloudformation_white.png
 
 
 

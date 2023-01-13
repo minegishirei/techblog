@@ -6,6 +6,7 @@
   - [知見が溜まっているので簡単にgoogle検索に引っかかる](#知見が溜まっているので簡単にgoogle検索に引っかかる)
   - [ユーザー数](#ユーザー数)
   - [terraformからも利用できる](#terraformからも利用できる)
+  - [Ansibleとは何か？](#ansibleとは何か)
 
 
 
@@ -88,6 +89,7 @@ https://registry.terraform.io/modules/dcos-terraform/dcos-install-remote-exec-an
 
 という構成も選択肢に入ると考えられる。
 
+https://qiita.com/hayaosato/items/ee0d6eabb7b3d0a22136
 
 ```json
  module "dcos-install" {
@@ -111,3 +113,17 @@ https://registry.terraform.io/modules/dcos-terraform/dcos-install-remote-exec-an
    depends_on = ["${module.dcos-infrastructure.bootstrap.prereq-id}"]
 }
 ```
+
+
+## Ansibleとは何か？
+
+
+title:Ansibleとは何か?
+
+img:https://avatars.githubusercontent.com/u/1507452?s=200&v=4
+
+category_script:True
+
+
+
+

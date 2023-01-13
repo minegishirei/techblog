@@ -437,6 +437,8 @@ description:terraformの概要からインストール、サンプルコード�
 
 category_script:True
 
+img:https://gyazo.com/7ad7a3e824c13d8f152da18b1a222143/max_size/1000
+
 
 
 
