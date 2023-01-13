@@ -18,6 +18,7 @@
   - [ソースの長さについて](#ソースの長さについて)
     - [Terraform](#terraform)
     - [AWS Cloudformation](#aws-cloudformation)
+  - [ユーザー数について](#ユーザー数について)
   - [備考](#備考)
 
 
@@ -245,6 +246,31 @@ Resources:
       KeyName: test
       InstanceType: t2.micro
 ```
+
+
+## ユーザー数について
+
+google trendから推測。
+およそ2倍の差が存在する。
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/cloudformation/compare.png?raw=true">
+
+ちなみにAWS CDKは比較にならないほど知名度が低かった。
+
+**今後開発者を確保するという点でもterraformの方に軍配が上がりそう**
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
