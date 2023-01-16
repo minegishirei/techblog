@@ -11,6 +11,7 @@
     - [類似製品](#類似製品)
   - [インストール方法](#インストール方法)
     - [ubuntuへのインストール](#ubuntuへのインストール)
+- [手を動かす](#手を動かす)
   - [ansible動作確認](#ansible動作確認)
     - [0.ansibleサーバーを用意する](#0ansibleサーバーを用意する)
     - [1.ansibleのhostsを書く必要がある](#1ansibleのhostsを書く必要がある)
@@ -18,6 +19,19 @@
     - [2.ssh実行時(初回のみ)](#2ssh実行時初回のみ)
     - [3.実行結果](#3実行結果)
     - [4.echo test以外も実行してみる](#4echo-test以外も実行してみる)
+  - [ansibleのplaybookを書く](#ansibleのplaybookを書く)
+    - [1.まずはディレクトリ作成](#1まずはディレクトリ作成)
+    - [2.site.ymlを作成する](#2siteymlを作成する)
+    - [3.実行](#3実行)
+    - [4.実行結果](#4実行結果)
+  - [モジュールを使例:Apacheの構築をしてみる](#モジュールを使例apacheの構築をしてみる)
+    - [1.Playbookを書く](#1playbookを書く)
+    - [コマンド実行](#コマンド実行)
+    - [実際にログインして確認してみる](#実際にログインして確認してみる)
+  - [handler](#handler)
+    - [0.confファイルが変更された時にserviceをrestartする](#0confファイルが変更された時にserviceをrestartする)
+    - [1.Playbookを次のように書き直す](#1playbookを次のように書き直す)
+    - [2.最後に変更を行う](#2最後に変更を行う)
 - [できることできないこと](#できることできないこと)
   - [ミドルウェアの構成までしてくれる](#ミドルウェアの構成までしてくれる)
   - [ansibleのユーザー数](#ansibleのユーザー数)
@@ -93,6 +107,8 @@ sudo apt install software-properties-common
 sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
+
+# 手を動かす
 
 ## ansible動作確認
 
@@ -176,6 +192,191 @@ ansible 10.91.77.16 -a "shutdown -r now" --extra-vars "ansible_user=root ansible
 ```
 
 この場合、サーバーがリブートされれば成功。
+
+
+## ansibleのplaybookを書く
+
+### 1.まずはディレクトリ作成
+
+`mkdir ansible-playbook`
+
+### 2.site.ymlを作成する
+
+次のコマンドでsite.ymlを作成
+`vim site.yml`
+
+あ内容は次の通り
+
+```yml
+ - hosts 10.91.77.16
+    gather_facts yes
+    remote_user root
+    vars
+      ansible_password p@ssword123!
+    task
+      name Make somefolder
+      file
+        path "/root/test"
+        state directory
+```
+
+ファイルを説明すると
+
+- gather_facts:サーバーの情報をできるだけ集めるコマンド
+
+- remote_user:接続を行うユーザー
+
+- vars  
+  - ansible_password: vaultsという機能を使えば、
+
+
+- task
+  - name: タスクの名前
+  - file: "file"というモジュールを使う
+    - path: パス
+    - state: 実行方法について指示している
+      - `absent`:ファイルが存在しないことを担保する(存在していた場合は削除する)
+      - `ansible`: ファイルが存在していない場合はフォルダーを作成する
+
+という意味。
+
+### 3.実行
+
+`ansible-playbook site.yml`で実行する。
+
+
+### 4.実行結果
+
+以下のように実行されれば完了
+
+```js
+TASK [do -> ok] **********************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "task has done and return ok"
+}
+
+PLAY RECAP ***************************************************************************************************************************************
+localhost                  : ok=1    changed=1    unreachable=0    failed=0
+```
+
+各ステータスは以下の意味を持つ。
+
+- ok=実行
+
+- changed=実際にファイル構成が変更されたことを確認
+
+- unreachable=ssh接続に失敗
+
+- faild=失敗
+
+また、実際にターゲットのサーバーにsshログインして、結果が見えていれば良い
+
+## モジュールを使例:Apacheの構築をしてみる
+
+以下の手順を行う
+
+1. Apacheのインストール
+
+2. Apacheのconf配置
+
+3. トップページの配置
+
+4. サービスの有効化
+
+### 1.Playbookを書く
+
+```yml
+  - hosts: 10.91.77.16
+    gather_facts: yes
+    remote_user: root
+    vars:
+      ansible_password: p@ssword
+    tasks:
+      - name: 1.Apache2のインストール
+       apt: #「apt」モジュールの使用
+        name: apache2 #
+        state: latest #(インストールされていて、最新であること)
+      - name: 2.confファイルを配置する
+        copy: #「copy」モジュールの使用
+          src: apacher2.conf
+          dest: /etc/apache2/apache2.conf
+      - name: 3.トップページの配置
+        copy: #「copy」モジュールの使用
+          src: index.html
+          dest: /var/www/index.html
+      - name: 4.Apache2のサービスの有効
+        service: #サービスモジュールの使用
+          name: apache2
+          state: started
+          enabled: yes
+```
+
+### コマンド実行
+
+`ansible-playbook site.yml`
+
+### 実際にログインして確認してみる
+
+`apt-get install apache2`を実行,apacheがインストールされていること
+
+10.91.77.16へアクセス。実際にページが表示されたことを確認する
+
+
+## handler
+
+先ほどのapacheのサーバーには、一つ欠点がある。
+それは、**サービスの再起動時に、ファイルが読み込まれない点を改善する**
+
+### 0.confファイルが変更された時にserviceをrestartする
+
+1. serviceモジュールのstateをrestartedに直す
+
+2. commandモジュールで直接サービスの再起動コマンドを入れる
+
+3. handlerを使用する
+
+しかし、1と2では冗長であり、**サーバーの結果**を保持することはできない。
+
+handlerは、**サーバーに変更があった際に実行される**キーワードである
+
+### 1.Playbookを次のように書き直す
+
+```yml
+  - hosts: 10.91.77.16
+    gather_facts: yes
+    remote_user: root
+    vars:
+      ansible_password: p@ssword
+    tasks:
+      - name: 1.Apache2のインストール
+       apt:
+        name: apache2
+        state: latest
+      - name: 2.confファイルを配置する
+        copy: 
+          src: apacher2.conf
+          dest: /etc/apache2/apache2.conf
+        notify: restart apache2 #1. ここでファイルの変更が検知された場合
+      - name: 3.トップページの配置
+        copy:
+          src: index.html
+          dest: /var/www/index.html
+      - name: 4.Apache2のサービスの有効
+        service: 
+          name: apache2
+          state: started
+          enabled: yes
+    handlers: 
+      - name: restart apache2 #handlersに設定された再起動taskが動き出す
+        service: #apacheの再起動を行うサービスモジュール
+          name: apache2
+          state: restated
+```
+
+### 2.最後に変更を行う
+
+`ansible-playbook site.yml`
+
 
 
 
