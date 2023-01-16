@@ -6,8 +6,6 @@
   - [参考記事](#参考記事)
   - [ansibleとは?](#ansibleとは-1)
     - [ansibleとshellスクリプト都の違い](#ansibleとshellスクリプト都の違い)
-  - [デメリット:ansibleの面倒な点](#デメリットansibleの面倒な点)
-    - [ansible専用のサーバーを立てなければならない可能性](#ansible専用のサーバーを立てなければならない可能性)
     - [類似製品](#類似製品)
   - [インストール方法](#インストール方法)
     - [ubuntuへのインストール](#ubuntuへのインストール)
@@ -32,11 +30,17 @@
     - [0.confファイルが変更された時にserviceをrestartする](#0confファイルが変更された時にserviceをrestartする)
     - [1.Playbookを次のように書き直す](#1playbookを次のように書き直す)
     - [2.最後に変更を行う](#2最後に変更を行う)
-- [できることできないこと](#できることできないこと)
-  - [ミドルウェアの構成までしてくれる](#ミドルウェアの構成までしてくれる)
-  - [ansibleのユーザー数](#ansibleのユーザー数)
+- [メリット](#メリット)
+  - [ミドルウェアの構成が可能](#ミドルウェアの構成が可能)
+  - [ansibleのユーザー数はそこそこいる](#ansibleのユーザー数はそこそこいる)
     - [知見が溜まっているので簡単にgoogle検索に引っかかる](#知見が溜まっているので簡単にgoogle検索に引っかかる)
   - [ansibleはterraformからも利用できる](#ansibleはterraformからも利用できる)
+  - [デメリット:ansibleの面倒な点](#デメリットansibleの面倒な点)
+    - [ansibleではおそらくsnowflake未対応](#ansibleではおそらくsnowflake未対応)
+    - [ansible専用のサーバーを立てなければならない可能性](#ansible専用のサーバーを立てなければならない可能性)
+- [結論](#結論)
+  - [ansibleはshellscriptのラッピング](#ansibleはshellscriptのラッピング)
+  - [ansibleはクラウドよりはオンプレ向きの可能性大](#ansibleはクラウドよりはオンプレ向きの可能性大)
   - [Ansibleとは何か？](#ansibleとは何か)
 
 
@@ -63,6 +67,7 @@ https://qiita.com/minorun365/items/05f5b3d5a674e8b5f5cf
   2. ansibleがlinuxコマンドを打ち込む
   3. 結果,自動的にサーバーの設定が完了する
 
+
 ### ansibleとshellスクリプト都の違い
 
 shellスクリプトは
@@ -73,22 +78,12 @@ shellスクリプトは
 
 ところがansibleでは、**shellスクリプトのような難しいコードを描かずとも、数行のymlファイルで完了する**
 
-## デメリット:ansibleの面倒な点
-
-### ansible専用のサーバーを立てなければならない可能性
-
-いくつかの検証環境で確認したところ、通常のノートPCで開設等を行う場合、virtual box内部にサーバーを二台建てていた。
-
-- 一台は設定したいターゲットとなるサーバー
-
-- もう一台は、ansibleを実行するサーバー
 
 ### 類似製品
 
 - terraform:ミドルウェアよりもインフラ周りが強いが、IaCとしては同じ分類
 
 - puppet:オープンソースの構成管理ツール(ruby製)
-
 
 
 ## インストール方法
@@ -107,6 +102,7 @@ sudo apt install software-properties-common
 sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
+
 
 # 手を動かす
 
@@ -156,6 +152,7 @@ hostsの書き方は以下のようなルールがある
 - []で括ることで、グルーピングが可能 `[webservers]`であれば、webサーバーとして扱うなど
 
 0.で設定したサーバーのipアドレスを入力していく。
+
 
 ### 2.コマンド入力
 
@@ -381,11 +378,11 @@ handlerは、**サーバーに変更があった際に実行される**キーワ
 
 
 
-# できることできないこと
+# メリット
 
-## ミドルウェアの構成までしてくれる
+## ミドルウェアの構成が可能
 
-Ansibleには豊富なミドルウェアモジュールが用意されています。
+Ansibleには豊富なミドルウェアモジュールが用意されています。(aptやserviceコマンドに対応)
 そのため、複雑なミドルウェア層の構成管理はAnsibleで行うことをお勧めしています。
 
 - terraform
@@ -400,11 +397,11 @@ from https://www.lac.co.jp/lacwatch/service/20201216_002380.html#:~:text=Ansible
 
 
 
-## ansibleのユーザー数
+## ansibleのユーザー数はそこそこいる
 
 terraformほどではないが、ansibleもそこそこユーザーがいる。
 
-ユーザー数はterraformの2/3ほど。
+ユーザー数は少なくともterraformの2/3ほど。
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/ansible/trend.png?raw=true">
 
@@ -418,19 +415,6 @@ https://www.google.com/search?q=ansible+mysql&sxsrf=AJOqlzXY2EsFvzxrtXnLFnzFPtP_
 簡単に必要な記事が見つかる。
 
 https://qiita.com/tz2i5i_ebinuma/items/4074cc45f5bac84b78a2
-
-インストールのためのコードは以下の通り
-
-```yml
-- name: MySQL関連のパッケージインストール
-  apt:
-    force_apt_get: yes
-    state: latest
-    name:
-      - mysql-server-5.7
-      - mysql-client-5.7
-      - python-mysqldb
-```
 
 
 ## ansibleはterraformからも利用できる
@@ -475,12 +459,48 @@ https://qiita.com/hayaosato/items/ee0d6eabb7b3d0a22136
 ```
 
 
+## デメリット:ansibleの面倒な点
+
+
+### ansibleではおそらくsnowflake未対応
+
+google検索ほぼなし
 
 
 
+### ansible専用のサーバーを立てなければならない可能性
+
+いくつかの検証環境で確認したところ、通常のノートPCで開設等を行う場合、virtual box内部にサーバーを二台建てていた。
+
+- 一台は設定したいターゲットとなるサーバー
+
+- もう一台は、ansibleを実行するサーバー
 
 
+# 結論
 
+## ansibleはshellscriptのラッピング
+
+ansibleがやっていることは
+
+- ssh接続
+
+- コマンドを実行
+
+- 条件分岐に基づいて、サーバーの構成管理をする
+
+記述量は減るが、上記はshellscriptでも十分可能
+
+
+## ansibleはクラウドよりはオンプレ向きの可能性大
+
+ansibleはクラウドよりもオンプレ環境で力を発揮する可能性が高い
+
+- ほとんどのチュートリアルでも、virtual-boxを使った紹介(EC2は0)
+
+- [AWS-Lambdaを作成する記事](https://www.google.com/search?q=ansible+lambda&sxsrf=AJOqlzUTcuuBjAQsYAY_LhO7Lf78mBlyyA%3A1673841799782&ei=h8zEY9OwL9Hs2roP1p6T-Ak&oq=ansible+lamb&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgAMgUIABCABDIICAAQgAQQywEyCAgAEIAEEMsBMggIABCABBDLATIICAAQgAQQywEyBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB4yBAgAEB46BwgjELADECc6CggAEEcQ1gQQsAM6BAgjECc6BwgAELEDEEM6BAgAEENKBAhBGABKBAhGGABQqwJY9Qlg6xNoAXABeACAAYwBiAH_A5IBAzQuMZgBAKABAcgBCsABAQ&sclient=gws-wiz-serp)は存在はするが、ほとんとが2017年頃(5年前)
+
+**ユーザー側でやらなければならないことが多い**
 
 
 
