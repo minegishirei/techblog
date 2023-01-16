@@ -205,16 +205,16 @@ ansible 10.91.77.16 -a "shutdown -r now" --extra-vars "ansible_user=root ansible
 あ内容は次の通り
 
 ```yml
- - hosts 10.91.77.16
-    gather_facts yes
-    remote_user root
-    vars
-      ansible_password p@ssword123!
-    task
-      name Make somefolder
-      file
-        path "/root/test"
-        state directory
+ - hosts: 10.91.77.16
+    gather_facts: yes
+    remote_user: root
+    vars:
+      ansible_password: p@ssword123!
+    task:
+      name: Make somefolder
+      file:
+        path: "/root/test"
+        state: directory
 ```
 
 ファイルを説明すると
