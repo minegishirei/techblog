@@ -1,11 +1,15 @@
+
+
+# ansibleとは？
+
 - [ansibleとは？](#ansibleとは)
   - [類似製品](#類似製品)
   - [インストール方法](#インストール方法)
 - [できることできないこと](#できることできないこと)
   - [ミドルウェアの構成までしてくれる](#ミドルウェアの構成までしてくれる)
-  - [知見が溜まっているので簡単にgoogle検索に引っかかる](#知見が溜まっているので簡単にgoogle検索に引っかかる)
-  - [ユーザー数](#ユーザー数)
-  - [terraformからも利用できる](#terraformからも利用できる)
+  - [ansibleのユーザー数](#ansibleのユーザー数)
+    - [知見が溜まっているので簡単にgoogle検索に引っかかる](#知見が溜まっているので簡単にgoogle検索に引っかかる)
+  - [ansibleはterraformからも利用できる](#ansibleはterraformからも利用できる)
   - [Ansibleとは何か？](#ansibleとは何か)
 
 
@@ -20,7 +24,6 @@ https://qiita.com/minorun365/items/05f5b3d5a674e8b5f5cf
 
 
 
-# ansibleとは？
 
 
 ## 類似製品
@@ -57,7 +60,16 @@ from https://www.lac.co.jp/lacwatch/service/20201216_002380.html#:~:text=Ansible
 
 
 
-## 知見が溜まっているので簡単にgoogle検索に引っかかる
+## ansibleのユーザー数
+
+terraformほどではないが、ansibleもそこそこユーザーがいる。
+
+ユーザー数はterraformの2/3ほど。
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/ansible/trend.png?raw=true">
+
+
+### 知見が溜まっているので簡単にgoogle検索に引っかかる
 
 例えば、以下のリンクのように「ansible mysql」で検索すると
 
@@ -67,15 +79,21 @@ https://www.google.com/search?q=ansible+mysql&sxsrf=AJOqlzXY2EsFvzxrtXnLFnzFPtP_
 
 https://qiita.com/tz2i5i_ebinuma/items/4074cc45f5bac84b78a2
 
+インストールのためのコードは以下の通り
 
-## ユーザー数
+```yml
+- name: MySQL関連のパッケージインストール
+  apt:
+    force_apt_get: yes
+    state: latest
+    name:
+      - mysql-server-5.7
+      - mysql-client-5.7
+      - python-mysqldb
+```
 
-terraformほどではないが、ansibleもそこそこユーザーがいる。
 
-<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/provider/ansible/trend.png?raw=true">
-
-
-## terraformからも利用できる
+## ansibleはterraformからも利用できる
 
 terraformのレジストリにremoteサーバーにansibleをインストールするライブラリが存在した。
 
@@ -91,7 +109,9 @@ https://registry.terraform.io/modules/dcos-terraform/dcos-install-remote-exec-an
 
 https://qiita.com/hayaosato/items/ee0d6eabb7b3d0a22136
 
-```json
+以下が、ansibleを実行する,terraformの`.tf`ファイル
+
+```t
  module "dcos-install" {
    source = "dcos-terraform/dcos-install-remote-exec-ansible/null"
    version = "~> 0.2.0"
@@ -113,6 +133,22 @@ https://qiita.com/hayaosato/items/ee0d6eabb7b3d0a22136
    depends_on = ["${module.dcos-infrastructure.bootstrap.prereq-id}"]
 }
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Ansibleとは何か？
