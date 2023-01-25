@@ -257,6 +257,8 @@ from https://beyondjapan.com/blog/2020/09/snowflake/
 - コンピュートレイヤ、ストレージレイヤを利用していない
 
 -  WEBUIからのSQLでキャッシュを利用した後は、Profileに`QUERY_RESULT_REUSE`のフラグが表示される
+<img src="https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2020/01/2020-01-20_17h35_48.png">
+from https://dev.classmethod.jp/articles/snowflake-cache-three/
 
 - 完全に同一のクエリでなくとも、キャッシュを利用してくれることもある
 
@@ -277,7 +279,21 @@ select * from A where id="1234"
 
 仮想ウェアハウスないのSSD内部に、キャッシュされたデータ
 
+- 例えば、`SELECT network FROM rating WHERE (data_stream = live)`を実行した場合。
 
+- ローカルディスクには
+   - data_stream = 'Live'
+   - network
+- がキャッシュとして格納される。
+
+**仮想ウェアハウスは、最初にローカルで利用なデータを読み取り、次にリモートクラウドストレージから残りを読み取る**
+
+- ローカルディスクキャッシュは、Profileから確認できる
+<img src="https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2020/01/dc2.png">
+
+この場合は、データの100%をローカルキャッシュから取れた。
+
+from https://dev.classmethod.jp/articles/snowflake-cache-three/
 
 
 
