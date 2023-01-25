@@ -1,5 +1,30 @@
 
 
+- [snowflakeの基礎](#snowflakeの基礎)
+  - [仮想ウェアハウスタイプ](#仮想ウェアハウスタイプ)
+    - [請求について](#請求について)
+      - [請求についての注意事項](#請求についての注意事項)
+  - [ウェアハウスのサイズ変更について](#ウェアハウスのサイズ変更について)
+  - [パフォーマンスのためにスケールをあげる](#パフォーマンスのためにスケールをあげる)
+  - [Snowflakeのクエリ結果取得キャッシュを無効にする方法](#snowflakeのクエリ結果取得キャッシュを無効にする方法)
+  - [Snowflakeの実行時間の調べ方](#snowflakeの実行時間の調べ方)
+- [snowflakeへの接続方法(クライアント、コネクタ、エコシステム)](#snowflakeへの接続方法クライアントコネクタエコシステム)
+  - [接続情報についての補足/注意事項](#接続情報についての補足注意事項)
+  - [webUI](#webui)
+  - [SNNOW SQL](#snnow-sql)
+    - [セットアップ方法](#セットアップ方法)
+    - [snowflakeコマンドライン起動方法](#snowflakeコマンドライン起動方法)
+    - [.snowsql内部の設定ファイル:接続情報のデフォルト設定　](#snowsql内部の設定ファイル接続情報のデフォルト設定)
+    - [対応しているコネクタ一覧](#対応しているコネクタ一覧)
+  - [snowflakeのエコシステム概要](#snowflakeのエコシステム概要)
+    - [エコシステムの検索方法](#エコシステムの検索方法)
+- [snowflakeのキャッシング](#snowflakeのキャッシング)
+  - [メタデータキャッシュ](#メタデータキャッシュ)
+  - [クエリレザルトキャッシュ](#クエリレザルトキャッシュ)
+  - [ローカルディスクキャッシュ](#ローカルディスクキャッシュ)
+  - [備考](#備考)
+
+
 
 
 
@@ -219,6 +244,12 @@ from https://beyondjapan.com/blog/2020/09/snowflake/
 
 各レイヤーの情報は上図の通り。
 
+流れとしては
+
+1. クエリリザルトキャッシュ内部に結果があるか確認し、データが変更されていないかを確認する
+2. メタデータキャッシュに結果がないかを確認する。
+3. ローカルディスクキャッシュに結果がないかを確認する。
+4. 上記にデータがなければ実行
 
 ## メタデータキャッシュ
 
@@ -234,6 +265,8 @@ from https://beyondjapan.com/blog/2020/09/snowflake/
   - MIN,MAX,COUNT関数
  
 - 仮想ウェアハウスを利用する必要がない。（ただしクラウドサービスの料金がまれに適用されます）
+
+
 
 
 ## クエリレザルトキャッシュ
@@ -257,7 +290,8 @@ from https://beyondjapan.com/blog/2020/09/snowflake/
 - コンピュートレイヤ、ストレージレイヤを利用していない
 
 -  WEBUIからのSQLでキャッシュを利用した後は、Profileに`QUERY_RESULT_REUSE`のフラグが表示される
-<img src="https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2020/01/2020-01-20_17h35_48.png">
+
+- <img src="https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2020/01/2020-01-20_17h35_48.png">
 from https://dev.classmethod.jp/articles/snowflake-cache-three/
 
 - 完全に同一のクエリでなくとも、キャッシュを利用してくれることもある
@@ -277,7 +311,7 @@ select * from A where id="1234"
 
 ## ローカルディスクキャッシュ
 
-仮想ウェアハウスないのSSD内部に、キャッシュされたデータ
+仮想ウェアハウスのSSD内部に、キャッシュされたデータ
 
 - 例えば、`SELECT network FROM rating WHERE (data_stream = live)`を実行した場合。
 
@@ -289,13 +323,15 @@ select * from A where id="1234"
 **仮想ウェアハウスは、最初にローカルで利用なデータを読み取り、次にリモートクラウドストレージから残りを読み取る**
 
 - ローカルディスクキャッシュは、Profileから確認できる
-<img src="https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2020/01/dc2.png">
 
-この場合は、データの100%をローカルキャッシュから取れた。
+- <img src="https://d1tlzifd8jdoy4.cloudfront.net/wp-content/uploads/2020/01/dc2.png">
 
-from https://dev.classmethod.jp/articles/snowflake-cache-three/
+- この場合は、データの100%をローカルキャッシュから取れた。
+
+- from https://dev.classmethod.jp/articles/snowflake-cache-three/
 
 
+- キャッシュの有効期限は、**ウェアハウスが存在する間なので、キャッシュを優先す流場合はウェアハウスは止めないようにすること**
 
 
 
