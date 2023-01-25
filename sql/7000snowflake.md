@@ -264,9 +264,9 @@ snowflakeには凄まじい数のエコシステムが存在する。
 
 title:snowflake完全解説
 
-img:https://beyondjapan.com/cms/wp-content/uploads/2020/09/Snowflake_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3.png
+img:https://cdn-icons-png.flaticon.com/512/638/638434.png
 
 from https://beyondjapan.com/blog/2020/09/snowflake/
 
 
-
+category_script:page_name.startswith("7")

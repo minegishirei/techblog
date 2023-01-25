@@ -211,6 +211,6 @@ VALIFATION_MODE=return_all_errors;
 
 title:snowflakeのデータのロード方法
 
+category_script:page_name.startswith("7")
 
-
-category_script:page_name.startswith("3")
+img:https://paya02.com/wp-content/uploads/2018/09/icon25620991.png

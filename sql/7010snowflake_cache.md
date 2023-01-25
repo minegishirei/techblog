@@ -147,7 +147,7 @@ where
 
 title:snowflakeのキャッシュ完全解説
 
-img:https://beyondjapan.com/cms/wp-content/uploads/2020/09/Snowflake_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3.png
+img:https://static.thenounproject.com/png/1716494-200.png
 
-category_script:page_name.startswith("3")
+category_script:page_name.startswith("7")
 

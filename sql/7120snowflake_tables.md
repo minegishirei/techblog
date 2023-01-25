@@ -60,12 +60,6 @@ TRANSIENTの作成は次の通り
 create transient table mytranstable (id number, creation_date date);
 ```
 
-
-
-
-
-
-
 **セッションを超えて維持する必要がある一時的なデータ用に特別に設計されています**
 
 
@@ -73,10 +67,12 @@ create transient table mytranstable (id number, creation_date date);
 
 
 
-
+## 備考
 
 title:snowflakeのデータベース完全解説
 
-category_script:page_name.startswith("3")
+category_script:page_name.startswith("7")
+
+img:https://cdn-icons-png.flaticon.com/512/787/787235.png
 
 

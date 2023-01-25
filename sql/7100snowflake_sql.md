@@ -173,8 +173,6 @@ CREATE TEMPOEAEY TABLE temp(
 
 title:snowsql完全解説
 
-img:https://cdn-ak.f.st-hatena.com/images/fotolife/s/serverworks/20200712/20200712025125.png
+img:https://cdn-icons-png.flaticon.com/512/4299/4299956.png
 
-from https://blog.serverworks.co.jp/tech/2020/05/15/snowsql-first-step/
-
-category_script:page_name.startswith("3")
+category_script:page_name.startswith("7")
