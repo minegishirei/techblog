@@ -69,7 +69,7 @@ create transient table mytranstable (id number, creation_date date);
 
 ## 備考
 
-title:snowflakeのデータベース完全解説
+title:snowflakeのデータベース解説【snowflake解説】
 
 category_script:page_name.startswith("7")
 

@@ -171,7 +171,7 @@ CREATE TEMPOEAEY TABLE temp(
 ## 備考
 
 
-title:snowsql完全解説
+title:sqlユーザーのためのsnowflakeのsql【snowflake解説】
 
 img:https://cdn-icons-png.flaticon.com/512/4299/4299956.png
 

@@ -145,7 +145,7 @@ where
 
 ## 備考
 
-title:snowflakeのキャッシュ完全解説
+title:snowflakeのキャッシュサービス一覧【snowflake解説】
 
 img:https://static.thenounproject.com/png/1716494-200.png
 
