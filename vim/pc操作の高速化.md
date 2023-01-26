@@ -2,7 +2,9 @@
 # お品書き
 
 - [お品書き](#お品書き)
-- [キーボード編](#キーボード編)
+- [閲覧注意](#閲覧注意)
+  - [この記事には個人の偏見が多分に含まれています。](#この記事には個人の偏見が多分に含まれています)
+- [環境構築](#環境構築)
   - [エディターはvim:マウスだけ拘らない](#エディターはvimマウスだけ拘らない)
     - [ブラウザもVimで動かす](#ブラウザもvimで動かす)
   - [キーボードはHHKB:キーボードにはこだわる](#キーボードはhhkbキーボードにはこだわる)
@@ -14,11 +16,23 @@
   - [Qiita or ブログを書く](#qiita-or-ブログを書く)
   - [握力を強化する:未実証](#握力を強化する未実証)
   - [指の毛は剃る,爪は切る](#指の毛は剃る爪は切る)
-    - [こまめにストレッチ](#こまめにストレッチ)
+  - [こまめにストレッチ](#こまめにストレッチ)
+  - [ショートカットキーを大量に覚える](#ショートカットキーを大量に覚える)
+
+# 閲覧注意
+
+この記事には個人の偏見が多分に含まれています。
+-
+
+変だなと思ったらコメントや編集リクエストをください。
+おそらくそのまま採用します。
+
+また、元記事は以下の通りです。
+
+https://techblog.short-tips.info/vim/pc%E6%93%8D%E4%BD%9C%E3%81%AE%E9%AB%98%E9%80%9F%E5%8C%96.md
 
 
-
-# キーボード編
+# 環境構築
 
 
 ## エディターはvim:マウスだけ拘らない
@@ -43,6 +57,8 @@ from https://ja.wikipedia.org/wiki/Vim
 <iframe width="560" height="315" src="https://www.youtube.com/embed/t67Sn0RGK54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 hjklでの移動やfキーでの検索は通常のVIMをかなり再現していると思います。
+
+ただし、後述の寿司打ちやタイピングゲームをするときだけはOFFにしましょう。
 
 
 ## キーボードはHHKB:キーボードにはこだわる
@@ -74,6 +90,12 @@ twitterを利用している方であれば、自分のスコアを毎日ツイ�
 - 今日は早さを意識してタイピングしたので、タイピングが雑になりスコアが下がった
 
 - 今日はゆっくり丁寧にを意識してタイピングしたが、なぜかスコアが上がった。
+
+<img src="https://thikashi-blog.com/wp-content/uploads/2021/08/5f2cda6218552883409865d6d7b93ce7-720x600.png">
+
+from https://thikashi-blog.com/sushida/
+
+
 
 ## 練習はetypingで
 
@@ -116,7 +138,7 @@ from https://kakakumag.com/houseware/?id=10814
 
 
 
-### こまめにストレッチ
+## こまめにストレッチ
 
 効果があるかどうかは不明ですが、お風呂で指のストレッチをしています。
 
@@ -127,6 +149,10 @@ from https://kakakumag.com/houseware/?id=10814
 
 
 
+## ショートカットキーを大量に覚える
+
+ここは編集中です。
+
 
 
 
@@ -134,7 +160,6 @@ from https://kakakumag.com/houseware/?id=10814
 
 
 title:PC操作を高速にするために練習したこと
-
 
 
 
