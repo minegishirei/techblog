@@ -1,6 +1,7 @@
 
-
 # この記事の内容：ソフトウェアアーキテクチャの概要と選択
+
+<img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/all/all.png?raw=true">
 
 - 上司から任られたプロジェクトについて「アーキテクチャについてざっくり考えてきてください」といわれたとき
 
