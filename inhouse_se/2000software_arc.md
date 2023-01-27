@@ -231,3 +231,5 @@ description:アーキテクトを学ぶ意義の理解。特に、アーキテ�
 category_script:page_name.startswith("2")
 
 img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/all/all.png?raw=true
+
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/27/183831
