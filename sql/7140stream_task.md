@@ -94,6 +94,6 @@ create or replacetask t_sales_task
 
 title:snowflakeのストリームとタスクの使い方【snowflake解説】
 
-
+category_script:page_name.startswith("7")
 
 

@@ -124,7 +124,10 @@ Stageing Areaへのデータのアップロードは、Customerのデータの�
 
 ## 備考
 
-title:snowflakenおセキュリティ用件
+title:snowflakeのセキュリティ関連調査結果
 
+category_script:page_name.startswith("7")
+
+img:https://static.security-design.jp/img/icon/Attacker@512.png
 
 

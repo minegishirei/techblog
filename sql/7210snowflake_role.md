@@ -9,9 +9,13 @@
   - [snowflakeでロールをユーザーに付与](#snowflakeでロールをユーザーに付与)
   - [ロール関連の裏話](#ロール関連の裏話)
   - [ウェアハウスの権限は二種類ある](#ウェアハウスの権限は二種類ある)
+- [snowflakeの所有権](#snowflakeの所有権)
 - [SQL、テーブルレベルのセキュリティ](#sqlテーブルレベルのセキュリティ)
   - [セキュアビュー、およびユーザー定義関数について](#セキュアビューおよびユーザー定義関数について)
   - [行レベルのアクセスの認可](#行レベルのアクセスの認可)
+- [ユーザー管理](#ユーザー管理)
+  - [ユーザー管理をクエリで行う](#ユーザー管理をクエリで行う)
+  - [snowflake ユーザー ロック 何分](#snowflake-ユーザー-ロック-何分)
   - [備考](#備考)
 
 
@@ -107,6 +111,24 @@ snowflakeのオブジェクトツリーは以下の通り
 - OPETATE : 仮想ウェアハウスを開始、停止、設定を変更
 
 
+# snowflakeの所有権
+
+所有権についての解説。
+
+各オブジェクトは、ロールに紐づいている。
+あるロールを使用したユーザーがオブジェクトを作ると、**そのオブジェクトの所有者はそのユーザーではなく、ロールになる**
+
+オブジェクトの所有権はロールに宿る。
+
+- 所有者は、オブジェクトに対して任意の操作を実行できる
+- 所有者は、自身またはその他のロールに対して権限を付与できる
+- 所有権は、所有者によって移譲できる。
+- `GRANT OWUNERSHIP ON WAREHOUSE dev_ws TO ROLE dba`
+- ただし、オブジェクトを共同で所有することはできないので、移譲した人はそのオブジェクトの閲覧などができなくなる
+
+
+
+
 # SQL、テーブルレベルのセキュリティ
 
 ## セキュアビュー、およびユーザー定義関数について
@@ -141,6 +163,45 @@ CURRENT_ROLE関数は、現在のセッションのロールによって帰る�
 - データベースロールである場合は、NULLを返す
 
 
+# ユーザー管理
+
+## ユーザー管理をクエリで行う
+
+snowflakeでもユーザー管理はクエリで可能である。
+
+例えば、別のユーザーのためにパスワードを変更する場合、次のようなSQLになる。
+
+```sql
+USE ROLE useradmin;
+ALTER USER johnsmith
+    SET PASSEORD='rosebud2'
+    must_change_password = true
+```
+
+または、
+
+```sql
+ALTER USER johnsmith
+    RESET PASSWORD
+```
+
+を実行することで、ユーザーのパスワードを変更するためのURLを発行してくれる。
+
+
+## snowflake ユーザー ロック 何分
+
+**ログインに5回失敗すると、ユーザーは15分間ロックアウトされます。**
+
+別のアカウントからアンロックしてもらう場合、
+
+```sql
+ALTER USER joohsmith
+    SET minutes_to_unlock = 0
+```
+
+をUSERADMINロールを持ったユーザーから実行する。
+
+
 
 
 ## 備考
@@ -151,5 +212,5 @@ img:https://www.clipartmax.com/png/middle/167-1673910_group-customer-customer-de
 
 from https://www.clipartmax.com/middle/m2i8m2i8A0A0G6G6_group-customer-customer-desk-icon-role-model-icon-png/
 
-
+category_script:page_name.startswith("7")
 
