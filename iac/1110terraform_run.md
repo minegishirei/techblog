@@ -86,8 +86,11 @@ terraform -chdir=environments/production apply
 
 
 
-
 title:terraformでパスを指定してコマンドを実行する
 
 
 category_script:True
+
+
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/27/121646
+

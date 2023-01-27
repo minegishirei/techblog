@@ -66,7 +66,6 @@ modulesやpluginsのインストールステップに関するアップデート
 
 
 
-## s
 
 
 
@@ -77,5 +76,5 @@ title:Terraformのinitのオプション一覧
 
 category_script:True
 
-
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/27/120400
 
