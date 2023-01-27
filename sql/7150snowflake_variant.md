@@ -5,6 +5,8 @@
   - [Variantカラムの使い方](#variantカラムの使い方)
   - [snowflakeでjsonを扱うサンプルコード](#snowflakeでjsonを扱うサンプルコード)
     - [jsonのvalueの取り出し方（jsonの要素のアクセス)](#jsonのvalueの取り出し方jsonの要素のアクセス)
+  - [半構造化ファイル形式](#半構造化ファイル形式)
+  - [備考](#備考)
 
 
 
@@ -185,9 +187,31 @@ select src['salesperson']['name']
 
 
 
+## 半構造化ファイル形式
+
+半構造化ファイル（jsonやxmlなど）のロード方法は次の通り.
+
+1.ファイルフォーマットを作成し、
+
+```sql
+CREATE FILE FORMAT <name>
+  TYPE = JSON
+  {<format options>};
+```
+
+2.`COPY`コマンドでファイルをロードする
+
+```sql
+COPY INTO <table>
+FROM <files in stage>
+FILE_FORMAT = (FORMAT_NAME=<name>)
+```
 
 
 
+
+
+## 備考
 
 title:反構造化ファイルフォーマット(`Variant`)
 
