@@ -1,6 +1,20 @@
 
 
 
+
+- [パイプラインアーキテクチャとは](#パイプラインアーキテクチャとは)
+- [概要](#概要)
+  - [パイプ](#パイプ)
+  - [フィルター](#フィルター)
+- [パイプラインアーキテクチャの威力](#パイプラインアーキテクチャの威力)
+  - [具体例1:関数型](#具体例1関数型)
+  - [具体例2:Apache kafka](#具体例2apache-kafka)
+- [パイプラインアーキテクチャのメリット](#パイプラインアーキテクチャのメリット)
+- [デメリット](#デメリット)
+- [備考](#備考)
+
+
+
 ## パイプラインアーキテクチャとは
 
 ソフトウェアの歴史の中で繰り返し出現するスタイルが、このパイプラインアーキテクチャスタイルだ。
@@ -154,3 +168,4 @@ category_script:page_name.startswith("2")
 img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2002pipline_arch/pipline.png?raw=true
 
 
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/28/101928
