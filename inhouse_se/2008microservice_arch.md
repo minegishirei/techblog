@@ -241,6 +241,7 @@ img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2008microse
 
 category_script:page_name.startswith("2")
 
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/29/151901
 
 
 
