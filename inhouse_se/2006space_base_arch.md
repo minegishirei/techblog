@@ -304,3 +304,5 @@ category_script:( page_name.startswith("2") or page_name.startswith("1") )
 
 
 
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/29/090131
+
