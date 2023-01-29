@@ -310,4 +310,4 @@ category_script:(page_name.startswith("2") or page_name.startswith("1"))
 
 参考資料：https://qiita.com/Suzuki_Cecil/items/a51d353c73e9277f46d8
 
-
+redirect:https://minegishirei.hatenablog.com/entry/2023/01/28/175459
