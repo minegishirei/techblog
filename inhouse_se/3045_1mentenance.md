@@ -1,11 +1,27 @@
 
 
+## この記事の説明
+
+機能の追加、変更、削除だけでなく、バッチファイルやフレームワークなどのアップグレードの適応も容易である性質を意味する。では保守性の低いシステムとはどのようなシステムだろうか
 
 
-# そもそも保守性とは
+- [この記事の説明](#この記事の説明)
+- [そもそも保守性とは](#そもそも保守性とは)
+- [保守性の低いシステム一覧(私見あり)](#保守性の低いシステム一覧私見あり)
+  - [詳細](#詳細)
+- [保守性の高いシステム一覧](#保守性の高いシステム一覧)
+  - [詳細](#詳細-1)
+- [保守レベル0:大規模なモノシリックなシステムは保守性が低い](#保守レベル0大規模なモノシリックなシステムは保守性が低い)
+- [保守レベル50:サービスベースなシステムは保守性が比較的高い](#保守レベル50サービスベースなシステムは保守性が比較的高い)
+- [保守レベル100:マイクロサービスなシステムは保守性が高い](#保守レベル100マイクロサービスなシステムは保守性が高い)
+- [まとめ:モジュール化が進めばメンテナンス性、保守性が向上する](#まとめモジュール化が進めばメンテナンス性保守性が向上する)
+
+
+## そもそも保守性とは
 
 そもそも保守性とは
-*機能の追加、変更、削除だけでなく、バッチファイルやフレームワークなどのアップグレードの適応も容易である性質を意味する。*
+
+> 機能の追加、変更、削除だけでなく、バッチファイルやフレームワークなどのアップグレードの適応も容易である性質
 
 を意味する。
 
@@ -13,10 +29,13 @@
 
 ## 保守性の低いシステム一覧(私見あり)
 
+保守性の低いアーキテクチャは例えば以下のようなもの
+
 - [レイヤードアーキテクチャ](https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true)
 - [パイプラインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md)
 - [イベント駆動アーキテクチャ](https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md)
 
+詳細は後ほど
 
 ### 詳細
 
@@ -24,18 +43,21 @@
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true">
 
+このシステムは技術による分割がメインであり、一つの事業の変更がシステムの全てに反映される。
+
+
 - [パイプラインアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2002pipline_arch.md)
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2002pipline_arch/pipline.png?raw=true">
 
-
 議論の余地ありで再利用性が高いが、個人的には保守性は高くない。
+
 
 - [イベント駆動アーキテクチャ](https://techblog.short-tips.info/inhouse_se/2005event_driven_arch.md)
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2005event_driven_arch/event_driven_arch.png?raw=true">
 
-議論の余地ありだが、応答速度に特化したイメージ
+議論の余地ありだが、応答速度に特化したイメージ。
 
 
 
@@ -54,7 +76,7 @@
 
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2003micro_kernel/micro_kernel.png?raw=true">
 
-モノシリックの中では保守性が最も高い。プラグインとして機能が独立しているため、改修後の変更範囲が予測しやすい。
+モノシリックの中では保守性が最も高い。プラグインとして機能が独立しているため、改修後の変更範囲が狭く、予測しやすい。
 
 - [サービスベースアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2004service_base_arch.md)
 
@@ -66,7 +88,8 @@
 <img src="https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/2006space_base_arch/space_base_arch.png?raw=true">
 </a>
 
-処理ユニットごとにドメインが決まっている
+処理ユニットごとにドメインが決まっている場合、一つの事業的な変更が処理ユニット内部に収まる。
+
 
 - [マイクロサービスアーキテクチャ](https://techblog.short-tips.info/inhouse_se/2008microservice_arch.md)
 

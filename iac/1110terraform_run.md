@@ -1,13 +1,16 @@
+## この記事の説明
+
+- terraformで扱えるコマンド概要
+- terraformでパスを指定してコマンドを実行する方法の説明です。
 
 
 
+# Terraformのコマンド（terraform CLI）
 
-# Terraformのコマンド
-
-terraformは様々なコマンドを受け付けます。
+terraformでは様々なコマンドを扱うことができます。
 `terraform` `terraform init` `terraform plan`
 
-terraformのコマンドは別名、`terraform CLI`と呼ばれていますが、これは**terraformが扱うそのほかのプロバイダーが用いるコマンドと明確に区別するためです。**
+terraformのコマンドは別名`terraform CLI`と呼ばれています。これは**terraformが扱うそのほかのプロバイダーが用いるコマンドと明確に区別するためです。**
 
 
 ## terraformのコマンドヘルプの見方
@@ -86,11 +89,9 @@ terraform -chdir=environments/production apply
 
 
 
+
 title:terraformでパスを指定してコマンドを実行する
 
 
 category_script:True
-
-
-redirect:https://minegishirei.hatenablog.com/entry/2023/01/27/121646
 
