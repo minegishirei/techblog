@@ -1,5 +1,9 @@
 
-## とりあえず試したい方へ
+
+## kotlinのメリットとデメリット
+
+
+### とりあえず試したい方へ
 
 とりあえずブラウザ上で試す: インストールしなくてもこちらからブラウザ上で実行可能
 
@@ -8,24 +12,24 @@ https://play.kotlinlang.org/
 ※Kotlinの公式のドメイン配下にあるサイトなので安全にお試しできます
 
 
-## Kotlinを動かすための開発環境
+### Kotlinを動かすための開発環境
 
 Android Studioが必要。
 
 
 
 
-## 言語のビジュアルが見たい方へ
+### 言語のビジュアルが見たい方へ
 
 外見はこんな感じ
 
-<pre><code>
+```kt
 //this is comment
 fun main() {
     var agreement : String = "Hello, world!!!"
     println(agreement)
 }
-</code></pre>
+```
 
 どちらかというとPythonやPerlに近い
 
@@ -34,7 +38,7 @@ fun main() {
 
 
 
-## 参考サイト
+### 参考サイト
 
 以下のURLを参考にしました。
 
@@ -43,7 +47,7 @@ fun main() {
 
 
 
-## Kotlinの人気急上昇について
+### Kotlinの人気急上昇について
 
 以下の記事より、「Kotlin on Android」が正式に決まった
 
@@ -58,7 +62,7 @@ https://blog.jetbrains.com/ja/2017/05/18/767/
 
 
 
-## Kotlinの特徴
+### Kotlinの特徴
 
 
 - Javaとの完全互換性
@@ -81,22 +85,23 @@ Javaの互換性を保ちながらもJavaよりすごい
 
 ***before(Java)***
 
-<pre><code>
+
+```java
 class HelloWorld {
 	public static void main(String[] args) {
 		System.out.println("Hello, world.");
 	}
 }
-</code></pre>
+```
 
 ***after(Kotlin)***
 
-<pre><code>
+```kt
 //this is comment
 fun main() {
     println("Hello, world!!!")
 }
-</code></pre>
+```
 
 - 複数のOSに対応
 
@@ -108,7 +113,7 @@ iOSでもAndroidでも同様に動く。
 
 
 
-## Javaの有償化について
+### Javaの有償化について
 
 JavaはOracle社が開発したプログラミング言語であるため、Kotlinもその影響を受けるのではないか？という懸念があったが
 

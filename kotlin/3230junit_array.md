@@ -16,7 +16,7 @@ assertThat(sut).hasSize(3)
 </code></pre>
 
 
-## JUnitのhasSize(3)
+### JUnitのhasSize(3)
 
 サイズが合っているかを確認する
 
@@ -27,7 +27,7 @@ assertThat(sut)
 </code></pre>
 
 
-## JUnitの.contains("green")
+### JUnitの.contains("green")
 
 文字列が含まれているかどうかを確認する
 
@@ -38,7 +38,7 @@ assertThat(sut)
 </code></pre>
 
 
-## JUnitの.containsOnly("blue", "red", "green")
+### JUnitの.containsOnly("blue", "red", "green")
 
 同じ要素が含まれているか確認する。
 
@@ -52,7 +52,7 @@ assertThat(sut)
 
 
 
-## JUnitの.containsExactly("blue", "red", "green")
+### JUnitの.containsExactly("blue", "red", "green")
 
 配列の要素が完全一致することを検証する。
 
@@ -65,7 +65,7 @@ assertThat(sut)
 </code></pre>
 
 
-## JUnitの.doesNotContains
+### JUnitの.doesNotContains
 
 文字列が含まれるかどうかを確認する
 
@@ -82,7 +82,7 @@ assertThat(sut)
 
 
 
-## 備考
+### 備考
 
 title:JUnitの文字列のアサーション
 

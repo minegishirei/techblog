@@ -15,7 +15,7 @@ assertThat(3.1415)
     .isbetween(3.0, 3.2)
 </code></pre>
 
-## JUnitの.isNotZero()
+### JUnitの.isNotZero()
 
 0ではない事を検証する
 
@@ -27,7 +27,7 @@ assertThat(3.1415)
 
 
 
-## JUnitの.isNotNegative()
+### JUnitの.isNotNegative()
 
 マイナスの値ではないことを証明する
 
@@ -39,7 +39,7 @@ assertThat(3.1415)
 
 
 
-## JUnitの.isLessThan()
+### JUnitの.isLessThan()
 
 ある特定の値より小さいことを証明する
 
@@ -50,7 +50,7 @@ assertThat(3.1415)
 
 
 
-## JUnitの.isGreaterThanorEqualto()
+### JUnitの.isGreaterThanorEqualto()
 
 ある値より大きいか等しいかを検証する
 
@@ -61,7 +61,7 @@ assertThat(3.1415)
 
 
 
-## 備考
+### 備考
 
 title:JUnitの文字列のアサーション
 

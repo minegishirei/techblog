@@ -5,23 +5,23 @@
 
 Kotlind複数の要素をまとめて扱うにはJavaと同様にCollectionを扱う 
 
-### 配列 
+#### 配列 
 
 最もシンプルだが、宣言の段階でサイズを決める必要がある。
 
-### List 
+#### List 
 
 長さが固定でなく、配列よりも柔軟性が高い。(ほぼ配列の上位互換)
 
-### Set 
+#### Set 
 
 リストとほぼ同じだが、重複した要素は登録されない。(集合の概念)
 
-### Map(辞書) 
+#### Map(辞書) 
 
 キーとバリューの一対一で登録される複数の値 辞書とも呼ばれる。
 
-## 配列について
+### 配列について
 
 サンプルコード 
 
@@ -41,7 +41,7 @@ println(d)
 
 </code></pre>
 
-## リストのサンプルコード
+### リストのサンプルコード
 
 <pre><code> 
 var list = listOf("あ", "い","う") 
@@ -51,7 +51,7 @@ printIn(list)
 
 </code></pre>
 
-## setのサンプルコード 
+### setのサンプルコード 
 
 出力の段階で重複が排除されていることに注意 
 
@@ -64,7 +64,7 @@ println(set)
 </code></pre>
 
 
-## mapのサンプルコード
+### mapのサンプルコード
 
 Kotlinでのdictに当たる。
 
@@ -72,7 +72,7 @@ Kotlinでのdictに当たる。
 var map = mapOf("First" to 1, "Second" to 2, "Third" to 3) println(map) 7/{First=1, Second=2, Third= 3} 
 </code></pre>
 
-## 変更可能なコレクション 
+### 変更可能なコレクション 
 
 mutableコレクション名Of () 関数を使う 
 
@@ -99,7 +99,7 @@ list = mList //OK
 </code></pre>
 
 
-## 備考
+### 備考
 
 title:Kotlinでの配列とリストの違い【Kotlin入門】
 

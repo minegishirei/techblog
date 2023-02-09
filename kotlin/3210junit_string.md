@@ -12,7 +12,7 @@ JUnitではAssertJのようなアサーションライブラリを用いるこ�
 ここではAssertJの基本的な使い方について扱う
 
 
-## 文字列のアサーション
+### 文字列のアサーション
 
 "KOTLIN"という文字列を様々な条件で比較検証してみる
 
@@ -29,7 +29,7 @@ assertThat("KOTLIN")
 </code></pre>
 
 
-## アサーションにラベルを付ける.`as`(...)
+### アサーションにラベルを付ける.`as`(...)
 
 <pre><code>
 assertThat("KOTLIN")
@@ -41,7 +41,7 @@ assertThat("KOTLIN")
 
 AssertJの「as」であることを示すために、`as`と表記する
 
-## JUnitの.isEqualToIgnoreingCase("kotlin")
+### JUnitの.isEqualToIgnoreingCase("kotlin")
 
 JUnitで大文字小文字を無視する
 
@@ -50,7 +50,7 @@ assertThat("KOTLIN")
     .isEqualToIgnoreingCase("kotlin")
 </code></pre>
 
-## JUnitの.isNotEqualTo("KOLTIN")
+### JUnitの.isNotEqualTo("KOLTIN")
 
 JUnitで等しくない事を示す。
 
@@ -60,7 +60,7 @@ assertThat("KOTLIN")
 </code></pre>
 
 
-## JUnitの.startsWith("KO") / .endsWith("IN")
+### JUnitの.startsWith("KO") / .endsWith("IN")
 
 特定の文字列からスタート/終了するか検証する
 
@@ -70,7 +70,7 @@ assertThat("KOTLIN")
 </code></pre>
 
 
-## JUnitの.contains("TL")
+### JUnitの.contains("TL")
 
 特定の文字列が含まれるか検証する
 
@@ -80,7 +80,7 @@ assertThat("KOTLIN")
 </code></pre>
 
 
-## JUnitの .isInstanceOf(String:class.java)
+### JUnitの .isInstanceOf(String:class.java)
 
 文字列型であるかどうかを検証する
 
@@ -91,7 +91,7 @@ assertThat("KOTLIN")
 
 
 
-## String型のJUnitのポイント
+### String型のJUnitのポイント
 
 1. 次のように、メソッドはチェインすることができる
 
@@ -129,7 +129,7 @@ SoftAssertions().apply{
 
 
 
-## 備考
+### 備考
 
 title:JUnitの文字列のアサーション
 

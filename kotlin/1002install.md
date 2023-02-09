@@ -1,4 +1,5 @@
 
+
 ## とりあえず試したい方へ
 
 とりあえずブラウザ上で試す: インストールしなくてもこちらからブラウザ上で実行可能
@@ -9,8 +10,10 @@ https://play.kotlinlang.org/
 
 
 
+## インストール方法:しっかりとインストールしたい人向け
 
-# しっかり構築したい方へ
+
+### しっかり構築したい方へ
 
 Android Studioのインストールが必要。
 
@@ -19,7 +22,7 @@ Android Studioのインストールが必要。
 
 
 
-## まずはAndroid Studioのインストールの仕方
+### まずはAndroid Studioのインストールの仕方
 
 以下のサイトにアクセスした後
 
@@ -32,7 +35,7 @@ https://developer.android.com/studio
 ダウンロードには5分程かかった。
 
 
-## Mac, Windowsなどの指定がある方
+### Mac, Windowsなどの指定がある方
 
 ダウンロードボタンを押すのではなく「Download options」を押すこと
 
@@ -41,7 +44,7 @@ https://developer.android.com/studio
 その後Mac,Window,Lixux,ChromeOSなどのOSごとの対応が出てくる。
 
 
-## Android Studio.exeを起動
+### Android Studio.exeを起動
 
 ダウンロードフォルダー配下に移動した（C:\Users\(ユーザ名)\Downloads）
 android-studio-ide-xxx-xxxxxxx-windows.exeを起動する
@@ -49,29 +52,29 @@ android-studio-ide-xxx-xxxxxxx-windows.exeを起動する
 C:\Users\～～\Downloads\android-studio-2021.1.1.22-windows.exe
 
 
-## Welcome To Android Studio Setup
+### Welcome To Android Studio Setup
 
 :NEXT>を押す
 
-## Chose Components
+### Chose Components
 
 Android Virtual Deviceを押したまま
 
 :NEXT>
 
-## Install Loaction
+### Install Loaction
 
 「C:\Program Files\Android\Android Studio」を選択したまま
 
 :NEXT>
 
-## Chose Start Menu Folder
+### Chose Start Menu Folder
 
 「Android Studio\Android Studio」を選択
 
 :NEXT>
 
-## インストールが開始される
+### インストールが開始される
 
 トータルで5分
 
@@ -82,50 +85,50 @@ Android Virtual Deviceを押したまま
 :NEXT>
 
 
-## Completeing Android Studio Setup
+### Completeing Android Studio Setup
 
 チェックボックスに「start android studio」をいれて「Finish」
 
 
 
 
-# 初回起動時
+## 初回起動時
 
 
-## Import Android Studio Settings
+### Import Android Studio Settings
 
 Do not import settingsを選択
 
 万が一エラーが出た場合は「Setup Proxy」をクリック
 
 
-## Welcomoe
+### Welcomoe
 
 色々書いてあるが全部飛ばして
 
 :Next>
 
 
-## Install Type
+### Install Type
 
 Standerdで良い。
 
 :Next>
 
-## Select UI theme
+### Select UI theme
 
 DarcualかLightどちらかを選べる
 
 色の好みで好きな方で
 
 
-## verify settings
+### verify settings
 
 確認画面
 
 :Next>
 
-## Licence
+### Licence
 
 色々インストールするのでそれぞれチェックを入れていかなければいけない
 
@@ -144,9 +147,9 @@ Intel HAXM installed successfully!
 
 
 
-# AndroiStudio日本語化 
+## AndroiStudio日本語化 
 
-## 次のサイトに行く
+### 次のサイトに行く
 
 https://github.com/yuuna/IDEA_resources_jp
 
@@ -155,13 +158,13 @@ https://github.com/yuuna/IDEA_resources_jp
 
 「download zip」を選択し解凍
 
-## 解凍後
+### 解凍後
 
 ZIPファイルを解凍すると「resources_jp.jar」というファイルができます
 
 これを「C:\Program Files\Android\Android Studio\lib」へコピー
 
-## 完了
+### 完了
 
 
 https://zesys.net/pc/android/android-studio-localizing-japanese/ 

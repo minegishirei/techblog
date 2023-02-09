@@ -1,10 +1,14 @@
 
 
-# ansibleとは？
+# この記事の説明:ansibleとは？
 
-- [ansibleとは？](#ansibleとは)
+この記事では「ansibleというツールはどのようなツールなのか」というツール紹介です。
+
+結論は、**terraformのほぼ下位互換**ですが、経緯を確認したい人はこの記事を読み込むと良いでしょう。
+
+- [この記事の説明:ansibleとは？](#この記事の説明ansibleとは)
   - [参考記事](#参考記事)
-  - [ansibleとは?](#ansibleとは-1)
+  - [ansibleとは?](#ansibleとは)
     - [ansibleとshellスクリプト都の違い](#ansibleとshellスクリプト都の違い)
     - [類似製品](#類似製品)
   - [インストール方法](#インストール方法)
@@ -60,7 +64,7 @@ https://qiita.com/minorun365/items/05f5b3d5a674e8b5f5cf
   2. 人間が手入力でlinuxコマンドを打ち込んで
   3. やっとサーバーの設定が完了する
 
-というのが一般的
+というのが一般的ですが、
 
 - ansibleの場合は
   1. ansibleが人間の代わりにsshコマンドを打って
@@ -76,7 +80,7 @@ shellスクリプトは
 
 - ubuntu,centOS,などの差異にも対応しなければならない
 
-ところがansibleでは、**shellスクリプトのような難しいコードを描かずとも、数行のymlファイルで完了する**
+ところがansibleでは、**shellスクリプトのような難しいコードを描かずとも、数行のymlファイルで完了させることができる**というメリットを持ちます。
 
 
 ### 類似製品
@@ -108,17 +112,17 @@ sudo apt install ansible
 
 ## ansible動作確認
 
-ansibleは2通りの実行方法がある
+ansibleは2通りの実行方法が存在します。
 
 - Ad-hoc:単体のコマンドを対象のサーバーに対して投げる実行方法
 
 - Playbook:ymlファイルで定義された一連のコマンドを投げる実行方法
 
-今回は、Ad-hocコマンドで単体のコマンドをサーバーに対して投げる
+今回は、Ad-hocコマンドで単体のコマンドをサーバーに対して投げてみます。
 
 ### 0.ansibleサーバーを用意する
 
-virtual boxなどでansibleサーバーを用意しておく。
+virtual boxなどでansibleサーバーを用意しておく必要があります。
 
 ### 1.ansibleのhostsを書く必要がある
 

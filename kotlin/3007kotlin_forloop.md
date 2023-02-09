@@ -1,7 +1,7 @@
 
 
 
-## for ループ 
+### for ループ 
 
 <pre><code> 
 val arr = array0f (1, 2, 3) 
@@ -11,7 +11,7 @@ for (item in arr) {
 
 </code></pre> 
 
-## mapのforループ
+### mapのforループ
 
 <pre><code> 
 val map = mapOf ("Firsst" to 1, "Second to 2, "Third” to 3) 
@@ -30,21 +30,21 @@ for ((index, value) in list.withIndex()) {
 }
 </code></pre>
 
-## 範囲を指定したforループ (pythonならrength)
+### 範囲を指定したforループ (pythonならrength)
 
 <pre><code> 
 for (i in 1..3) {
     println(i) 
 }</code></pre> 
 
-## 両端を含めたくない時のforループ 
+### 両端を含めたくない時のforループ 
 
 <pre><code> 
 for (i in 1 until 3) {
     println(i) 
 }</code></pre> 
 
-## インデックスを減少させるforループ
+### インデックスを減少させるforループ
 
 <pre><code> 
 for (i in 3 downTo 1) {
@@ -52,7 +52,7 @@ for (i in 3 downTo 1) {
 }
 </code></pre>
 
-## for文のステップ数を変化させたい時 
+### for文のステップ数を変化させたい時 
 
 ex) 3飛びでループのインデックスを回す
 
@@ -63,7 +63,7 @@ for (i in 1.. 10 step 3) {
 }
 </code></pre> 
 
-## Kotlinのcontinue
+### Kotlinのcontinue
 
 <pre><code> 
 for (i in 1..10) {
@@ -73,7 +73,7 @@ for (i in 1..10) {
 }
 </code></pre> 
 
-## 二重ループで外側のループに出たいとき 
+### 二重ループで外側のループに出たいとき 
 
 二重ループで外側のループに出たいときはラベル構文を用いる 
 
@@ -91,7 +91,7 @@ outer@for (i in 1..3) {
 }
 </code></pre>
 
-## whileループ 
+### whileループ 
 
 条件を満たす間は実行するwhileループ 
 
@@ -101,7 +101,7 @@ var i = 1 while (i < 2 ){
     i++ 
 }</code></pre>
 
-## do~whileループ 
+### do~whileループ 
 
 do whileループは条件式の判定が処理の後ろになり、必ず一度は処理を通る 
 
