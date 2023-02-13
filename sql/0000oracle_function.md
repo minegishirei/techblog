@@ -1,7 +1,36 @@
 
 
 
-##二種類の関数
+#### oracleで使用可能な関数一覧
+
+oracleでは以下の関数が使用可能である。
+
+- [UPPER関数](#upper関数)
+- [LOWER関数](#lower関数)
+- [INTCAP関数](#intcap関数)
+- [CONCAT関数](#concat関数)
+- [SUBSTR関数](#substr関数)
+- [LENGTH関数](#length関数)
+- [INSTR関数](#instr関数)
+- [LPAD,RPAD関数](#lpadrpad関数)
+- [TRIM関数](#trim関数)
+- [REPLSCE関数](#replsce関数)
+- [ROUND関数](#round関数)
+- [TRUNC関数](#trunc関数)
+- [MOD関数](#mod関数)
+- [現在時刻を返す関数](#現在時刻を返す関数)
+- [日付の四則演算](#日付の四則演算)
+- [日付-日付](#日付-日付)
+- [日付 + 日付](#日付--日付)
+- [MONTHS\_BETWEEN関数](#months_between関数)
+- [ADD\_MONTHS関数](#add_months関数)
+- [NEXT\_DAY関数](#next_day関数)
+- [LAST\_DAY関数](#last_day関数)
+- [ROUND関数](#round関数-1)
+- [TRUNC関数](#trunc関数-1)
+
+
+ 二種類の関数
 
 SQLの関数には二種類ある
 
@@ -19,7 +48,7 @@ SQLの関数には二種類ある
 
 
 
-##UPPER関数
+### UPPER関数
 
 文字列を全て大文字に書き換えることができる関数
 
@@ -32,12 +61,12 @@ SELECT name, UPPER(name) FROM employees;
 上記の例では「satomi」というフィールドを「SATOMI」に変換している
 
 
-##LOWER関数
+### LOWER関数
 
 全ての文字列を小文字に変えることができる関数
 
 
-##INTCAP関数
+### INTCAP関数
 
 - 単語の先頭にあるアルファベットを大文字に、
 
@@ -52,7 +81,7 @@ select INTCAP("test code") from dual;
 単語として区切られる文字列はスペースの他に-や,も認識される
 
 
-##CONCAT関数
+### CONCAT関数
 
 文字列を結合する関数
 
@@ -69,7 +98,7 @@ from
 
 
 
-##SUBSTR関数
+### SUBSTR関数
 
 範囲を選択して文字列を取り出す関数
 
@@ -89,7 +118,7 @@ from
 </code></pre>
 
 
-##LENGTH関数
+### LENGTH関数
 
 文字数を表す関数
 
@@ -103,7 +132,7 @@ from
 </code></pre>
 
 
-## INSTR関数
+###  INSTR関数
 
 指定した文字列パターンが現れる位置
 を表す関数
@@ -122,7 +151,7 @@ FROM dual;
 
 </code></pre>
 
-## LPAD,RPAD関数
+###  LPAD,RPAD関数
 
  n文字になるように埋め込みを行う関数
 
@@ -148,7 +177,7 @@ RPADは右にパディングを(padding right の略)
 
 
 
-## TRIM関数
+###  TRIM関数
 
 TRIMの第一引数には三通りの選択があり
 
@@ -172,7 +201,7 @@ FROM dual;
 注意！TRIMの第一引数を省略するとBOTHが適用されます
 
 
-## REPLSCE関数
+###  REPLSCE関数
 
 マッチした文字列を全て書き換える関数
 
@@ -188,7 +217,7 @@ FROM dual;
 </code></pre>
 
 
-##ROUND関数
+### ROUND関数
 
 小数点以下n桁を四捨五入する関数
 
@@ -208,7 +237,7 @@ ROUND(12345.678, -1)
 </code></pre>
 
 
-##TRUNC関数
+### TRUNC関数
 
 小数点以下n桁に切り捨てる関数
 
@@ -224,7 +253,7 @@ ROUND(12345.678)
 
 
 
-##MOD関数
+### MOD関数
 
 割り算の余りを返す関数
 
@@ -237,7 +266,7 @@ MOD(20,4)
 </code></pre>
 
 
-## 現在時刻を返す関数
+###  現在時刻を返す関数
 
 sysdateは現在の時刻を返す関数
 
@@ -250,7 +279,7 @@ from dual;
 </code></pre>
 
 
-## 日付の四則演算
+###  日付の四則演算
 
 日付の計算における1は「一日」を表す
 
@@ -264,7 +293,7 @@ sysdate -1/24
 >> 2021-11-10 13:15:00
 </code></pre>
 
-## 日付-日付
+###  日付-日付
 
 日付同士の四則演算は「日数」が返される
 
@@ -273,14 +302,14 @@ sysdate -1/24
 > 1
 </code></pre>
 
-## 日付 + 日付
+###  日付 + 日付
 
 エラーが出る
 
 (日付と日付の四則演算はできません。)
 
 
-## MONTHS_BETWEEN関数
+###  MONTHS_BETWEEN関数
 
 二つの日付の月数を戻す
 
@@ -295,7 +324,7 @@ from
 > 4
 </code></pre>
 
-## ADD_MONTHS関数
+###  ADD_MONTHS関数
 
 日付に対して加算、引き算ができる。
 
@@ -305,7 +334,7 @@ ADD_MONTHS(sysdate, -1)
 </code></pre>
 
 
-## NEXT_DAY関数
+###  NEXT_DAY関数
 
 指定された曜日の翌日以降に指定された曜日になる日付(つまり一週間後)を返す関数
 
@@ -320,7 +349,7 @@ NEXT_DAY(日付,'曜日')
 「SUM」「MON」...の形式
 
 
-## LAST_DAY関数
+###  LAST_DAY関数
 
 日付に指定された月の最終日を持ってくる関数
 
@@ -331,7 +360,7 @@ LAST_DAY("2021-01-21")
 </code></pre>
 
 
-## ROUND関数 
+###  ROUND関数 
 
 指定された日付を四捨五入して表す関数
 
@@ -348,7 +377,7 @@ ROUND("2021-01-21",'YEAR')
 
 
 
-## TRUNC関数 
+###  TRUNC関数 
 
 指定された日付を四捨五入して表す関数
 

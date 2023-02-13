@@ -7,7 +7,7 @@ img:https://www.oreilly.co.jp/books/images/picture_large4-87311-281-8.jpeg
 category_script:page_name.startswith("1")
 
 
-##リレーショナルデータベース
+### リレーショナルデータベース
 
 直訳すると「整理された関係性のあるデータベース」
 
@@ -15,7 +15,7 @@ category_script:page_name.startswith("1")
 
 
 
-##データベース
+### データベース
 
 
 データを一定の規則にしたがって格納し、効率よく利用できるようにしたもの
@@ -23,13 +23,13 @@ category_script:page_name.startswith("1")
 
 
 
-##DBMS(リレーショナルデータベースマネジメントシステム)
+### DBMS(リレーショナルデータベースマネジメントシステム)
 
 データベースを管理するために使用する専用のソフトウェア
 
 
 
-##行(ROW)
+### 行(ROW)
 
 横一列方向を指す
 
@@ -38,7 +38,7 @@ category_script:page_name.startswith("1")
 
 
 
-##列(COLUMN)
+### 列(COLUMN)
 
 縦一列を指す
 
@@ -48,7 +48,7 @@ category_script:page_name.startswith("1")
 
 
 
-##フィールド
+### フィールド
 
 値を格納する部分。
 
@@ -57,7 +57,7 @@ category_script:page_name.startswith("1")
 
 
 
-##NULL値
+### NULL値
 
 フィールドに値が格納されていない状態を表す特殊な値。
 
@@ -66,7 +66,7 @@ category_script:page_name.startswith("1")
 
 
 
-##主キー
+### 主キー
 
 一意に識別するための列(または、列の組み合わせ)」です。
 
@@ -80,7 +80,7 @@ category_script:page_name.startswith("1")
 
 
 
-##外部キー
+### 外部キー
 
 同じ表または他の表の主キー(または一意キー)を参照する列のこと。
 
@@ -91,7 +91,7 @@ category_script:page_name.startswith("1")
 
 
 
-##SQLとは
+### SQLとは
 
 リレーショナルデータベースを操作するための言語です。
 
@@ -102,37 +102,37 @@ ANSI (米国規格協会)やISO(国際標 進化機構)、JIS(日本工業規格
 
 
 
-##SQL文の分類
+### SQL文の分類
 
 SQLは、DML(データ操作言語)、DDL(データ定義言語)、DCL(データ制御 言語)、トランザクション制御の4つに分類される
 
 
 
-##DML Data Manipulation Language
+### DML Data Manipulation Language
 
 表内のデータを直接操作する
 
 
 
-##DDL (Data Define Language:データ定義言語
+### DDL (Data Define Language:データ定義言語
 
 データ操作音 ・表などのデータベースオブジェクトを作成・変更・削除する
 
 
 
-##DCL (Data Cons Language:データ制御言語)」
+### DCL (Data Cons Language:データ制御言語)」
 
 データベースに対する権限を付与したり、取り消したりする
 
 
 
-##「トランザクション制御」
+### 「トランザクション制御」
 
 トランザクションを制御する
 
 
 
-##DML(データ操作言語)
+### DML(データ操作言語)
 
 ・SELECT文
 
@@ -148,7 +148,7 @@ SQLは、DML(データ操作言語)、DDL(データ定義言語)、DCL(データ
 
 
 
-##DDL(データ定義言語)
+### DDL(データ定義言語)
 
 ・CREATE文 
 
@@ -166,7 +166,7 @@ SQLは、DML(データ操作言語)、DDL(データ定義言語)、DCL(データ
 
 
 
-##DCL(データ制御言語)
+### DCL(データ制御言語)
 
 ・GRANT文(権限の付与) 
 
@@ -175,7 +175,7 @@ SQLは、DML(データ操作言語)、DDL(データ定義言語)、DCL(データ
 
 
 
-##トランザクション言語
+### トランザクション言語
 
 ・COMMIT文 
 

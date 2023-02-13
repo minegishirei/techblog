@@ -1,6 +1,6 @@
 
 
-## スキーマについて
+### スキーマについて
 
 「論理的な概念」のこと
 
@@ -20,13 +20,13 @@ Oracleの各ユーザーは、ユーザー名と同じ名前のスキーマを�
 
 
 
-## CREATE句
+### CREATE句
 
 新しいオブジェクトを作成するための句です
 
 ※CREATE系を実行した後は直後にCOMMITが自動実行されます。
 ****
-## CREATE TABLE文
+### CREATE TABLE文
 
 表を作成するための句です
 
@@ -54,7 +54,7 @@ CREATE TABLE employees
 </code></pre>
 
 
-## DEFAULTオプション
+### DEFAULTオプション
 
 表の作成時に列の定義にデフォルトオプションを追加できる。
 
@@ -94,7 +94,7 @@ SELECT * FROM emp2;
 </code></pre>
 
 
-## DEFAULTの値
+### DEFAULTの値
 
 リテラル値、式またはSQL関数を指定できる。(SYSDATE式やUSER式など)
 
