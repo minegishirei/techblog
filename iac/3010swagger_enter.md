@@ -6,6 +6,7 @@
 - [paths:urlを記述する部分](#pathsurlを記述する部分)
   - [{}でパラメーターを受け取る](#でパラメーターを受け取る)
   - [responsesでステータスコードを設定する。](#responsesでステータスコードを設定する)
+  - [componets:部品化](#componets部品化)
 
 
 
@@ -16,7 +17,7 @@ swaggerはyml形式で記述します。
 
 まずは以下の点を押さえておきましょう
 - すべてのキーワードは小文字で書かれる
-- バージョンは2系と3系で大きく異なる。現在の主流は3系。
+- バージョンは2系と3系で大きく異なる。AWSではまだ古い2系を使用しているので注意しよう。
 
 ```yml
 openapi: 3.0.0
@@ -202,6 +203,62 @@ paths:
           description: Unexpected error
 ```
 
+
+
+## componets:部品化
+
+**componets**内部ではpaths間で共通となる部品を作り出すことができます。
+今回の例ではユーザーデータを受け付けるschemasを共通化しています。
+
+```yml
+paths:
+  /users/{userId}:
+    get:
+      summary: Returns a user by ID.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'    # <-------呼び出し部分1
+  /users:
+    post:
+      summary: Creates a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'      # <-------呼び出し部分2
+      responses:
+        '201':
+          description: Created
+
+components: ## ここから共通部品を定義する
+  schemas: ## schemas
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        name:
+          type: string
+          example: Arthur Dent
+      # Both properties are required
+      required:  
+        - id
+        - name
+```
 
 
 
