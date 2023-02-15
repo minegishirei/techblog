@@ -26,7 +26,7 @@ WHERE
 </code></pre>
 
 
-## 文字列や日付の比較
+### 文字列や日付の比較
 
 - ""で囲まなければいけない
 
@@ -36,7 +36,7 @@ WHERE
 
 
 
-##比較演算子
+###比較演算子
 
 <pre><code>
 = 同じ値
@@ -46,7 +46,7 @@ WHERE
 < 以下
 </code></pre>
 
-## WHERE句での列別名は使用ができない
+### WHERE句での列別名は使用ができない
 
 次のSLEECT文はエラーになる
 
@@ -62,7 +62,7 @@ WHERE
 原因は従業員番号がWHERE句で使用されているため
 
 
-## WHERE句では演算子が使える
+### WHERE句では演算子が使える
 
 従業員番号を2倍した時で1000と比較
 
@@ -76,7 +76,7 @@ WHERE
 </code></pre>
 
 
-## BETWEEN演算子
+### BETWEEN演算子
 
 BETWEENの後に続く二つの数字の間にあるものが当てはまる
 
@@ -94,7 +94,7 @@ WHERE
 </code></pre>
 
 
-## BETWEENの日付での比較
+### BETWEENの日付での比較
 
 日付の範囲もBETWEENで比較が可能
 
@@ -113,7 +113,7 @@ WHERE
 
 
 
-## IN演算子
+### IN演算子
 
 資子を使用すると、列値と複数の値を比較できる
 
@@ -137,7 +137,7 @@ WHERE deptno IN(10, 20);
 
 
 
-## LIKE演算子
+### LIKE演算子
 
 LIKE演算子を使うとさらに高度な文字列パターンで検索をかけられます
 
@@ -167,7 +167,7 @@ WHEERE
     empname like "%鈴木___"
 </code></pre>
 
-## ESCAPEオプション
+### ESCAPEオプション
 
 %が文字列に入るものを認識したい時はさらに高度な技が必要になります。
 
@@ -189,7 +189,7 @@ WHEERE
 </code></pre>
 
 
-## IS NULL演算子
+### IS NULL演算子
 
 IS NULLは値がNULLかどうかを比較することができます
 
@@ -219,20 +219,20 @@ WHEERE
 
 
 
-## AND演算子
+### AND演算子
 
 前後に指定された条件が両方ともTRUEの場合にTRUE 
 
 
 
-## OR演算子
+### OR演算子
 
 前後に指定された条件のどちらか一方でもTRUEの場合にTRUE 
 
 
 
 
-## INとORのパフォーマンスの違い
+### INとORのパフォーマンスの違い
 
 IN演算子は、内部的にはOR演算子を使用したものに置き換えられてしまう。
 
@@ -242,7 +242,7 @@ IN演算子を使用して書き換えても実行時のパフォーマンスは
 テストに出ることもあるので覚えておきましょう
 
 
-##ORDER BYによる行のソート
+###ORDER BYによる行のソート
 
 ORDER BY句に列名を指定すると、ソートされたデータの抽出が可能になる。
 
@@ -272,14 +272,14 @@ ORDER BY sal;
 このコードでは従業員データベースから給料順に並べている
 
 
-## 「ASC」
+### 「ASC」
 
 昇順:小さいほうから順
 
 デフォルトの設定はこちらになっている
 
 
-## 「DESC」
+### 「DESC」
 
 降順:大きいほうから順
 
@@ -293,27 +293,27 @@ ORDER BY sal DESC;
 こちらは意図的に設定しないと反映されない。
 
 
-## ORDER BYと列別名
+### ORDER BYと列別名
 
 ORDER BY句では列別名は使用可能
 
 
 
-## ソートの順序はデータによって異なる
+### ソートの順序はデータによって異なる
 
 例えば数値であれば、大きい順に並ぶ
 
 日付であれば、最新の値順に並ぶ
 
 
-##NULLの扱いとORDER BY
+###NULLの扱いとORDER BY
 
 <pre><code>
 NULL値は数値、日付値、文字値のいずれの場合も、デフォルトでは「最も大きい値」として扱われます。
 </code></pre>
 
 
-## NULLS FIRSTとNULLS LAST
+### NULLS FIRSTとNULLS LAST
 
 NULLの値に関しては最初に出てくるように調整するコードが「NULLS FIRST」
 
@@ -325,7 +325,7 @@ ORDER BY sal NULLS FIRST;
 </code></pre>
 
 
-##WHERE句とORDER BY句
+###WHERE句とORDER BY句
 
 この二つは同時に指定することが可能。
 
@@ -345,22 +345,22 @@ ORDER BY sal;
 </code></pre>
 
 
-## SLECT句で指定しない列名でのORDER BY
+### SLECT句で指定しない列名でのORDER BY
 
 SLECT句で指定しない列名でのORDER BYは
 
 エラーにならない
 
-## 列別名とORDER BYの関係
+### 列別名とORDER BYの関係
 
 WHERE句には列別名は指定できませんが、
 
-### ORDER BY 句には列別名 を指定できます
+#### ORDER BY 句には列別名 を指定できます
 
 
 
 
-##row_limiting_clauseを使用
+###row_limiting_clauseを使用
 
 <pre><code>
 SELECT *
