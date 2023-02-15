@@ -38,7 +38,7 @@ RAND関数は行ごとにランダムな数字をだすので、この数字で�
 
 「1から主キーの最大値までの間の値をランダムに選ばせる」というアルゴリズムを使う
 
-<pre><code>
+```sql
 select
     *
 from
@@ -46,7 +46,7 @@ from
 INNER JOIN  (
     select CEIL( RAND()*(select MAX(bug_id) FROM Bugs) ) AS rand_id
 ) AS b2 ON b1.bug_id = b2.rand_id
-</code></pre>
+```
 
 1. MAX(bug_id)で最大のbug_idを選ぶ
 
@@ -67,7 +67,7 @@ SQLで選ばずに、プログラム側で選ぶことも考えられる。
 
 解決策1で主キーが連続した値になっていない場合に有効
 
-<pre><code>
+```sql
 select
     *
 from
@@ -77,7 +77,7 @@ INNER JOIN  (
 ) AS b2 ON b1.bug_id >= b2.rand_id
 ORDER BY b1.bug_id
 LIMIT 1;
-</code></pre>
+```
 
 この方法であれば穴が空いた番号に値が設定されることはない。
 

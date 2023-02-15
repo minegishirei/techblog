@@ -22,13 +22,13 @@
 
 この状態で（複数の親テーブルを参照しようとする外部キーを宣言しようとすることで）Create Tableしようとすると、次のような構文を使用したくなるが、残念ながらそのような文法は存在しない。
 
-<pre><code>
+```sql
 CREATE TABLE Comments(
     ...
     FOREGN KEY (issue_id) 
     REFERENSES Bugs(issue_id) OR FeatureRequests(issue_id)
 )
-</code></pre>
+```
 
 Bugs(issue_id) OR FeatureRequests(issue_id)
 
@@ -41,7 +41,7 @@ Bugs(issue_id) OR FeatureRequests(issue_id)
 
 上記のバグ管理システムが次のような状態であるとする。
 
-<pre><code>
+```sql
 CREATE TABLE Issues(
     issue_id    SERIAL PRIMARYKEY,
     reported_by BIGINT UNSINED NOT NULL,
@@ -65,13 +65,13 @@ CREATE TABLE FeatureReport (
     FOREGN KEY (issue_id) REFERENCES Issues(issue_id)
 )
 
-</code></pre>
+```
 
 ここのテーブル軍に対してコメントをつける場合。
 
 もっと言うと外部キー参照制約をつけながらCommentsを付けたい場合は、issueを親テーブルとして扱いながらCommentsテーブルを作成するのがベストな解法である。
 
-<pre><code>
+```sql
 CREATE TABLE Comments (
     comment_id      SERIAL PRIMARY KEY,
     issue_id        BIGINT UNSINED NOT NULL,
@@ -81,17 +81,17 @@ CREATE TABLE Comments (
     FOREIGN KEY     (issue_id) REFERENCES Issues(issue_id),
     FOREGN KEY      (author) REFERENCES Acounts(acount_id)
 )
-</code></pre>
+```
 
 これはつまりIssuesテーブルに対して三つの異なる階層のテーブルが連なっている状態。
 
-<pre><code>
+```sql
 Issues
 |
 -- Bugs
 -- Feature Requests
 -- Comments
-</code></pre>
+```
 
 このような従属関係になっている。
 

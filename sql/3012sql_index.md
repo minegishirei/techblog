@@ -9,7 +9,7 @@
 
 作成例
 
-<pre><code>
+```sql
 create table staff(
     id int , 
     name varchar(10), 
@@ -19,7 +19,7 @@ create table staff(
     index (id),
     index (description)
 );
-</code></pre>
+```
 
 
 しかしながら、インデックスを正しく理解/使用できている開発者は意外と少ないという。
@@ -54,7 +54,7 @@ create table staff(
 
 例えば、先程の作成例をみてみる
 
-<pre><code>
+```sql
 create table staff(
     id int , 
     name varchar(10), 
@@ -64,7 +64,7 @@ create table staff(
     index (id),             - 1
     index (description)     - 2
 );
-</code></pre>
+```
 
 
 - 1 idへのindex作成

@@ -9,7 +9,7 @@
 
 このwebアプリケーションは記事をタグ付けして管理することがウリであり、記事の内容が格納されているAriticleテーブルとタグの種類を格納しているTagsテーブル。そしてその二つを関連付ける次のArticleTagsテーブルを管理している。
 
-<pre><code>
+```sql
 CREATE TABLE AtrticleTags (
     id          SERIAL PRIMARY KEY,
     article_id  BIGINT UNSIGNED NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE AtrticleTags (
     FOREGN KEY  (article_id) REFERENCES Article (id),
     FOREGN KEY  (tag_id) REFERENCES Tags (id),
 )
-</code></pre>
+```
 
 ある時こんな問題が起きた。
 
@@ -26,12 +26,12 @@ CREATE TABLE AtrticleTags (
 
 調べてみると、economyタグは一つの記事に対して3重に関連づけられていることがわかった。
 
-<pre><code>
+```
 id      tag_id      article_id
 22      327         1234
 23      327         1234
 24      327         1234
-</code></pre>
+```
 
 article_idが1234の記事に三つのレコードが作られてしまっている。
 
@@ -48,7 +48,7 @@ article_idが1234の記事に三つのレコードが作られてしまってい
 
 理由は、記事とタグの「組み合わせ」を"一意に"保存すると言う今回のテーブルの趣旨をidタグは全うできていないから。
 
-<pre><code>
+```sql
 CREATE TABLE AtrticleTags (
     id          SERIAL PRIMARY KEY, <=これが余計なカラム
     article_id  BIGINT UNSIGNED NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE AtrticleTags (
     FOREGN KEY  (article_id) REFERENCES Article (id),
     FOREGN KEY  (tag_id) REFERENCES Tags (id),
 )
-</code></pre>
+```
 
 idタグを用いて重複を防ぐのではなく、
 
@@ -72,7 +72,7 @@ idタグを用いて重複を防ぐのではなく、
 
 と言うことが可能になる。
 
-<pre><code>
+```sql
 CREATE TABLE AtrticleTags (
     article_id  BIGINT UNSIGNED NOT NULL,
     tag_id      BIGINT UNSIGEND NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE AtrticleTags (
     FOREGN KEY  (article_id) REFERENCES Article (id),
     FOREGN KEY  (tag_id) REFERENCES Tags (id),
 )
-</code></pre>
+```
 
 
 

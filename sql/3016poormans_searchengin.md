@@ -43,25 +43,25 @@ SQLをRDMSたらしめているのは列の値がアトミックであること
 
 単純なワイルドカードならば以下の通り
 
-<pre><code>
+```sql
 select
     *
 from
     Bugs
 where
     description like '%crash%'
-</code></pre>
+```
 
 SQLの標準ではないが、多くのデータベースは **正規表現** もサポートしている
 
-<pre><code>
+```sql
 select
     *
 from
     Bugs
 where
     description REGEXP 'crash'
-</code></pre>
+```
 
 ## デメリット１:パフォーマンスの低下
 
@@ -78,14 +78,14 @@ LIKEや正規表現を用いた単純なパターンマッチでは、意図し�
 
 例えば英数字のoneをパターンマッチで検知したい場合
 
-<pre><code>
+```sql
 select
     *
 from
     Bugs
 where
     description like '%one%'
-</code></pre>
+```
 
 と書くことが予想されるが、これは次の単語にもマッチする
 
@@ -114,9 +114,9 @@ MySQLではMyISAMストレージエンジンのみがサポートする、シン
 
 適用するためには **ALTER TABLE文** を使用する
 
-<pre><code>
+```sql
 ALTER TABLE Bugs ADD FULLTEXT INDEX bugfts (summary, description)
-</code></pre>
+```
 
 インデックスに格納されたテキストからキーワードを検索するにはMATCH関数を使用する。
 
@@ -129,11 +129,11 @@ select * from Bugs Where MATCH(summary, description) AGAINST('crash')
 
 ## Oracleのテキストインデックス
 
-<pre><code>
+```sql
 > CREATE INDEX BugsText ON Bugs(summary) INDEXTYPE CTXSYS.CONTEXT
 
 > SELECT * FROM Bugs Where CONTAINS(summary, 'crash') > 0
-</code></pre>
+```
 
 
 # サードパーティーのサーチエンジン
@@ -164,7 +164,7 @@ C++,C#,Perl,Ruby,Python,PHPなどのプロジェクトも存在している
 
 多対多の関係の構築のために **BugsKeywords** 交差テーブルを作る
 
-<pre><code>
+```sql
 CREATE TABLE Keywords {
     keyword_id  SERIAL PRIMARY KEY,
     keyword     VARCHAR2 NOT NULL,
@@ -178,7 +178,7 @@ CRETAE TABLE BugsKeyword {
     FOREIGN KEY (keyword_id) REFERENCES Keywords(keyword_id),
     FOREGIN KEY (bug_id) REFERENCES Bugs(bug_id)
 }
-</code></pre>
+```
 
 BugsKeywordは Keywordテーブルと Bugsテーブルの組み合わせを **重複なしにする役割を担う**
 
@@ -186,7 +186,7 @@ BugsKeywordにはあるバグの説明文に使われる全てのキーワード
 
 次に、次のようなプロシージャを作る
 
-<pre><code>
+```sql
 CREATE PROCEDURE BugsSearch(keyword VARCHAR(40))
 BEGIN
     set @keyword = keyword;
@@ -235,7 +235,7 @@ BEGIN
     EXCUTE s4 USINF @k
     DEALLOCATE PREPARE s4;
 END
-</code></pre>
+```
 
 
 

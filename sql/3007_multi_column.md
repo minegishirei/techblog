@@ -19,7 +19,7 @@ SQLテーブルに対して列に対して年度や携帯電話番号など、�
 
 そんな時に次のようなテーブルを作成することも考えられるが、結論から言えばこれは悪手である。
 
-<pre><code>
+```sql
 CREATE TABLE ContactAdress (
     name        VARCHAR(50)
     house       VARCHAR(50),
@@ -28,7 +28,7 @@ CREATE TABLE ContactAdress (
     phone2      VARCHAR(10),
     phone3      VARCHAR(10)
 )
-</code></pre>
+```
 
 
 # アンチパターン：複数の列を定義する
@@ -36,7 +36,7 @@ CREATE TABLE ContactAdress (
 ## 値を検索するときに次のようにORを繋げる必要が出てくる。
 
 
-<pre><code>
+```sql
 select
     *
 from
@@ -47,7 +47,7 @@ OR
     phone2 = "07014981234"
 OR
     phone3 = "07014981234"
-</code></pre>
+```
 
 テーブルから特定の電話番号と一致するものを取り出すためだけのクエリに、これだけのORを使用する必要が出てきてしまう。
 
@@ -58,7 +58,7 @@ OR
 
 複数の列を用意して対応する方策には次のようなイレギュラーなインサートを防ぐ術はありません。
 
-<pre><code>
+```sql
 insert into
     ContactAdress
     Values(
@@ -69,7 +69,7 @@ insert into
         "07014981234",
         "07014981234"
     )
-</code></pre>
+```
 
 
 ## NULLで溢れる列
@@ -92,24 +92,24 @@ insert into
 
 今回の解決策を実施するためには、まずは無限に増殖しかねない列を消してしまうことです。
 
-<pre><code>
+```sql
 CREATE TABLE ContactAdress (
     name        VARCHAR(50)
     house       VARCHAR(50),
     work        VARCHAR(50)
     PRIMARY KEY (name)
 )
-</code></pre>
+```
 
 電話番号をどのように管理するかというと、次のように管理します
-<pre><code>
+```sql
 CREATE TABLE PhoneAdress (
     name        VARCHAR(50),
     phone       UNSINED INT NOT NULL,
     PRIMARY KEY (name, phone),
     FOREIGN KEY(name) REFERENCES ContactAdress(name)
 );
-</code></pre>
+```
 
 これにより、ContactAdress一行に対して、複数行（になる可能性がある）のPhoneAdressが定義されます。
 

@@ -41,7 +41,7 @@ UI,UX,使用する言語が決まりましたが、SQLのデータベースの�
 これらの手法を用いればSQLデータベースの管理など容易いと考えたあなたは、早速実行に移しました。
 
 
-<pre><code>
+```sql
 INSERT INTO BugAttributes 
     (entity, attribute, value)
 VALUES
@@ -52,7 +52,7 @@ VALUES
     (1234, "prioryty", "HIGH"),
     (1234, "version", "1.0"),
     (1234, "limit", "2021-01-20")
-</code></pre>
+```
 
 
 
@@ -76,7 +76,7 @@ VALUES
 
 つまり次のような日付による絞り込みができません。
 
-<pre><code>
+```sql
 select
     count(*)
 from
@@ -85,7 +85,7 @@ where
     b.attribute = "date"
 and
     b.value > "2021-01-01" -- valueは日付型ではない。
-</code></pre>
+```
 
 ## 必須属性が定義できない
 
@@ -98,7 +98,7 @@ and
 あなたはissueテーブルが二つの種類（バグと要求）に別れることに気づけました。
 
 
-<pre><code>
+```sql
 CREATE TABLE Issues(
     issue_id    SERIAL PRIMARYKEY,
     reported_by BIGINT UNSINED NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE FeatureReport (
     FOREGN KEY (issue_id) REFERENCES Issues(issue_id)
 )
 
-</code></pre>
+```
 
 
 

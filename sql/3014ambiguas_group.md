@@ -8,14 +8,14 @@
 
 例えば「product_idごとにレポート日付の最大値を取得したい」という要件を考えると、次のようなコードになる。
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report)
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 このクエリはうまく動いた。
 
@@ -26,14 +26,14 @@ Group By
 
 あなたは次のようにbug_idをselect句に加えた。
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report), bug_id
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 ところが、カラムを加えた瞬間エラーが出るようになった。
 
@@ -88,14 +88,14 @@ select句の選択リストに列挙されるs全ての列は、行グループ�
 
 例えば先程の例
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report), bug_id
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 product_id はGroup Byで指定しているのでproduct_idごとに「単一の値が帰る」
 
@@ -110,25 +110,25 @@ MAX(data_report) もMAXでproduct_idごとの最大のdata_reportを帰してい
 
 先程の例では、「bug_id」というふわっとしたものを追加したためエラーが起きた。
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report), bug_id
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 この場合はbug_idを消せば元通り動く
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report)
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 
 ## 対策方法2:集約関数を使う
@@ -140,26 +140,26 @@ Group By
 
 例えば平均値とか
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report), AVG(bug_id)
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 あるいはdata_reportが最大の日付を取得しているので、最大のbug_idを返す方が適切かもしれない。
 
 
-<pre><code>
+```sql
 SELECT
     product_id, MAX(data_report), MAX(bug_id)
 FROM
     Bugs
 Group By
     product_id
-</code></pre>
+```
 
 
 
