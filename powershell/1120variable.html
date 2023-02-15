@@ -21,40 +21,37 @@ powershell入門
     変数について 
 </h2>
 変数の書き方は以下の通り
-<pre><code> 
+
+```ps1 
 $FilePath = "C:\Windows\System32"
-</code>
-</pre>
+```
 <p>
 変数名に厳しいルールはないが、 基本的には大文字スタートで大文字区切りがよしとされる。
 </p>
-<pre><code> 
+
+```ps1 
 NG1 : $filePath
 NG2 : $file_path 
 
 GOOD! : $FilePath
-</code>
-</pre>
+```
 
 
-<h2>
-    「数値の代入 」
-</h2>
-<pre><code> 
+## 数値の代入
+
+
+```ps1 
 $num1 = 1
-</code>
-</pre>
+```
 
-<h2>
-変数確認(変数表示)
-</h2>
-<p>
+
+## 変数確認(変数表示)
+
 echo コマンドを使う。 
-</p>
-<p>
+
 あるいは代入せずに$num1等でも可能 
-</p>
-<pre><code> 
+
+```ps1 
 #方法1
 $num1 = 1 
 echo "num1 varius is $num1"
@@ -63,64 +60,57 @@ echo "num1 varius is $num1"
 
 #方法2 
 $num1
-</code>
-</pre>
+```
 
 
-<p>
 ちなみに#で始まる行はコメント行と呼ばれ、 
 プログラムの動作に一切影響を及ぼさない。 
 コード内に書けるメモだと思っていい。
-</p>
 
-<h2>
-    変数一覧の表示 </h2>
+
+## 変数一覧の表示
 <p>Get-Variableで可能 </p>
-<pre><code>
+```ps1
 $num1 = 1 
 echo "numl varius is "$numl 
 $num2 = 2
 echo "num2 varius is"$num2
 
 Get-Variable 
-</code>
-</pre>
+```
 
 <h2> 変数の種類 </h2>
 
-<pre><code> 
+```ps1 
 $a = 12                         # System. Int32 
 $a = "Word"                     # System. String
 $a = 3 ,12, "Word"              # array of System.
 $a = Get-ChildItem C:\Windows   # FileInfo and DirectoryInfo types
-</code>
-</pre>
+```
 
 <p>
     数字、文字列、配列、コマンドの実行結果まで格納できる。(後々に紹介するが、コマンドの実行結果は再利用が可能)
 </p>
 
 <p> 以下microsoftのドキュメントから </p>
-<pre><code> 
+```ps1 
 整数、文字列、配列、ハッシュ テーブルなど、任意の種類のオブジェクトを変数に格納 できます。 
 また、プロセス、サービス、イベント ログ、およびコンピューターを表す オブジェクト。
 PowerShell 変数は緩やかに型指定されます。 つまり、特定の種類のオブジェクトに限定されません。 
 1つの変数に、異なる種類のオブジェクトのコレクションまたは配列を同時に含めするこ ともできます。
 変数のデータ型は、変数の値の.NET 型によって決まります。 変数のオブジェクト型を表示するには、Get-Member を使用します。 
-</code>
-</pre>
+```
 
 <h2>
     型指定 
 </h2>
 <p> 以下のように大括弧を使用することで型の指定が可能。 </p>
 
-<pre><code> 
+```ps1 
 [int] $number = 8 
 $number = "12345" 
 $number = "Hello"  #The string is converted to an integer.
-</code>
-</pre>
+```
 <p>
     上記のコマンドはエラーが起きる！(想定通りのエラー)
 </p>
@@ -129,28 +119,25 @@ $number = "Hello"  #The string is converted to an integer.
 ここの例ではintという数値を入れる変数に対して stringを代入していることでエラーが発生させることができる。
  ([int]を付けなければ意図していない変数が代入される事態を防げる) 
 </p>
-<pre><code> 
+```ps1 
 Cannot convert value "Hello" to type "System. Int32". Error: "Input string was
 not in a correct format. At line:1 char:1 + $number = "Hello"
 +
 + CategoryInfo_e: : MetadataError: (:) [],
 ArgumentTransformationMetadataException + FullyQualifiedError Id : RuntimeException 
-</code>
-</pre>
+```
 <p>
 どのような型があるのかは以下のコマンドを打つことで把握できる </p>
-<pre><code> Get-Service | Get-Member </code>
-</pre>
+```ps1 Get-Service | Get-Member ```
 <p>
 【代表的なものは以下の通り onwas false 
 </p> 
-<pre><code> 
+```ps1 
 int 
 string
 datetime 
 array 
-</code>
-</pre>
+```
 
 
 <a href="./2if.html">
