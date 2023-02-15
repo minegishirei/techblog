@@ -1,5 +1,3 @@
-
-
 この記事はPowershellの学習サイトです。
 Powershellで使用する基本的な文法をまとめました。
 
@@ -13,6 +11,7 @@ Powershellで使用する基本的な文法をまとめました。
 - [powershellで複数行の文字列を変数に代入する](#powershellで複数行の文字列を変数に代入する)
 - [powershellのif文の書き方](#powershellのif文の書き方)
 - [powershell-while文の書き方](#powershell-while文の書き方)
+- [powershellのアンパサンドの意味](#powershellのアンパサンドの意味)
 
 
 
@@ -62,12 +61,9 @@ Powershellで使用する基本的な文法をまとめました。
 
 
 
+## powershellのアンパサンドの意味
 
-
-
-
-
-
+[https://minegishirei.hatenablog.com/entry/2023/02/15/165222:embed:cite]
 
 
 
