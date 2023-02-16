@@ -1,9 +1,11 @@
 
-##  クラスの使い方(サンプル１)
+## Powershellのクラスのサンプルコード
+
+Powershellではclassの後にクラス名を宣言して自作クラスを作成する。
 
 まずは宣言のやり方
 
-<pre><code>
+```ps1
 class Car{
     # プロパティ
     [string] $people;
@@ -27,32 +29,31 @@ class Car{
         return $this.location;
     }
 }
-</code></pre>
+```
 
 基本的な使い方は上記の通り
 
-classの後にクラス名を宣言して自作クラスの完成
 
 あとは内部に変数名と関数を宣言して実態を作っていく。
 
 
-##  自作クラスの使い方
+## 自作クラスの使い方
 
-<pre><code>
+```ps1
 $car = Car("tanaka tarou", 10)
 $car.move()
 $car.move()
 $car.move()
 $car.rideoff()
 $car.whereami()
-</code></pre>
+```
 
 $を使って変数宣言
 
 その後に通常の関数と同様にしてコンストラクタを呼び出し、インスタンスを作成する。
 
 
-#### 参考記事
+### 参考記事
 
 この記事は以下の書籍を参考に執筆されました。
 詳しい内容の確認はこちらからお願いいたします。
