@@ -1,26 +1,15 @@
 
-title:powershellでスクレイピングする
-
-description:WebClientのDownloadStringを使えばhtmlのソースを手に入れることができる。
-
-category_script:page_name.startswith("2")
-
-img:https://johobase.com/jb/wp-content/uploads/2021/03/taskbar-powershell-icon-contextmenu.png
-
-参考:海外版のpowershell pdfファイル
-
-URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
 
 
 
 
 ## powershellでhtmlテキストを手に入れる
 
-<pre><code>
+```ps1
 $source = "http://blogs.msdn.com/powershell/rss.xml"     
 $wc = New-Object System.Net.WebClient
 $content = $wc.DownloadString($source)
-</code></pre>
+```
 
 WebClientのDownloadStringを使えばhtmlのソースを手に入れることができる。
 
@@ -31,7 +20,7 @@ WebClientのDownloadStringを使えばhtmlのソースを手に入れること�
 
 以下のコードはmicrosoft beingで検索するコード（現在はhtmlの形式が変わったため、更なる工夫が必要）
 
-<pre><code>
+```ps1
 [string] $question = "何かの文字列"
 $encoded = [System.Web.HttpUtility]::UrlEncode($question)
 $url = "http://search.live.com/results.aspx?q=$encoded"
@@ -64,9 +53,9 @@ function clean-html ($htmlInput)
     $tempString = [Regex]::Replace($htmlInput, "<[^>]*>", "")
     $tempString.Replace("&nbsp&nbsp", "")
 }
-</code></pre>
+```
 
-####解説
+#### 解説
 
 powershellでのスクレイピングは正直なところ賢い選択とは思えない
 
@@ -79,10 +68,20 @@ powershellでのスクレイピングは正直なところ賢い選択とは思�
 もし言語の選択肢が残っているのであればpythonをおす。
 
 
-
-
 redirect:https://minegishirei.hatenablog.com/entry/2023/02/21/211722
 
+
+title:powershellでスクレイピングする
+
+description:WebClientのDownloadStringを使えばhtmlのソースを手に入れることができる。
+
+category_script:page_name.startswith("2")
+
+img:https://johobase.com/jb/wp-content/uploads/2021/03/taskbar-powershell-icon-contextmenu.png
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
 
 
 
