@@ -25,7 +25,7 @@
 
     
 h2> 条件文(if文) </h2> if文の書き方は以下の通り
-<pre><code>
+```ps1
 $condition = $true 
 if ($condition ){
     Write-Output "The condition was true" 
@@ -38,43 +38,38 @@ if ($condition ){
     Write-Output "The condition was true"
 }else{
     Write-Output "The condition was false"
-}</code>
-</pre>
+}```
 <p>
     実行結果 </p>
-<pre><code>
+```ps1
 The condition was true
 The condition was false
-</code>
-</pre>
+```
 <h2>
     if文の==は成立しない </h2>
-<pre><code>
+```ps1
 $num1 = 2
 if ($num1 == 2) {
     Write-Output "The condition was true" } 
 else{
     Write-Output "The condition was false"
 }
-</code>
-</pre>
+```
 ドキュメントでも以下の様に書かれている </p>
-<pre><code> C# のような他の言語では、等価性のチェックに ==3 を使用する (例:5 == $value)のが一般的ですが、 これは PowerShell では機能しません。 </code>
-</pre>
+```ps1 C# のような他の言語では、等価性のチェックに ==3 を使用する (例:5 == $value)のが一般的ですが、 これは PowerShell では機能しません。 ```
 <small> 正直いかがなものかと思う... </small>
 <h2>
     if文の同値評価は「-eq」 </h2>
-<pre><code>
+```ps1
 $num1 %3D2 if ($num1 -eq 2 ){
     Write-Output "The condition was true" 
 } else{
     Write-Output "The condition was false"
-}</code>
-</pre>
+}```
 <h2>
     等しくないは「-ne」 </h2>
 
-<pre><code>
+```ps1
 $value = 5 
 
 if ( 5 -ne $value ){
@@ -90,12 +85,11 @@ if ( 5 -ne $value) {
 }else
     echo "value is equl 5"
 }
-</code>
-</pre>
+```
 <h2>
     大小関係、 </h2>
 以下はmicrosoftドキュメントから
-<pre><code>
+```ps1
 -gt(より大きい) -igt(より大きい、大文字と小文字が区別されない) 
 -cgt(より大きい、大文字と小文字が区別される) -ge(以上)
 -ige(以上、大文字と小文字が区別されない)
@@ -106,27 +100,24 @@ if ( 5 -ne $value) {
 -le(以下)
 -ile(以下、大文字と小文字が区別されない)
 -cle (以下、大文字と小文字が区別される) 
-</code>
-</pre>
+```
 <strong> こんなにたくさん覚えてられねぇ... </strong>
 
 
 
 ということで抜粋。以下の4つを押さえておけば問題なさそう
-<pre><code>
+```ps1
 -gt(より大きい、greater thanの頭文字) 
 -ge(以上、greater Equalの頭文字)
 -It(より小さい、little thanの頭文字)
 -le(以下、little Equalの頭文字) 
-</code>
-</pre>
+```
 <p>
     以下サンプルコード 初心者の方はgtを常時使用して 大きい方を右側におく癖を付けておいた方がいいかも?
 </p>
-<pre><code> $bignum = 50000
+```ps1 $bignum = 50000
 if( $bignum -gt 100 ) {
-echo "$bignum > 100" </code>
-</pre>
+echo "$bignum > 100" ```
 
 
 
@@ -136,4 +127,6 @@ title:powershellのif文について説明する
 description:プログラミング言語powershellの入門サイトです。今回は第二弾、条件文編
 img:https://blog.hubfly.com/wp-content/uploads/2018/12/powershell.png
 category_script:page_name.startswith("1")
+
+redirect:https://minegishirei.hatenablog.com/entry/2023/02/15/154248
 

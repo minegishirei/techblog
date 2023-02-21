@@ -1,0 +1,89 @@
+<pre><code>
+    <a href="./9_1file_directory.html">
+        powershell 応用 サイズの大きいファイルを見つける
+    </a>
+    
+    <a href="./9_2get_allfile_edited.html">
+        powershell 応用 変更済みファイルの取得
+    </a>
+</pre>
+
+
+## powershellでサイズの大きいファイルを見つける
+
+
+
+参考:海外版のpowershell pdfファイル
+
+URL：http://index-of.co.uk/Microsoft-Windows-Ebooks/OReilly.Windows.PowerShell.Cookbook.Oct.2007.pdf
+
+
+
+
+サンプルコード
+
+
+```ps1
+############################################################################## 
+## 
+##  Get-DiskUsage.ps1
+## 
+##  ディスク使用率に関する情報を手に入れられる
+##  -IncludeSubdirectoriesを指定した場合、ディrエレクトリ内のサブディレクトリのサイズも提示する
+## 
+##  具体例)
+## 
+##   PS >Get-DiskUsage
+##   PS >Get-DiskUsage -IncludeSubdirectories
+## 
+############################################################################## 
+param(
+    [switch] $includeSubdirectories
+)
+#サブディレクトリについての情報が欲しい時
+if($includeSubdirectories)
+{
+    Get-ChildItem | Where-Object { $_.PsIsContainer } |
+        Select-Object Name,
+            @{ Name="Size";
+            Expression={ ($_ | Get-ChildItem -Recurse |
+                Measure-Object -Sum Length).Sum + 0 } }
+}
+#それ以外はカレントディレクトリのサイズを探索
+else
+{
+    Get-ChildItem -Recurse | Where-Object { $_.PsIsContainer } |
+        Select-Object FullName,
+}
+```
+
+
+
+
+
+#### 参考記事
+
+この記事は以下の書籍を参考に執筆されました。
+詳しい内容の確認はこちらからお願いいたします。
+
+<iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=oreilly10book-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=4873113822&linkId=3998987cf4c97963a20e5ceb58e41198"></iframe>
+
+
+
+
+
+
+
+title:powershellでサイズの大きいファイルを見つける
+description:海外版のpowershellクックブック pdfファイルを参考に、サイズの大きいファイルを全て取り出すスクリプトを紹介。
+img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
+category_script:page_name.startswith("16")
+
+
+
+
+
+
+
+
+

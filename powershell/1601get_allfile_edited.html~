@@ -1,0 +1,55 @@
+<pre>
+    <a href="./9_1file_directory.html">
+        powershell 応用 サイズの大きいファイルを見つける
+    </a>
+    
+    <a href="./9_2get_allfile_edited.html">
+        powershell 応用 変更済みファイルの取得
+    </a>
+</pre>
+
+## powershellで最近作成されたファイルの一覧を取得する
+
+
+
+
+
+<p>
+    サンプルコード
+</p>
+<pre>
+Get-ChildItem -Recurse | Where-Object { $_.LastWriteTime -lt "01/01/2007" }
+</pre>
+
+
+<p>
+    解説
+</p>
+
+
+<p>
+    「Get-ChildItem -Recurse」は現在のディレクトリ配下にある全てのファイル・ディレクトリを取得する
+</p>
+
+<p>
+    取得したそのすべてのファイル・ディレクトリに対して、「Where-Object { $_.LastWriteTime -gt "01/01/2007" }」で2007/01/01以降に作成されたファイルの全てを取得する
+</p>
+
+
+## #使い所
+
+社内SEやシステムの管理者にとって、システムが障害が起きた時にそれが誰かがファイルを触ったせいでエラーが起きた物だと特定できた場合、
+次に取るべきエンジニアの行動はどうにかしてどのファイルの変更がエラーを引き起こしているのか探し出す必要があります。
+
+それを可能にするためには、powershellで最近作成されたファイルの一覧を取得する必要があるのです。
+
+
+
+title:powershellで最近作成されたファイルの一覧を取得する
+description:社内SEやシステムの管理者にとって、システムが障害が起きた時にそれが誰かがファイルを触ったせいでエラーが起きた物だと特定できた場合、
+img:https://cdn.slidesharecdn.com/ss_thumbnails/windows-powershell-cookbook-the-complete-guide-to-scripting-microsofts-command-shell-190312151315-thumbnail-4.jpg?cb=1552403608
+category_script:page_name.startswith("16")
+
+
+
+

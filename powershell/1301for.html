@@ -24,30 +24,27 @@
 
 <h2>
     while文 </h2>
-<pre><code> 基本的なwhile文は以下の通り </code>
-</pre>
+```ps1 基本的なwhile文は以下の通り ```
 <p>
     a $i++は「iの数字を一つ増やす」という意味で </p>
 <p>
     while ($i -le 5) {は括弧()内の条件を満たす間何度も{}中括弧を実行する。 </p>
-<pre><code> $i=1
+```ps1 $i=1
 while ($i -le 5) {
     Write-Output "$i";
     $i++;
 }
-</code>
-</pre>
+```
 <p>
     の実行結果
 </p>
-<pre><code>
+```ps1
 1
 2
 3
 4
 5
-</code>
-</pre>
+```
 
 
 <h2>
@@ -60,14 +57,13 @@ while文では
 <p>
     このように、カウンターを増やすというループであれば
     次のfor文で一行でまかなえる </p>
-<pre><code>
+```ps1
 for ($i=1; $i -It 10; $i+=1){
     echo "$i"; 
-}</code>
-</pre>
+}```
 <p>
     実行結果 </p>
-<pre><code>
+```ps1
 1
 2
 3
@@ -77,13 +73,12 @@ for ($i=1; $i -It 10; $i+=1){
 7
 8
 9
-10</code>
-</pre>
+10```
 <h2>
     課題1 fizzbuzzを作れ </h2>
 正解は以下のスロールの先
 </p>
-<pre><code>
+```ps1
 
 
 
@@ -99,9 +94,8 @@ for ($i=1; $i -It 10; $i+=1){
 
 
 
-</code>
-</pre>
-<pre><code> 
+```
+```ps1 
 for($i=1; $i-It 20; $j++){ 
     if($i % 15 -eq0) {
         echo "$i is fizzbuzz"
@@ -111,8 +105,7 @@ for($i=1; $i-It 20; $j++){
         echo "$i is fizz"
     }
 }
-</code>
-</pre> 
+``` 
 <strong>
     当然ながら別解もある 
 </strong>
