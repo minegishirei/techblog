@@ -1,0 +1,89 @@
+/* <system section="theme" selected="smooth"> */
+@import "/css/theme/smooth/smooth.css";
+/* </system> */
+
+
+/* 吹き出しのCSS　*/
+.entry-content .l-fuki,
+.entry-content p {
+  position: relative;
+  width: calc(100% - 82px);
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 20px;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  box-shadow: 0 3px 8px -2px rgba(0,0,0,.16);
+  background-color: #fff;
+  z-index: 1;
+  box-sizing: border-box;
+}
+.entry-content .l-fuki {
+  margin: 20px auto 36px 0;
+}
+.entry-content p {
+  margin: 20px 0 36px auto;
+}
+.entry-content .l-fuki::before,
+.entry-content p::before {
+  position: absolute;
+  content: "";
+  top: 16px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  background-color: #fff;
+  z-index: 2;
+}
+.entry-content .l-fuki::before {
+  right: -7px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.entry-content p::before {
+  left: -7px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.entry-content .l-fuki::after,
+.entry-content p::after {
+  position: absolute;
+  content: "";
+  width: 60px;
+  height: 60px;
+  top: -6px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 1px 1px 5px #aaa;
+  box-sizing: border-box;
+}
+.entry-content .l-fuki::after {
+  right: -82px;
+}
+.entry-content p::after {
+  left: -82px;
+}
+@media screen and (min-width: 478px) {
+  .entry-content .l-fuki::after,
+  .entry-content p::after {
+    width: 80px;
+    height: 80px;
+  }
+  .entry-content .l-fuki,
+  .entry-content p {
+    width: calc(100% - 106px);
+  }
+  .entry-content .l-fuki::after {
+    right: -106px;
+  }
+  .entry-content p::after {
+    left: -106px;
+  }
+}
+.クラス名::after {background-image:url(画像のURL);}
+.クラス名::after {background-image:url(画像のURL);}
+
