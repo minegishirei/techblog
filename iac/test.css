@@ -84,6 +84,6 @@
     left: -106px;
   }
 }
-.クラス名::after {background-image:url(画像のURL);}
+p::after {background-image:url(https://github.com/kawadasatoshi/minegishirei/blob/main/img/beaver_picture_small.png?raw=true);}
 .クラス名::after {background-image:url(画像のURL);}
 
