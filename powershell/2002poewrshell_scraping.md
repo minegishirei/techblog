@@ -3,7 +3,7 @@
 - [Powershellでスクレイピングを行う方法](#powershellでスクレイピングを行う方法)
   - [PowershellでHTMLを取得する](#powershellでhtmlを取得する)
     - [注意:robots.txtを確認すること](#注意robotstxtを確認すること)
-  - [HTML agility Packを](#html-agility-packを)
+  - [HTML agility Packをインストールする](#html-agility-packをインストールする)
   - [スクレイピング結果を保存する](#スクレイピング結果を保存する)
   - [結果を保存する](#結果を保存する)
   - [まとめ](#まとめ)
@@ -102,7 +102,7 @@ echo $html
   - その通り、特に`robots.txt`の中でも`User-agent: *`の下にある項目を確認すれば、許可されているページとそうでないページがわかるよ
 ---
 
-## HTML agility Packを
+## HTML agility Packをインストールする
 
 ---
 
@@ -132,23 +132,6 @@ Install-Package HtmlAgilityPack
 
 
 ## スクレイピング結果を保存する
-
----
-
-- 
-  - それじゃあ手に入れたhtmlコードを解析していこうか
-- 
-  - さっき見た生のhtmlはクソまずいわね
-  - どうしたら綺麗に見えるかしら...
-- 
-  - PowerShellの`HTML Agility Pack`と呼ばれる外部ライブラリを使用することができるよ
-  - 以下のコマンドを使用して、`NuGetパッケージマネージャー`を使用して`HTML Agility Pack`をインストールしようか。
-  - `Install-Package HtmlAgilityPack`
-- 
-  - なんかよくわかんないけどエンター押したら行けたっぽい！
-- 
----
-
 
 HTMLを解析して、必要な要素を抽出することができます。**たとえば、すべてのリンクを取得するには、次のようにします。**
 
