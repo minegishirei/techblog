@@ -3,9 +3,10 @@
 - [Powershellでスクレイピングを行う方法](#powershellでスクレイピングを行う方法)
   - [PowershellでHTMLを取得する](#powershellでhtmlを取得する)
     - [注意:robots.txtを確認すること](#注意robotstxtを確認すること)
-  - [HTML agility Packを](#html-agility-packを)
-  - [](#)
+  - [HTML agility Packをインストールする](#html-agility-packをインストールする)
+  - [スクレイピング結果を保存する](#スクレイピング結果を保存する)
   - [結果を保存する](#結果を保存する)
+  - [まとめ](#まとめ)
 
 
 # Powershellでスクレイピングを行う方法
@@ -53,6 +54,35 @@ $response = Invoke-WebRequest -Uri $url
 $html = $response.Content
 ```
 
+今回はexampleですが、例えばyahooの天気予報を取得したい場合にはurlを次のように変更しましょう。
+
+```ps1
+$url = "https://weather.yahoo.co.jp/weather/"
+$response = Invoke-WebRequest -Uri $url
+$html = $response.Content
+echo $html
+```
+
+サンプル実行例
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link rel="stylesheet" href="https://s.yimg.jp/images/weather/pc/v2/css/map-1.1.0.css">
+  <title>Yahoo!天気・災害 - 天気予報 / 防災情報</title>
+  <link rel="canonical" href="https://weather.yahoo.co.jp/weather/">
+</head>
+
+<body class="yj950-2">
+  (中略...)
+        
+  <script src="https://s.yimg.jp/images/weather/pc/v2/js/yjw_cre_sub-1.1.js" type="text/javascript" charset="UTF-8"></script>
+</body>
+</html>
+```
+
 ### 注意:robots.txtを確認すること
 
 ---
@@ -72,14 +102,14 @@ $html = $response.Content
   - その通り、特に`robots.txt`の中でも`User-agent: *`の下にある項目を確認すれば、許可されているページとそうでないページがわかるよ
 ---
 
-## HTML agility Packを
+## HTML agility Packをインストールする
 
 ---
 
 - 
   - それじゃあ手に入れたhtmlコードを解析していこうか
 - 
-  - 生のhtmlはクソまずいわね
+  - さっき見た生のhtmlはクソまずいわね
   - どうしたら綺麗に見えるかしら...
 - 
   - PowerShellの`HTML Agility Pack`と呼ばれる外部ライブラリを使用することができるよ
@@ -101,9 +131,9 @@ Install-Package HtmlAgilityPack
 ```
 
 
-## 
+## スクレイピング結果を保存する
 
-次に、HTMLを解析して、必要な要素を抽出することができます。たとえば、すべてのリンクを取得するには、次のようにします。
+HTMLを解析して、必要な要素を抽出することができます。**たとえば、すべてのリンクを取得するには、次のようにします。**
 
 ```ps1
 $url = "https://example.com"
@@ -124,14 +154,40 @@ foreach ($link in $links) {
 
 ## 結果を保存する
 
-必要に応じて、スクレイピングされたデータをファイルに保存することができます。たとえば、次のようにファイルに書き込むことができます。
+
+---
+
+- 
+  - 必要に応じて、スクレイピングされたデータをファイルに保存することができるよ。
+  - `out-File`コマンドを使うことで先ほど取得した結果をすべてファイルに出力してみよか。
+- 
+  - なんかよくわかんないけどエンター押したら行けたっぽい！
+- 
+
+---
 
 
 ```ps1
 Out-File -FilePath "output.txt" -InputObject $links
 ```
 
-以上の手順に従うことで、PowerShellを使用してWebスクレイピングを行うことができます。ただし、WebスクレイピングはWebサイトの利用規約に反する場合がありますので、注意して使用してください。
+
+## まとめ
+
+---
+
+- 
+  - 以上の手順に従うことで、PowerShellを使用してWebスクレイピングを行うことができたね。
+- 
+  - ただ... WebスクレイピングはWebサイトの利用規約に反する場合があるのね...
+- 
+  - そうだね。よく言う、大いなる力には大いなる責任が伴うってやつだね。
+- 
+
+---
+
+
+
 
 
 
