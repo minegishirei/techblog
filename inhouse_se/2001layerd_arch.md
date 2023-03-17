@@ -1,4 +1,8 @@
 
+レイヤードアーキテクチャは、n層アーキテクチャとも呼ばれており、最も一般的なアーキテクチャのうちの一つだ。このアーキテクチャは**シンプル**さや**親やすさ**、**コストの低さ**からほとんどのアプリケーションのスタンダードの形となっている。
+
+[https://minegishirei.hatenablog.com/entry/2023/01/27/214843:embed:cite]
+
 
 - [レイヤードアーキテクチャとは何か？](#レイヤードアーキテクチャとは何か)
 - [レイヤードアーキテクチャの構成](#レイヤードアーキテクチャの構成)
@@ -185,6 +189,6 @@ category_script:page_name.startswith("2")
 
 img:https://github.com/kawadasatoshi/techblog/blob/main/0/inhouse_se/layerd1.png?raw=true
 
-redirect:https://minegishirei.hatenablog.com/entry/2023/01/27/214843
+
 
 
