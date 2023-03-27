@@ -117,11 +117,6 @@ from https://www.hrw.org/reports/2005/us1005/6.htm#:~:text=Psychological%20resea
 
 
 
-
-
-
-
-
 title:子供っぽい人の違い（大人と子供の心理学的な違い）
 
 
