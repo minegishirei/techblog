@@ -1,0 +1,17 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }, 
+        {
+            "before": ["ｊ", "ｊ"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.useSystemClipboard": true,
+    "workbench.editorAssociations": {
+        "*.db": "default"
+    }, // OS のクリップボードと同期
+}
