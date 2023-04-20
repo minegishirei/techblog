@@ -17,6 +17,9 @@ git clone git@github.com:kawadasatoshi/using_docker_in_dev.git
 
 次のurlをブラウザで開き、zipとしてダウンロードします。
 
+これはテストです。
+
+
 <pre><code>
 https://github.com/kawadasatoshi/using_docker_in_dev
 
