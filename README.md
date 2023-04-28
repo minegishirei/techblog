@@ -20,7 +20,6 @@ techblogの説明
 ## 何ができる人なのか
 
 - Webサイト/Webアプリケーションを0から構築し、サーチコンソールによるseo改善ができる。
-
 - .NET Framework, Visual Studio, C#, VBA, VB6の開発歴がもっとも長い(3年以上)
 
 
