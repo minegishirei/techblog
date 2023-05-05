@@ -1,4 +1,22 @@
 
+## DockerDeamonとその周囲(Dockerの基本的なアーキテクチャ)
+
+以下はDockerの基本的なアーキテクチャです。
+
+<figure class="figure-image figure-image-fotolife" title="Dockerの基本的なアーキテクチャ">[f:id:minegishirei:20230505204232p:plain:alt=Dockerの基本的なアーキテクチャ]<figcaption>Dockerの基本的なアーキテクチャ</figcaption></figure>
+
+from https://pepa.holla.cz/wp-content/uploads/2016/10/Using-Docker.pdf
+
+- 中心にあるのは**DockerDeamon**で、コンテナの作成、実行、監視、イメージの構築と保存を担当します。
+
+- クライアントは左側にあり、DockerDeamonと対話するために使用されます。（今回はTerminalやPowershellに該当する部分）
+この対話のプロトコルはHTTP経由で送信します。この性質上、リモートに存在するDockerデーモンにはHTTP経由で命令を出すことが可能です。
+
+- Docker レジストリは、イメージを保存および配布します。（ざっくり言うと、Githubのイメージバージョンようなもの）
+
+これらの構成要素が互いに連携することで、「**Dockerfileの内容がDockerDeamonに送信され、Dockerレジストリから元のイメージを送ってもらい、その上に新たにイメージを作りだし、最後にコンテナとして運用される**」と言うサイクルが完成します。
+
+<img src="https://images.viblo.asia/0240e699-0175-4ccc-be70-89f6131fd5b7.png">
 
 
 
@@ -43,9 +61,15 @@ https://github.com/moby/moby
 
 #### DockerEngin自体をビルドして使うこともできる
 
-7年前の記事ではあるが、実際にDockerエンジンを
+7年前の記事ではあるが、実際にDockerエンジンを動かしている人もいた。
+流石に今現在このままでは動かないとは思うが...
 
 参考記事：https://qiita.com/minamijoyo/items/cf69b355fdc561aaa533
+
+
+
+
+
 
 
 
