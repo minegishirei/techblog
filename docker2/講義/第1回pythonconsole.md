@@ -60,12 +60,10 @@ git clone https://github.com/kawadasatoshi/PythonImages.git
 ```
 
 
-## ディレクトリ構成
 
 
 
-
-### Dockerfileの作成
+### Dockerfileの作成(5分)
 
 まずは`Dockerfile`という名前でファイルを作成し、次のコードを入力しましょう。
 
@@ -87,7 +85,7 @@ RUN pip install -r requirements.txt
 ```
 
 
-#### Dockerfileとは
+#### Dockerfileとは(5分)
 
 Dockerfileとは
 
