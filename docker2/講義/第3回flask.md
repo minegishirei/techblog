@@ -10,7 +10,7 @@
     3. pythonコード作成
     4. `build`コマンドの実行と解説
     5. `run`コマンドの実行と解説
-    6. helloworldの確認
+    6. flaskサーバーの動作確認
 
 - やらないこと：
     1. Docker Enginについての詳しい解説
@@ -61,10 +61,6 @@ git clone https://github.com/kawadasatoshi/PythonImages.git
 ```
 
 
-## ディレクトリ構成
-
-
-
 
 ### Dockerfileの作成
 
@@ -88,77 +84,6 @@ RUN pip install -r requirements.txt
 ```
 
 
-#### Dockerfileとは
-
-Dockerfileとは
-
-> Dockerイメージを作成するためのファイルです。
-
-Dockerイメージとは
-
-> Dockerコンテナの動作環境となるテンプレートファイルです。Dockerイメージには、OSやアプリケーションからアプリケーションの実行に使われるコマンド、メタデータまで含まれます。
-
-つまり、**「DockerfileからDockerイメージが作られて、最終的にDockerコンテナという実態が作られる」** という構図になってます。
-
-<img src="https://images.viblo.asia/0240e699-0175-4ccc-be70-89f6131fd5b7.png">
-
-from https://www.kagoya.jp/howto/cloud/container/dockerimage/
-
-
-これらの要素の違いにはいくつかポイントがある。
-
-- `Dockerfile`：開発環境段階でいじられることが多い。
-
-- `Docker Image`：直接内部をいじられることはあまりない。ただし、コンテナよりは容量が軽いことが多い。その性質から、本番環境、検証環境、ステージング環境を行き来する。
-
-- `Docker Container`：実際に動く実態。
-
-これらが、大雑把なDockerコンテナのライフサイクルです。
-
-
-### Dockerfileの内容解説
-
-- `FROM`：すでに存在するイメージファイルを取得し、それを元に新しくイメージファイルを作り出す。
-
-
-```Dockerfile
-FROM python:3.9.16
-```
-
-この場合は、「python:3.9.16」という名前のイメージファイルを取得し、その上に新しいイメージファイルを作り出していきます。
-
-
-- `WORKDIR`：ファイルの作業場所を指定します。
-
-
-```Dockerfile
-WORKDIR /code
-```
-
-この場合は、`/code`ディレクトリを指定して作業場所を指定します。
-
-
-- `COPY`：ローカルPCに存在するファイルをイメージ内部にコピーするコマンド
-
-```Dockerfile
-COPY ./code /code
-```
-
-- `RUN`：Linuxコマンドを実行します。
-
-```Dockerfile
-# upgrade pip command
-RUN pip install --upgrade pip 
-
-# install python lib 
-RUN pip install -r requirements.txt
-```
-
-今回は`pip`ライブラリのアップデートと、`requirements.txt`に存在するライブラリをインストールを実行します。
-
-
-
-
 
 ### codeディレクトリを作成し、ソースコードを配置
 
@@ -171,10 +96,18 @@ RUN pip install -r requirements.txt
 内容は以下のとおりです。
 
 ```python
-print("hello world")
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+  return "<h1>Hello, Flask!</h1>"
+
+if __name__ == "__main__":
+  app.run(host="0.0.0.0", port=80, debug=True)
 ```
 
-こちらのコードは"hello world"と出力するだけのコードです。
+こちらのコードでは、htmlのh1タグで"hello Flask!"と出力するコードとなってます。
 
 
 ### requirements.txtも作成
@@ -186,34 +119,46 @@ print("hello world")
 実際にDockerfileを見ると、`RUN pip install -r requirements.txt`で`requirements.txt`を指定して、pythonのライブラリーをインストールしていることがわかると思います。
 
 
+今回はPythonでWebサービスを作るために必要な`Flask`サービスを追記します。
+
+```
+Flask
+```
 
 ## buildコマンド実行
 
 ここまでできたら、buildコマンドでDockerfileからイメージファイルを作成します。
 
 ```sh
-docker image build -t pythonconsole .
+docker image build -t flask .
 ```
 
 - `docker image build`では、dockerイメージをビルドし、コンテナを作成する基本的なコマンド
 
-- `-t`フラグで、`pythonconsole`という名前をつけています。
+- `-t`フラグで、`flask`という名前をつけています。
 
 
 
-## runコマンド実行し、Hellowroldを出力する
+## runコマンド実行し、Flaskサーバーを起動する
 
-先ほど作成した、pythonconsoleイメージコンテナをrunします。
+先ほど作成した、flaskイメージコンテナをrunします。
 
 ```sh
-docker run -it -v ./code:/code pythonconsole bash
+docker run -it -p 80:80 -v ./code:/code flask bash
 ```
 
 - `docker run `は、dockerコンテナを実行するコマンドです。
 
 - `-it`フラグは、**コンテナ内部とやりとりするためのコマンド**で、`bash`コマンドと組み合わせることで、ssh接続されたかのように、コンテナ内部からLinuxコマンドを実行することができます。
 
+- `-p`フラグは、**ローカルPCのポート番号と、コンテナ内部のポート番号を繋げるためのコマンドです。**
 
+コンテナに入った後は、`python main.py`を実行してサーバーを起動しましょう。
+
+
+次のリンクからwebサイトに入れたら成功です。
+
+http://localhost
 
 
 
