@@ -938,8 +938,8 @@ HTTPコネクションが途切れた場合、buildは中断されます。
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| inputStream | body | A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz. | No | binary |
-| dockerfile | query | Path within the build context to the `Dockerfile`. This is ignored if `remote` is specified and points to an external `Dockerfile`. | No | string |
+| inputStream | body | `Dockerfile`を含む圧縮されたファイル。圧縮形式は次のいずれかの通り。gzip, bzip2, xz. | No | binary |
+| dockerfile | query | 圧縮されたフォルダー内での`Dockerfile`のファイルパス. このオプションは`remote`と外部の`Dockerfile`の場所が指定されば場合には無視されます。 | No | string |
 | t | query | A name and optional tag to apply to the image in the `name:tag` format. If you omit the tag the default `latest` value is assumed. You can provide several `t` parameters. | No | string |
 | extrahosts | query | Extra hosts to add to /etc/hosts | No | string |
 | remote | query | A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called `Dockerfile` and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the `dockerfile` parameter is also specified, there must be a file with the corresponding path inside the tarball. | No | string |
