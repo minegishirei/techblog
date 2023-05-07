@@ -940,11 +940,11 @@ HTTPコネクションが途切れた場合、buildは中断されます。
 | ---- | ---------- | ----------- | -------- | ---- |
 | inputStream | body | `Dockerfile`を含む圧縮されたファイル。圧縮形式は次のいずれかの通り。gzip, bzip2, xz. | No | binary |
 | dockerfile | query | 圧縮されたフォルダー内での`Dockerfile`のファイルパス. このオプションは`remote`と外部の`Dockerfile`の場所が指定されば場合には無視されます。 | No | string |
-| t | query | A name and optional tag to apply to the image in the `name:tag` format. If you omit the tag the default `latest` value is assumed. You can provide several `t` parameters. | No | string |
+| t | query | 新しく作られるDockerイメージの名前とタグである。形式は`name:tag`。`tag`側を省略した場合、`latest`が自動的にバージョンとして付けられる。  | No | string |
 | extrahosts | query | Extra hosts to add to /etc/hosts | No | string |
-| remote | query | A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called `Dockerfile` and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the `dockerfile` parameter is also specified, there must be a file with the corresponding path inside the tarball. | No | string |
-| q | query | Suppress verbose build output. | No | boolean |
-| nocache | query | Do not use the cache when building the image. | No | boolean |
+| remote | query | GitのリポジトリのURIやHTTP/HTTPS形式のURL。 このurlがテキストファイルを指し示す場合は、それが`Dockerfile`であるかのようにbuildされる。このurlが圧縮されたフォルダーであれば、それをダウンロードした上でそれを元にbuildされる。 | No | string |
+| q | query | build中の詳細なログ出力をコントロールします。| No | boolean |
+| nocache | query | Imageをビルドする際にキャッシュを使用するかをコントロールします。 | No | boolean |
 | cachefrom | query | JSON array of images used for build cache resolution. | No | string |
 | pull | query | Attempt to pull the image even if an older image exists locally. | No | string |
 | rm | query | Remove intermediate containers after a successful build. | No | boolean |
