@@ -15,7 +15,7 @@ $ docker build -t <TAG_NAME> <DOCKERFILE_DIRECTORY>
 
 ここで、`<TAG_NAME>`はビルドされたイメージに付けるタグ名です。`<DOCKERFILE_DIRECTORY>`はDockerfileがあるディレクトリのパスです。
 
-例えば、次のコマンドを実行すると、ビルドされたイメージに`myimage:latest`というタグが付けられます。
+例えば、**次のコマンドを実行すると、ビルドされたイメージに`myimage:latest`というタグが付けられます。**
 
 ```sh
 $ docker build -t myimage:latest .
