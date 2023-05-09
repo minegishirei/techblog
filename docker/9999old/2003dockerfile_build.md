@@ -115,35 +115,28 @@ dockerイメージにすでに存在する場合、コンテナの起動時に�
 
 
 
-## dockerfileのCMD
+## dockerfileのCMD:コンテナ起動時のコマンドを設定する
 
-コンテナの起動時に指定された命令を実行します。
+**コンテナの起動時に指定された命令を実行します。**
 *`RUN`コマンドはビルド時に命令が実行されますが、`CMD`はコンテナの起動時であることに注意してください*
 
 例えば、`docker run -it -p 80:80 -v ./code:/code flask`でflaskサーバーを起動したい場合、
 
 ```Dockerfile
-# python version number:3.9.16
-FROM python:3.9.16
-
-# code ... directory for python codes.
-WORKDIR /code
-
-# copy localcode to container image.
-COPY ./code /code
-
-# upgrade pip command
-RUN pip install --upgrade pip 
+...
 
 # install python lib 
 RUN pip install -r requirements.txt
 
+# flaskサーバーを起動する
 CMD ["python", "index.py"]
 ```
 
 のように、pythonでindex.pyを実行してくれるように設定することができます。
 
 **その性質上、`Dockerfile`の末尾に書かれることが多いです。**
+
+### CMDの注意点
 
 CMDにはいくつか注意点があります。
 
