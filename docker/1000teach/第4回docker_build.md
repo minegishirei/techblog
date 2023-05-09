@@ -3,6 +3,65 @@
 [:contents]
 
 
+## `docker build -t, --tag=[]`オプション
+
+Dockerの`docker build -t`または`--tag`オプションは、**ビルドされたイメージにタグを付けるために使用されます。イメージには、複数のタグを付けることができます。**
+
+`-t`または`--tag`オプションを使用するには、次のようにコマンドを実行します。
+
+```sh
+$ docker build -t <TAG_NAME> <DOCKERFILE_DIRECTORY>
+```
+
+ここで、`<TAG_NAME>`はビルドされたイメージに付けるタグ名です。`<DOCKERFILE_DIRECTORY>`はDockerfileがあるディレクトリのパスです。
+
+例えば、次のコマンドを実行すると、ビルドされたイメージに`myimage:latest`というタグが付けられます。
+
+```sh
+$ docker build -t myimage:latest .
+```
+
+`-t`または`--tag`オプションを複数回使用することで、複数のタグを同時にイメージに付けることができます。例えば、次のコマンドを実行すると、ビルドされたイメージに`myimage:latest`と`myimage:v1.0`という2つのタグが付けられます。
+
+```sh
+$ docker build -t myimage:latest -t myimage:v1.0 .
+```
+
+タグの指定方法は`<TAG_NAME>`の他に、`<REGISTRY_URL>/<REPOSITORY_NAME>:<TAG_NAME>`のように、リポジトリ名やレジストリURLを含めて指定することもできます。例えば、次のコマンドは`my-registry.com/myrepository:latest`というタグを付けたイメージをビルドします。
+
+```sh
+$ docker build -t my-registry.com/myrepository:latest .
+```
+
+### dockerのrunでタグを指定する方法
+
+Dockerの`run`コマンドで、イメージにタグを指定するには、以下のように`<イメージ名>:<タグ名>`の形式で指定します。
+
+通常、runコマンドではコンテナIDを指定することもできます。**加えて、runコマンド実行時にはbuildの際に`-t`フラグでつけられたイメージタグを指定してコンテナとして実行することができます。**
+
+```sh
+$ docker run <イメージ名>:<タグ名>
+```
+
+例えば、build時のフラグとして`-t`を指定したとします。
+
+```sh
+docker image build -t flask .
+```
+
+この時に先ほど作成した、flaskイメージコンテナをrunする場合、**特にフラグを使わずにタグを入力することで実行できます。**
+
+```sh
+docker run -it -p 80:80 -v ./code:/code flask bash
+```
+
+
+
+
+
+
+
+
 ## `--build-arg=[]`:Dockerfileの変数に変更を加える
 
 Dockerの`docker build --build-arg=[]`オプションは、**ビルド時にDockerfile内で変数に変更を加えます**
@@ -54,46 +113,6 @@ $ docker build --rm=true -t <IMAGE_NAME> <DOCKERFILE_DIRECTORY>
 ここで、`<IMAGE_NAME>`はビルドされたイメージの名前、`<DOCKERFILE_DIRECTORY>`はDockerfileがあるディレクトリのパスです。このコマンドを実行すると、ビルドが開始され、ビルドに必要な一時的なコンテナが作成されます。ビルドが完了すると、中間コンテナが自動的に削除され、イメージが作成されます。
 
 `--rm`オプションはデフォルトで`true`に設定されており、`--rm=false`のように明示的に指定しなくても中間コンテナを残すことができます。ただし、中間コンテナを残した場合は、後で手動で削除する必要があります。
-
-
-## `docker build -t, --tag=[]`オプション
-
-Dockerの`docker build -t`または`--tag`オプションは、**ビルドされたイメージにタグを付けるために使用されます。イメージには、複数のタグを付けることができます。**
-
-`-t`または`--tag`オプションを使用するには、次のようにコマンドを実行します。
-
-```sh
-$ docker build -t <TAG_NAME> <DOCKERFILE_DIRECTORY>
-```
-
-ここで、`<TAG_NAME>`はビルドされたイメージに付けるタグ名です。`<DOCKERFILE_DIRECTORY>`はDockerfileがあるディレクトリのパスです。
-
-例えば、次のコマンドを実行すると、ビルドされたイメージに`myimage:latest`というタグが付けられます。
-
-```sh
-$ docker build -t myimage:latest .
-```
-
-`-t`または`--tag`オプションを複数回使用することで、複数のタグを同時にイメージに付けることができます。例えば、次のコマンドを実行すると、ビルドされたイメージに`myimage:latest`と`myimage:v1.0`という2つのタグが付けられます。
-
-```sh
-$ docker build -t myimage:latest -t myimage:v1.0 .
-```
-
-タグの指定方法は`<TAG_NAME>`の他に、`<REGISTRY_URL>/<REPOSITORY_NAME>:<TAG_NAME>`のように、リポジトリ名やレジストリURLを含めて指定することもできます。例えば、次のコマンドは`my-registry.com/myrepository:latest`というタグを付けたイメージをビルドします。
-
-```sh
-$ docker build -t my-registry.com/myrepository:latest .
-```
-
-
-
-
-
-
-
-
-
 
 
 
