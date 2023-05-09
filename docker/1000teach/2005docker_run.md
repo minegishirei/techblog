@@ -40,7 +40,7 @@ docker run -a stdout:/path/to/stdout.log -a stderr:/path/to/stderr.log <イメ�
 -dと互換性はありません
 
 
-## docker -d --detachとは
+## docker -d --detachとは:バックグランド実行
 
 コンテナを「デタッチ」モードで実行します。
 
@@ -70,26 +70,19 @@ docker logs <コンテナID>
 対話型のコンテナを実行する場合は、代わりに `-it` オプションを使用する必要があります。
 
 
-## docker -i --interactive
+## docker -i --interactive:コンテナと対話的なシェルを立ち上げたい。
 
-stdinを開いたままにします（接続されていない場合でも）。
+`-it`フラグは、**コンテナ内部とやりとりするためのコマンド**で、`bash`コマンドと組み合わせることで、ssh接続されたかのように、コンテナ内部からLinuxコマンドを実行することができます。
 
-通常は-tとともに使用して開始します。
+たとえば、flaskサーバーを起動した後にbashシェルを起動したい場合は、以下のように`-it`を組み合わせることで対話的なシェルが立ち上がります。
 
-インタラクティブなコンテナセッションを起動させることが可能です。
-
-例えば：
-
-<pre><code>
-$ docker run -it debian /bin/bash
-root@bd0f26f928bb:/# ls
-...snip...
-</code></pre>
+```sh
+docker run -it -p 80:80 -v ./code:/code flask bash
+```
 
 
 
-
-## docker --restart
+## docker --restart:
 
 Dockerが終了したコンテナーを再起動しようとするタイミングを構成します。
 
@@ -257,6 +250,9 @@ img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg
 category_script:True
 
 title:dockerのrunコマンドオプション一覧【docker入門】
+
+
+
 
 
 
