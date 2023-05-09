@@ -81,6 +81,8 @@ RUN pip install --upgrade pip
 
 # install python lib 
 RUN pip install -r requirements.txt
+
+CMD ["python", "index.py"]
 ```
 
 
