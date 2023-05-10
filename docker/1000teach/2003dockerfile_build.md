@@ -207,7 +207,6 @@ dockerイメージにすでに存在する場合、コンテナの起動時に�
 例えば、`docker run -it -p 80:80 -v ./code:/code flask`でflaskサーバーを起動したい場合、
 
 ```Dockerfile
-...
 
 # install python lib 
 RUN pip install -r requirements.txt
