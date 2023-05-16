@@ -139,6 +139,20 @@ services:
       - db
 ```
 
+## volumes:ファイルシステムのマウント
+
+パスをボリュームとしてマウントします。**これによりコンテナ内部で作られたファイルがホストOS上にも保存されることになります。**
+
+```
+volumes:
+ - /var/lib/mysql
+ - cache/:/tmp/cache
+ - ~/configs:/etc/configs/:ro
+```
+
+オプションとして**アクセスモードを指定します（`ホスト:コンテナ:ro`）**。
+
+
 
 ## links
 
@@ -197,17 +211,6 @@ extra_hosts:
 expose:
  - "3000"
  - "8000"
-```
-
-## volumes
-
-パスをボリュームとしてマウントします。オプションとしてホスト側のパスを指定（`ホスト:コンテナ`）したり、アクセスモードを指定します（`ホスト:コンテナ:ro`）。
-
-```
-volumes:
- - /var/lib/mysql
- - cache/:/tmp/cache
- - ~/configs:/etc/configs/:ro
 ```
 
 ## volumes_from
