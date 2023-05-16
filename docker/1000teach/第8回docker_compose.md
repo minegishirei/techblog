@@ -169,23 +169,36 @@ services:
 
 オプションとして**アクセスモードを指定することができます（`ホスト:コンテナ:ro`）**。
 
-
-## environment:コンテナの環境変数を設定
+#### `environment`:環境変数を設定
 
 環境変数を追加します。配列や dictionary（訳注；YAML のハッシュ）を使えます。
 
-キーだけの環境変数は、Compose 起動時に用いられる値があてられますので、秘密にしたい値やホスト固有の値を指定しやすいです。
+以下はmysqlコンテナの構築のymlファイルです。
 
+mysqlのコンテナは環境変数にデータベースの情報を書き込むことで、その情報をもとにデータベースが構築されるという特徴があります。
+
+```yml
+version: '3'
+
+services:
+  db:
+    container_name: mysql
+    build: ./mysql
+    restart: always
+    volumes:
+      - ./mysql/data:/var/lib/mysql 
+    ports:
+      - 3306:3306
+    environment: ##### here #####
+      TZ: 'Asia/Tokyo'
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: 'django'
+      MYSQL_USER: 'django'
+      MYSQL_PASSWORD: 'django'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      ##### end #####
+    privileged: true
 ```
-environment:
-  RACK_ENV: development
-  SESSION_SECRET:
-
-environment:
-  - RACK_ENV=development
-  - SESSION_SECRET
-```
-
 
 
 ## links
