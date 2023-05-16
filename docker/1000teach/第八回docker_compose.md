@@ -94,12 +94,27 @@ Compose は構築時に指定されたファイルを使います。
 dockerfile: Dockerfile-alternate
 ```
 
-## command
+## command:コンテナ立ち上げ時のコマンドを上書き
 
-デフォルトのコマンドを上書きします。
+コンテナ立ち上げ時のコマンドを上書きします。
+このコードを指定しない場合、`image:`で指定したDockerイメージのデフォルトのコマンドか、`build:`で指定したDockerfileの`CMD`命令が適応されます。
 
-```
-command: bundle exec thin -p 3000
+以下の例では`django`イメージの上書きを行い、起動時に`python mysite/manage.py runserver 0.0.0.0:80`というコマンドが実行される設定をしております。
+
+```yml
+version: '3'
+
+services:
+  app:
+    container_name: django
+    build: ./django 
+    volumes:
+     - ./django/code/:/code
+    ports:
+     - 80:80
+    command: python mysite/manage.py runserver 0.0.0.0:80 ##### here #####
+    depends_on:
+      - db
 ```
 
 ## links
