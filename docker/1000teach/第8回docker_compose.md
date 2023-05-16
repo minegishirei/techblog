@@ -143,14 +143,48 @@ services:
 
 パスをボリュームとしてマウントします。**これによりコンテナ内部で作られたファイルがホストOS上にも保存されることになります。**
 
-```
-volumes:
- - /var/lib/mysql
- - cache/:/tmp/cache
- - ~/configs:/etc/configs/:ro
+以下の例では`mysql`コンテナ内部の`/var/lib/mysql`を`./mysql/data`にマウントすることで`mysql`コンテナに保存されたデータがホストOS上の`./mysql.data`にも保存されるようになってます。
+
+```yml
+version: '3'
+
+services:
+  db:
+    container_name: mysql
+    build: ./mysql
+    restart: always
+    volumes:
+      - ./mysql/data:/var/lib/mysql ##### here #####
+    ports:
+      - 3306:3306
+    environment:
+      TZ: 'Asia/Tokyo'
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: 'django'
+      MYSQL_USER: 'django'
+      MYSQL_PASSWORD: 'django'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+    privileged: true
 ```
 
-オプションとして**アクセスモードを指定します（`ホスト:コンテナ:ro`）**。
+オプションとして**アクセスモードを指定することができます（`ホスト:コンテナ:ro`）**。
+
+
+## environment:コンテナの環境変数を設定
+
+環境変数を追加します。配列や dictionary（訳注；YAML のハッシュ）を使えます。
+
+キーだけの環境変数は、Compose 起動時に用いられる値があてられますので、秘密にしたい値やホスト固有の値を指定しやすいです。
+
+```
+environment:
+  RACK_ENV: development
+  SESSION_SECRET:
+
+environment:
+  - RACK_ENV=development
+  - SESSION_SECRET
+```
 
 
 
@@ -221,22 +255,6 @@ expose:
 volumes_from:
  - service_name
  - container_name
-```
-
-## environment
-
-環境変数を追加します。配列や dictionary（訳注；YAML のハッシュ）を使えます。
-
-キーだけの環境変数は、Compose 起動時に用いられる値があてられますので、秘密にしたい値やホスト固有の値を指定しやすいです。
-
-```
-environment:
-  RACK_ENV: development
-  SESSION_SECRET:
-
-environment:
-  - RACK_ENV=development
-  - SESSION_SECRET
 ```
 
 ## env_file
