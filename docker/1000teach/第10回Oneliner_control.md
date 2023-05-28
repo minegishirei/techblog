@@ -12,7 +12,7 @@
 コンテナのボリュームをすべて消したかったらこのコマンドです。
 
 ```sh
-docker rm -v $(docker ps -q -f status=exited)
+docker rm -v $(docker ps -q)
 ```
 
 一度実行した後は`Ctrl+R`で履歴を開き`docker rm -`で再度実行できるはず。
