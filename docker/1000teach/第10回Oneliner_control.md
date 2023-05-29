@@ -22,11 +22,11 @@ docker rm -v $(docker ps -q)
 
 ```
 PS C:\Users\mineg\myworking> docker rm -v $(docker ps -q -f status=exited)
-7435063f254c
-7f16b42bdc4f
-c30b1c16b4a7
-ac60d05e5375
-75b46930de22
+7435062f254c
+6f16b42bdc4f
+c29b1c16b4a7
+ac59d05e5375
+74b46930de22
 ```
 
 ### Dockerのコンテナをすべてストップする
