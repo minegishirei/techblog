@@ -23,6 +23,8 @@ hhhhlllllhhhhhllll
 HMLHMLHMLHML
 ```
 
+左右の動きをしていたHとLが上下に大きな動きになるのが特徴的ですね〜
+
 
 ## 
 
