@@ -16,12 +16,3 @@ https://github.com/moby/moby
 色々あってこの`moby`リポジトリに移されました。
 
 <img src="https://github.com/moby/moby/raw/master/docs/static_files/moby-project-logo.png">
-
-
-
-
-
-
-
-
-
