@@ -14,7 +14,6 @@ cgroupsは、Linuxカーネルの一部として提供されており、コマ�
 
 
 
-
 ## cgroupsはファイルとして扱う
 
 
@@ -23,9 +22,10 @@ cgroupfsという名前の仮想ファイルシステムにディレクトリー
 デフォルトのパスは`/sys/fs/cgroup/`です。
 
 
+
 ### 新規プロセスを作ってみる
 
-次のように、cgroup配下にフォルダーを作成することで新規プロセスが発生します。
+次のように、cgroup配下にフォルダーを作成することで新規プロセスを作成することができます。
 
 `mkdir /sys/fs/cgroup/Example/`
 
@@ -35,6 +35,12 @@ cgroupfsという名前の仮想ファイルシステムにディレクトリー
 
 
 
+```sh
+cat /sys/fs/cgroup/cgroup.controllers
+```
+
+
+from https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/assembly_using-cgroupfs-to-manually-manage-cgroups_managing-monitoring-and-updating-the-kernel
 
 
 
