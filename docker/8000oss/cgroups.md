@@ -92,6 +92,6 @@ cat /proc/2331/cgroup
 [f:id:minegishirei:20230613182101p:plain:alt=]
 
 
-
+プロセスに関する情報が記述されてますね！
 
 
