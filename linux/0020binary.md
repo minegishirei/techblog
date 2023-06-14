@@ -68,6 +68,28 @@ func main(){
 }
 ```
 
+```go
+package main
+
+import (
+    "os",
+    "bytes",
+    "encoding/binary"
+)
+
+func main() {
+    buf := new(bytes.Buffer)
+    var num uint8
+    num = 0
+    err := binary.Write(buf, binary.LittleEndian, num)
+    if err != nil {
+        panic("faild to write a number")
+    }
+    os.Stdout.Write(buf.Bytes())
+}
+```
+
+
 このプログラムはいかのリンクから写経したものです。
 
 https://www.youtube.com/watch?v=8qg2b8ZZm_c
