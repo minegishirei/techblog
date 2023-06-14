@@ -67,6 +67,12 @@ print("hello python")
 strace -o c.log python.log ./hello_python
 ```
 
+(筆者はなぜかエラーが出たのでyoutubeに挙がっているログを見てみる)
+
+
+
+
+
 
 ### 結論
 
