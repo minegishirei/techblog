@@ -30,7 +30,6 @@ linuxkernelでは以下のファイルに存在する。
 `linux-3.12.6/include/linux/sched.h`
 
 ```c
-
 struct task_struct {
     volatile long state;    /* -1 unrunnable, 0 runnable, >0 stopped */
     ...
