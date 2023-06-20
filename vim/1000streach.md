@@ -39,7 +39,11 @@ Ctrl+e,Ctrl+y
 HkkkkkkkLjjjjjjjHkkkkkkkkLkkkkkkkk
 ```
 
+## 組み合わせる
 
+```sh
+HzzLzzHzzLzzHzzLzzHzzLzz
+```
 
 
 ## Linuxコマンドの実行

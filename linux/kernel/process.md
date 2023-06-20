@@ -122,62 +122,113 @@ POSIXが定めるプロセス間通信は三つの種類があり、それぞれ
 
 ### メッセージキュー
 
+いわゆるメッセージボックスのような動作を行う IPC です。
+プロセス間で一意に識別できるメッセージキューに対してメッセージを書き込み、受け取りができます。
 
+- メッセージキューの作成
+```c
+msgkey = ftok("msgq.key",'X');
+```
+
+- メッセージキューのid取得
+
+```c
+msqid = msgget(msgkey,IPC_CREAT|0666);
+```
+
+- メッセージ受け取り
+
+```c
+msgrcv(msqid,p,sizeof(p->mdata),0,IPC_NOWAIT)
+```
+
+- メッセージの送信
+
+```c
+msgsnd(msqid,p,sizeof(p->mdata),0);
+```
 
 
 from https://lightning-brains.blogspot.com/2019/08/unix-linux.html
 
 
+#### サンプルコード(メッセージ受信)
+
+```c
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <string.h>
+#include <unistd.h>
+#define MSGBUFSIZ 256
+
+int main(int argc, char** argv) {
+    int msqid;
+    key_t msgkey;
+    struct msgbuf{
+      long mtype;
+      char mdata[MSGBUFSIZ];
+    };
+    struct msgbuf msgdata,*p;
+    p = &msgdata;
+    // メッセージキューの作成
+    msgkey = ftok("msgq.key",'X');
+    // メッセージキューの情報取得
+    msqid = msgget(msgkey,IPC_CREAT|0666);
+    // "Quit"メッセージを受け取るまでループさせる
+    while(1) {
+        // メッセージ受け取り
+        if(msgrcv(msqid,p,sizeof(p->mdata),0,IPC_NOWAIT)<=0) {
+          printf("No message\n");
+          sleep(3);
+          continue;
+        }
+        printf("message received from %ld\n%s\n",p->mtype,p->mdata);
+        if(strncmp((char*)p->mdata, "Quit", (size_t)3)==0)
+            break;
+    }
+    // Remove Message Queue
+    msgctl(msqid, IPC_RMID, 0);
+}
+```
+
+from https://software.fujitsu.com/jp/manual/manualfiles/M060041/B1WN7071/02Z200/mqdml07/mqdml163.htm
+
+#### サンプルコード(メッセージ送信)
+
+```c
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <unistd.h>
+#define MSGBUFSIZ 256
+
+int main(int argc, char** argv) {
+    int msqid;
+    key_t msgkey;
+    struct msgbuf{
+        long mtype;
+        char mdata[MSGBUFSIZ];
+    };
+    struct msgbuf msgdata,*p;
+    // メッセージキューの作成
+    msgkey = ftok(argv[1], 'X');
+    // メッセージキューの取得 (Only get existing message queue.)
+    msqid = msgget(msgkey, 0666);
+    printf("QID = %d\n", msqid);
+    if(msqid<0 -1="" fflush="" fgets="" nter="" p-="" p="&msgdata;" printf="" return="" stdin="">mdata,MSGBUFSIZ,stdin);
+    p->mtype = getpid();
+    // メッセージ送信
+    msgsnd(msqid,p,sizeof(p->mdata),0);
+}
+```
 
 ### メモリ共有
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### セフォマ
 
 
