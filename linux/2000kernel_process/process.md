@@ -152,14 +152,58 @@ struct task_struct{
 }
 ```
 
+from https://github.com/torvalds/linux/blob/692b7dc87ca6d55ab254f8259e6f970171dc9d01/include/linux/sched.h#LL998C1-L999C27
+
+#### PIDのMAX
+
+ちなみにPIDにもMAXの値は存在し、デフォルトでは`PID_MAX_DEFAULT-1`です
+カーネルはＰＩＤがこの上限に達したときに、使われていないPIDの再利用を行う必要があります。
+
+```c
+/*
+ * This controls the default maximum pid allocated to a process
+ */
+#define PID_MAX_DEFAULT (CONFIG_BASE_SMALL ? 0x1000 : 0x8000)
+```
+
+from https://github.com/torvalds/linux/blob/e660abd551f1172e428b4e4003de887176a8a1fd/include/linux/threads.h#L28
+
+さらに、システム管理者は`/proc/sys/kernel/pid_max`ファイルにより小さな値を書き込むことにより、PIDの最大値を下げることができます。
 
 
 
+#### PIDの再利用
+
+PIDを再利用するときは、`pidmap_array`ビットマップを使う必要があります。`pidmap_array`ビットマップは、使用中のPIDと未使用のPIDを表しています。
+
+```c
+static pidmap_t pidmap_array[PIDMAP_ENTRIES] =
+	 { [ 0 ... PIDMAP_ENTRIES-1 ] = { ATOMIC_INIT(BITS_PER_PAGE), NULL } };
+```
 
 
+### TGIDによるグループ化
 
+これまで、PIDは一意の値であることを期待されていると説明してきました。
 
+しかし、UNIXプログラマは同じグループのスレッドが同じPIDを持っていることを期待しまsう。
 
+> 例えば、あるPIDにシグナルを送ると、そのグループ内のすべてのスレッドに効果を及ぼすなど。
+
+**この仕組みを体現するため、Linuxはスレッドグループを使用しています。**スレッド間で共有する識別子として、グループの最初の軽量プロセスであるスレッドグループリーダのPIDを使用するのでう。
+この識別子は各プロセスディスクリプタの`tgid`メンバに格納されています。
+そして、`getpid`システムコールは、カレントプロセスの`pid`ではなく、`tgid`の値を返すのです。
+
+```c
+static pid_t getpid(void)
+{
+	return bpf_get_current_pid_tgid();
+}
+```
+
+参照 https://github.com/torvalds/linux/blob/e660abd551f1172e428b4e4003de887176a8a1fd/tools/perf/examples/bpf/augmented_raw_syscalls.c#LL351C1-L354C2
+
+この仕組みのおかげで、すべてのマルチスレッドアプリケーションは同じ識別子を共有できるのです。
 
 
 
