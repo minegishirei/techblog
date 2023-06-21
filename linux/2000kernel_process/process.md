@@ -190,7 +190,7 @@ static pidmap_t pidmap_array[PIDMAP_ENTRIES] =
 
 > 例えば、あるPIDにシグナルを送ると、そのグループ内のすべてのスレッドに効果を及ぼすなど。
 
-**この仕組みを体現するため、Linuxはスレッドグループを使用しています。**スレッド間で共有する識別子として、グループの最初の軽量プロセスであるスレッドグループリーダのPIDを使用するのでう。
+**この仕組みを体現するため、Linuxはスレッドグループを使用しています。** スレッド間で共有する識別子として、グループの最初の軽量プロセスであるスレッドグループリーダのPIDを使用するのです。
 この識別子は各プロセスディスクリプタの`tgid`メンバに格納されています。
 そして、`getpid`システムコールは、カレントプロセスの`pid`ではなく、`tgid`の値を返すのです。
 
@@ -204,6 +204,75 @@ static pid_t getpid(void)
 参照 https://github.com/torvalds/linux/blob/e660abd551f1172e428b4e4003de887176a8a1fd/tools/perf/examples/bpf/augmented_raw_syscalls.c#LL351C1-L354C2
 
 この仕組みのおかげで、すべてのマルチスレッドアプリケーションは同じ識別子を共有できるのです。
+
+
+
+### プロセスディスクリプタの処理
+
+Linuxは各プロセスに一つのメモリ領域を割り当て、プロセスディスクリプタとリンクします。
+
+この領域には二つの異なるデータ構造である`thread_info`構造体とカーネルモードプロセッサスタックを割り当てます。
+
+カーネルは8KBのメモリ領域を、先頭ページフレームが2の13乗の倍数のアドレス協会に位置合わせ下二つの連続するページフレームに置きます。
+これにより、メモリのフラグメンテーションを防ぐことができます。
+
+
+
+
+<figure class="figure-image figure-image-fotolife" title="linux kernel">[f:id:minegishirei:20230621180137p:plain]<figcaption>linux kernel</figcaption></figure>
+
+from 
+[https://doc.lagout.org/operating%20system%20/linux/Understanding%20Linux%20Kernel.pdf]
+
+
+この図を見ると
+
+- thread_info構造体はメモリ領域の先頭に格納し、
+- スタックは末尾から低位アドレス方向に延びていきます。
+
+この状態をc言語であらわすと、以下のようなunionとして表現できますね。
+
+```c
+union thread_union {
+    struct thread_info thread_info;
+    unsigned long stack[2048];
+}
+```
+
+さらに、thread_infoとtask_struct構造体（プロセスディスクリプタ）がtaskメンバとthread_infoメンバで互いにリンクしているのが分かると思います。
+
+実際のlinuxkernelのコードは以下の通りです。
+
+```c
+struct thread_info {
+	struct task_struct	        *task;		/* main task structure */
+	unsigned long		        flags;		/* low level flags */
+	__u32			            cpu;		/* current CPU */
+	int			                preempt_count;  /* 0 => preemptable,<0 => BUG */
+	struct thread_info	        *real_thread;    /* Points to non-IRQ stack */
+	unsigned long               aux_fp_regs[FP_SIZE];	/* auxiliary fp_regs to save/restore them out-of-band */
+};
+```
+
+
+from https://github.com/torvalds/linux/blob/e660abd551f1172e428b4e4003de887176a8a1fd/arch/um/include/asm/thread_info.h#LL19C1-L28C3
+
+
+### epsレジスタの動き
+
+スタックは末尾から低位アドレス方向に延びると説明しましたが、`esp`レジ須賀はCPUのスタックポイントであり、この値が小さければ小さいほど、スタックが使われていることを表します。
+
+プロセスのカーネルスタックは、ユーザーモードからカーネルモードへ切り替わった直後はからです。
+この状態ではespレジスタの値はスタックの末尾+1のアドレスを示しています。
+
+
+
+
+
+
+
+
+
 
 
 
