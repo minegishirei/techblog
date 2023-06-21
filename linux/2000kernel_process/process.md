@@ -106,10 +106,51 @@ from https://github.com/torvalds/linux/blob/692b7dc87ca6d55ab254f8259e6f970171dc
     - シグナルの受信
 
 
+stateメンバの値は、以下のようにして単純に代入します。
+
+```sh
+p->state = TASK_RUNNNING
+```
+
+あるいは、`set_task_state`マクロや、`set_current_state`(現在実行中のプロセスの状態を設定する)マクロを利用することもあります。
+→（以前は`set_task_state`は次の階層の中に定義されていたようですが、今はないようです）
+
+```c
+include/linux/sched.h
+```
+
+```c
+#define set_current_state(state_value)				\
+	do {							\
+		current->task_state_change = _THIS_IP_;		\
+		smp_store_mb(current->state, (state_value));		\
+	} while (0)
+#endif
+
+#define set_current_state(state_value)			\
+	smp_store_mb(current->state, (state_value))
+#endif
+```
 
 
+## プロセスのしきべつ
 
+### プロセスディスクリプタポインタ
 
+プロセスとプロセスディスクリプタは必ず一対一対応しており、カーネルは`task_struct`構造体の32ビットのアドレスを使用してプロセスを識別します。このアドレスを、**プロセスディスクリプタポインタ**と呼びます。これにより、独立にスケジューリング可能な各実行コンテキストにはそれぞれディスクリプタが割り当てられております。
+
+### PID
+
+PIDはプロセスディスクリプタの`pid`メンバに格納されています。新しく生成されるPIDはその直前に生成されたプロセスのPIDに1を足した値になります。
+
+```c
+struct task_struct{
+    ...
+	/* PID/PID hash table linkage. */
+	struct pid			*thread_pid;
+    ...
+}
+```
 
 
 
