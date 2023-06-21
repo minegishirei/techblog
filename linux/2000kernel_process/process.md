@@ -241,7 +241,7 @@ union thread_union {
 
 さらに、thread_infoとtask_struct構造体（プロセスディスクリプタ）がtaskメンバとthread_infoメンバで互いにリンクしているのが分かると思います。
 
-実際のlinuxkernelのコードは以下の通りです。
+実際のlinuxkernelの`thread_info`コードは以下の通りです。
 
 ```c
 struct thread_info {
@@ -250,7 +250,8 @@ struct thread_info {
 	__u32			            cpu;		/* current CPU */
 	int			                preempt_count;  /* 0 => preemptable,<0 => BUG */
 	struct thread_info	        *real_thread;    /* Points to non-IRQ stack */
-	unsigned long               aux_fp_regs[FP_SIZE];	/* auxiliary fp_regs to save/restore them out-of-band */
+	unsigned long               aux_fp_regs[FP_SIZE];	
+    /* auxiliary fp_regs to save/restore them out-of-band */
 };
 ```
 
