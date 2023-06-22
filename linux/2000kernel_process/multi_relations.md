@@ -72,5 +72,73 @@ from https://github.com/torvalds/linux/blob/dad9774deaf1cf8e8f7483310dfb26903101
 
 
 
+## プロセスの親子関係
+
+- プログラムから生成されたプロセスには親子関係があります。
+- プロセスが複数のプロセスを生成するとき、プロセス間には兄弟関係が構築されます。
+
+こうした兄弟/親子関係を表すメンバが、プロセスディスクリプタには存在します。
+
+### プロセスを生成したプロセスディスクリプタ
+
+プロセスPを生成したプロセスディスクリプタは`real_parent`メンバに格納されます。
+（本物の）と名前が付く通り、このプロセスは削除される可能性もあります。
+その場合はプロセス1を示すようになります。
+
+```c
+struct task_struct {
+    ...
+	/* Real parent process: */
+	struct task_struct __rcu	*real_parent;
+    ...
+}
+```
+
+
+### プロセスの現在の親
+
+プロセスPの"現在の"親プロセスを示します。この値は通常は`real_pparent`と同じですが、ほかのプロセスが`ptrace()`システムコールを使用してプロセスを監視するときなど、異なる番号を示すケースもあります。
+
+```c
+struct task_struct {
+    ...
+ 	/* Recipient of SIGCHLD, wait4() reports: */
+	struct task_struct __rcu	*parent;
+    ...
+}
+```
+
+
+### プロセスのすべての子/親戚
+
+プロセスの現在の子供、親戚のデータは`children`,`sibling`にそれぞれ格納されます。
+
+```c
+struct task_struct {
+    ...
+ 	/*
+	 * Children/sibling form the list of natural children:
+	 */
+	struct list_head		children;
+	struct list_head		sibling;
+    ...
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
