@@ -127,10 +127,113 @@ struct task_struct {
 
 
 
+## pidhashテーブル
+
+### ハッシュ法について
+
+ハッシュ法とは「目次の作成,分類分け」であり、配列内の要素へのアクセスを高速化するアルゴリズムです。
+例えば、`kill()`システムコールを処理するときなどに、PIDから対応するプロセスディスクリプタを必要とする場合があります。この処理の高速化のために、ハッシュ法が使われています。
+
+
+ハッシュ法では以下の二つの要素が出現します。
+
+- ハッシュ関数（ハッシュ値を作成する）
+- ハッシュテーブル（ハッシュ値の場所へ要素を格納する）
+
+例えば、`10で割ったときのあまりをハッシュ値とする`というハッシュ関数があるとき、
+どんなに膨大な集合でも、必ず10種類のどれかに分類分けできます。
+
+<img src="https://medium-company.com/wp-content/uploads/2021/09/hash1_5.png">
+
+この図の場合、`22`のハッシュ値は`2`であるため、位置`2`の場所に`22`が格納されます。
+これをすべての集合に対して処理を行い、ハッシュテーブルという目次を作成するのが目的です
 
 
 
 from https://www.youtube.com/watch?v=bLw4HocrZiA
+
+
+### PIDハッシュテーブル一覧
+
+実際、Linuxkernelではプロセスディスクリプタの特定のために、4つのハッシュテーブルが導入されました（PID_TYPE_MAXは最近導入？）
+
+これら4つのテーブルを活用することにより、PID,TGID(スレッドグループID),PGID(プロセスグループID),SIDの探索を高速化します。
+
+```c
+enum pid_type
+{
+	PIDTYPE_PID,
+	PIDTYPE_TGID,
+	PIDTYPE_PGID,
+	PIDTYPE_SID,
+	PIDTYPE_MAX,
+};
+
+/*
+ * What is struct pid?
+ *
+ * A struct pid is the kernel's internal notion of a process identifier.
+ * It refers to individual tasks, process groups, and sessions.  While
+ * there are processes attached to it the struct pid lives in a hash
+ * table, so it and then the processes that it refers to can be found
+ * quickly from the numeric pid value.  The attached processes may be
+ * quickly accessed by following pointers from struct pid.
+ *
+ * Storing pid_t values in the kernel and referring to them later has a
+ * problem.  The process originally with that pid may have exited and the
+ * pid allocator wrapped, and another process could have come along
+ * and been assigned that pid.
+ *
+ * Referring to user space processes by holding a reference to struct
+ * task_struct has a problem.  When the user space process exits
+ * the now useless task_struct is still kept.  A task_struct plus a
+ * stack consumes around 10K of low kernel memory.  More precisely
+ * this is THREAD_SIZE + sizeof(struct task_struct).  By comparison
+ * a struct pid is about 64 bytes.
+ *
+ * Holding a reference to struct pid solves both of these problems.
+ * It is small so holding a reference does not consume a lot of
+ * resources, and since a new struct pid is allocated when the numeric pid
+ * value is reused (when pids wrap around) we don't mistakenly refer to new
+ * processes.
+ */
+```
+
+コメント和訳
+
+> ※構造体pidとは何ですか?
+>  * struct pid は、プロセス識別子のカーネルの内部概念です。
+>  ※個々のタスク、プロセスグループ、セッションを指します。その間
+>  * プロセスが接続されており、構造体 pid はハッシュ内に存在します
+>  * テーブルなので、それとそれが参照するプロセスを見つけることができます
+>  * 数値の pid 値から迅速に取得します。付属のプロセスは次のとおりです。
+>  * struct pid からのポインターをたどることですぐにアクセスできます。
+>  *
+>  * pid_t 値をカーネルに保存し、後で参照するには、
+>  * 問題。もともとその pid を持っていたプロセスが終了した可能性があり、
+>  * pid アロケータがラップされており、別のプロセスが来る可能性があります
+>  * そしてそのpidが割り当てられました。
+>  *
+>  * 構造体への参照を保持することでユーザー空間のプロセスを参照
+>  * task_struct に問題があります。ユーザー空間プロセスの終了時
+>  * 役に立たなくなった task_struct はまだ保持されています。 task_struct と
+>  * スタックは約 10K の低カーネル メモリを消費します。より正確に
+>  * これは THREAD_SIZE + sizeof(struct task_struct) です。比較すると
+>  ※ struct pidは約64バイトです。
+>  *
+>  * struct pid への参照を保持すると、これらの問題の両方が解決されます。
+>  ※小さいのでリファレンスを保持してもあまり消費しません
+>  * リソース、および数値 pid が割り当てられたときに新しい構造体 pid が割り当てられるため
+>  * 値は再利用されます (pid がラップアラウンドするとき) 誤って新しいものを参照することはありません
+> 
+> 
+
+
+
+
+
+
+
 
 
 
