@@ -229,10 +229,47 @@ enum pid_type
 > 
 
 
+## PIDハッシュテーブル操作
+
+### 検索
+
+`find_task_by_pid_type(type, nr)`
+
+pidがnrであるプロセスを、type型のハッシュテーブルから検索します。
+- みつかった場合はディスクリプタへのポインタを返し
+- 見つからなかった場合はnullを返します
+
+```c
+/*
+ * Must be called under rcu_read_lock().
+ */
+struct task_struct *find_task_by_pid_ns(pid_t nr, struct pid_namespace *ns)
+{
+	RCU_LOCKDEP_WARN(!rcu_read_lock_held(),
+			 "find_task_by_pid_ns() needs rcu_read_lock() protection");
+	return pid_task(find_pid_ns(nr, ns), PIDTYPE_PID);
+}
+```
 
 
+### 追加
 
+`attach_pid(task, type, nr)`
 
+type型のpidハッシュテーブルのPID番号がnrの場所に、taskが指すプロセスディスクリプタを挿入します。
+
+```c
+/*
+ * attach_pid() must be called with the tasklist_lock write-held.
+ */
+void attach_pid(struct task_struct *task, enum pid_type type)
+{
+	struct pid *pid = *task_pid_ptr(task, type);
+	hlist_add_head_rcu(&task->pid_links[type], &pid->tasks[type]);
+}
+```
+
+pidを外すときは`detach_pid(task, type)`を使用します。
 
 
 
