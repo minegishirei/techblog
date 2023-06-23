@@ -75,13 +75,25 @@ static inline void bit_spin_lock(int bitnum, unsigned long *addr)
 from https://github.com/torvalds/linux/blob/8a28a0b6f1a1dcbf5a834600a9acfbe2ba51e5eb/include/linux/bit_spinlock.h#L16C1-L36C2
 
 
+#### 待ちキューの初期化
+
+待ちキューの頭の初期化はマクロで行います。
+いかがそのコードです。
+
+```c
+#define __WAIT_QUEUE_HEAD_INITIALIZER(name) {					\
+	.lock		= __SPIN_LOCK_UNLOCKED(name.lock),			\
+	.head		= LIST_HEAD_INIT(name.head) }
+
+#define DECLARE_WAIT_QUEUE_HEAD(name) \
+	struct wait_queue_head name = __WAIT_QUEUE_HEAD_INITIALIZER(name)
+```
+
+from https://github.com/torvalds/linux/blob/8a28a0b6f1a1dcbf5a834600a9acfbe2ba51e5eb/include/linux/wait.h#L57C1-L62C67
 
 
+### プロセスへの`sleep_on`関数
 
 
-
-
-
-
-
+from https://github.com/torvalds/linux/blob/8a28a0b6f1a1dcbf5a834600a9acfbe2ba51e5eb/net/sunrpc/sched.c#L447C1-L462C2
 
