@@ -94,6 +94,70 @@ from https://github.com/torvalds/linux/blob/8a28a0b6f1a1dcbf5a834600a9acfbe2ba51
 
 ### プロセスへの`sleep_on`関数
 
+この関数は
+
+- 条件を確認した結果、その結果が成立していないような場合に、*アトミックに*プロセスを待ち状態にするという関数です。
+	- ここでの*アトミック*とは、極めて小さい期間という意味です。
 
 from https://github.com/torvalds/linux/blob/8a28a0b6f1a1dcbf5a834600a9acfbe2ba51e5eb/net/sunrpc/sched.c#L447C1-L462C2
+
+
+
+### 待ち状態への設定
+
+`prepara_to_wait(&wq, &wait, task)`関数は
+
+1. プロセスの状態を第三匹すうの値に設定します
+2. 待ちキューの要素の排他フラグを0(排他的でない)にします
+3. 待ちキューの頭がwqである待ちキューのリストに、待ちキュー要素(wait)を挿入します
+
+このようにして、要素(`wait`)を待ち状態にするのです。
+ちなみに、`prepare_to_wait_exclusive()`も存在しますが、これは2番の排他フラグを1(排他的)に設定します。
+
+
+### 待ち状態からの回復
+
+プロセスは起床すると、すぐに`finish_wait()`関数を呼び出します。
+- `finish_wait()`関数はまず、プロセスの状態を再度`TASK_RUNNING`に設定します。
+	これは、`Schedule()`関数を呼び出す前でも、プロセスが起床しているという条件が成立するようにするためです。
+- 次に、待ちキューのリストから、待ちキュー要素を削除します。
+
+### `wait_event`と`wait_event_interruptible`マクロ
+
+- `wait_event`と`wait_event_interruptible`マクロは呼び出したプロセスを条件が成り立つまで待ちキューで待たせます。
+
+例えば`wait_event(wq, condition)`マクロは次のようなコードです。
+
+```c
+DEFINE_WAIT(__wait);
+for (;;){
+	prepara_to_wait(&wq, &wait, TASK_UNINTERRUPTIBLE);
+	if (condition)
+}
+finish_wait(&wq, &__wait);
+```
+
+
+
+### プロセスの起床
+
+カーネルは次のマクロ(`wake_up`)によって待ちキュー上のプロセスを起こし、`TASK_RUNNING`状態にします。
+
+```c
+void wake_up(wait_queue_head_t, *q){
+	struct list_head *tmp
+	wait_queue_t *curr;
+	list_for_each(tmp, &q->task_list){
+		// wait_queue_tのアドレスの先頭を求める。
+		curr = list_entry(tmp, wait_queue_t, task_list)
+		// func:プロセスの起床関数のアドレス。実際に起床すれば1が帰る。
+		if ( curr->func(curr, TASK_INTERRUPTIBLE|TASK_UNINTERUPTIBLE,0,NULL) && curr->flags)
+			break;
+	}
+}
+
+
+
+
+
 
