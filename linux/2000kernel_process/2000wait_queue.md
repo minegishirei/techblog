@@ -383,3 +383,59 @@ out:
 from https://github.com/torvalds/linux/blob/a92b7d26c743b9dc06d520f863d624e94978a1d9/kernel/sched/core.c#L4120C1-L4317C1
 
 
+
+
+## プロセスの資源利用制限
+
+プロセスには使用可能な資源の量を表す利用制限があります。
+
+制限をかけるファイルは`asm-generic/resource.h`ファイル内に記述されています。
+ほとんどの値はRLIM_INFINITYに設定されており、これはシステム資源を**最大値**で使用可能であることを表します。
+
+from https://github.com/torvalds/linux/blob/6995e2de6891c724bfeb2db33d7b87775f913ad1/include/asm-generic/resource.h#L22
+
+
+```c
+/* SPDX-License-Identifier: GPL-2.0 */
+#ifndef _ASM_GENERIC_RESOURCE_H
+#define _ASM_GENERIC_RESOURCE_H
+
+#include <uapi/asm-generic/resource.h>
+
+
+/*
+ * boot-time rlimit defaults for the init task:
+ */
+#define INIT_RLIMITS							\
+{									\
+	[RLIMIT_CPU]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+	[RLIMIT_FSIZE]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+	[RLIMIT_DATA]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+	[RLIMIT_STACK]		= {       _STK_LIM,  RLIM_INFINITY },	\
+	[RLIMIT_CORE]		= {              0,  RLIM_INFINITY },	\
+	[RLIMIT_RSS]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+	[RLIMIT_NPROC]		= {              0,              0 },	\
+	[RLIMIT_NOFILE]		= {   INR_OPEN_CUR,   INR_OPEN_MAX },	\
+	[RLIMIT_MEMLOCK]	= {    MLOCK_LIMIT,    MLOCK_LIMIT },	\
+	[RLIMIT_AS]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+	[RLIMIT_LOCKS]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+	[RLIMIT_SIGPENDING]	= { 		0,	       0 },	\
+	[RLIMIT_MSGQUEUE]	= {   MQ_BYTES_MAX,   MQ_BYTES_MAX },	\
+	[RLIMIT_NICE]		= { 0, 0 },				\
+	[RLIMIT_RTPRIO]		= { 0, 0 },				\
+	[RLIMIT_RTTIME]		= {  RLIM_INFINITY,  RLIM_INFINITY },	\
+}
+
+#endif
+```
+
+
+
+
+
+
+
+
+
+
+
