@@ -69,3 +69,106 @@ flagsはグローバル定数と連携し、様々な情報を表す。
 from https://github.com/torvalds/linux/blob/6995e2de6891c724bfeb2db33d7b87775f913ad1/include/uapi/linux/sched.h#L7C1-L34C52
 
 
+
+
+## dup_task_structについて
+
+この関数が、プロセスを複製する際のメインとなる関数です。
+
+#### プロセスディスクリプタ用のメモリ確保
+
+`alloc_task_struct()`マクロを実行します。
+マクロは新しい子プロセスのディスクリプタを作り、ローカル変数`tsk`に入れます。
+
+
+```c
+tsk = alloc_task_struct();
+```
+
+#### メイン処理
+
+この関数のやることは次の一行にまとめられます。
+
+```c
+*tsk = *orig
+```
+
+これは、**新しいプロセスである`task_struct`型の`tsk`に対して、元となるプロセス`orig`をコピーしているコードになります。**
+
+
+#### スタック領域の割り当て
+
+その後、新規タスク`tsk`のメンバである`stack`（おそらくスタック領域のこと）に対して、事前に`allock_thread_info()`で確保していた分を割り当てます。
+
+```c
+tsk->stack = ti;
+```
+
+#### プロセスの利用カウンタを変更
+
+新しいプロセスディスクリプタ`tsk`の利用カウンタを2に変更します。
+
+```c
+atomic_set(&tsk->usage,2);
+```
+
+#### tskを返します
+
+```c
+        return tsk;
+```
+
+### プログラム全文
+
+
+```c
+static struct task_struct *dup_task_struct(struct task_struct *orig)
+{
+        struct task_struct *tsk;
+        struct thread_info *ti;
+        int err;
+
+        prepare_to_copy(orig);
+
+        tsk = alloc_task_struct();
+        if (!tsk)
+                return NULL;
+
+        ti = alloc_thread_info(tsk);
+        if (!ti) {
+                free_task_struct(tsk);
+                return NULL;
+        }
+
+        // *tsk = *orig　と同じコード
+        err = arch_dup_task_struct(tsk, orig);
+        if (err)
+                goto out;
+
+        tsk->stack = ti;
+
+        err = prop_local_init_single(&tsk->dirties);
+        if (err)
+                goto out;
+
+        setup_thread_stack(tsk, orig);
+
+#ifdef CONFIG_CC_STACKPROTECTOR
+        tsk->stack_canary = get_random_int();
+#endif
+
+        /* One for us, one for whoever does the "release_task()" (usually parent) */
+        atomic_set(&tsk->usage,2);
+        atomic_set(&tsk->fs_excl, 0);
+#ifdef CONFIG_BLK_DEV_IO_TRACE
+        tsk->btrace_seq = 0;
+#endif
+        tsk->splice_pipe = NULL;
+        return tsk;
+
+out:
+        free_thread_info(ti);
+        free_task_struct(tsk);
+        return NULL;
+}
+```
