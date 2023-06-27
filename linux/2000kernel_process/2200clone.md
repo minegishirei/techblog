@@ -128,6 +128,82 @@ clone,fork,forkvの基盤となるのがこの`do_fork`関数です。
         }
 ```
 
+### 以下全文
+
+一部省略...
+
+```c
+/*
+ *  Ok, this is the main fork-routine.
+ *
+ * It copies the process, and if successful kick-starts
+ * it and waits for it to finish using the VM if required.
+ */
+long do_fork(unsigned long clone_flags,
+    unsigned long stack_start,
+    struct pt_regs *regs,
+    unsigned long stack_size,
+    int __user *parent_tidptr,
+    int __user *child_tidptr)
+{
+    struct task_struct *p;
+    int trace = 0;
+    long nr;
+    /*
+     * Do some preliminary argument and permissions checking before we
+     * actually start allocating stuff
+     * 事前にいくつかの予備的な引数と権限のチェックを行ってください。
+     */
+    if (clone_flags & CLONE_NEWUSER) {
+        if (clone_flags & CLONE_THREAD)
+           return -EINVAL;
+            /* hopefully this check will go away when userns support is
+             * complete
+             */
+        if (!capable(CAP_SYS_ADMIN) || !capable(CAP_SETUID) || !capable(CAP_SETGID))
+            return -EPERM;
+    }
+
+    /*
+     * When called from kernel_thread, don't do user tracing stuff.
+     */
+    if (likely(user_mode(regs)))
+        trace = tracehook_prepare_clone(clone_flags);
+    p = copy_process(clone_flags, stack_start, regs, stack_size,
+         child_tidptr, NULL, trace);
+    /*
+     * Do this prior waking up the new thread - the thread pointer
+     * might get invalid after that point, if the thread exits quickly.
+     */
+    if (!IS_ERR(p)) {
+        /*
+         * We set PF_STARTING at creation in case tracing wants to
+         * use this to distinguish a fully live task from one that
+         * hasn't gotten to tracehook_report_clone() yet.  Now we
+         * clear it and set the child going.
+         */
+        p->flags &= ~PF_STARTING;
+        if (unlikely(clone_flags & CLONE_STOPPED)) {
+            /*
+             * We'll start up with an immediate SIGSTOP.
+             */
+            sigaddset(&p->pending.signal, SIGSTOP);
+            set_tsk_thread_flag(p, TIF_SIGPENDING);
+            __set_task_state(p, TASK_STOPPED);
+        } else {
+            wake_up_new_task(p, clone_flags);
+        }
+
+    } else {
+        nr = PTR_ERR(p);
+    }
+    return nr;
+}
+```
+
+
+
+
 
 
 ## dup_task_structについて
@@ -231,3 +307,112 @@ out:
         return NULL;
 }
 ```
+
+
+
+
+## wake_up_new_taskについて
+
+
+
+```c
+
+/*
+ * wake_up_new_task - wake up a newly created task for the first time.
+ *
+ * This function will do some initial scheduler statistics housekeeping
+ * that must be done for every newly created context, then puts the task
+ * on the runqueue and wakes it.
+ */
+void wake_up_new_task(struct task_struct *p)
+{
+	struct rq_flags rf;
+	struct rq *rq;
+
+	raw_spin_lock_irqsave(&p->pi_lock, rf.flags);
+	WRITE_ONCE(p->__state, TASK_RUNNING);
+#ifdef CONFIG_SMP
+	/*
+	 * Fork balancing, do it here and not earlier because:
+	 *  - cpus_ptr can change in the fork path
+	 *  - any previously selected CPU might disappear through hotplug
+	 *
+	 * Use __set_task_cpu() to avoid calling sched_class::migrate_task_rq,
+	 * as we're not fully set-up yet.
+	 */
+	p->recent_used_cpu = task_cpu(p);
+	rseq_migrate(p);
+	__set_task_cpu(p, select_task_rq(p, task_cpu(p), WF_FORK));
+#endif
+	rq = __task_rq_lock(p, &rf);
+	update_rq_clock(rq);
+	post_init_entity_util_avg(p);
+
+	activate_task(rq, p, ENQUEUE_NOCLOCK);
+	trace_sched_wakeup_new(p);
+	check_preempt_curr(rq, p, WF_FORK);
+#ifdef CONFIG_SMP
+	if (p->sched_class->task_woken) {
+		/*
+		 * Nothing relies on rq->lock after this, so it's fine to
+		 * drop it.
+		 */
+		rq_unpin_lock(rq, &rf);
+		p->sched_class->task_woken(rq, p);
+		rq_repin_lock(rq, &rf);
+	}
+#endif
+	task_rq_unlock(rq, p, &rf);
+}
+```
+
+
+```c
+void activate_task(struct rq *rq, struct task_struct *p, int flags)
+{
+	if (task_on_rq_migrating(p))
+		flags |= ENQUEUE_MIGRATED;
+	if (flags & ENQUEUE_MIGRATED)
+		sched_mm_cid_migrate_to(rq, p);
+
+	enqueue_task(rq, p, flags);
+
+	p->on_rq = TASK_ON_RQ_QUEUED;
+}
+```
+
+
+```c
+static inline void enqueue_task(struct rq *rq, struct task_struct *p, int flags)
+{
+	if (!(flags & ENQUEUE_NOCLOCK))
+		update_rq_clock(rq);
+
+	if (!(flags & ENQUEUE_RESTORE)) {
+		sched_info_enqueue(rq, p);
+		psi_enqueue(p, (flags & ENQUEUE_WAKEUP) && !(flags & ENQUEUE_MIGRATED));
+	}
+
+	uclamp_rq_inc(rq, p);
+	p->sched_class->enqueue_task(rq, p, flags);
+
+	if (sched_core_enabled(rq))
+		sched_core_enqueue(rq, p);
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

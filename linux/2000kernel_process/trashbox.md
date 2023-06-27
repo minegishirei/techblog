@@ -82,20 +82,7 @@ long do_fork(unsigned long clone_flags,
         if (!capable(CAP_SYS_ADMIN) || !capable(CAP_SETUID) || !capable(CAP_SETGID))
             return -EPERM;
     }
-    /*
-     * We hope to recycle these flags after 2.6.26
-     */
-    if (unlikely(clone_flags & CLONE_STOPPED)) {
-        static int __read_mostly count = 100;
-        if (count > 0 && printk_ratelimit()) {
-            char comm[TASK_COMM_LEN];
-            count--;
-            printk(KERN_INFO "fork(): process `%s' used deprecated "
-                "clone flags 0x%lx\n",
-                get_task_comm(comm, current),
-                clone_flags & CLONE_STOPPED);
-            }
-    }
+
     /*
      * When called from kernel_thread, don't do user tracing stuff.
      */
@@ -108,17 +95,6 @@ long do_fork(unsigned long clone_flags,
      * might get invalid after that point, if the thread exits quickly.
      */
     if (!IS_ERR(p)) {
-        struct completion vfork;
-        trace_sched_process_fork(current, p);
-        nr = task_pid_vnr(p);
-        if (clone_flags & CLONE_PARENT_SETTID)
-            put_user(nr, parent_tidptr);
-        if (clone_flags & CLONE_VFORK) {
-            p->vfork_done = &vfork;
-            init_completion(&vfork);
-        }
-        audit_finish_fork(p);
-        tracehook_report_clone(trace, regs, clone_flags, nr, p);
         /*
          * We set PF_STARTING at creation in case tracing wants to
          * use this to distinguish a fully live task from one that
@@ -137,14 +113,6 @@ long do_fork(unsigned long clone_flags,
             wake_up_new_task(p, clone_flags);
         }
 
-        tracehook_report_clone_complete(trace, regs,
-            clone_flags, nr, p);
-
-        if (clone_flags & CLONE_VFORK) {
-            freezer_do_not_count();
-            wait_for_completion(&vfork);
-            freezer_count()                        tracehook_report_vfork_done(p, nr);
-            }
     } else {
         nr = PTR_ERR(p);
     }
@@ -183,7 +151,7 @@ long do_fork(unsigned long clone_flags,
 p = dup_task_struct(current, node);
 ```
 
-```c
+c
 /*
  * This creates a new process as a copy of the old one,
  * but does not actually start it yet.
