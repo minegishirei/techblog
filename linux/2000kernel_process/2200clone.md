@@ -70,6 +70,65 @@ from https://github.com/torvalds/linux/blob/6995e2de6891c724bfeb2db33d7b87775f91
 
 
 
+## do_fork関数について
+
+clone,fork,forkvの基盤となるのがこの`do_fork`関数です。
+プロセスをコピーし、切り離しスタートします。
+
+行っていることは以下の通り
+
+#### 1. 事前に予備的な引数の確認を行う
+
+1. 事前に予備的な引数の確認を行う
+2. プロセスが監視されているかどうか確認し、監視されていれば`CLONE_PTRACE`フラグを立てる
+```c
+    /*
+     * Do some preliminary argument and permissions checking before we
+     * actually start allocating stuff
+     * 事前にいくつかの予備的な引数と権限のチェックを行ってください。
+     */
+    if (clone_flags & CLONE_NEWUSER) {
+        if (clone_flags & CLONE_THREAD)
+           return -EINVAL;
+            /* hopefully this check will go away when userns support is
+             * complete
+             */
+        if (!capable(CAP_SYS_ADMIN) || !capable(CAP_SETUID) || !capable(CAP_SETGID))
+            return -EPERM;
+    }
+```
+
+#### 2. プロセスをコピーする関数を呼び出す
+
+3. `copy_process()`を呼び出す→詳しい内容は`dup_task_struct()`を参照
+```c
+    /*
+     * When called from kernel_thread, don't do user tracing stuff.
+     */
+    if (likely(user_mode(regs)))
+        trace = tracehook_prepare_clone(clone_flags);
+    p = copy_process(clone_flags, stack_start, regs, stack_size,
+         child_tidptr, NULL, trace);
+```
+
+#### エラーが出なければプロセスを走らせる
+
+4. プロセスにエラーがないことを確認出来たら`wake_up_new_task()`を呼び出しプロセスを走らせる
+
+```c
+        if (unlikely(clone_flags & CLONE_STOPPED)) {
+            /*
+             * We'll start up with an immediate SIGSTOP.
+             */
+            sigaddset(&p->pending.signal, SIGSTOP);
+            set_tsk_thread_flag(p, TIF_SIGPENDING);
+            __set_task_state(p, TASK_STOPPED);
+        } else {
+            wake_up_new_task(p, clone_flags);
+        }
+```
+
+
 
 ## dup_task_structについて
 
@@ -115,7 +174,7 @@ atomic_set(&tsk->usage,2);
 #### tskを返します
 
 ```c
-        return tsk;
+return tsk;
 ```
 
 ### プログラム全文
