@@ -1,101 +1,102 @@
 {
-    "explorer.confirmDragAndDrop": false,
-    "keyboard.layout": "com.apple.inputmethod.Korean.2SetKorean",
-    "vim.insertModeKeyBindings": [
-        {
-          "before": ["j", "j"],
-          "after": ["<Esc>"]
-        }
-      ],
-  //nnoremap
-  "vim.normalModeKeyBindingsNonRecursive": [
-    { "before": ["J"], "after": ["1", "0", "j"] }, //移動を早める
-    { "before": ["K"], "after": ["1", "0", "k"] }, //移動を早める
-    { "before": ["H"], "after": ["0"] }, //端に移動
-    { "before": ["L"], "after": ["$"] }, //端に移動
-    { "before": ["<Leader>", "h"], "after": ["<C-w>", "h"] }, //window移動
-    { "before": ["<Leader>", "j"], "after": ["<C-w>", "j"] }, //window移動
-    { "before": ["<Leader>", "k"], "after": ["<C-w>", "k"] }, //window移動
-    { "before": ["<Leader>", "l"], "after": ["<C-w>", "l"] }, //window移動
-    {
-      "before": ["]"],
-      "commands": [{ "command": "C_Cpp.PeekDeclaration" }],
-      "when": ["editorLangId == c"]
-    }, //宣言を見る c専用
-    {
-      "before": ["["],
-      "commands": [{ "command": "editor.action.peekDefinition" }]
-    }, //定義を見る
-    { "before": ["<Leader>", "s"], "commands": [":split"] }, //水平に開く
-    { "before": ["<Leader>", "v"], "commands": [":vsplit"] }, //水平にを閉じる
-    { "before": [">"], "commands": ["editor.action.indentLines"] }, //インデント調整(repeat可能)
-    { "before": ["<"], "commands": ["editor.action.outdentLines"] }, //インデント調整(repeat可能)
-    { "before": ["<Leader>", "u"], "after": ["g", "t"] }, //tab移動
-    { "before": ["<Leader>", "y"], "after": ["g", "T"] }, //tab移動
-    { "before": ["<Leader>", "x"], "commands": [":q!"] }, //tabを閉じる
-    { "before": ["<Leader>", "q"], "commands": [":qa!"] }, //すべてを閉じる
-    { "before": ["<Leader>", "w"], "commands": [":wa"] }, //すべてを保存
-    { "before": ["<Leader>", "o"], "after": ["o", "<ESC>"] }, //空の行を挿入
-    { "before": ["<Leader>", "O"], "after": ["O", "<ESC>"] }, //空の行を挿入
-    {
-      "before": ["<Leader>", "c"],
-      "commands": [{ "command": "editor.action.commentLine" }]
-    },
-    //コメント
-    {
-      "before": ["<Leader>", ":"],
-      "commands": [{ "command": "workbench.action.showCommands" }]
-    },
-    //コマンドパレット
-    {
-      "before": ["<Leader>", ";"],
-      "commands": [{ "command": "workbench.action.quickOpen" }]
-    },
-    //ファイル検索
-    { "before": ["<CR>"], "after": ["G"] }, //最終行へ
-    { "before": ["<BS>"], "after": ["g", "g"] }, //先頭行へ
-    // 検索結果を画面中央に
-    { "before": ["n"], "after": ["n", "z", "z"] },
-    { "before": ["N"], "after": ["N", "z", "z"] },
-    { "before": ["*"], "after": ["*", "z", "z"] },
-    { "before": ["#"], "after": ["#", "z", "z"] },
+  "explorer.confirmDragAndDrop": false,
+  "keyboard.layout": "com.apple.inputmethod.Korean.2SetKorean",
+  "vim.leader": "<space>",
+  "vim.insertModeKeyBindings": [
+      {
+        "before": ["j", "j"],
+        "after": ["<Esc>"]
+      }
+    ],
+//nnoremap
+"vim.normalModeKeyBindingsNonRecursive": [
+  { "before": ["J"], "after": ["1", "0", "j"] }, //移動を早める
+  { "before": ["K"], "after": ["1", "0", "k"] }, //移動を早める
+  { "before": ["H"], "after": ["5","h"] }, //端に移動
+  { "before": ["L"], "after": ["5","l"] }, //端に移動
+  { "before": ["<Leader>", "h"], "after": ["<C-w>", "h"] }, //window移動
+  { "before": ["<Leader>", "j"], "after": ["<C-w>", "j"] }, //window移動
+  { "before": ["<Leader>", "k"], "after": ["<C-w>", "k"] }, //window移動
+  { "before": ["<Leader>", "l"], "after": ["<C-w>", "l"] }, //window移動
+  {
+    "before": ["]"],
+    "commands": [{ "command": "C_Cpp.PeekDeclaration" }],
+    "when": ["editorLangId == c"]
+  }, //宣言を見る c専用
+  {
+    "before": ["["],
+    "commands": [{ "command": "editor.action.peekDefinition" }]
+  }, //定義を見る
+  { "before": ["<Leader>", "s"], "commands": [":split"] }, //水平に開く
+  { "before": ["<Leader>", "v"], "commands": [":vsplit"] }, //水平にを閉じる
+  { "before": [">"], "commands": ["editor.action.indentLines"] }, //インデント調整(repeat可能)
+  { "before": ["<"], "commands": ["editor.action.outdentLines"] }, //インデント調整(repeat可能)
+  { "before": ["<Leader>", "u"], "after": ["g", "t"] }, //tab移動
+  { "before": ["<Leader>", "y"], "after": ["g", "T"] }, //tab移動
+  { "before": ["<Leader>", "x"], "commands": [":q!"] }, //tabを閉じる
+  { "before": ["<Leader>", "q"], "commands": [":qa!"] }, //すべてを閉じる
+  { "before": ["<Leader>", "w"], "commands": [":wa"] }, //すべてを保存
+  { "before": ["<Leader>", "o"], "after": ["o", "<ESC>"] }, //空の行を挿入
+  { "before": ["<Leader>", "O"], "after": ["O", "<ESC>"] }, //空の行を挿入
+  {
+    "before": ["<Leader>", "c"],
+    "commands": [{ "command": "editor.action.commentLine" }]
+  },
+  //コメント
+  {
+    "before": ["<Leader>", ":"],
+    "commands": [{ "command": "workbench.action.showCommands" }]
+  },
+  //コマンドパレット
+  {
+    "before": ["<Leader>", ";"],
+    "commands": [{ "command": "workbench.action.quickOpen" }]
+  },
+  //ファイル検索
+  { "before": ["<CR>"], "after": ["G"] }, //最終行へ
+  { "before": ["<BS>"], "after": ["g", "g"] }, //先頭行へ
+  // 検索結果を画面中央に
+  { "before": ["n"], "after": ["n", "z", "z"] },
+  { "before": ["N"], "after": ["N", "z", "z"] },
+  { "before": ["*"], "after": ["*", "z", "z"] },
+  { "before": ["#"], "after": ["#", "z", "z"] },
 
-    //Surround
-    { "before": ["s"], "after": ["y", "s"] }, //surround add
+  //Surround
+  { "before": ["s"], "after": ["y", "s"] }, //surround add
 
-    //easy motion
-    { "before": ["f"], "after": ["<Leader>", "<Leader>", "2", "s"] }, //easymotion 2s
+  //easy motion
+  { "before": ["f"], "after": ["<Leader>", "<Leader>", "2", "s"] }, //easymotion 2s
 
-    //Multi-Cursor Mode
-    //prefix Ctrl
-    { "before": ["<C-n>"], "after": ["g", "b"] }, //選択した文字に対して増やす
-    {
-      "before": ["<C-k>"],
-      "commands": [{ "command": "editor.action.insertCursorAbove" }]
-    },
-    {
-      "before": ["<C-j>"],
-      "commands": [{ "command": "editor.action.insertCursorBelow" }]
-    },
+  //Multi-Cursor Mode
+  //prefix Ctrl
+  { "before": ["<C-n>"], "after": ["g", "b"] }, //選択した文字に対して増やす
+  {
+    "before": ["<C-k>"],
+    "commands": [{ "command": "editor.action.insertCursorAbove" }]
+  },
+  {
+    "before": ["<C-j>"],
+    "commands": [{ "command": "editor.action.insertCursorBelow" }]
+  },
 
-    //外部プラグイン呼び出し
-    // {
-    //   "before": ["<Leader>", "@"],
-    //   "commands": [
-    //     { "command": "markdown-preview-enhanced.openPreviewToTheSide" }
-    //   ]
-    // } //markdownで開く
-    {
-      "before": ["u"],
-      "commands": ["undo"]
-    },
-    {
-      "before": ["<C-r>"],
-      "commands": ["redo"]
-    },
-    {
-      "before": ["leader", "d"],
-      "commands": ["editor.action.revealDefinition"]
-    }
-  ]
+  //外部プラグイン呼び出し
+  // {
+  //   "before": ["<Leader>", "@"],
+  //   "commands": [
+  //     { "command": "markdown-preview-enhanced.openPreviewToTheSide" }
+  //   ]
+  // } //markdownで開く
+  {
+    "before": ["u"],
+    "commands": ["undo"]
+  },
+  {
+    "before": ["<C-r>"],
+    "commands": ["redo"]
+  },
+  {
+    "before": ["leader", "d"],
+    "commands": ["editor.action.revealDefinition"]
+  }
+]
 }
