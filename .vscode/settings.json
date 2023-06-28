@@ -10,6 +10,10 @@
             "after": ["<Esc>"]
         }
     ],
+    "inQuickOpen": {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpenSelectNext",
+    },
     "vim.useSystemClipboard": true,
     "workbench.editorAssociations": {
         "*.db": "default"
