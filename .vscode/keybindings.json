@@ -1,0 +1,215 @@
+// 既定値を上書きするには、このファイル内にキー バインドを挿入しますauto[]
+[
+    // サジェスチョン操作
+    {
+        "key": "ctrl+j",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    //コマンドパレットの移動
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen "
+    },
+    //editorじゃない時の操作(editorではvscodevimのコマンドが有効になる)
+    //tabを閉じる
+    {
+        "key": "space x",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "!editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen && !sideBarFocus && !panelFocus"
+    },
+    //tabを進める
+    {
+        "key": "space u",
+        "command": "workbench.action.nextEditor",
+        "when": "!editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen && !sideBarFocus && !panelFocus"
+    },
+    //tabを戻す
+    {
+        "key": "space y",
+        "command": "workbench.action.previousEditor",
+        "when": "!editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen && !sideBarFocus && !panelFocus"
+    },
+    //markdownのpreviewから戻る
+    {
+        "key": "space h",
+        "command": "workbench.action.focusPreviousGroup",
+        "when": "!editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen && !sideBarFocus && !panelFocus"
+    },
+    //コマンドパレットを開く
+    {
+        "key": "space oem_1",
+        "command": "workbench.action.showCommands",
+        "when": "!editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen && !sideBarFocus && !panelFocus"
+    },
+    //ファイルを開く
+    {
+        "key": "space oem_plus",
+        "command": "workbench.action.quickOpen",
+        "when": "!editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen && !sideBarFocus && !panelFocus"
+    },
+    /* -------------------------------------------------------------------------- */
+    /*                                  sidebar                                   */
+    /* -------------------------------------------------------------------------- */
+    //サイドバー表示(toggle)
+    {
+        "key": "shift+space shift+space",
+        "command": "workbench.action.focusFirstEditorGroup"
+        // "command": "workbench.action.toggleSidebarVisibility",
+        // "when": "!explorerViewletVisible && !searchViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+    },
+    {
+        "key": "shift+space shift+space",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "explorerViewletVisible && !searchViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+    },
+    // サイドバーからの移動
+    {
+        "key": "shift+space l",
+        "command": "workbench.action.focusFirstEditorGroup"
+        // "when": "explorerViewletVisible && explorerViewletFocus && !editorFocus && !inQuickOpen"
+    },
+    /* -------------------------------- explorer -------------------------------- */
+    //explorer表示
+    {
+        "key": "shift+space shift+e",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "shift+space e",
+        "command": "workbench.view.explorer"
+    },
+    //エクスプローラー間移動
+    {
+        "key": "j",
+        "command": "list.focusDown",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    {
+        "key": "k",
+        "command": "list.focusUp",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    //新規ファイル作成
+    {
+        "key": "n",
+        "command": "explorer.newFile",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    //新規フォルダ作成
+    {
+        "key": "f",
+        "command": "explorer.newFolder",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    //エクスプローラーでフォルダを開く
+    {
+        "key": "e",
+        "command": "revealFileInOS",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    //リネーム
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    //削除
+    {
+        "key": "d",
+        "command": "deleteFile",
+        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+    },
+    // //svn操作
+    // {
+    //     "key": "s",
+    //     "command": "tortoise-svn ...",
+    //     "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus",
+    //     "args":"explorerPath",
+    // },
+    /* ----------------------------- grep検索(sidebar) ---------------------------- */
+    {
+        "key": "shift+space shift+f",
+        "command": "workbench.action.findInFiles",
+        "when": "!searchInputBoxFocus"
+    }, 
+    // 検索ボックスへ移動
+    {
+        "key": "shift+space f",
+        "command": "workbench.action.findInFiles",
+        "when": "!searchInputBoxFocus"
+    },
+    /* ---------------------------- debug(sidebar) ---------------------------- */
+    {
+        "key": "shift+space ctrl+d",
+        "command": "workbench.view.debug"
+    },
+    {
+        "key": "shift+space d",
+        "command": "workbench.view.debug"
+    },
+    /* -------------------------- version管理(sidebar) -------------------------- */
+    {
+        "key": "shift+space shift+s",
+        "command": "workbench.view.scm"
+    },
+    {
+        "key": "shift+space s",
+        "command": "workbench.view.scm"
+    },
+    /* --------------------------- plugin管理(sidebar) -------------------------- */
+    {
+        "key": "shift+space shift+z",
+        "command": "workbench.view.extensions"
+    },
+    {
+        "key": "shift+space z",
+        "command": "workbench.view.extensions"
+    },
+    /* -------------------------------------------------------------------------- */
+    /*                                    Panel                                   */
+    /* -------------------------------------------------------------------------- */
+    //パネルから戻る
+    {
+        "key": "shift+space k",
+        "command": "workbench.action.focusLastEditorGroup",
+        "when": "panelFocus && !editorTextFocus && !editorHasSelection && !editorHasMultipleSelections && !inQuickOpen"
+    },
+    // //パネルを出す
+    // {
+    //   "key": "ctrl+space ctrl+p",
+    //   "command": "workbench.action.togglePanel",
+    //   "when": "vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+    // },
+    /* ---------------------------- terminal(panel) --------------------------- */
+    {
+        "key": "shift+space shift+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+    },
+    {
+        "key": "shift+space t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+    },
+    /* ---------------------------- error画面(panel) ---------------------------- */
+    {
+        "key": "shift+space shift+q",
+        "command": "workbench.actions.view.problems"
+    },
+    {
+        "key": "shift+space q",
+        "command": "workbench.actions.view.problems"
+    }
+]
