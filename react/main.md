@@ -90,7 +90,7 @@ function App() {
   const [name, setName] = useState();
   const [content, setContent] = useState();
 
-  // //////// 投稿一覧 ///////////
+  // //////// 投稿一覧 //////////
   // useSelectorを使用することで、どんなデータにもアクセスすることができる
   const postlist = useSelector((state) => state.posts.value); // createSliceの中のnameを参照している。なので今回は、state.postsを使用している。
   // console.log(postlist) // データがみえるかどうか確認。
