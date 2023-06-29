@@ -12,7 +12,7 @@
 "vim.normalModeKeyBindingsNonRecursive": [
   { "before": ["j"], "after": ["j","z","z"]},
   { "before": ["k"], "after": ["k","z","z"]},
-  { "before": ["A"], "after": ["A","<ESC>"] },
+  { "before": ["A"], "after": ["A","<ESC>"] }, //移動を早める
   { "before": ["J"], "after": ["1", "0", "j", "z", "z"] }, //移動を早める
   { "before": ["K"], "after": ["1", "0", "k", "z", "z"] }, //移動を早める
   { "before": ["H"], "after": ["5","h"] }, //端に移動
