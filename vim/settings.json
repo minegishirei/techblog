@@ -10,8 +10,8 @@
     ],
 //nnoremap
 "vim.normalModeKeyBindingsNonRecursive": [
-  { "before": ["J"], "after": ["1", "0", "j"] }, //移動を早める
-  { "before": ["K"], "after": ["1", "0", "k"] }, //移動を早める
+  { "before": ["J"], "after": ["1", "0", "j", "z", "z"] }, //移動を早める
+  { "before": ["K"], "after": ["1", "0", "k", "z", "z"] }, //移動を早める
   { "before": ["H"], "after": ["5","h"] }, //端に移動
   { "before": ["L"], "after": ["5","l"] }, //端に移動
   { "before": ["<Leader>", "h"], "after": ["<C-w>", "h"] }, //window移動
