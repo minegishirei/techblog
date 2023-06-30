@@ -44,6 +44,12 @@ https://www.amazon.com/Apollo-Robbins/s?k=Apollo+Robbins
 
 ### 心理学:★★★
 
+ふとした時に使える場面が増えてきているのが気づいた。
+
+- ゆびスマ
+- じゃんけん
+
+
 
 
 ```
