@@ -33,19 +33,12 @@ techblogの説明
 ## 項目一覧
 
 - html/css :webサイトのフロントで使う技術その1
-
 - JavaScript :webサイトのフロントで使う技術その2
-
 - Python : Webサイトのバックエンドで使う技術。 機械学習や統計、webスクレイピングなどデータ集計やAI関連が得意
-
 - SQL :データベース関連で使う技術。
-
 - Powershell :windowsのオートメーションで使う技術
-
 - Management :プロジェクトの管理や一員としての動きについて
-
 - Inhouse-SE :社内SEの仕事について
-
 - Career :キャリアについて
 
 
