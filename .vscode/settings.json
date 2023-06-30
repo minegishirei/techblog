@@ -1,19 +1,5 @@
 {
     "workbench.colorTheme": "Default Dark+",
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
-        }, 
-        {
-            "before": ["ｊ", "ｊ"],
-            "after": ["<Esc>"]
-        }
-    ],
-    "inQuickOpen": {
-        "key": "ctrl+j",
-        "command": "workbench.action.quickOpenSelectNext",
-    },
     "vim.useSystemClipboard": true,
     "workbench.editorAssociations": {
         "*.db": "default"

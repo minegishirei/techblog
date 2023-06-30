@@ -31,7 +31,7 @@
     "commands": [{ "command": "editor.action.peekDefinition" }]
   }, //定義を見る
   { "before": ["<Leader>", "s"], "commands": [":split"] }, //水平に開く
-  { "before": ["<Leader>", "v"], "commands": [":vsplit"] }, //水平にを閉じる
+   "before": ["<Leader>", "v"], "commands": [":vsplit"] }, //水平にを閉じる
   { "before": [">"], "commands": ["editor.action.indentLines"] }, //インデント調整(repeat可能)
   { "before": ["<"], "commands": ["editor.action.outdentLines"] }, //インデント調整(repeat可能)
   { "before": ["<Leader>", "u"], "after": ["g", "t"] }, //tab移動
