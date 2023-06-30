@@ -1,7 +1,4 @@
 
-これからの人生において、自分自身が選択を迷わないように方向性を決める。
-
-
 ## 現在の姿
 
 エンジニアとしてはめっちゃ強い。
@@ -14,24 +11,20 @@ https://www.amazon.com/Apollo-Robbins/s?k=Apollo+Robbins
 
 ### エンジニア:★★★★★
 
+自分のエンジニアリングを語るならまず以下の二つ。
+
+- Vim
+- Linux
+
+この二つは他の人がそう簡単には手を出せないエリアだと思う。
+
+この二つをメインの主軸とつつ他のシステム開発の場数をこなせば良い。
+自分の代名詞となる分野を持っている人は
 
 
-- エンジニアリング
-    1. アーキテクト
-        - [docker 3年](https://techblog.short-tips.info/docker/)
-        - [AWS]()
-        - [Archtecture](https://techblog.short-tips.info/inhouse_se/)
-        - [IaC](https://techblog.short-tips.info/iac/0000IAC.md)
-        - [AWS]()
-    2. コーディング
-        - [Python 6年](https://techblog.short-tips.info/python/)
-        - [Django 4年](https://techblog.short-tips.info/python/)
-        - [Javascript 4年](https://techblog.short-tips.info/javascript/)
-        - [SQL 3年](https://techblog.short-tips.info/sql/)
-        - [React-Native 1年]()
-        - [VB 1年]()
-        - [C# 2年]()
-        - [Lisp]
+
+
+
 
 今やっているlispは自分のコードの品質の向上のための一手。
 自分の実力を上げるための未来への投資。
