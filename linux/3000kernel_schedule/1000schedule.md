@@ -6,7 +6,113 @@
 
 # schedule関数の目的
 
-schedule()がスケジューラーのメイン処理。schedule()はRunQueueから(動的)優先度の高いプロセスを選択して実行する。
+`schedule()`がスケジューラーのメイン処理。schedule()はRunQueueから(動的)優先度の高いプロセスを選択して実行する。
+
+概念的なコードは以下の通り。
+
+
+
+```c
+schedule(){
+
+    // 自CPUのRunQueueを取得
+    rq = this_rq(); 
+    // prevをRunQueueから取り外す
+    deactivate_task(prev, rq) 
+
+    // RunQueueにプロセスがない場合
+    if (!rq->nr_running) {
+        // 他のCPUのRunQueueからプロセスを持って来る
+        idle_balance(cpu, rq) 
+    } else {
+        // タスク待ち
+        if (dependent_sleeper()) {
+            // Idle状態にする 
+            next = rq->idle;
+            // switch_tasksに移動
+            goto switch_tasks;
+        }
+    }
+
+    // RunQueueのActiveリストにプロセスがない場合
+    if (unlikely(!array->nr_active)) {
+        //全RUNNINGプロセスがCPU時間を使い切った事になる
+        rq->active <-> rq->expireを入れ換える
+    }
+
+    // 次の実行プロセスを選択
+    idx = sched_find_first_bit(array->bitmap);
+    queue = array->queue + idx;
+    next = list_entry(queue->next, task_t, run_list);
+
+    if (!rt_task(next) && next->activated > 0) {
+        /* 選択したプロセスが非リアルタイムプロセスで
+           Wakeup後、初回実行の時 (*3) */
+
+        recalc_task_prio() - 動的優先順位再計算
+            sleepしていた時間に応じてsleep_avgを更新し
+            effective_prio(p)で優先順位を計算する
+
+        RunQueue内の優先度に対応するリストにつなぎ直す
+    }
+
+switch_tasks:
+    prev->sleep_avgを使用したCPU時間分だけ減算
+    (この影響で動的優先度は下がっていく)
+
+    if (選択したプロセスが以前と異なる) {
+        prepare_task_switch(rq, next)
+        context_switch(rq, prev, next) - プロセス切替え
+
+            MMの切替え
+            if (next->mmがない) { - Kernel Process
+                アドレス空間を持たないので切替え不要
+
+                next->active_mm = prev->active_mm;
+                <-- 前のプロセスからActiveマップを引き継ぐ
+                enter_lazy_tlb(prev->active_mm, next)
+            } else {
+                switch_mm(prev->active_mm,next->mm,next)
+                    :
+                    load_cr3(next->mm->pgd) - PageTable切替え
+            }
+            :
+            switch_to(prev, next, prev) - レジスタ、スタックの切替え
+        barrier()
+        finish_task_switch(this_rq(), prev);
+    }
+}
+```
+
+
+
+#### RunQueueの取得
+
+- `rq`はRunQueueのことで、優先度の高いプロセス順にタスク（おそらく`task_struct`型）が格納されている。
+- 取得方法は以下の通り
+
+```c
+        cpu = smp_processor_id();
+        rq = cpu_rq(cpu);
+        prev = rq->curr;
+```
+
+
+#### 競合を防ぐために`rq`のロックを取得する
+
+```c
+rq_lock(rq, &rf);
+```
+
+このlockは後程以下のコードで解除される
+
+```c
+rq_unpin_lock(rq, &rf);
+raw_spin_rq_unlock_irq(rq);
+```
+
+
+
 
 
 
