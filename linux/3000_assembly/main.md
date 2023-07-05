@@ -119,7 +119,9 @@ CPUの最適化ができるのがアセンブリ言語のメリット。
 
 
 
+レジスタ数
 
+from https://www.youtube.com/watch?v=95WZlyJUppk
 
 
 
