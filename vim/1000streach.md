@@ -78,7 +78,10 @@ vscodeなどインデント整理をデフォルトでサポートしている�
 
 - `Shift+Ctrl+E`でエクスプローラーへ移動
 
+## git push
 
+- `Ctrl+Shift+P`
+- `push`
 
 
 
