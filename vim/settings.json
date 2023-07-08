@@ -1,5 +1,6 @@
 {
   "explorer.confirmDragAndDrop": false,
+  "vim.useSystemClipboard": true,
   "keyboard.layout": "com.apple.inputmethod.Korean.2SetKorean",
   "vim.leader": "<space>",
   "vim.insertModeKeyBindings": [
@@ -49,8 +50,7 @@
         "J"
       ],
       "after": [
-        "1",
-        "0",
+        "5",
         "j",
         "z",
         "z"
@@ -61,8 +61,7 @@
         "K"
       ],
       "after": [
-        "1",
-        "0",
+        "5",
         "k",
         "z",
         "z"
@@ -126,6 +125,36 @@
         "l"
       ]
     }, //window移動
+    {
+      "before": [
+        "<Leader>",
+        "m"
+      ],
+      "after": [
+        ":",
+        "m",
+        "a",
+        "r",
+        "k",
+        "s",
+        "<Enter>"
+      ]
+    },
+    {
+      "before": [
+        ":",
+        "m"
+      ],
+      "after": [
+        ":",
+        "m",
+        "a",
+        "r",
+        "k",
+        "s",
+        "<Enter>"
+      ]
+    },
     {
       "before": [
         "]"
@@ -345,15 +374,7 @@
       ]
     },
     //Surround
-    {
-      "before": [
-        "s"
-      ],
-      "after": [
-        "y",
-        "s"
-      ]
-    }, //surround add
+    // { "before": ["s"], "after": ["y", "s"] }, //surround add
     //easy motion
     //{ "before": ["f"], "after": ["<Leader>", "<Leader>", "2", "s"] }, //easymotion 2s
     //Multi-Cursor Mode
