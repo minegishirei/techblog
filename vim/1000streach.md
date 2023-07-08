@@ -63,13 +63,7 @@ hhhhlllllhhhhhllll
 
 ## Exploreへ移動
 
-
 - `Shift+Ctrl+E`でエクスプローラーへ移動
-
-
-        
-
-
 
 
 
