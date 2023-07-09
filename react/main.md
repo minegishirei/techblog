@@ -82,54 +82,54 @@ import { addPost } from './features/Posts'; // 掲示板投稿するための関
 import { useState } from 'react';
 
 
-function App() {
+function app() {
 
   // //////// 入力取得 //////////
   // ユーザーが入力したデータを保持しておくための関数
-  // reduxを使っているのにuseStateを使用していたら、それはonClickと結びつけるためだけの一時変数位に思っておくのでちょうどいい。
-  const [name, setName] = useState();
-  const [content, setContent] = useState();
+  // reduxを使っているのにusestateを使用していたら、それはonclickと結びつけるためだけの一時変数位に思っておくのでちょうどいい。
+  const [name, setname] = usestate();
+  const [content, setcontent] = usestate();
 
   // //////// 投稿一覧 //////////
-  // useSelectorを使用することで、どんなデータにもアクセスすることができる
-  const postlist = useSelector((state) => state.posts.value); // createSliceの中のnameを参照している。なので今回は、state.postsを使用している。
+  // useselectorを使用することで、どんなデータにもアクセスすることができる
+  const postlist = useselector((state) => state.posts.value); // createsliceの中のnameを参照している。なので今回は、state.postsを使用している。
   // console.log(postlist) // データがみえるかどうか確認。
 
-  const dispatch = useDispatch();
+  const dispatch = usedispatch();
 
   // 投稿ボタン
-  const handleClick= () => {
-    // addPostはSliceのreducer。 アクションを返すことができる。
-    const addpostaction = addPost({
+  const handleclick= () => {
+    // addpostはsliceのreducer。 アクションを返すことができる。
+    const addpostaction = addpost({
       id: postlist.length,
       name: name,
       content: content
     })
     // 帰ってきたアクションを、dispatchでstoreに送る。
     dispatch(addpostaction)
-    setName("")
-    setContent("")
+    setname("")
+    setcontent("")
   }
   return (
-    <div className="App">
+    <div classname="app">
       <div>
         <h1>
           react redux 掲示板
         </h1>
       </div>
-      <div className='addPost'>
-        <input type='text' placeholder='お名前' onChange={(e) => setName(e.target.value)}></input>
-        <input type='text' placeholder='投稿内容' onChange={(e)=> setContent(e.target.value)}></input>
-        <button onClick={() => handleClick()}>投稿</button>
+      <div classname='addpost'>
+        <input type='text' placeholder='お名前' onchange={(e) => setname(e.target.value)}></input>
+        <input type='text' placeholder='投稿内容' onchange={(e)=> setcontent(e.target.value)}></input>
+        <button onclick={() => handleclick()}>投稿</button>
         <hr />
       </div>
-      <div className='displayPosts'>
+      <div classname='displayposts'>
         {postlist.map((post)=>(
-          <div key={post.id} className='post'>
+          <div key={post.id} classname='post'>
             <h1>
               {post.name}
             </h1>
-            <h1 className='postContent'>
+            <h1 classname='postcontent'>
               {post.content}
             </h1>
             <button>削除</button>
