@@ -15,6 +15,8 @@ https://qiita.com/DogK0625/items/16535e6732ec3ba238c2
 
 - `Ctrl + K` : カーソルから右の文字を全て消す。
     - 使い所 : `Ctrl + R`で過去のコマンドを遡った後、オプションを変更するときに特定の位置から末尾までの削除する
+- `Ctrl + B` : 左にカーソルを移動させる
+    - 使い所 : `Ctrl + K`でオプションを変更するためにカーソルを移動させるなど。
 
 
 
@@ -26,6 +28,7 @@ https://qiita.com/DogK0625/items/16535e6732ec3ba238c2
 cat hoge.txt | pbcopy
 ```
 
+from https://qiita.com/Kzno/items/6f2fa98256bdffb0fd43
 
 
 
