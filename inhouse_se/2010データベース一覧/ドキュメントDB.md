@@ -111,7 +111,7 @@ db.users.update({username:"hashito"}, {$set:{username:"hashito-v2"}})
 
 実行結果を確認する。
 
-```
+```js
 test> db.users.update({username:"hashito"}, {$set:{username:"hashito-v2"}})
 {
   acknowledged: true,
