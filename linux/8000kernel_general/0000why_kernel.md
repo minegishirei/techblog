@@ -213,10 +213,105 @@ pythonはインタプリタ言語であるため、まず最初に読み込み�
 
 # CPU
 
-Linuxは複数のコンピューターアーキテクチャ
+Linuxは複数のコンピューターアーキテクチャ上で動作します。
+（ここでのコンピューターアーキテクチャはCPUファミリアと同じ意味です。）
+現在使用しているLinuxがどのCPUアーキテクチャであるかを把握するには`dmidecode`コマンドを使用します。
+もし出力結果が得られない場合には、`lscpu`コマンドを使用するのがよいでしょう。
+
+```sh
+[root@ac93e82b6845 myworking]# lscpu
+Architecture:            x86_64
+  CPU op-mode(s):        32-bit, 64-bit
+  Address sizes:         46 bits physical, 48 bits virtual
+  Byte Order:            Little Endian
+CPU(s):                  20
+  On-line CPU(s) list:   0-19
+Vendor ID:               GenuineIntel
+  Model name:            12th Gen Intel(R) Core(TM) i7-12700
+    CPU family:          6
+    Model:               151
+    Thread(s) per core:  2
+    Core(s) per socket:  10
+    Socket(s):           1
+    Stepping:            2
+    BogoMIPS:            4224.00
+    Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse ss
+                         e2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop
+                         _tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline
+                         _timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs
+                         ibpb stibp ibrs_enhanced tpr_shadow vnmi ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi
+                         2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves avx_vnni u
+                         mip waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm serialize flush_l1d arch_capabili
+                         ties
+Virtualization features:
+  Virtualization:        VT-x
+  Hypervisor vendor:     Microsoft
+  Virtualization type:   full
+Caches (sum of all):
+  L1d:                   480 KiB (10 instances)
+  L1i:                   320 KiB (10 instances)
+  L2:                    12.5 MiB (10 instances)
+  L3:                    25 MiB (1 instance)
+Vulnerabilities:
+  Itlb multihit:         Not affected
+  L1tf:                  Not affected
+  Mds:                   Not affected
+  Meltdown:              Not affected
+  Mmio stale data:       Not affected
+  Retbleed:              Mitigation; Enhanced IBRS
+  Spec store bypass:     Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+  Spectre v1:            Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+  Spectre v2:            Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence
+  Srbds:                 Not affected
+  Tsx async abort:       Not affected
+```
+
+lscpuコマンドの実行結果、
+
+- cpuファミリアは`x86_64`
+- CPU数は`20`
+- CPUのモデルは`Intel 12世代`
+
+さらにコンパクトな情報は`uanme -a`で確認できます。
+
+```sh
+[root@ac93e82b6845 myworking]# uname -a
+Linux ac93e82b6845 5.15.90.1-microsoft-standard-WSL2 #1 SMP Fri Jan 27 02:56:13 UTC 2023 x86_64 GNU/Linux
+```
+
+## CPUファミリア一覧
+
+
+### x86 CPUファミリア
+
+x86アーキテクチャはIntelが開発した命令セットファミリでのちにAMDに提供されます。
+
+- `Intel 64bit cpu`はカーネル内部では`x64`または`x86_64`と表記されています。
+- `Intel-32bit`はカーネル内部では`x86`と表記されます。
+- `AMD84`はカーネル内部では`amd64`と表記されます。
+
+アウトオブオーダー実行への依存とエネルギー効率の悪さがデメリットとしてあげられますが、
+`x86`はいま最も使用されているCPUファミリアです。
+
+> アウト・オブ・オーダー実行（アウト・オブ・オーダーじっこう、英: out-of-order execution）とは、高性能プロセッサにおいてクロックあたりの命令実行数（IPC値）を増やし性能を上げるための手法の1つで、機械語プログラム中の命令の並び順に依らず、データなどの依存関係から見て処理可能な命令について逐次開始・実行・完了させるものである。頭文字で'OoO'あるいは'O-o-O'とも書かれる。「順序を守らない実行」の意である。
+
+from https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%A6%E3%83%88%E3%83%BB%E3%82%AA%E3%83%96%E3%83%BB%E3%82%AA%E3%83%BC%E3%83%80%E3%83%BC%E5%AE%9F%E8%A1%8C
+
+x86 CPUファミリアに対する命令は`x86アセンブラ`として定義されており、
+x86アーキテクチャは8個の汎用レジスタ (GPR) と6個のセグメントレジスタ、1個のフラグレジスタ、1個の命令ポインタを持っている。
+
+- RAX/EAX/AX/AL/AH : 「アキュムレータレジスタ」と呼ばれる。算術演算操作の結果が格納される。
+- RCX/ECX/CX/CL/CH : 「カウンタレジスタ」と呼ばれる。シフトローテート命令とループ命令に使用される。
+- RDX/EDX/DX/DL/DH : 「データレジスタ」と呼ばれる。算術演算操作とI/O操作に使用される。
+- RBX/EBX/BX/BL/BH : 「ベースレジスタ」と呼ばれる。セグメントモードでのDS（後述）に格納されたデータを指し示すために使用される。
+- RSP/ESP/SP : 「スタックポインターレジスタ」と呼ばれる。スタックのトップを指し示すポインタ。
+- RBP/EBP/BP : 「スタックベースポインタレジスタ」と呼ばれる。スタックのベースを指し示すのに使用される。
+- RSI/ESI/SI : 「ソースレジスタ」と呼ばれる。ストリーム操作コマンド（たとえば MOV命令）でのソース（入力元）へのポインタとして使用される。
+- RDI/EDI/DI : 「デスティネーションレジスタ」と呼ばれる。ストリーム操作コマンドでの転送先（←英語でデスティネーションという. 出力先のようなもの）へのポインタとして使用される。
 
 
 
+### ARM CPUファミリア
 
 
 
