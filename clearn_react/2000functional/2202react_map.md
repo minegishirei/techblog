@@ -7,14 +7,15 @@
 
 
 
-## javascriptのmapメソッドで
+## javascriptのmapメソッド
 
-関数型プログラミングに不可欠なもう 1 つの配列関数は、Array.map です。
+今回はArray.mapです。
+- **Array.map メソッドは関数を引数として取ります。**
+- また、**配列内のすべての項目に対して 1 回呼び出され、それが返すものは何でも新しい配列に追加される** という特徴を持ちます。
 
-述語の代わりに、**Array.map メソッドは関数を引数として取ります。**
+### サンプルコード1: 全ての配列の文字を装飾
 
-この関数は **配列内のすべての項目に対して 1 回呼び出され、それが返すものは何でも新しい配列に追加される** という特徴を持ちます。
-
+以下の場合、highSchoolsリストにある高校の名前は、`HighSchool`という文字列を末尾に付けるという動作をします。
 
 ```js
 const schools = [
@@ -35,11 +36,17 @@ console.log(schools.join("\n"))
 // Washington & Lee
 ```
 
-この場合、highSchoolsリストは`HighSchool`という文字列を末尾に付けるという動作をします。
+### サンプルコード2: 配列から連想配列を生み出す
 
-また、次の例では配列から、連想配列を生み出すタスクをたった1行で行ってます。
+また、次の例では、「配列から連想配列を生み出す」というタスクをたった1行で完結させることができます。
 
 ```js
+const schools = [
+    "Yorktown",
+    "Washington & Lee",
+    "Wakefield"
+]
+
 const highSchools = schools.map(school => ({ name: school }))
 console.log( highSchools )
 // [
@@ -60,17 +67,7 @@ let schools = [
  { name: "Wakefield"}
 ]
 
-const editName = (oldName, name, arr) =>
-    arr.map(item => {
-    if (item.name === oldName) {
-        return {
-            ...item,
-            name
-        }
-    } else {
-        return item
-    }
-})
+const editName = (oldName, name, arr) => arr.map(item => (item.name === oldName) ?　({...item,name}) : item)
 
 let updatedSchools = editName("Stratford", "HB Woodlawn", schools)
 console.log( updatedSchools[1] ) 
@@ -86,13 +83,9 @@ updatedSchools変数はeditName関数を呼び出し結果を格納します。
 関数の引数では、更新したい学校名、新しい学校名、最後に対象となる学校配列を取ります。
 
 
-**これにより、新しい配列が変更されますが、元の配列は編集されません。**
 
-ちなみにこの関数はif/elseではなく、三項演算子を使うことでより短くなります。
+ちなみにこの関数は三項演算子を使うことでより短くなります。
 
-```js
-const editName = (oldName, name, arr) => arr.map(item => (item.name === oldName) ?　({...item,name}) : item)
-```
 
 ## mapを使って連想配列にキーを追加する(Object.keys)
 
@@ -139,6 +132,62 @@ console.log(schoolArray)
 ここまでで、**Array.map と Array.filter を使用して配列を変換できることを学びました。**
 
 また、**Object.keys を組み合わせることで配列をオブジェクトに変更できることも学びました。**
+
+
+
+## 実践例:Reactで配列からliタグ要素を作成する
+
+React を使用する主な利点は、データを UI 要素から分離できることです。
+
+React は単なる JavaScript であるため、JavaScript ロジックを追加して、データからReactDOMそしてHTMLを構築するのに役立てることができます。
+
+
+例えば次のようなhtmlも
+
+```html
+<ul>
+    <li>1 lb Salmon</li>
+    <li>1 cup Pine Nuts</li>
+    <li>2 cups Butter Lettuce</li>
+    <li>1 Yellow Squash</li>
+    <li>1/2 cup Olive Oil</li>
+    <li>3 cloves of Garlic</li>
+</ul>
+```
+
+配列を使って次の様に配列データとjavascriptのロジックに分離することができます。
+
+
+```js
+var items = [
+    "1 lb Salmon",
+    "1 cup Pine Nuts",
+    "2 cups Butter Lettuce",
+    "1 Yellow Squash",
+    "1/2 cup Olive Oil",
+    "3 cloves of Garlic"
+]
+
+React.createElement(
+    "ul",
+    { className: "ingredients" },
+    items.map(ingredient => React.createElement("li", null, ingredient)
+)
+```
+
+この構文は、配列内の各成分に対して React 要素を作成します。
+
+map関数は配列からさらに新しい配列を作り出せることがポイントです。
+
+Reactは関数型プログラミングですので、mapを使いこなせればReact使いとしてレベルは高くなります。
+
+
+
+title:ReactでのmapとcreateElementの使い方【React入門】
+
+
+category_script:page_name.startswith("2")
+
 
 
 
