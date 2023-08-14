@@ -342,10 +342,34 @@ Go、Rust、Python、Java などの言語は、これらの syscall 上に構築
 ## システムコール一覧
 
 - プロセス関連
-    - `clone`
+    - `clone` : 
     - `fork`
     - `execve`
-
+    - `getpid`
+    - `setuid`
+    - `setns`
+    - `getrusage`
+    - `capset`
+    - `ptrace`
+- メモリ管理
+    - `brk`
+    - `mmap`
+    - `munmap`
+    - `mremap`
+    - `mlock`
+    - `mincore`
+- ネットワーク関連
+    - `socket` : ソケット(socket)と呼ばれる通信の端点を作り出します。
+    - `setsockeopt` : ソケット番号を指定して通信方式を設定する
+    - `bind` : ソケットにポート番号を付与する。
+    - `listen` : 外部からのコネクションを待機するためにソケットをリッスン状態にする。
+- ファイルシステム
+    - `open` : 読み書きするためにファイルを開く。
+    - `read` : ファイルディスクリプタからファイルを開く。
+    - `write` : ファイルへ情報を書き込む。
+- 時間
+    - `time`
+    - `clock_settime`
 
 
 ### 具体例1:writeシステムコール
