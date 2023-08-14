@@ -159,91 +159,171 @@ CPUはプロセスが仮想ページにアクセスするたびに、その仮�
 内部にあるキャッシュにより、高速アクセスが実現されています。
 
 
+### CPUの情報を確認してみる
+
+RAMの空き容量を確認するには、`/proc/meminfo`を確認します。
+純粋なcatコマンドだけでも大量の情報が出力されると思います。
+
+```sh
+[root@d74ed5791dfa myworking]# cat /proc/meminfo
+MemTotal:        8001864 kB
+MemFree:         4803932 kB
+MemAvailable:    6764496 kB
+Buffers:          177200 kB
+Cached:          1974496 kB
+SwapCached:            0 kB
+Active:           732236 kB
+Inactive:        2016892 kB
+Active(anon):       3312 kB
+Inactive(anon):   598200 kB
+Active(file):     728924 kB
+Inactive(file):  1418692 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       2097152 kB
+SwapFree:        2097152 kB
+Dirty:                 4 kB
+Writeback:             0 kB
+AnonPages:        573460 kB
+Mapped:           346068 kB
+Shmem:              4064 kB
+KReclaimable:      57452 kB
+Slab:             142644 kB
+SReclaimable:      57452 kB
+SUnreclaim:        85192 kB
+KernelStack:       14912 kB
+PageTables:         8180 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6098084 kB
+Committed_AS:    3745712 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       36500 kB
+VmallocChunk:          0 kB
+Percpu:            11232 kB
+AnonHugePages:    284672 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:       41984 kB
+DirectMap2M:     6115328 kB
+DirectMap1G:    10485760 kB
+```
+
+これらの情報から必要な情報を抜き取るには`grep`を併用して活用することをお勧めします。
+
+- 例えば物理メモリのサイズを確認するには`MemTotal`の項目を参照します。
+
+```sh
+grep MemTotal /proc/meminfo
+```
+
+実行結果
+
+```sh
+[root@d74ed5791dfa myworking]# grep MemTotal /proc/meminfo
+MemTotal:        8001864 kB
+```
+
+- さらに、仮想メモリのサイズを確認するには`VmallocTotal`項目を参照します。
+
+```sh
+grep VmallocTotal /proc/meminfo
+```
+
+実行結果... 仮想メモリは物理メモリ以上のメモリを持っているように見せる機能ですから`MemTotal`よりもサイズが大きくなりますね
+
+```sh
+[root@d74ed5791dfa myworking]# grep VmallocTotal /proc/meminfo
+VmallocTotal:   34359738367 kB
+```
+
+
+## ネットワーク
+
+linuxのネットワークスタックは、階層化されたアーキテクチャに従っています。
+
+- ソケット
+    - 通信が抽象化されたもの。プログラミングレベル。
+- TCPとUDP
+    - 通信方式
+- インターネットプロトコル（IP）
+    - アドレスに基づいたマシン間の通信
+
+カーネルで実装しているのは上記の3つのみで、HTTPやSSHはユーザー空間で実装されています。
+
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## ファイルシステム
+
+linuxでは、ハードディスクドライブやSSDなど記憶装置の上に、ファイルシステムを構築する機能を提供しています。
+ファイルシステムには様々な種類があり、それぞれ特色があります。一般的なファイルシステムはext4やbtrfs、ntfsなどがあります。
+
+そのような異なるファイルシステムを束ね上げるのが`VFS`というシステムです。（正式名は`Virtual File System`）
+`VFS`自体はカーネル空間に存在しますが、`open`,`close`,`read`,`write`などのシステムコールを実装しています。
+
+逆に、それぞれのファイルシステムに対してはプラグイン方式で対応しています。
+
+
+## デバイスドライバ
+
+デバイスドライバはデバイスを操作するためのソースコードです。
+以下のようなデバイスが捜査対象です。
+
+- キーボード、マウス、ハードディスクドライブとの相互やり取り
+- `/dev/pts/`に存在する疑似端末デバイス
+- GPU
+
+使用されているデバイスの一覧を確認するためには、`mount`コマンドを使用します。
+
+```sh
+[root@d74ed5791dfa myworking]# mount
+overlay on / type overlay (rw,relatime,lowerdir=/var/lib/docker/overlay2/l/KUED77NDQ2VIQTJKHDT5TVRC5B:/var/lib/docker/overlay2/l/DZNLNSZ3BXFZ63TB7EX3JKG3EI:/var/lib/docker/overlay2/l/LDNSRHZRYB7BTYXMDCJG3LRJ32:/var/lib/docker/overlay2/l/JEXPX24JSJU76REMP4XZ3SKVDS:/var/lib/docker/overlay2/l/CPFYGJFOVIE44MY5KDAGA33JJ4:/var/lib/docker/overlay2/l/JHDDCWFSOB3FJTRF2SFFOKKODU:/var/lib/docker/overlay2/l/BMAMETRRYZNT7H44UOZZ4GGSCC:/var/lib/docker/overlay2/l/MFFC47CV7ETMJVVD7SNOKJIUHS:/var/lib/docker/overlay2/l/OZRFZXZVVLZCOMLNXXFN6JHYFB:/var/lib/docker/overlay2/l/SL4UY27Q534ZVGOYM7FVHHIKQV:/var/lib/docker/overlay2/l/AYMQ2IGLJ7UEEU5X2IANCMKPW5:/var/lib/docker/overlay2/l/25Q3HMNBKBTRQC47PAJQA4UGGD:/var/lib/docker/overlay2/l/S22JWTQ25OY7KMS62CUNCAQ5QN:/var/lib/docker/overlay2/l/IXXE4DRTUBXWZ6WPBNFADJM72E:/var/lib/docker/overlay2/l/OZBA3SQBWAE2BVYOD6OOFFUEBL:/var/lib/docker/overlay2/l/KQYGBFR6WR3O6UYLRTM4HQ26UV:/var/lib/docker/overlay2/l/JVZ4MBIY2PDCJECPML4OUJVZNE:/var/lib/docker/overlay2/l/EWYNXR5C5DNQD3KHKK2BJE3B6X:/var/lib/docker/overlay2/l/BU5STOQYPN4P3LPJWUC3AH44C6,upperdir=/var/lib/docker/overlay2/27de62f94edab7010c56cfb84a58d865eea424d8b70d794e9b5a45d5483a407a/diff,workdir=/var/lib/docker/overlay2/27de62f94edab7010c56cfb84a58d865eea424d8b70d794e9b5a45d5483a407a/work)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev type tmpfs (rw,nosuid,size=65536k,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=666)
+sysfs on /sys type sysfs (ro,nosuid,nodev,noexec,relatime)
+tmpfs on /sys/fs/cgroup type tmpfs (rw,nosuid,nodev,noexec,relatime,mode=755)
+cpuset on /sys/fs/cgroup/cpuset type cgroup (ro,nosuid,nodev,noexec,relatime,cpuset)
+cpu on /sys/fs/cgroup/cpu type cgroup (ro,nosuid,nodev,noexec,relatime,cpu)
+cpuacct on /sys/fs/cgroup/cpuacct type cgroup (ro,nosuid,nodev,noexec,relatime,cpuacct)
+blkio on /sys/fs/cgroup/blkio type cgroup (ro,nosuid,nodev,noexec,relatime,blkio)
+memory on /sys/fs/cgroup/memory type cgroup (ro,nosuid,nodev,noexec,relatime,memory)
+devices on /sys/fs/cgroup/devices type cgroup (ro,nosuid,nodev,noexec,relatime,devices)
+freezer on /sys/fs/cgroup/freezer type cgroup (ro,nosuid,nodev,noexec,relatime,freezer)
+net_cls on /sys/fs/cgroup/net_cls type cgroup (ro,nosuid,nodev,noexec,relatime,net_cls)
+perf_event on /sys/fs/cgroup/perf_event type cgroup (ro,nosuid,nodev,noexec,relatime,perf_event)
+net_prio on /sys/fs/cgroup/net_prio type cgroup (ro,nosuid,nodev,noexec,relatime,net_prio)
+hugetlb on /sys/fs/cgroup/hugetlb type cgroup (ro,nosuid,nodev,noexec,relatime,hugetlb)
+pids on /sys/fs/cgroup/pids type cgroup (ro,nosuid,nodev,noexec,relatime,pids)
+rdma on /sys/fs/cgroup/rdma type cgroup (ro,nosuid,nodev,noexec,relatime,rdma)
+misc on /sys/fs/cgroup/misc type cgroup (ro,nosuid,nodev,noexec,relatime,misc)
+cgroup on /sys/fs/cgroup/systemd type cgroup (ro,nosuid,nodev,noexec,relatime,name=systemd)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime)
+shm on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime,size=65536k)
+drvfs on /myworking type 9p (rw,noatime,dirsync,aname=drvfs;path=C:\;uid=0;gid=0;metadata;symlinkroot=/mnt/host/,mmap,access=client,msize=262144,trans=virtio)
+drvfs on /root type 9p (rw,noatime,dirsync,aname=drvfs;path=C:\;uid=0;gid=0;metadata;symlinkroot=/mnt/host/,mmap,access=client,msize=262144,trans=virtio)
+/dev/sdd on /etc/resolv.conf type ext4 (rw,relatime,discard,errors=remount-ro,data=ordered)
+/dev/sdd on /etc/hostname type ext4 (rw,relatime,discard,errors=remount-ro,data=ordered)
+/dev/sdd on /etc/hosts type ext4 (rw,relatime,discard,errors=remount-ro,data=ordered)
+devpts on /dev/console type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=666)
+proc on /proc/bus type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/fs type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/irq type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/sys type proc (ro,nosuid,nodev,noexec,relatime)
+tmpfs on /proc/acpi type tmpfs (ro,relatime)
+tmpfs on /proc/kcore type tmpfs (rw,nosuid,size=65536k,mode=755)
+tmpfs on /proc/keys type tmpfs (rw,nosuid,size=65536k,mode=755)
+tmpfs on /proc/timer_list type tmpfs (rw,nosuid,si
+```
 
 
 
@@ -256,6 +336,16 @@ CPUはプロセスが仮想ページにアクセスするたびに、その仮�
 アプリがカーネルの機能を呼び出すこと。
 linuxkernelにはAPIが存在しており、このAPIを利用することでシステムコールが可能です。
 Go、Rust、Python、Java などの言語は、これらの syscall 上に構築される可能性があります。
+
+
+
+## システムコール一覧
+
+- プロセス関連
+    - `clone`
+    - `fork`
+    - `execve`
+
 
 
 ### 具体例1:writeシステムコール
@@ -391,12 +481,6 @@ pythonはインタプリタ言語であるため、まず最初に読み込み�
 - ユーザーモード:一部命令が禁止される。アプリを実行するときにはユーザーモードになる。
     - ハードウェアアクセスを禁止
     - 禁止されたシステムコールをすると特定の処理が動く
-
-
-
-
-
-
 
 
 
