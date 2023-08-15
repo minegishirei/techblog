@@ -154,7 +154,25 @@ AWSのコンソール画面のecsのタスク定義の`Json`から確認する�
 blue/greenデプロイ用のロードバランサーを用意する必要があるが、
 新規画面ではblue/greenデプロイ用のロードバランサーを作成できない。
 
-<img >
+<img src="https://github.com/minegishirei/techblog/blob/main/aws/img/bluegreen_lbs.png?raw=true">
+
+ターゲットグループは二つ作る。
+
+
+### ECS
+
+- クラスターの「サービスの作成」を押下
+- 起動タイプはFargate
+- タスク定義等はそのままで 
+- デプロイメントの方法は**Blue/Greenアップデート**を選択する。
+
+
+
+
+
+
+
+
 
 
 
