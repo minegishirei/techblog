@@ -66,7 +66,7 @@ CI/CDを束ねるCodepiplineは、gitのpushからリリースまでの各段階
 
 ### buildアーティファクトの作成
 
-#### buildspec.ymlの作成
+#### ビルド定義`buildspec.yml`の作成
 
 ここではソースコードの取得とdockerによるイメージのbuildを行い、ecrへpushする処理をする。
 
@@ -98,7 +98,14 @@ artifacts:
 
 imageDetails.jsonは`post_build`にて作成されているのが分かるだろうか。後続のCodeDeployは`imageDetails.json`を参照して必要なECRを参照する。
 
-#### `appspec.yml`
+```json
+{"Version":"1.0","ImageURI":"repository_url:latest"}
+```
+
+#### デプロイ定義`appspec.yml`について
+
+このコードはコードデプロイがデプロイを管理するために使用するファイル。
+ecsのタスク定義やロードバランサーの情報を含めている。
 
 ```yml
 version: 0.0
@@ -111,6 +118,48 @@ Resources:
             ContainerName: "各自ご自身のコンテナ名に置き換えてください！"
             ContainerPort: "80"
 ```
+
+ContainerNameはecsのタスク定義配下に存在する。
+
+
+#### タスク定義ファイル`taskdef.json`
+
+AWSのコンソール画面のecsのタスク定義の`Json`から確認する。
+「jsonファイルのダウンロード」「jsonファイルのコピー」を使用する。
+このファイルはビルド定義、タスク定義と同様の階層に配置すること。
+
+また、次のような修正が必要となる。
+
+- 名前は`taskdef.json`に変える
+- `image`は修正する必要がある → 動的にイメージのuriを置き換えること。具体的には次のように置き換える
+
+```json
+"image" : "<IMAGE1_NAME>"
+```
+
+このように置き換えを行うことで、ビルドのアクションのたびにイメージは最新版になる。
+
+
+#### どこに置くべきか
+
+これらのファイルもCodecommitでソース管理する必要がある。
+上記の修正を行った後は、必ずリリースすること。
+
+
+
+## blue/green deploy用のecsを作成する
+
+### ロードバランサ
+
+blue/greenデプロイ用のロードバランサーを用意する必要があるが、
+新規画面ではblue/greenデプロイ用のロードバランサーを作成できない。
+
+<img >
+
+
+
+
+
 
 
 
