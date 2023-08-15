@@ -57,6 +57,65 @@ CI/CDを束ねるCodepiplineは、gitのpushからリリースまでの各段階
 3. Codebuildの際、`imageDetail.json`が作成される（これはCode Deployにて使用される）
 
 
+## 環境作成手順
+
+### Codecommitを作成
+
+まずはソースコードを入れる器の`CodeCommit`のリポジトリを作成しましょう。
+作成後はリポジトリに対してソースをpushして中身が反映したか確認してみます。
+
+### buildアーティファクトの作成
+
+#### buildspec.ymlの作成
+
+ここではソースコードの取得とdockerによるイメージのbuildを行い、ecrへpushする処理をする。
+
+また、**artifacts**として、`imageDetails.json`を指定している。
+
+```yml
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=各自ご自身のURIに置き換えてください！
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+
+  build:
+    commands:
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - printf '{"Version":"1.0","ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
+  
+artifacts:
+    files: imageDetail.json
+```
+
+imageDetails.jsonは`post_build`にて作成されているのが分かるだろうか。後続のCodeDeployは`imageDetails.json`を参照して必要なECRを参照する。
+
+#### `appspec.yml`
+
+```yml
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "<TASK_DEFINITION>"
+        LoadBalancerInfo:
+            ContainerName: "各自ご自身のコンテナ名に置き換えてください！"
+            ContainerPort: "80"
+```
+
+
+
+## ビルド定義
+
 
 
 
