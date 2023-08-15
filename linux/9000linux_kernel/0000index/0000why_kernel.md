@@ -540,14 +540,14 @@ eBPFはカスタム64bitRISC命令(cpuファミリアの一種でRISCがあっ�
 
 #### eBPFの使用例
 
-- cilium
+- cilium(kubernetisにおけるserviceMeshは、サービス同士の通信が大量に発生する。CiliumはアプローチとしてKernel Spaceにてパケットフィルタの処理が行えるeBPFを使ってiptableを置き換えることで高速な通信を実現している。)
 - iovisor
 - CNCF Falco
 - L4 katran
 
 
 
-
+from https://qiita.com/sg-matsumoto/items/8194320db32d4d8f7a16
 
 
 
