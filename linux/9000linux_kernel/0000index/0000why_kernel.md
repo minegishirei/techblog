@@ -532,10 +532,18 @@ lsmod
 
 ### eBPF
 
+カーネルの機能を拡張する方法は`eBPF`という物があります。
+これは、linuxkernelの`bpf`システムコールを用いてlinuxkernelの機能を効率的に拡張できます。
+
+eBPFはカスタム64bitRISC命令(cpuファミリアの一種でRISCがあったことを思い出してください。)を用いて、カーネル内の仮想マシンとして実装できます。
 
 
+#### eBPFの使用例
 
-
+- cilium
+- iovisor
+- CNCF Falco
+- L4 katran
 
 
 
