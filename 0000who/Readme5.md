@@ -26,7 +26,7 @@
   - Django(3年~)
     - REST_Flamework
 - インフラ
-  - コンテナ
+  - Container
     - ECS
     - Docker
   - CICD
@@ -34,7 +34,7 @@
     - CodeBuild
     - ECR
   - IaC
-    - Terraform
+    - Cloudformation
 - デスクトップアプリ(2年~)
   - C#
   - VBA
