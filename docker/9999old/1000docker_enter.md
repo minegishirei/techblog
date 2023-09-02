@@ -27,7 +27,6 @@ dockerのhello worldは簡単です。
 
 <pre><code>
 docker run debian echo "Hello World"
-
 </code></pre>
 
 このコマンドを実行した後、環境によって多少は違えど以下のようなログが出現するはずです。
@@ -259,3 +258,5 @@ description:Dockerを使用する最初の手順について説明します。�
 img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg
 
 category_script:True
+
+
