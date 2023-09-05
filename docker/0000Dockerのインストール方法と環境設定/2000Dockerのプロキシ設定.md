@@ -14,6 +14,7 @@ Docker のプロキシーの設定をする方法や、Dockerfileへのプロキ
 - [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 - [Dockerのダウンロードとインストール(Mac編)](https://minegishirei.hatenablog.com/entry/2023/09/03/143528)
 - [Dockerのダウンロードとインストール(Windows編)](https://minegishirei.hatenablog.com/entry/2023/09/04/115946)
+- [Dockerのプロキシーの設定](https://minegishirei.hatenablog.com/entry/2023/09/05/120827)
 
 
 ## Docker for Desktopでのプロキシの設定方法( windows, mac 環境の方)
@@ -24,29 +25,30 @@ Docker のプロキシーの設定をする方法や、Dockerfileへのプロキ
 
 ### 1. docker for desktop を起動する
 
-<img>
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/0000Docker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95%E3%81%A8%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/img/proxy/1home.png?raw=true">
 
 
 ### 2. docker for desktop の設定を開く
 
 右上の歯車アイコンからdocker for desktopの設定を開きましょう
 
-<img>
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/0000Docker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95%E3%81%A8%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/img/proxy/2config.png?raw=true">
 
 
 ### 3. Resources > Proxies の設定を開く
 
 Resources > Proxies からプロキシの設定を開きましょう
 
-<img>
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/0000Docker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95%E3%81%A8%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/img/proxy/3resources.png?raw=true">
+
 
 ### 4. manual config を押下
 
-<img>
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/0000Docker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95%E3%81%A8%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/img/proxy/4manual_config.png?raw=true">
 
 ### 5. docker for desktopのプロキシを設定する
 
-<img>
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/0000Docker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95%E3%81%A8%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/img/proxy/5sample_proxy.png?raw=true">
 
 
 
