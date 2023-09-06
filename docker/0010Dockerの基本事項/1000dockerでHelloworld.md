@@ -4,13 +4,17 @@
 まずはDockerがどのように機能するかを理解するために、いくつかの単純な Docker コンテナを起動して動かしてみましょう。
 
 
-## 参考図書
+[:contents]
 
-以下のリンクを参考にしました。
 
-https://pepa.holla.cz/wp-content/uploads/2016/10/Using-Docker.pdf
+### Docker入門 関連記事
 
-<img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg">
+- [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+- [Dockerのダウンロードとインストール(Mac編)](https://minegishirei.hatenablog.com/entry/2023/09/03/143528)
+- [Dockerのダウンロードとインストール(Windows編)](https://minegishirei.hatenablog.com/entry/2023/09/04/115946)
+- [Dockerのプロキシーの設定](https://minegishirei.hatenablog.com/entry/2023/09/05/120827)
+
+
 
 
 ## dockerのhello world
@@ -36,6 +40,7 @@ Hello World
 </code></pre>
 
 何はともあれ、最後の**Hello World**が出現すれば成功です。
+
 
 
 ## dockerのrunコマンドの構文
@@ -68,200 +73,41 @@ docker run  <オプション(-または--で始まる)>  <イメージ名>  <コ
 3. イメージがダウンロードされると、Dockerはイメージをコンテナを実行し、指定したコマンドを実行します（`echo "Hello World"`）
 このコマンドを実行した結果は、出力の最後の行に表示されます。
 
-発生した作業の量を考えるとこの短時間での作業は驚くべきことです。
+Dockerは**コンテナを起動して起動し、echoコマンドを実行してから、シャットダウンしました**
+発生した作業の量を考えると、この短時間での作業は驚くべきことです。
 
-Dockerには**コンテナを起動して起動し、echoコマンドを実行してから、シャットダウンしました--**
+あなたが伝統的な方法で同じようなことをしようとした場合。つまりVMやVirtual Boxの場合、数秒、場合によっては数分待つことになります。
 
-あなたが伝統的な方法で同じようなことをしようとした場合
--つまりVMやVirtual Boxの場合、数秒、場合によっては数分待つことになります。
-
-
-また同じコマンドを再度実行すると、すぐにコンテナが起動します。
-ダウンロードとコマンドの実行には1秒もかからないはずです。
+Dockerにはそれぐらいに威力が込められているのです。
 
 
 
-## dockerのlinuxのなかに入る
+## dockerのコンテナ（linux）のなかに入る
 
-あなたは先ほど実行したコンテナの中に入ることができます。
-
+**Dockerでは実行したコンテナの中に入ることができます。**
 以下のコマンドを実行してみてください
 
-<pre><code>
+```sh
 docker run -i -t debian /bin/bash
-</code></pre>
+```
 
 以下のような対話形式のターミナルが出現すれば成功です。
+これにより、コンテナ内に新しいコマンドプロンプトが表示されます。
 
-<pre><code>
+```
 $ docker run -i -t debian /bin/bash
 root@622ac5689680:/# echo "Hello from Container-land!"
 Hello from Container-land!
 root@622ac5689680:/# exit
 exit
-</code></pre>
+```
 
+### docker run の -it オプションについて
 
-これにより、コンテナ内に新しいコマンドプロンプトが表示されます。
+フラグ-iと-tはDockerにあたかもリモートマシンにSSH接続するようにと伝えてます。
 
-この場合、フラグ-iと-tはDockerにあたかもリモートマシンにSSH接続するようにと伝えてます。
-
-- -tはttyが接続されたインタラクティブセッション。
-
+- -itはttyが接続されたインタラクティブセッション。
 - コマンド/bin/bashはbashを提供します
 
-シェルを終了すると、コンテナは停止します。コンテナは、dockerの主なプロセスなのです。
-
-
-## dockerで遊んでみる
-
-コンテナを起動して何を確認するかで、Dockerをもう少し理解してみましょう。
-
-さまざまなコマンドやアクションが持つ効果。まず、新しいコンテナを起動しましょう。しかし今回は、時間の経過とともに、-hフラグを使用して新しいホスト名を指定します
-
-<pre><code>
-docker run -h CONTAINER -i -t debian /bin/bash
-
-</code></pre>
-
-**ここでもしあなたがコマンドをぶっ壊したらどうなってしまうのでしょう...?**
-
-mvコマンドを使用してbin配下を消してしまいます。
-
-<pre><code>
-> docker run -h CONTAINER -i -t debian /bin/bash
-root@CONTAINER:/# mv /bin /basket
-root@CONTAINER:/# ls
-bash: ls: command not found
-</code></pre>
-
-/binディレクトリを削除し、コンテナをかなり役に立たないものにしました。
-
-
-このコンテナを削除する前に、新しいターミナルを開いて、dockerの
-
-ps、inspect、diff
-
-を見てみましょう。
-
-これらのコマンドはコンテナの状態について教えてくれます。
-
-
-## docker psコマンドについて
-
-新しいターミナルを開きます（コンテナセッションは実行したままにします
-）
-
-ホストから「docker ps」を実行してみてください。すると次のようなものが表示されます。
-
-
-<pre><code>
-CONTAINER ID IMAGE COMMAND ... NAMES
-00723499fdbf debian "/bin/bash" ... stupefied_turing
-</code></pre>
-
-これにより、現在実行中のすべてのコンテナーに関するいくつかの詳細がわかります。
-
-出力のほとんどは一目瞭然ですが、名前がstupefied_turingとなっていることに注目して、覚えておいてください。次のコマンドを実行するのに必要です。
-
-
-## docker inspectコマンドについて
-
-dockerの「inspect」コマンドはコンテナの状態についてより詳しい情報をjson形式で教えてくれます
-
-<pre><code>
-docker inspect stupefied_turing
-[
-    {
-        "Id": "00723499fdbfe55c14565dc53d61452519deac72e18a8a6fd7b371ccb75f1d91",
-        "Created": "2015-09-14T09:47:20.2064793Z",
-        "Path": "/bin/bash",
-        "Args": [],
-        "State": {
-            "Running": true,
-</code></pre>
-
-
-## docker diffコマンドについて
-
-docker diffコマンドは**実行中のコンテナで変更されたファイルのリスト**です。
-
-次のコマンドを実行してみてください。
-
-<pre><code>
-$ docker diff stupefied_turing
-C /.wh..wh.plnk
-A /.wh..wh.plnk/101.715484
-D /bin
-A /basket
-A /basket/bash
-A /basket/cat
-A /basket/chacl
-A /basket/chgrp
-</code></pre>
-
-
-
-この場合、
-
-- /binの削除
-- /basket内のすべての追加、
-- およびストレージドライバに関連するいくつかのファイルの作成。 
-
-を確認できるのです。
-
-
-## docker logsの見方
-
-dockerコンテナのログを見たければ docker logsと入力すれば良いです
-
-<pre><code>
-$ docker logs stupefied_turing
-root@CONTRAINER:/# mv /bin /basket
-root@CONTRAINER:/# ls
-bash: ls: command not found
-</code></pre>
-
-
-## dockerコンテナの脱出方法
-
-dockerコンテナから出る時はexitコマンドを実行しましょう。
-
-これはちょうどsshコマンドでログインしていた状態を抜けるのと同じです。
-
-<pre><code>
-root@CONTRAINER:/# exit
-exit
-$
-</code></pre>
-
-シェルが唯一の実行中のプロセスであったため、これによりコンテナも停止します。
-もし、あなたがdocker psを実行すると、実行中のコンテナーがないことがわかります。
-
-## dockerコンテナの削除
-
-ただし、これですべてがわかるわけではありません。 
-
-docker ps -aと入力すると、停止したコンテナー（正式には終了コンテナーと呼ばれます）を含むすべてのコンテナーのリストが表示されます。
-
-終了したコンテナは、docker startを発行することで再起動できます（ただし、このコンテナ内のパスを削除してしまったため、この場合、開始することはできません）。
-
-コンテナを削除する場合は、dockerrmコマンドを使用します。
-
-<pre><code>
-$ docker rm stupefied_turing
-stupefied_turing
-</code></pre>
-
-
-## 備考
-
-title:5分でわかるDockerの使い方を学ぶ【docker入門】
-
-description:Dockerを使用する最初の手順について説明します。まずはDockerがどのように機能するかを理解するために、いくつかの単純なコンテナーを起動して使用します。次に、Dockerfiles（Dockerコンテナーの基本的な構成要素）とコンテナの配布をサポートするDockerレジストリ。最後にコンテナを使用して、永続ストレージを備えたKey-Valueストアを展開する方法を学びます。
-
-img:https://www.oreilly.co.jp/books/images/picture_large978-4-87311-776-8.jpeg
-
-category_script:True
-
+シェルを終了すると、コンテナは停止し自動的にシャットダウンします。
 
