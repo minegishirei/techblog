@@ -1,5 +1,7 @@
 
 
+dockerのportオプションの使い方について詳しく解説します。その過程で、Dockerを使用してWebサーバーを立てる方法について詳しく説明します。コンテナ内でウェブサーバーを実行して外部にサービスを提供する手順を理解しましょう。
+
 ### Docker入門 関連記事
 
 - [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
@@ -9,7 +11,7 @@
 
 
 
-# dockerのrunコマンドのオプション一覧
+
 
 [:contents]
 
