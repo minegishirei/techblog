@@ -1,6 +1,6 @@
 
 
-# 自己紹介
+## 自己紹介
 
 初めまして、みねぎしれいと申します。
 
@@ -9,6 +9,11 @@
 得意言語はDockerとPythonで、普段は技術系ブログの運営とDockerコミュニティの運営を行ってます。
 
 趣味はゲームで休日は友達とFPS（銃で撃つ系のゲーム）をします。
+
+
+
+
+
 
 
 ## 職歴
@@ -25,3 +30,20 @@
 
 
 
+<style>
+.column-left{
+  float: left;
+  width: 50%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 50%;
+  text-align: left;
+}
+.column-one{
+  float: left;
+  width: 100%;
+  text-align: left;
+}
+</style>
