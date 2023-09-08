@@ -2,7 +2,13 @@
 
 [:contents]
 
-# ビルド時の挙動をコントロールするコマンド
+# dockerfileの書き方
+
+
+
+
+
+
 
 
 ## dockerのFROM (dockerのベースイメージを指定する)
