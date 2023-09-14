@@ -41,6 +41,7 @@ Docker を使ってプログラミングの学習を開始される方を対象�
 
 ### [Dockerfile の user ( USER ) 句の使い方](https://minegishirei.hatenablog.com/entry/2023/09/12/113541)
 
+### [Dockerfile の run ( RUN ) 句の使い方](https://minegishirei.hatenablog.com/entry/2023/09/14/102912)
 
 ### Dockerfileの文の区切りと長い行を折り返す方法（長い行を折り返す）
 
