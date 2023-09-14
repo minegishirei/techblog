@@ -1,6 +1,17 @@
 
 
+# dockerのbuildコマンドのオプション一覧
+
 [:contents]
+
+
+### Docker入門 関連記事
+
+- [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+- [Dockerのダウンロードとインストール(Mac編)](https://minegishirei.hatenablog.com/entry/2023/09/03/143528)
+- [Dockerのダウンロードとインストール(Windows編)](https://minegishirei.hatenablog.com/entry/2023/09/04/115946)
+- [Dockerのプロキシーの設定](https://minegishirei.hatenablog.com/entry/2023/09/05/120827)
+
 
 
 ## `docker build -t, --tag=[]`オプション
@@ -113,85 +124,6 @@ $ docker build --rm=true -t <IMAGE_NAME> <DOCKERFILE_DIRECTORY>
 ここで、`<IMAGE_NAME>`はビルドされたイメージの名前、`<DOCKERFILE_DIRECTORY>`はDockerfileがあるディレクトリのパスです。このコマンドを実行すると、ビルドが開始され、ビルドに必要な一時的なコンテナが作成されます。ビルドが完了すると、中間コンテナが自動的に削除され、イメージが作成されます。
 
 `--rm`オプションはデフォルトで`true`に設定されており、`--rm=false`のように明示的に指定しなくても中間コンテナを残すことができます。ただし、中間コンテナを残した場合は、後で手動で削除する必要があります。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
