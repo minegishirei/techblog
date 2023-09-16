@@ -85,10 +85,10 @@ Docker を使ってプログラミングの学習を開始される方を対象�
 
 # Dockerイメージ集
 
-#### [docker-compose と nginx を使用してWebｗサーバーを立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/09/16/112502)
+#### [docker-compose と nginx を使用してWebサーバーを立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/09/16/112502)
 
 
-
+#### [FlaskサーバーをDockerで立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/05/06/180545)
 
 #### python
 
