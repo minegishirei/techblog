@@ -55,7 +55,7 @@ Docker を使ってプログラミングの学習を開始される方を対象�
 
 #### [Dockerfile の cmd ( CMD ) の使い方](https://minegishirei.hatenablog.com/entry/2023/09/14/210740)
 
-#### [Dockerfile の workdir ( WORKDIR ) の使い方]
+#### [Dockerfile の workdir ( WORKDIR ) の使い方](https://minegishirei.hatenablog.com/entry/2023/09/16/094349)
 
 
 
