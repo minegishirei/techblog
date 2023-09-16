@@ -41,7 +41,7 @@ C:.
 vscodeでのディレクトリ構造ですと以下の通りです。
 
 
-<img src=>
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/3000Images/images/nginx/dir.png?raw=true">
 
 
 ### docker-compose のソースコード
