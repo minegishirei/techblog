@@ -49,7 +49,7 @@ Docker を使ってプログラミングの学習を開始される方を対象�
 
 #### [Dockerfile の copy ( COPY ) の使い方](https://minegishirei.hatenablog.com/entry/2023/09/14/152703)
 
-#### [Dockerfile の arg ( ARG ) の使い方]
+#### [Dockerfile の arg ( ARG ) の使い方](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
 #### [Dockerfile の ENTRYPOINT の使い方]
 
