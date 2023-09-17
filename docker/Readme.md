@@ -14,13 +14,21 @@ Docker を使ってプログラミングの学習を開始される方を対象�
 
 #### [Dockerのダウンロードとインストール(MacOS編)](https://minegishirei.hatenablog.com/entry/2023/09/03/143528)
 
+MacOSでのDocker のダウンロードとインストール方法について解説します。 2023 年 9 月現在、最新のバージョンは Docker v4.19.0 となっています。
+
 #### [Dockerのダウンロードとインストール(Windows編)](https://minegishirei.hatenablog.com/entry/2023/09/04/115946)
+
+WindowsOSでのDocker のダウンロードとインストール方法について解説します。
 
 #### [Dockerに関するドキュメントを参照する](https://minegishirei.hatenablog.com/entry/2023/09/03/184308)
 
+Docker を使ったプログラミング、開発を行う上で、参考になるドキュメントを参照する方法について解説します。
+
 #### [Dockerのプロキシーの設定](https://minegishirei.hatenablog.com/entry/2023/09/05/120827)
 
+Docker のプロキシーの設定をする方法や、Dockerfileへのプロキシの記述方法など Dockerを社内で使う上で基本となる項目について解説します。
 
+会社内でDockerを使用する際にはよくプロキシに引っかかるのでご注意ください。
 
 
 # Dockerの基本事項
@@ -85,8 +93,19 @@ Docker を使ってプログラミングの学習を開始される方を対象�
 
 #### [docker-compose と nginx を使用してWebサーバーを立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/09/16/112502)
 
+#### [Docker を使用して python の環境構築する方法](https://minegishirei.hatenablog.com/entry/2023/09/17/085706)
 
-#### python
+Docker を使用して python の環境構築を行う方法を解説します。
+
+- やること：
+    1. Dockerのインストール（事前準備推奨）
+    2. Dockerfile作成（ソースコードをダウンロードでもいいが、手作業で書いた方が理解が進みます。）
+    3. pythonコード作成
+    4. `build`コマンドの実行と解説
+    5. `run`コマンドの実行と解説
+    6. helloworldの確認
+
+
 
 #### [FlaskサーバーをDockerで立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/05/06/180545)
 
