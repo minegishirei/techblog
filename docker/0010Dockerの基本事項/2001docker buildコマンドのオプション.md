@@ -2,6 +2,10 @@
 
 # dockerのbuildコマンドのオプション一覧
 
+dockerのbuildコマンドについて詳しく解説します。
+dockerのイメージはDockerfileによって定義されますが、buildコマンドのオプションによってコントロールできます。
+
+
 [:contents]
 
 
