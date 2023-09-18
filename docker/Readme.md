@@ -138,7 +138,7 @@ docker-compose , Docker , Dockerfile を使用して nginx を立ち上げる方
 
 
 
-#### [Docker を使用して python の環境構築する方法](https://minegishirei.hatenablog.com/entry/2023/09/17/085706)
+#### [Docker を使用して python の環境構築する方法](https://minegishirei.hatenablog.com/entry/2023/05/04/171154)
 
 Docker を使用して python の環境構築を行う方法を解説します。
 
