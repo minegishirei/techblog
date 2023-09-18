@@ -157,6 +157,12 @@ Docker を使用して python の環境構築を行う方法を解説します�
 目的：**本サイトではDockerを利用したflaskサーバーの環境構築方法を学びます。**
 
 
+
+#### [Django と MySQL を docker-compose で動かす【docker-compose,django,mysql】](https://minegishirei.hatenablog.com/entry/2023/09/18/205930)
+
+MySQLを搭載したDjangoアプリケーションdocker-composeを用いて動かす方法を解説します。 ソースコードの入手からDjangoプロジェクトのアカウント作成、MySQLコンテナの確認まで行います。
+
+
 [https://docker.hatenablog.jp/entry/2023/05/10/184909:embed:cite]
 
 
