@@ -32,6 +32,55 @@ Docker のプロキシーの設定をする方法や、Dockerfileへのプロキ
 
 
 
+
+
+
+## Dockerイメージ集
+
+#### [docker-compose と nginx を使用してWebサーバーを立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/09/16/112502)
+docker-compose , Docker , Dockerfile を使用して nginx を立ち上げる方法を解説します。 コピペで完成するため、だれでも簡単にサービスを立ち上げれます。
+
+
+
+#### [Docker を使用して python の環境構築する方法](https://minegishirei.hatenablog.com/entry/2023/05/04/171154)
+
+Docker を使用して python の環境構築を行う方法を解説します。
+
+- やること：
+    1. Dockerのインストール（事前準備推奨）
+    2. Dockerfile作成（ソースコードをダウンロードでもいいが、手作業で書いた方が理解が進みます。）
+    3. pythonコード作成
+    4. `build`コマンドの実行と解説
+    5. `run`コマンドの実行と解説
+    6. helloworldの確認
+
+
+
+#### [FlaskサーバーをDockerで立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/05/06/180545)
+
+目的：**本サイトではDockerを利用したflaskサーバーの環境構築方法を学びます。**
+
+
+
+#### [Django と MySQL を docker-compose で動かす【docker-compose,django,mysql】](https://minegishirei.hatenablog.com/entry/2023/09/18/205930)
+
+MySQLを搭載したDjangoアプリケーションdocker-composeを用いて動かす方法を解説します。 ソースコードの入手からDjangoプロジェクトのアカウント作成、MySQLコンテナの確認まで行います。
+
+
+
+#### [ReactでDockerの環境構築をする（docker-compose.yml, Dockerfile, npm使用）](https://minegishirei.hatenablog.com/entry/2023/09/19/182011)
+
+
+Reactプロジェクトはnpmやyarnが必ず絡むので必ずと言っていいほど環境依存が発生します。 プロジェクトの管理を可能にするためにはdocker-composeを使用しましょう。
+
+
+#### [Docker で アセンブリの環境構築（Assembly, Dockerfile, nasm)](https://minegishirei.hatenablog.com/entry/2023/09/19/182340)
+
+アセンブリの学習環境を Docker を使用して構築します。
+
+
+
+
 ## Dockerの基本事項
 
 #### [docker で HelloWorld!](https://minegishirei.hatenablog.com/entry/2023/09/06/100027)
@@ -120,6 +169,7 @@ WORKDIRコマンドは以下のように書きます。
 ## docker コマンド一覧
 
 
+#### [Dockerのゴミを削除する（未使用イメージ、ボリューム、コンテナの削除）](https://minegishirei.hatenablog.com/entry/2023/09/19/182608)
 
 
 ## docker-composeの使い方
@@ -129,42 +179,5 @@ WORKDIRコマンドは以下のように書きます。
 #### docker-compose.ymlの作成と起動
 
 #### docker-compose.ymlのオプション一覧
-
-
-
-
-
-
-## Dockerイメージ集
-
-#### [docker-compose と nginx を使用してWebサーバーを立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/09/16/112502)
-docker-compose , Docker , Dockerfile を使用して nginx を立ち上げる方法を解説します。 コピペで完成するため、だれでも簡単にサービスを立ち上げれます。
-
-
-
-#### [Docker を使用して python の環境構築する方法](https://minegishirei.hatenablog.com/entry/2023/05/04/171154)
-
-Docker を使用して python の環境構築を行う方法を解説します。
-
-- やること：
-    1. Dockerのインストール（事前準備推奨）
-    2. Dockerfile作成（ソースコードをダウンロードでもいいが、手作業で書いた方が理解が進みます。）
-    3. pythonコード作成
-    4. `build`コマンドの実行と解説
-    5. `run`コマンドの実行と解説
-    6. helloworldの確認
-
-
-
-#### [FlaskサーバーをDockerで立ち上げる方法](https://minegishirei.hatenablog.com/entry/2023/05/06/180545)
-
-目的：**本サイトではDockerを利用したflaskサーバーの環境構築方法を学びます。**
-
-
-
-#### [Django と MySQL を docker-compose で動かす【docker-compose,django,mysql】](https://minegishirei.hatenablog.com/entry/2023/09/18/205930)
-
-MySQLを搭載したDjangoアプリケーションdocker-composeを用いて動かす方法を解説します。 ソースコードの入手からDjangoプロジェクトのアカウント作成、MySQLコンテナの確認まで行います。
-
 
 
