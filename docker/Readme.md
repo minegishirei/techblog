@@ -163,40 +163,4 @@ Docker を使用して python の環境構築を行う方法を解説します�
 MySQLを搭載したDjangoアプリケーションdocker-composeを用いて動かす方法を解説します。 ソースコードの入手からDjangoプロジェクトのアカウント作成、MySQLコンテナの確認まで行います。
 
 
-[https://docker.hatenablog.jp/entry/2023/05/10/184909:embed:cite]
-
-
-
-[https://docker.hatenablog.jp/entry/2023/05/12/212955:embed:cite]
-
-
-
-
-
-
-
-
-## Dockerコマンド詳細
-
-
-[https://docker.hatenablog.jp/entry/2023/05/10/205606:embed:cite]
-
-
-
-[https://docker.hatenablog.jp/entry/2023/05/10/205512:embed:cite]
-
-
-## Dockerfile、docker-comopse.yml解説
-
-
-
-[https://docker.hatenablog.jp/entry/2023/05/10/190414:embed:cite]
-
-
-
-
-## Dockerのアーキテクチャ
-
-
-[https://docker.hatenablog.jp/entry/2023/05/10/205416:embed:cite]
 
