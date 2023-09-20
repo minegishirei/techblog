@@ -1,10 +1,24 @@
 ﻿
 
+# Dockerイメージをファイルとして配布する（docker, export コマンド）
+
+ビルドしたDockerイメージを圧縮ファイルとして配りたい場面があると思います。
+この場合、`docker export`コマンドを使用することで、ビルドしたDockerイメージを圧縮ファイルとして配ることがうできます。
+
+[:contents]
+
+### Docker入門 関連記事
+
+- [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+- [Dockerのダウンロードとインストール(Mac編)](https://minegishirei.hatenablog.com/entry/2023/09/03/143528)
+- [Dockerのダウンロードとインストール(Windows編)](https://minegishirei.hatenablog.com/entry/2023/09/04/115946)
+- [Dockerのプロキシーの設定](https://minegishirei.hatenablog.com/entry/2023/09/05/120827)
+- [Dockerfileの書き方](https://minegishirei.hatenablog.com/entry/2023/09/11/102313)
 
 
-ビルドしたDockerイメージを圧縮ファイルとして配りたい場合。
 
-### 解決策:`docker export`コマンドを使用する
+
+## 解決策:`docker export`コマンドを使用する
 
 まずは`docker ps`でコンテナの一覧を取得する
 

@@ -1,5 +1,20 @@
 ﻿
 
+# docker commit コマンドはコンテナの変更履歴を保存できる
+
+
+`docker commit` コマンドはDockerコンテナで発生した履歴をもとに新しいイメージを作り出すことができます。
+使い方を覚えて変更履歴をコミットできるようにしましょう。
+
+[:contents]
+
+### Docker入門 関連記事
+
+- [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+- [Dockerのダウンロードとインストール(Mac編)](https://minegishirei.hatenablog.com/entry/2023/09/03/143528)
+- [Dockerのダウンロードとインストール(Windows編)](https://minegishirei.hatenablog.com/entry/2023/09/04/115946)
+- [Dockerのプロキシーの設定](https://minegishirei.hatenablog.com/entry/2023/09/05/120827)
+- [Dockerfileの書き方](https://minegishirei.hatenablog.com/entry/2023/09/11/102313)
 
 ## コンテナ内部のコマンドによる変更を保存する
 
