@@ -172,14 +172,25 @@ WORKDIRコマンドは以下のように書きます。
 
 #### [Dockerのゴミを削除する（未使用イメージ、ボリューム、コンテナの削除）](https://minegishirei.hatenablog.com/entry/2023/09/19/182608)
 
+Dockerのボリューム、イメージ、コンテナを削除する方法を解説します。
+一度**実行したdockerコマンドはshellのhistoryに登録されるので、`Ctrl+R`で実行したいコマンドをさかのぼることで楽に実行できる。**
 
 #### [docker commit コマンドでコンテナの変更履歴を保存する (docker, commit)](https://minegishirei.hatenablog.com/entry/2023/09/20/185015)
 
+`docker commit` コマンドはDockerコンテナで発生した履歴をもとに新しいイメージを作り出すことができます。
+使い方を覚えて変更履歴をコミットできるようにしましょう
 
 #### [docker cp コマンドでコンテナにファイルをコピーする](https://minegishirei.hatenablog.com/entry/2023/09/20/185116)
 
+`docker`の`cp`コマンドを使用することでコンテナとローカルPC間でファイルのコピーが可能です。
+`docker`の`cp`コマンドを使用してファイルをコピーする方法を解説します。
+
+
 
 #### [Dockerイメージをファイルとして配布する（docker, export コマンド）](https://minegishirei.hatenablog.com/entry/2023/09/20/185234)
+
+ビルドしたDockerイメージを圧縮ファイルとして配りたい場面があると思います。
+この場合、`docker export`コマンドを使用することで、ビルドしたDockerイメージを圧縮ファイルとして配ることがうできます。
 
 
 ## docker-composeの使い方
