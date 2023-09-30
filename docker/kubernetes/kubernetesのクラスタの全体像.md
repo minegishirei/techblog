@@ -17,7 +17,7 @@ Kubernetesのアーキテクチャを理解するためにはこれらの用語�
 
 全体像は以下のとおりです。
 
-<img src="" alt="Kubernetesのクラスタの全体図">
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/kubernetes/img/1_kubernetes_cluseter.png?raw=true" alt="Kubernetesのクラスタの全体図">
 
 
 Kubernetesのクラスタの構成要素は以下のとおりです。
@@ -32,7 +32,6 @@ Kubernetesのクラスタの構成要素は以下のとおりです。
 
 Kubenetesのコントロールプレーンは以下のコンポーネントから構成されます。
 
-
 - `kube-apiserver` : コントロールプレーンの本体と言えるサーバーでAPIリクエストを受け付け、クラスタを修正します。
     - 実際にはコマンド`kube-ctl`を実行することで`kube-apiserver`へAPIリクエストを投げることでクラスタの修正を行います。
 - `etcd` : Kubernetes内部に存在するノードの情報、リソースの詳細などの情報を貯めるデータベース
@@ -42,12 +41,20 @@ Kubenetesのコントロールプレーンは以下のコンポーネントか�
 - `cloud-controller-manager` : クラウドプロバイダとやりとりをするためのサービスです。
 
 
-<img src=">
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/kubernetes/img/2_kubernetes_control.png?raw=true">
 
 
+## ノードのコンポーネント
 
+`ノードのコンポーネント`とは実際に実行されるサービスのこと。通常はDockerコンテナが動く。(別名`Kubernetes Work Nodes`)
 
+<img src="https://github.com/minegishirei/techblog/blob/main/docker/kubernetes/img/3_kubernetes_nodes.png?raw=true">
 
+Kubenetesのノードコンポーネントの構成要素は以下のとおりです。
+
+- `kubelet` : コントローラーによってスケジューリングされたコンテナを実際に運用する、クラスター内の各ノードで実行されるエージェントです。
+- `kube-proxy` : `kubernetes`専用のネットワークプロキシです。
+- `コンテナランタイム` : 実際に起動されるコンテナです。これは`kubelet`によって起動されます。
 
 
 
