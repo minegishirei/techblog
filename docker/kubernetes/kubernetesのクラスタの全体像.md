@@ -15,14 +15,17 @@ Kubernetesのアーキテクチャを理解するためにはこれらの用語�
 
 ## Kubernetesのクラスタの構成要素
 
+全体像は以下のとおりです。
+
+<img src="" alt="Kubernetesのクラスタの全体図">
+
+
 Kubernetesのクラスタの構成要素は以下のとおりです。
 
 - `コントロールプレーン` : クラスタの頭脳でコンテナのオーケストレーション（全体の指揮）を行う。(別名`Kubernetes Master`)
 - `ノードのコンポーネント` : 実際に実行されるサービスのこと。通常はDockerコンテナが動く。(別名`Kubernetes Work Nodes`)
 
-全体像は以下のとおりです。
 
-<img src="" alt="Kubernetesのクラスタの全体図">
 
 
 ## Kubernetesのコントロールプレーンについて
@@ -32,6 +35,19 @@ Kubenetesのコントロールプレーンは以下のコンポーネントか�
 
 - `kube-apiserver` : コントロールプレーンの本体と言えるサーバーでAPIリクエストを受け付け、クラスタを修正します。
     - 実際にはコマンド`kube-ctl`を実行することで`kube-apiserver`へAPIリクエストを投げることでクラスタの修正を行います。
+- `etcd` : Kubernetes内部に存在するノードの情報、リソースの詳細などの情報を貯めるデータベース
+- `kube-controller-manager` : 新しいPodを生成したり、新しいEndpointを生成したりします。
+- `kube-scheduler` : 生成されるPodの場所を決定する。（リソースの生成自体は`controller-manager`で行いますが、`kube-scheduler`は生成場所を決定します。
+    - その時の様々なリソースの状況を見たり、ユーザーが指定したPodのスケジュールの制約を鑑みたりしつつ、Podに最適なNodeを決定しています。
+- `cloud-controller-manager` : クラウドプロバイダとやりとりをするためのサービスです。
+
+
+<img src=">
+
+
+
+
+
 
 
 
