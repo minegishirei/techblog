@@ -43,7 +43,7 @@
   - Docker 書籍の出版 (未達)
 - [Flamevalue](https://minegishirei.github.io/flamevalue_site/code/vue-notus/dist/tables.html)
   - プログラミング、フレームワークの市場価値を判定するサイト
-
+- [心理学]()
 
 
 ## 目標
