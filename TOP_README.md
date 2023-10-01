@@ -46,15 +46,17 @@
 
 
 
-## 目的
+## 目標
 
 - すんごいエンジニア(Jeff DeanやBill Gatesぐらい)
   - こんな感じになったら面白いと思う[全盛期のJeff Dean](https://qiita.com/umegaya/items/ef69461d6f4967d5c623)
   - だからエンジニアリングを極めていく
   - でもエンジニアリングだけを極めても同じレベルにはなれない
   - エンジニアリングとは真反対の人間の本質、心理学を学ぶ必要がある
-  
 
+つまりこんな感じ
+
+<img src="https://github.com/minegishirei/draw_v1/blob/main/%E4%BA%BA%E7%94%9F%E8%A8%AD%E8%A8%88-arch_20230928.drawio.png?raw=true">
 
 
 
