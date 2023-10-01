@@ -28,3 +28,26 @@
   - 派遣求人自動生成(PoC) : 求人サイトに掲載する文章の自動生成プロジェクトに参加。インフラ~バックエンドを担当
   - 営業Webアプリ(アジャイル) : BtoB営業に使用するアプリの開発に参加。
 
+
+
+
+
+## 個人活動
+
+- Dockerの勉強
+  - [Docker 入門サイトの作成](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+  - [Discordコミュニティの運営](https://discord.gg/jQ9J3kPmAg)
+  - Docker 書籍の出版 (未達)
+- [Flamevalue](https://minegishirei.github.io/flamevalue_site/code/vue-notus/dist/tables.html)
+  - プログラミング、フレームワークの市場価値を判定するサイト
+
+
+
+
+
+
+
+
+
+
+
