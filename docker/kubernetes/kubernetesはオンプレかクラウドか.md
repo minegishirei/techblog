@@ -54,8 +54,6 @@ kubernetesをセルフホスティングする場合、以下の要素で大量�
 
 #### 
 
-
-
 Netflixが提供しているChaos Monky
 
 
