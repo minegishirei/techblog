@@ -35,7 +35,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas:
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -73,6 +73,42 @@ kubectl get deployments
 kubectl get deployments
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 nginx-deployment   3/3     3            3           13m
+```
+
+
+### Podも確認してみる
+
+以下のコマンドでDeploymentによって生成されるPodを確認できる。
+
+```sh
+kubectl get pod
+```
+
+今回は`replica`に`3`が指定しているため、podの数は3つまで増える。
+
+
+```sh
+> kubectl get pod
+NAME                               READY   STATUS      RESTARTS   AGE
+hello-world                        0/1     Completed   0          117m
+nginx-deployment-cbdccf466-7qvhk   1/1     Running     0          14s
+nginx-deployment-cbdccf466-hn95r   1/1     Running     0          14s
+nginx-deployment-cbdccf466-vf5sj   1/1     Running     0          14s
+```
+
+### Deploymentsを削除する
+
+deploymentsを終了させるには`kubectl delete`コマンドを使用する。
+
+```sh
+kubectl delete -f .\deployment-example.yaml
+```
+
+deployments確認結果
+
+```sh
+> kubectl get deployments
+No resources found in default namespace.
 ```
 
 
