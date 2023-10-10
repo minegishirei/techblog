@@ -77,27 +77,3 @@ nginx-deployment   3/3     3            3           13m
 
 
 
-
-## Pod
-
-試しにhelloworldプロジェクトの情報を取得してみる。
-以下helloworldコンテナの作成。
-
-```sh
-kubectl run hello-world --image hello-world --restart=Never
-```
-
-実行結果
-
-```sh
-kubectl get pod
-```
-
-```
-PS C:\Users\mineg> kubectl get pod
-NAME          READY   STATUS      RESTARTS   AGE
-hello-world   0/1     Completed   0          2m36s
-```
-
-
-
