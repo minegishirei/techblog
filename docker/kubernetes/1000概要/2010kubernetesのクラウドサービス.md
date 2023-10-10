@@ -2,6 +2,22 @@
 
 
 
+# Kubernetesのクラウド選定(Google vs Microsoft vs Amazon)
+
+
+
+
+## ベンダロックインは発生しない
+
+kubernetesはクラウドプラットフォームの技術的な詳細を抽象化して隠してくれます。
+つまり、AzureやGCPなどのプラットフォームで実行しているサーバーは、別のクラウドサービスでkubernetesを利用する際にはAWSのEC2サーバーとして利用することが出来ます。
+
+したがって、Kubernetesを利用している場合には「クラウドサービスの構築」ではなく「kubernetesの利用」に焦点を絞ることで対応できます。
+
+
+
+
+
 
 ## Google Kubernetes Engine (GKE)
 
@@ -34,6 +50,14 @@ ECSもコンテナサービスの運用には十分なレベルですが、Kuber
 ただし、EKSはGoogleほどのシームレスなサポートではないため、セットアップ作業が多くなる可能性はあります。
 すでにAWSでインフラを構築しているか、ECSを利用している場合でKubernetesを利用する場合にKubernetesの選択肢が上がります。
 大多数の企業でAWSのクラウドサービスを利用しているため、ほどんどの企業でEKSは選択肢に上がります。
+
+
+## Azure Kubernetes Service (AKS)
+
+MicrosoftはAmazonやGoogleよりも遅れてクラウドビジネスに参入しましたが、急速な追い上げてます。
+Azure Kubernetes ServiceはGoogleのGKEなどの強豪サービスが提供する機能をすべてサポートします。
+
+こちらも、すでにAzureのクラウドサービスを利用している場合は選択肢に上がります。
 
 
 
