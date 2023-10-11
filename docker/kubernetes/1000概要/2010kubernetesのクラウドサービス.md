@@ -71,3 +71,4 @@ Azure Kubernetes ServiceはGoogleのGKEなどの強豪サービスが提供す�
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2023/10/11/103313
