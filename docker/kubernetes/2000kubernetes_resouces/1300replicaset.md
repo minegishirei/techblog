@@ -97,6 +97,8 @@ spec: # Deploymentの望ましい状態を定義
 すると、適応した後の一種は、`DSIRED（望ましい数）`と`READY(実際の数)`に偏りがある。
 これは、**ユーザーがDeploymentを更新する際に、新しいReplicaSetが作成されて新しいPodを管理し、更新が完了した時点で古いReplicaSetとそのPodが終了するためである。**
 
+このように、**Podの数を一定に保とうとする動きのことを調整ループ**と呼びます。
+
 ```sh
 kubectl get replicaset
 NAME                         DESIRED   CURRENT   READY   AGE
