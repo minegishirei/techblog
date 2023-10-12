@@ -8,7 +8,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-deployment
 spec:
   replicas: 1
   selector:
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.7.5
+        image: nginx  # または公式のNginxイメージを使用
         ports:
         - containerPort: 80
 ```
@@ -32,19 +32,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-service
 spec:
   selector:
     app: nginx
   ports:
-    - name: http
-      protocol: TCP
+    - protocol: TCP
       port: 80
       targetPort: 80
-  externalIPs:
-     - <ノードの内部IP>
-     - <ノードの内部IP>
+  type: NodePort
 ```
+
+```sh
+kubectl apply -f .\nginx.service.yaml
+```
+
+
+
+
+
+http://localhost/
+
+
+
 
 
 
