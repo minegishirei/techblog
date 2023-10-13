@@ -102,3 +102,4 @@ kubectl port-forward service/nginx-service 80:80
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2023/10/13/091613?_gl=1*1paa6d4*_gcl_au*MTAxNjcwMDkxNS4xNjk1NjAyODkx

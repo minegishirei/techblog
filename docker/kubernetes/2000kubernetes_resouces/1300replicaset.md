@@ -109,4 +109,4 @@ nginx-deployment-cbdccf466   4         4         3       12s
 
 
 
-
+page:https://minegishirei.hatenablog.com/entry/2023/10/13/091443
