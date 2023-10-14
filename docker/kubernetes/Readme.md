@@ -1,5 +1,6 @@
 
 
+[:contents]
 
 
 
@@ -47,6 +48,46 @@ Podはクジラの小さい群れを表す言葉であり、派生してKubernet
 
 
 
+
+### [ReplicaSetとは何か?](https://minegishirei.hatenablog.com/entry/2023/10/13/091443)
+
+ユーザーはReplicaSetを理解している必要はなく、Deploymentの挙動を把握している必要があります。
+ですが、ReplicaSetの挙動を把握しておくことは実運用上のトラブルシューティングなどで役に立つことがあります。
+
+ReplicaSetの仕事は、Deploymentの変更を受けてPodを管理することにあります。
+Deploymentが直接Podを変更しないのは、ローリングアップデートなどのデプロイ戦略に対応するためです。（例えば、RplicaSetをバージョニングすることで、古いReplicaと新しいReplicaをコントロールし、複数のPodをローリングアップデートすることが出来ます。）
+
+
+
+
+
+
+### [Service とは何か?](https://minegishirei.hatenablog.com/entry/2023/10/13/091613)
+
+**Serviceリソースは単一の変化しないIPアドレス、またはDNSを付与することができ、任意の対応するPodへ自動的にルーティングさせることが出来ます。**
+
+ServiceはWebプロキシやロードバランサのようなものと考えることができ、バックエンドであるPodのグループにリクエストを飛ばします。
+
+
+
+
+
+## kubernetesリソースコントロール
+
+
+### [KubernetesのCPUリソース制限方法](https://minegishirei.hatenablog.com/entry/2023/10/13/093621)
+
+
+Kubernetesでは必要となるリソースを次の二つの方法を用いて指定します。
+
+- リソース要求値（Kubernetesが必要とする最小のリソース）
+- リソース制限値（Kubernetesへ許可される最大のリソース）
+
+
+### [Kubernetesでのヘルスチェック方法](https://minegishirei.hatenablog.com/entry/2023/10/14/102141)
+
+Kubernetesではコンテナのスペック管理の一部として、Liveness Probe(ライブネスプローブ)を利用できます。
+言い換えればヘルスチェックが利用可能です
 
 
 
