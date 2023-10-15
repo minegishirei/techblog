@@ -2,7 +2,7 @@
 
 
 
-## KubernetesのNamespaceリソースとは何か?
+# KubernetesのNamespaceリソースとは何か?
 
 一台のマシンに複数の環境を構築する場合、どのようにリソースを分配すれば良いのでしょうか?
 クラスター単位でリソースの使用状況を管理するためには`Namespace`の使用が有効です。
@@ -61,6 +61,15 @@ metadata:
 
 このリソースファイルを`kubectl apply -f (リソースファイル名)`で適応することでNamespaceが作成されます。
 
+またはマニフェストを使わずにNamespaceを作成する場合、
+`kubectl create namespace`コマンドが使用可能です。
+例えば、`test`Namespaceを作成したいときは次のコマンドを実行します。
+
+```sh
+kubectl create namespace test
+```
+
+
 
 ## Serviceのアドレス
 
@@ -74,6 +83,30 @@ demo.test
 
 
 
+## Namespaceによるリソース制限
+
+Namespace単位でのリソースを制限することも可能です。
+コレを行うためには`ResourceQuota`リソースを使用します。
+
+```yml
+appVersion: v1
+kind: ResourceQuota
+metadata:
+  name: demo-resourcequota # ただのコメント
+spec:
+  hard:
+    pods: "100"
+```
+
+上記のマニフェストではあるNamespace内部で同時に実行できるPodの数を100に制限するハードリミットが設定されます。
+ただ、リソースファイル内部にはどのNamespaceに適応するかは書かれていません。
+
+上記のymlファイルを保存した後、次の`apply`コマンド実行時に`--namespace`オプションを使用することで初めて適応されます。
+
+
+```sh
+kubectl apply --namespace demo -f (ymlファイル名)
+```
 
 
 
@@ -83,9 +116,5 @@ demo.test
 
 
 
-
-
-
-
-
+page:https://minegishirei.hatenablog.com/entry/2023/10/15/140051?_gl=1*1y35ymm*_gcl_au*NTQ2MzIzOTE5LjE2OTA2MTM2MDk.
 
