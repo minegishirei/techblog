@@ -57,10 +57,6 @@
 
 つまりこんな感じ
 
-<img src="https://github.com/minegishirei/draw_v1/blob/main/%E4%BA%BA%E7%94%9F%E8%A8%AD%E8%A8%88-arch_20230928.drawio.png?raw=true">
-
-
-
 
 
 
