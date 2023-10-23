@@ -54,7 +54,7 @@ Kubernetesのクラスタのサイズには上限があります。
 一部の例外を除けば複数のクラスタを管理するメリットはありません。
 
 
-
+page:https://minegishirei.hatenablog.com/entry/2023/10/23/221122
 
 
 
