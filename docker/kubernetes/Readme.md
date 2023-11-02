@@ -27,7 +27,7 @@ kubernetsのセットアップに要するリソースを考えればKubernetes�
 
 
 
-## kubernetes基本事項
+## kubernetesリソース一覧
 
 ### [Deploymentとは何か?](https://minegishirei.hatenablog.com/entry/2023/10/11/091715)
 
@@ -59,7 +59,9 @@ Deploymentが直接Podを変更しないのは、ローリングアップデー�
 
 
 
+### [Namespace とは何か?](https://minegishirei.hatenablog.com/entry/2023/10/15/140051)
 
+クラスター単位でリソースの使用状況を管理するためにはNamespaceの使用が有効です。
 
 
 ### [Service とは何か?](https://minegishirei.hatenablog.com/entry/2023/10/13/091613)
@@ -67,6 +69,24 @@ Deploymentが直接Podを変更しないのは、ローリングアップデー�
 **Serviceリソースは単一の変化しないIPアドレス、またはDNSを付与することができ、任意の対応するPodへ自動的にルーティングさせることが出来ます。**
 
 ServiceはWebプロキシやロードバランサのようなものと考えることができ、バックエンドであるPodのグループにリクエストを飛ばします。
+
+
+
+
+### [PersistentVoluem とは何か?]()
+
+個々のコンテナには独自のファイルシステムが存在します。
+しかしこれらのファイルシステムはエフェメラルであり、再起動してしまえばその情報は失われてしまいます。
+
+この性質上、コンテナはステートレスであり、再起動すれば必ず初期化してくれます。
+
+
+ところが、より複雑なアプリケーションではストレージを永続化し、ほかのコンテナと共有したい場面が出てきます。
+Kubernetesのvolumeオブジェクトはそのどちらのニーズにも対応することが出来ます。
+
+
+
+## kubernetes コマンド集
 
 
 
@@ -89,6 +109,7 @@ Kubernetesではコンテナのスペック管理の一部として、Liveness P
 言い換えればヘルスチェックが利用可能です
 
 
+### [クラスタのサイズを見極める](https://minegishirei.hatenablog.com/entry/2023/10/23/221122)
 
 
 
