@@ -75,6 +75,8 @@ spec:
 
 ## 永続ボリューム
 
+以下は永続ボリュームを設定する`PersistentVolume`です。
+永続ボリュームはクラスタ全体で共有できるため、他のポッドからもアクセスできます。
 
 ```yml
 apiVersion: v1
@@ -92,6 +94,55 @@ spec:
     path: /data
 ```
 
+`PersistentVolume`は、物理ディスク、クラウドボリューム、ネットワークストレージ、ローカルディスクなど、クラスタ内のあらゆる種類のストレージに関連付けることができます。
+
+ただし、Podは直接ストレージにアクセスできるわけではありません。
+Podが永続ボリューム（PersistentVolume）にアクセスできるように、アクセス要求（PersistentVolumeClain）を定義しなければなりません。
+
+```yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+```
+
+PVCはポッドが永続データを要求するための要求オブジェクトであり、ポッドが必要とするストレージの容量やアクセスモード（ReadWriteOnce、ReadOnlyMany、ReadWriteMany）を指定します。
+
+永続ボリュームをPodから利用するためには、この二つのオブジェクトがそろって初めて、アクセスできるようになるのです。
+
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: my-image
+      volumeMounts:
+        - name: my-pv-claim
+          mountPath: /data
+  volumes:
+    - name: my-pv-claim
+      persistentVolumeClaim:
+        claimName: my-pvc
+```
+
+
+## 永続ボリュームはクラウドプロバイダのサービスを使うべし
+
+ここまでKubernetes側で永続データを扱う方法を紹介しましたが、**基本的には永続ボリュームはクラウドプロバイダのサービスを使用するべきです。**
+kubernetesはステートレスな管理が得意であり、データベースの運用には向いていません。
+
+Poc段階の開発では利用することをお勧めできますが、本番稼働するまでにはクラウドプロバイダのサービスを使い、完璧なバックアップ体制を整えましょう。
 
 
 
