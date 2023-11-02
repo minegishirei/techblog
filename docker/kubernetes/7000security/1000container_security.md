@@ -141,7 +141,87 @@ spec:
 
 特定の機能とはカーネルモジュールのロード、ダイレクトネットワークのI/O、システムデバイスへのアクセスなどです。
 
-> ポート80番でwebサーバーを建てる場合、この機能を実行するためにrootとして実行するのではなく、
+> ポート80番でwebサーバーを建てる場合、この機能を実行するためにrootとして実行するのではなく、`NET_BIND_SERVICE`ケイパビリティを与える。
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        securityContext:
+          drop: ["CHOWN", "NET_RAW", "SETPCAP"]
+          add:  ["NET_ADMIN"]
+```
+
+上記のコンテナは、`"CHOWN", "NET_RAW", "SETPCAP"`が削除され、`NET_ADMIN`ケイパビリティが追加されます。
+
+しかし、セキュリティを最大限に高めるには、どのコンテナについても`drop: ["all"]`を追加するべきです。
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        securityContext:
+          drop: ["ALL"]
+          add:  ["NET_BIND_SERVICE"]
+```
+
+
+## Podのセキュリティ
+
+これまでの内容はコンテナ単位に適応してきましたが、Podのレベルに適応することも可能です。
+**Podに適応した場合、コンテナが自分自身のセキュリティコンテキストで上書きする場合を除き、Pod内のすべてのコンテナに適応されます。**
+
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      securityContext:
+        drop: ["ALL"]
+        add:  ["NET_BIND_SERVICE"]
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+```
 
 
 
