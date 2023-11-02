@@ -71,3 +71,34 @@ spec:
 
 
 
+
+
+## 永続ボリューム
+
+
+```yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /data
+```
+
+
+
+
+
+
+
+
+
+
+
