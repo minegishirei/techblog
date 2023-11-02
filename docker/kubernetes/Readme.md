@@ -47,6 +47,9 @@ Podとは、一つ以上のコンテナのグループを表すKubernetesオブ�
 Podはクジラの小さい群れを表す言葉であり、派生してKubernetesのPodはコンテナのグループを表しています。
 
 
+### [Podとコンテナの違い](https://minegishirei.hatenablog.com/entry/2023/11/02/093812)
+
+Podオブジェクトとは単一のコンテナまたはコンテナのグループを表し、Kubernetesで何を実行する場合でもPodを使用して実行されます。
 
 
 ### [ReplicaSetとは何か?](https://minegishirei.hatenablog.com/entry/2023/10/13/091443)
@@ -88,8 +91,34 @@ Kubernetesのvolumeオブジェクトはそのどちらのニーズにも対応�
 
 ## kubernetes コマンド集
 
+### [kubectl 省略形](https://minegishirei.hatenablog.com/entry/2023/10/27/091007)
 
 
+kubernetesのコマンドは長くなりがちですが、実は省略形も存在します。
+今回はリソースタイプの省略形、自動補完機能、フラグの省略形をお伝えします。
+
+
+### [kubectl getオプション一覧](https://minegishirei.hatenablog.com/entry/2023/10/27/125349)
+
+kubernetesではgetコマンドでリソース情報を入手することができます。
+
+
+### [kubernetesのリソースマニフェストは自動生成できる](https://minegishirei.hatenablog.com/entry/2023/11/02/201315)
+
+kubectlを使用してYAMLマニュフェストを生成することで、リソースマニュフェストを0から書く心配はなくなります。
+コマンドは`--dry-run`オプションと`-o yaml`オプションを`kubectl create`コマンドにつけるだけです。
+
+
+### [kubernetesによるログ出力](https://minegishirei.hatenablog.com/entry/2023/10/29/160300)
+
+コンテナの内部で起こるエラーは、通常のLinux,Windowsサーバー内のログを確認する作業比べて, 何が起こっているかを把握することが難しくなります。
+Kubernetesでは、kubectlコマンドを使用することで、より効果的な使用方法が見つかるでしょう。
+
+### [kubectl execでコンテナに入る](https://minegishirei.hatenablog.com/entry/2023/10/29/162143)
+
+kubectlでコンテナ内部に入る方法
+
+kubernetesではコンテナの内部に入り、linuxコマンドを打てる環境を用意してくれます。より正確にいうと、コンテナに対してssh接続しているかのようにシェルを起動できるのです。
 
 
 ## kubernetesリソースコントロール
@@ -113,4 +142,34 @@ Kubernetesではコンテナのスペック管理の一部として、Liveness P
 
 
 
+
+## Kubernetesセキュリティ
+
+### [Podのセキュリティ](https://minegishirei.hatenablog.com/entry/2023/11/02/202016)
+
+
+
+コンテナのセキュリティとは、攻撃者がコンテナ内部に侵入しても問題ない状態を作り上げておかなければなりません。
+プログラムには脆弱性が付きまといます。
+これを任意の権限をもつユーザー（rootユーザー）が悪用できる状況になった場合、最悪システムを乗っ取られる可能性もあります。
+あるいは、コンテナのバグを悪用してホストマシンの権限を奪われる可能性もあります。
+
+このような危険性を軽減するために、コンテナは考えうる最小の権限で実行することが重要です。
+
+
+
+
+
+
+
+
 page:https://minegishirei.hatenablog.com/entry/2023/10/11/103809
+
+
+
+
+
+
+
+
+
