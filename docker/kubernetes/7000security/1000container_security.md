@@ -75,8 +75,63 @@ spec:
 
 
 
+## 読み取り専用ファイルシステムの設定
+
+コンテナが自分自身のファイルシステムに書き込むことを防止する`readOnlyRootFileSystem`があります。
+例えば、自分がアクセスできるファイルシステムに望ましくない変更を加えてしまった場合、ホストマシンが機能不全になってしまう可能性もあります。
+ファイルシステムを読み取り専用として設定することで、このような事態を未然に防ぐことが出来ます。
 
 
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        securityContext:
+          readOnlyRootFilesystem: true
+```
+
+ほとんどのコンテナでは自分のホストマシンに何かを書き込む必要がないため、この設定を常に書き込んでおくことをお勧めします。
+
+## 権限昇格の無効か
+
+`allowPrivilegeEscalation`項目を`false`に設定しておくことで、一般ユーザーがroot権限を獲得することを未然に防ぐことが出来ます。
+
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        securityContext:
+          readOnlyRootFilesystem: true
+```
 
 
 
