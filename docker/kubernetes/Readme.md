@@ -77,7 +77,6 @@ ServiceはWebプロキシやロードバランサのようなものと考える�
 
 ### [KubernetesのCPUリソース制限方法](https://minegishirei.hatenablog.com/entry/2023/10/13/093621)
 
-
 Kubernetesでは必要となるリソースを次の二つの方法を用いて指定します。
 
 - リソース要求値（Kubernetesが必要とする最小のリソース）
