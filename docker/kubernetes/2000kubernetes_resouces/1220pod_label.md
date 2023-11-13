@@ -108,7 +108,7 @@ kubectl get pods --selector app!=test,env=test
 
 
 
-
+page:https://minegishirei.hatenablog.com/entry/2023/11/13/091825
 
 
 
