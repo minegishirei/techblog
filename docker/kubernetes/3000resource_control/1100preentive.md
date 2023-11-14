@@ -96,6 +96,68 @@ affinityの`matchExpressions`を強化することで、このように拡張す
 ```
 
 
+## Affinityの重さを調節する
+
+個々のルールの重さを調節し、どの程度リソースに影響させるかを1~100の数字で表せます。
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejs-app
+        image: your-nodejs-image:tag
+        ports:
+        - containerPort: 3000
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+    template:
+      spec:
+        affinity: # ここからNode affinity
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+            - weight: 10
+              preference:
+                matchExpressions:
+                - key: cloud.google.com/gke-nodepool
+                  operator: In
+                  values:
+                  - ["us-centrall-a"]
+            - weight: 100
+              preference:
+                matchExpressions:
+                - key: cloud.google.com/gke-nodepool
+                  operator: In
+                  values:
+                  - ["us-centrall-b"]
+```
+
+上記の記述では、`us-centrall-a`よりも`us-centrall-b`のほうが10倍で優先しました。
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
