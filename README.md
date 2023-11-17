@@ -8,19 +8,18 @@
 
 
 
-### 筆者
+## 筆者
 
-#### [みねぎしれい](https://github.com/minegishirei)
+### [みねぎしれい](https://github.com/minegishirei)
 
-<a href="https://github.com/minegishirei">
 コンテナと心理学が好きな25歳エンジニアです。人材業界で働いています。
 
+<a href="https://github.com/minegishirei">
 <img src="https://github.com/minegishirei/minegishirei/blob/main/img/github.png?raw=true">
-
 </a>
 
 
-### インフラ
+## インフラ
 
 自分がキャリアの中で最も重要と感じているのが**コンテナ**です。
 
@@ -32,14 +31,14 @@ NginxもDjangoもMySQLもコンテナから始まるのです。
 
 
 
-#### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
-#### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
+### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
 
-#### [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
+### [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
 
 
-### プログラミング
+## プログラミング
 
 #### [Kotlin](https://minegishirei.hatenablog.com/entry/2023/02/09/101751)
 
