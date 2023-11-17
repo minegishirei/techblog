@@ -19,6 +19,7 @@
 
 <img src="https://github.com/minegishirei/draw_v1/blob/main/life.draw.io-engineer_psychology.drawio.png?raw=true">
 
+
 ## やらないことリスト
 
 - やることリスト
@@ -38,6 +39,7 @@
     - アプリ開発: webアプリが作れればスマホアプリにも応用ができる。加えて、アプリの分野は今後webアプリと合流する可能性がある。（React Native, Flutter等）したがって、スマホアプリかwebかのどちらかが出来ればよい。
 - 保留
     - セキュリティ: 深すぎる。攻撃者とセキュリティエンジニアの攻防はいたちごっこであり、利益にもなりずらかった。
+    - OS: 深すぎる。
 
 
 
