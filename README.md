@@ -122,3 +122,4 @@ NginxもDjangoもMySQLもコンテナから始まるのです。
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2023/01/27/193827
