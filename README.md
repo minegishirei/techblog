@@ -4,13 +4,15 @@
 
 # エンジニア基礎力会とは?
 
+頑丈な基礎を作ること
+
 
 
 ## 対象者
 
 ## アーキテクチャ
 
-<img src="https://github.com/minegishirei/minegishirei/blob/main/img/engineer_psychology_engineer.png?raw=true">
+<img src="https://github.com/minegishirei/minegishirei/blob/main/img/engineer_psychology.png?raw=true">
 
 ## やらないことリスト
 
