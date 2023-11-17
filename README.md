@@ -26,8 +26,10 @@
         - [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
         - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
         - [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
+        - [IaC]()
     - バックエンド
         - [Django]()
+        - [SQL]()
         - [オブジェクト指向プログラミング]()
     - フロントエンド
         - [React]()
