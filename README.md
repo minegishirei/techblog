@@ -21,6 +21,9 @@
 
 ## インフラ
 
+
+### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+
 自分がキャリアの中で最も重要と感じているのが**コンテナ**です。
 
 プログラミングの学習において最もハードルが高いのが環境構築だと思います。
@@ -28,10 +31,6 @@
 
 コンテナを使えば、コピペで環境構築が完了してしまします。
 NginxもDjangoもMySQLもコンテナから始まるのです。
-
-
-
-### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
 ### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
 
