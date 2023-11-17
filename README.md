@@ -4,9 +4,27 @@
 
 # エンジニア基礎力会とは?
 
+## 対象者
+
+## アーキテクチャ
+
 <img src="https://github.com/minegishirei/draw_v1/blob/main/life.draw.io-engineer_psychology.drawio.png?raw=true">
 
 
+## やらないことリスト
+
+- やることリスト
+    - インフラ
+        - [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+        - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
+        - [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
+- やらないことリスト
+    - アプリ開発
+
+
+
+
+# 目次
 
 ## 筆者
 
