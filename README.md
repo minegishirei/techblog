@@ -12,7 +12,7 @@
 
 ## アーキテクチャ
 
-<img src="https://github.com/minegishirei/minegishirei/blob/main/img/engineer_psychology.png?raw=true">
+<img src="https://github.com/minegishirei/draw_v1/blob/main/life.draw.io-engineer_psychology.drawio.png?raw=true">
 
 ## やらないことリスト
 
