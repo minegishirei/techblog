@@ -24,6 +24,8 @@
 
 #### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
+#### [Kubernetes入門]()
+
 #### [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
 
 #### [アーキテクトの仕事](https://minegishirei.hatenablog.com/entry/2023/02/07/114407)
