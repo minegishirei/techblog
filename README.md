@@ -16,15 +16,18 @@
 
 ### 筆者
 
-#### [みねぎしれい](https://minegishirei.hatenablog.com/entry/2023/01/27/114655)
+#### [みねぎしれい](https://github.com/minegishirei)
 
+コンテナと心理学が好きな25歳エンジニアです。人材業界で働いています。
+
+<img src="https://github.com/minegishirei/minegishirei/blob/main/img/github.png?raw=true">
 
 
 ### インフラ
 
 #### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
-#### [Kubernetes入門]()
+#### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
 
 #### [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
 
