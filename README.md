@@ -4,6 +4,8 @@
 
 # エンジニア基礎力会とは?
 
+
+
 ## 対象者
 
 ## アーキテクチャ
@@ -18,9 +20,11 @@
         - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
         - [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
     - バックエンド
-        - [Djnago]()
+        - [Django]()
+        - [オブジェクト指向プログラミング]()
     - フロントエンド
         - [React]()
+        - [関数型プログラミング]()
 - やらないことリスト
     - アプリ開発
 
