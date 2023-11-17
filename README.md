@@ -8,30 +8,35 @@
 
 
 
-## 目次
-
-[:contents]
-
-
-
 ### 筆者
 
 #### [みねぎしれい](https://github.com/minegishirei)
 
+<a href="https://github.com/minegishirei">
 コンテナと心理学が好きな25歳エンジニアです。人材業界で働いています。
 
 <img src="https://github.com/minegishirei/minegishirei/blob/main/img/github.png?raw=true">
 
+</a>
+
 
 ### インフラ
+
+自分がキャリアの中で最も重要と感じているのが**コンテナ**です。
+
+プログラミングの学習において最もハードルが高いのが環境構築だと思います。
+プログラミングの文法を学ぼうとしたのに、セットアップの段階で躓いていてしますとモチベーションが大きくそがれてしまいます。
+
+コンテナを使えば、コピペで環境構築が完了してしまします。
+NginxもDjangoもMySQLもコンテナから始まるのです。
+
+
 
 #### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
 #### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
 
 #### [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
-
-#### [アーキテクトの仕事](https://minegishirei.hatenablog.com/entry/2023/02/07/114407)
 
 
 ### プログラミング
