@@ -8,6 +8,12 @@
 
 取り扱う記事は以下の通りで`SQL`や`Docker`などの製品知識から`アジャイル`などの開発手法まで幅広く取り扱います。
 
+<img src="https://github.com/minegishirei/draw_v1/blob/main/%E4%BA%BA%E7%94%9F%E8%A8%AD%E8%A8%88-arch.drawio.png?raw=true">
+
+
+
+
+
 [:contents]
 
 ### 筆者
