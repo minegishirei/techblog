@@ -53,15 +53,16 @@
         - [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
         - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
         - [アーキテクチャ](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
-        - [IaC]()
+        - IaC
     - 関数型プログラミング
-        - [関数型プログラミング]()
-        - [Lisp]()
-        - [React]()
+        - 関数型プログラミング
+        - Lisp
+        - React
     - Vim
-        - [Vim]()
-        - [ショートカットキー一覧]()
-        - [HHKB]()
+        - [Vim](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
+        - Vimnium
+        - ショートカットキー
+        - HHKB
 - やらないことリスト
     - アプリ開発: webアプリが作れればスマホアプリにも応用ができる。加えて、アプリの分野は今後webアプリと合流する可能性がある。（React Native, Flutter等）したがって、スマホアプリかwebかのどちらかが出来ればよい。
 - 保留
