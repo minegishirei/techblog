@@ -47,7 +47,8 @@
 
 - やることリスト
     - アジャイル
-        - [アジャイル]()
+        - [アジャイル](https://minegishirei.hatenablog.com/entry/2023/01/27/164337)
+        - [リファクタリング](https://minegishirei.hatenablog.com/entry/2023/02/02/165446:embed:cite)
     - Docker 
         - [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
         - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
@@ -69,12 +70,9 @@
 
 
 
-
-# 目次
-
 ## 筆者
 
-### [みねぎしれい](https://github.com/minegishirei)
+[みねぎしれい](https://github.com/minegishirei)
 
 10xプログラマーを目指す25歳エンジニアです。人材業界で働いています。
 
@@ -83,38 +81,7 @@
 </a>
 
 
-## Docker
 
-自分がキャリアの中で最も重要と感じているのが**コンテナ**です。
-
-プログラミングの学習において最もハードルが高いのが環境構築だと思います。
-プログラミングの文法を学ぼうとしたのに、セットアップの段階で躓いていてしますとモチベーションが大きくそがれてしまいます。
-
-コンテナを使えば、コピペで環境構築が完了してしまします。
-NginxもDjangoもMySQLもコンテナから始まるのです。
-
-### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
-
-### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
-
-### [アーキテクチャ関連](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
-
-
-## プログラミング
-
-#### [Kotlin](https://minegishirei.hatenablog.com/entry/2023/02/09/101751)
-
-#### [Powershell](ttps://minegishirei.hatenablog.com/entry/2023/02/15/162959)
-
-#### [SQL](https://minegishirei.hatenablog.com/archive/category/SQL)
-
-
-### 開発手法
-
-#### [リファクタリング](https://minegishirei.hatenablog.com/entry/2023/02/02/165446:embed:cite)
-
-
-#### [アジャイル](https://minegishirei.hatenablog.com/entry/2023/01/27/164337)
 
 
 
