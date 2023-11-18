@@ -4,7 +4,7 @@
 
 10xプログラマー養成所の目的は**10xプログラマーを育てることです**。
 10xプログラマーとは、普通のプログラマーと比べて10倍の生産性をもつプログラマーの事です。
-「無駄な機能を付けない」「オリジナリティを出さない」「ゴミを出さない」「物理的に早く動く」を守るため、`アジャイル`、`Docker`、`関数型プログラミング`、`Vim`を中心とした10xのための技術をまとめました。
+「無駄な機能を付けない」「オリジナリティを出さない」「副作用を減らす」「物理的に早く動く」を守るため、`アジャイル`、`Docker`、`関数型プログラミング`、`Vim`を中心とした10xのための技術をまとめました。
 
 1. 無駄な機能を付けない
     - あのExcelですら全体の80%の機能が使われていないそうです。これさえ意識すれば必要な作業量は1/5になります。
@@ -69,17 +69,14 @@
 
 ### [みねぎしれい](https://github.com/minegishirei)
 
-コンテナと心理学が好きな25歳エンジニアです。人材業界で働いています。
+10xプログラマーを目指す25歳エンジニアです。人材業界で働いています。
 
 <a href="https://github.com/minegishirei">
 <img src="https://github.com/minegishirei/minegishirei/blob/main/img/github.png?raw=true">
 </a>
 
 
-## インフラ
-
-
-### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
+## Docker
 
 自分がキャリアの中で最も重要と感じているのが**コンテナ**です。
 
@@ -88,6 +85,8 @@
 
 コンテナを使えば、コピペで環境構築が完了してしまします。
 NginxもDjangoもMySQLもコンテナから始まるのです。
+
+### [Docker入門](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 
 ### [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
 
