@@ -56,6 +56,7 @@
         - IaC
     - 関数型プログラミング
         - 関数型プログラミング
+        - Haskell
         - Lisp
         - React
     - Vim
