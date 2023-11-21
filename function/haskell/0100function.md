@@ -25,6 +25,8 @@ functionName arg1 arg2 ... = 関数本体
 - 二行目の関数本体は引数の列挙と関数が行う処理の記述を表します。
 
 
+
+
 ## Haskellのサンプルコード
 
 以下は文字列を結合する関数です。
@@ -35,7 +37,7 @@ functionName arg1 arg2 ... = 関数本体
 concatenate :: String -> String -> String
 concatenate str1 str2 = str1 ++ str2
 
-main = print( concatenate "Hello" "World" ) 
+main = print (concatenate "Hello" "World") 
 ```
 
 以下は引数が一つの関数で、`double`に数値を入れて呼び出すと2倍になって返却されます。
@@ -47,7 +49,7 @@ main = print( concatenate "Hello" "World" )
 double :: Int -> Int
 double x = x * 2
 
-main = print( double 10 ) 
+main = print (double 10) 
 ```
 
 
