@@ -97,11 +97,43 @@ f x = (double (addOne x) )
 
 
 
+### Haskellの関数合成記号
+
+数学における関数の合成は、二通りの表現方法があります。
+
+<img src="https://github.com/minegishirei/techblog/blob/main/0/function/gousei.png?raw=true">
+
+上記のように、`〇`でつなぐ方法がHaskellにはないのでしょうか?
+
+結論から言えば、Haskellにも数学のような関数合成の記述方法があります。
+
+<img src="https://res.cloudinary.com/bend/f_auto/shikakutimes/s3/bend-image/1653309571.png">
+
+```hs
+-- g(x)
+g :: Int->Int
+g x = x + 1
+
+-- f(x)
+f :: Int->Int
+f x = x*x
+
+-- g(x)とf(x)の合成関数
+fg :: Int->Int
+fg x = (f . g) x
+
+main = print (fg 10)
+```
+
+このように、Haskellにおける関数合成は`.`演算子を用いて行うことができます。
+
+
+
 ### Haskellの再起関数
 
 wikipediaによると、数学における階乗の定義は次のように表すことができます。
 
-<img src="">
+<img src="https://github.com/minegishirei/techblog/blob/main/0/function/factal.png?raw=true">
 
 これは再帰的な階乗の定義ですが、これをHaskellであらわした場合、次のような表記になります。
 
