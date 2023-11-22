@@ -13,16 +13,16 @@
 1. 無駄な機能を付けない
     - あのExcelですら全体の80%の機能が使われていないそうです。これさえ意識すれば必要な作業量は1/5になります。
     - MVP(価値の判定が可能な最小限の成果物)を高速で作ることで、無駄なものを作りません。
-    - キーワード） `アジャイル`
+    - キーワード）[`アジャイル`](https://minegishirei.hatenablog.com/entry/2023/01/27/164337)
 2. オリジナリティを出さない
     - 0からコードを書くよりもすでに出来上がっているOSSのコード、コンテナイメージのほうがよいですね。
-    - キーワード） `Docker`
+    - キーワード） [`Docker入門`](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 3. 副作用を減らす
     - 予期しないコードはチームの生産性を落としますが、バグのない理解の早いコードはきちんと動くだけでなく、チームメンバーの生産性をも向上します。
-    - キーワード） `関数型プログラミング`
+    - キーワード） [`関数型プログラミング`](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
 4. 物理的に早く動く
     - ショートカットキー、キーボードの選定では物理的な操作スピードを向上させてくれます。
-    - キーワード） `Vim`
+    - キーワード） [`Vim`](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
 
 私はこれらの要素を達成することで、10xプログラマーに近づけると考えてます。
 
@@ -54,10 +54,9 @@
         - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
         - [アーキテクチャ](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
         - IaC
-    - 関数型プログラミング
-        - 関数型プログラミング
-        - Haskell
-        - Lisp
+    - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
+        - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
+        - [Haskell](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
         - React
     - Vim
         - [Vim](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
