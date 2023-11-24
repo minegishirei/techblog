@@ -9,7 +9,6 @@
 
 <img src="https://github.com/minegishirei/minegishirei/blob/main/img/10x_programmer.png?raw=true">
 
-
 1. 無駄な機能を付けない
     - あのExcelですら全体の80%の機能が使われていないそうです。これさえ意識すれば必要な作業量は1/5になります。
     - MVP(価値の判定が可能な最小限の成果物)を高速で作ることで、無駄なものを作りません。
@@ -24,9 +23,16 @@
     - ショートカットキー、キーボードの選定では物理的な操作スピードを向上させてくれます。
     - キーワード） [`Vim`](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
 
-私はこれらの要素を達成することで、10xプログラマーに近づけると考えてます。
 
-参考:https://note.com/zaq1tomo/n/n9d0d5e68960c
+これに加えて、私個人が大切にしたいのが二つの「人間」に関する課題
+
+
+5. 人間中心のシステム設計
+    - キーワード）[`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology)
+6. 結局最後は人の問題
+    - 人間関係は最後の問題となる。
+    - キーワード）[`エンジニア心理学`](https://qiita.com/organizations/engineering_psychology)
+
 
 
 

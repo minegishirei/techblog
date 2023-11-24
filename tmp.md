@@ -21,11 +21,11 @@
     - キーワード） [`Vim`](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
 
 
-これに加えて、私個人が大切にしたいのが以下二つの「人間」に関する課題
+これに加えて、私個人が大切にしたいのが二つの「人間」に関する課題と一つの「システム」に関連する課題
 
 
 5. 人間中心のシステム設計
-    - キーワード）[`エンジニアデザイン心理学`]
+    - キーワード）[`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology)
 6. 結局最後は人の問題
     - 人間関係は最後の問題となる。
     - キーワード）[`エンジニア心理学`](https://qiita.com/organizations/engineering_psychology)
