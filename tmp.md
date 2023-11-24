@@ -25,7 +25,7 @@
 
 
 5. 人間中心のシステム設計
-    - キーワード）[`UIUX`]
+    - キーワード）[`エンジニアデザイン心理学`]
 6. 結局最後は人の問題
     - 人間関係は最後の問題となる。
     - キーワード）[`エンジニア心理学`](https://qiita.com/organizations/engineering_psychology)
