@@ -61,7 +61,7 @@
         - [アーキテクチャ](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
         - IaC
     - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
-        - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
+        - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/25/093811)
         - [Haskell](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
         - React
     - Vim
