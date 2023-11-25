@@ -198,3 +198,4 @@ f 5 = 5 * f 4
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2023/11/25/093512
