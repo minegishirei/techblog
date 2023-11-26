@@ -60,10 +60,10 @@
         - [Kubernetes入門](https://minegishirei.hatenablog.com/entry/2023/10/11/103809)
         - [アーキテクチャ](https://minegishirei.hatenablog.com/entry/2023/01/27/183831)
         - IaC
-    - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
-        - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/25/093811)
-        - [Haskell](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
-        - js
+    - 関数型プログラミング
+        - [関数型プログラミング](https://minegishirei.hatenablog.com/entry/2023/11/22/085527)
+        - [Haskell](https://minegishirei.hatenablog.com/entry/2023/11/25/093811)
+        - JS
     - Vim
         - [Vim](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
         - Vimnium
