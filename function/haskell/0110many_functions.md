@@ -72,6 +72,30 @@ drop :: Int -> [a] -> [a]
 ```
 
 
+## all関数とany関数
+
+- all は、ひとつめの関数がリストのすべての要素で`True`場合に True を返します。
+- 一方、any は、述語がリストの少なくとも 1 つの要素で`True`した場合に True を返します。
+
+```hs
+ghci> :type all
+all :: (a -> Bool) -> [a] -> Bool
+```
+
+`odd`関数は数値を引数に取り、奇数であれば`True`を返却します。
+
+```hs
+ghci> all odd [1,3,5]
+True
+ghci> all odd [3,1,4,1,5,9,2,6,5]
+False
+```
+
+
+
+
+
+
 
 
 
