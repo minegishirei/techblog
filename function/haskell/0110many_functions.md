@@ -84,12 +84,27 @@ all :: (a -> Bool) -> [a] -> Bool
 
 `odd`関数は数値を引数に取り、奇数であれば`True`を返却します。
 
+`all odd`を組み合わせることで、すべての配列の要素が奇数であれば
+
 ```hs
 ghci> all odd [1,3,5]
 True
 ghci> all odd [3,1,4,1,5,9,2,6,5]
 False
+ghci> any even [3,1,4,1,5,9,2,6,5]
+True
 ```
+
+
+
+
+
+
+ghci> "foo" `isPrefixOf` "foobar"
+True
+ghci> [1,2] `isPrefixOf` []
+False
+
 
 
 
