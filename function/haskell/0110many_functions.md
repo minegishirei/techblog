@@ -97,13 +97,52 @@ True
 
 
 
+## isPrefixOf : 文字列を含むか確認
 
+文字列を含むか確認し、含めば`True`を返す
 
-
+```hs
 ghci> "foo" `isPrefixOf` "foobar"
 True
-ghci> [1,2] `isPrefixOf` []
-False
+ghci> [1,2] `isPrefixOf` [1,2,3,4]
+True
+```
+
+しかし、二番目の実行結果を確認すれば分かるとおり、 **isPrefixOfの本質は、ひとつ目の配列が二つ目の配列に含まれているかどうかを確認するというもの**
+
+
+
+# 関数を引数に取る関数
+
+
+## filter関数
+
+filter関数はひとつ目の関数でTrueが返ってくるものだけを返却する関数です。
+
+filter関数の型を確認すると、引数のひとつ目の型が`(a -> Bool)`であることが確認できます。
+
+```hs
+ghci> :type filter
+filter :: (a -> Bool) -> [a] -> [a]
+```
+
+```hs
+filter odd [2,4,1,3,6,8,5,7]
+[1,3,5,7]
+```
+
+
+## zip関数
+
+
+```hs
+ghci> :type zip
+zip :: [a] -> [b] -> [(a, b)]
+ghci> zip [12,72,93] "zippity"
+[(12,'z'),(72,'i'),(93,'p')]
+```
+
+
 
 
 
