@@ -177,3 +177,4 @@ ghci> zipWith (+) [1,2,3] [4,5,6]
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2023/12/04/093533
