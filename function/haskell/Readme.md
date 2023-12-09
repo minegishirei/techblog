@@ -44,5 +44,17 @@ Haskellの真骨頂は関数型プログラミングにあります。
 
 
 
+## Haskellの関数一覧
+
+[https://minegishirei.hatenablog.com/entry/2023/12/04/093533:embed:cite]
+
+
+## Haskellにおける標準入力と標準出力
+
+ほとんどのプログラミングでは副作用は必要不可欠です。 Haskellの世界では純粋なコードの副作用から完全に分離されます。
+
+[https://minegishirei.hatenablog.com/entry/2023/12/04/093642:embed:cite]
+
+
 
 page:https://minegishirei.hatenablog.com/entry/2023/11/25/093811
