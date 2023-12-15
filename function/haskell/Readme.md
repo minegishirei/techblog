@@ -67,3 +67,5 @@ Haskellにおいてのファイル読み込みは`openFile`関数を使用しま
 
 
 page:https://minegishirei.hatenablog.com/entry/2023/11/25/093811
+
+
