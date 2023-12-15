@@ -56,5 +56,14 @@ Haskellの真骨頂は関数型プログラミングにあります。
 [https://minegishirei.hatenablog.com/entry/2023/12/04/093642:embed:cite]
 
 
+## Haskellでファイルを読み書きする方法【Haskell入門】
+
+Haskellにおいてのファイル読み込みは`openFile`関数を使用します。
+子の関数を使用するためには、`System.IO`を事前にimportしておく必要があります。
+
+
+[https://minegishirei.hatenablog.com/entry/2023/12/15/093109:embed:cite]
+
+
 
 page:https://minegishirei.hatenablog.com/entry/2023/11/25/093811
