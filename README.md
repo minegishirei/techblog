@@ -18,7 +18,7 @@
     - キーワード） [`Docker入門`](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)
 3. 副作用を減らす
     - 予期しないコードはチームの生産性を落としますが、バグのない理解の早いコードはきちんと動くだけでなく、チームメンバーの生産性をも向上します。
-    - キーワード） [`関数型プログラミング`](https://minegishirei.hatenablog.com/entry/2023/11/22/090144)
+    - キーワード） [`関数型プログラミング`](https://minegishirei.hatenablog.com/entry/2023/11/25/093811)
 4. 物理的に早く動く
     - ショートカットキー、キーボードの選定では物理的な操作スピードを向上させてくれます。
     - キーワード） [`Vim`](https://minegishirei.hatenablog.com/entry/2023/03/19/204719)
