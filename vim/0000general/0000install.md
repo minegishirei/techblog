@@ -154,7 +154,32 @@ services:
       - TZ=Asia/Tokyo
 ```
 
-それ以外にも、個人では使わないawsの設定や、通常は使わない`TZ`の環境設定を`docker-compose`にて吸収していますね。
+それ以外にも、個人では使わないawsの設定や、通常は使わない`TZ`の環境設定を`docker-compose`にて吸収しています。
+
+
+
+## reflesh.sh系のコード
+
+`reflesh.sh`系のコードはbashとして動くようにしています。
+
+```sh
+cd ..
+sudo rm -rf ./*
+git clone https://github.com/minegishirei/myworking
+cd myworking
+docker-compose -f business-docker-compose.yml build 
+docker-compose -f business-docker-compose.yml run myworking bash
+```
+
+- 一個上のディレクトリに移動し、その配下のコードを全て削除
+- `git clone`により、IDE環境用のコードを取得する
+- 対象のディレクトリに移動し、`docker-compose`系のコードを起動する。
+
+おそらく察したと思いますが、**このコードはある意味非常に危険なコードです**
+自分で自分のコードを破壊して、再度クローンすることでコードの鮮度を保っています。
+
+このあたりの仕組みをもう少しセーフティにしたいのですが、今のところは非常に便利です。
+
 
 
 
