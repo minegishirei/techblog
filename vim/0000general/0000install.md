@@ -110,7 +110,51 @@ RUN git clone https://github.com/tomasiser/vim-code-dark.git ~/.vim/bundle/vim-c
 
 ### docker-compose.yml
 
-docker-compose 系のファイルには、
+docker-compose 系のファイルには、「個人開発用」「会社用」で使うそれぞれの開発環境を用意しています。
+
+例えば、個人では以下のように`MODE`環境変数を、`PERSONAL`に設定しています。
+
+```yml
+version: "3.3"
+
+services:
+  myworking:
+    container_name: myworking
+    build:
+      ./
+    volumes:
+      - ./root/.vimrc:/root/.vimrc
+      - ./root/.bashrc:/root/.bashrc
+      - ./code:/code
+    environment:
+      - MODE=PERSONAL
+```
+
+
+ですが、会社用の`docker-compose`ファイルでは、`MODE`を`BUSINESS`に指定しています。
+
+```yml
+version: "3.3"
+
+services:
+  myworking:
+    container_name: myworking
+    build:
+      ./
+    volumes:
+      - ./root/.vimrc:/root/.vimrc
+      - ./root/.bashrc:/root/.bashrc
+      - ./code:/code
+      - ~/.aws/:/root/.aws/
+    environment:
+      - MODE=BUSINESS
+      - debian_frontend=noninteractive
+      - AWS_DEFAULT_REGION=ap-northeast-1
+      - AWS_DEFAULT_OUTPUT=json
+      - TZ=Asia/Tokyo
+```
+
+それ以外にも、個人では使わないawsの設定や、通常は使わない`TZ`の環境設定を`docker-compose`にて吸収していますね。
 
 
 
