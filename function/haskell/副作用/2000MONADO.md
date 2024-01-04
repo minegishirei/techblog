@@ -188,7 +188,7 @@ main = do
 
 ```hs
 getLine :: IO String
-``
+```
 
 ```hs
 putStrLn :: String -> IO ()
