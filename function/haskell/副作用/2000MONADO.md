@@ -13,6 +13,21 @@
 
 ## モナドの具体例
 
+例えば、二つの関数`getLine`と`putStrLn`関数を考えます。
+この二つはどちらも`IO`型で定義される、**副作用の存在する** 関数です。
+
+そして、この二つの関数を用いて、「getLineで得た行を、putStrLnで出力したい」とします。
+通常のコードであれば、次のように書き表すと思います。
+
+
+```hs
+main :: IO ()
+main = do
+    putStrLn "Greetings!  What is your name?"
+    inpStr <- getLine
+
+```
+
 ```hs
 getLine >>= putStrLn
 ```
