@@ -21,15 +21,30 @@
 
 
 ```hs
-main :: IO ()
-main = do
-    putStrLn "Greetings!  What is your name?"
-    inpStr <- getLine
+import System.IO
+import Data.Char(toUpper)
 
+main :: IO ()
+main = do 
+    inpStr <- getLine
+    putStrLn( inpStr )
 ```
 
+上記のコードでは、`getLine`で得た内容を`inpStr`変数に格納しています。
+そして次の行で`inpStr`変数の内容を`putStrLn`で標準出力しています。
+
+ところが、よくよく考えれば`inpStr`は仲介するだけの変数で、可能であれば`getLine`と`putStrLn`の関数を直接つなげたくなると思います。
+
+このように、**副作用のある関数同士**を `>>=` でつなげることができます。
+
+
 ```hs
-getLine >>= putStrLn
+import System.IO
+import Data.Char(toUpper)
+
+main :: IO ()
+main = do 
+    getLine >>= putStrLn
 ```
 
 
