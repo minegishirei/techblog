@@ -200,7 +200,27 @@ putStrLn :: String -> IO ()
 - putStrLnの型は`String -> IO()` であった。
 
 
-## HaskellのRandomの具体例
+## HaskellのRandom関数
+
+Haskellにおけるモナドの理解を進めるために、「ランダムな数値を取得し、標準出力させる」という関数を作りましょう。
+
+まずはモナドの仕組みを使用しないケースを見てみます。
+
+```hs
+import System.Random
+
+main = do
+    randomNumber <- randomRIO (0, 100 :: Int)
+    print(randomNumber)
+```
+
+Haskellにおいて乱数を扱うためには`Random`ライブラリーを使用します。
+今回使用する関数は`randomRIO`ですが、これは指定した範囲でランダムな数値を返却します。
+
+しかし、Randoom関数においていま最も着目しなければならない点は、これが`IO`型の数値を返却するという点でしょう。
+
+これに着目し、`=<<`演算子を使用した場合は、次のように書き直せます。
+
 
 ```hs
 import System.Random
@@ -211,6 +231,24 @@ main = do
 
 
 
+## return関数
+
+先ほどはランダムな数値を`print`関数によって画面出力しました。
+
+ところで、これまでは`IO`型のみ`>>=`などのモナド関連の演算子で出力してきましたが、
+定数などの外部からの要素でない値を表示することはできないのでしょうか？
+
+結論、`return`キーワードを使用することで、`>>=`をつなげることができます。
+
+次の例は、0を`print`関数で画面出力するケースです。
+
+
+```hs
+import System.Random
+
+main = do
+    (return 0) >>= print
+```
 
 
 
