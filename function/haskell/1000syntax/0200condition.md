@@ -62,6 +62,8 @@ main = do
 ## Haskellのcase式
 
 
+```hs
+main = do
 
 
 
