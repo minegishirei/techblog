@@ -32,6 +32,39 @@ main = do
     print(judge_score(test_point))
 ```
 
+上記の例だと
+
+- `judge_sore` が関数名
+- `score`が引数
+- 実際の関数の中身が =以降の `if score > 60 then "合格" else "不合格"` 
+    - このif式自体が関数となるので、`judge_score` というラベルに張り付けているイメージですね
+
+このようにして、Haskellのif式を関数として再定義することが可能になってます。
+
+
+ちなみに、Haskellにおけるif式は`else if`も使用可能です。以下はテストのスコアリングで第三の選択肢を追加した例です。
+
+```hs
+main = do
+    let test_point = 95
+    let result =  
+        if test_point > 90 
+            then "合格" 
+        else if test_point >60
+            then "赤点は超えた"
+        else 
+            "不合格"
+    print(result)
+```
+
+
+
+## Haskellのcase式
+
+
+
+
+
 
 
 
