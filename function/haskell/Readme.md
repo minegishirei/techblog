@@ -9,8 +9,6 @@
 
 HaskellはWindowsやMacの上に構築することも可能ですが、Dockerコンテナの上で実行することで完全な再現性が得られます。 加えてHaskell自体にもバージョンが存在するため、それらを容易に切り替えるとなおよいでしょう。
 
-
-
 [https://minegishirei.hatenablog.com/entry/2023/11/21/085934:embed:cite]
 
 
@@ -35,6 +33,18 @@ Haskellは関数型プログラミングであるが故、手続き型プログ�
 [https://minegishirei.hatenablog.com/entry/2023/11/22/085647:embed:cite]
 
 
+## Haskellのlet whereの使い方【Haskell let where 変数宣言 局所的変数】
+
+[https://minegishirei.hatenablog.com/entry/2024/01/14/152609:embed:cite]
+
+
+
+## Haskellの条件分岐
+
+Haskellにおいて、条件文という言葉よりも「条件式」といったほうが適切かもしれません。 条件文という言葉は手続き型言語やオブジェクト指向型言語では使われますが、Haskellにおいては「関数」が第一級オブジェクトとして扱われます。 ifも「if文」というよりは「if式」と表現し、値が返却するという点でも関数と呼んだほうが良いです。
+
+[https://minegishirei.hatenablog.com/entry/2024/01/14/152307:embed:cite]
+
 
 ## Haskellは数学
 
@@ -51,14 +61,16 @@ Haskellの真骨頂は関数型プログラミングにあります。
 [https://minegishirei.hatenablog.com/entry/2023/12/04/093533:embed:cite]
 
 
+## Haskell dataコマンドの使い方
 
+Haskellのdata コマンドは既存の型を組み合わせて新しい型を作ることが出来ます。
 
-
-
+[https://minegishirei.hatenablog.com/entry/2024/01/14/152856:embed:cite]
 
 
 
 # Haskell IO型
+
 
 
 
@@ -79,8 +91,13 @@ Haskellにおいてのファイル読み込みは`openFile`関数を使用しま
 
 
 
+
+
 ## Haskellのモナドの説明
 
+モナドはHaskellのプログラムにおいて、特に入出力回りで活躍する仕組みです。 関数プログラムの本体から副作用を安全に分離することができ、計算戦略をプログラム全体にばら撒くことをせずに、一箇所にまとめることができます。
+
+[https://minegishirei.hatenablog.com/entry/2024/01/14/153301:embed:cite]
 
 
 

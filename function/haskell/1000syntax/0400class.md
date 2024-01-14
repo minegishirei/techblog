@@ -6,8 +6,6 @@
 
 型クラスの定義
 
-
-
 Haskellでは等号、非等号を表すために`Eq`というクラスを使用しています。
 
 ```hs
@@ -85,3 +83,4 @@ main do
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2024/01/14/153103
