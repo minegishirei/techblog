@@ -62,15 +62,36 @@ main = do
 ## Haskellのcase式
 
 
+Haskellにおいてはswitch文は存在しません。
+代わりに、case式と呼ばれる条件分岐が用意されています。
+
+
 ```hs
 main = do
+    let gender_id = "1"
+    let gender_string = case gender_id of
+        "1" -> "man"
+        "2" -> "woman"
+    print(gender_string) 
+```
+
+上記の例では性別を識別するid `gender_id`を`gender_string`に変換しますが、
+その時の変換表を`case`式で対応しています。
+
+ところで、上記のcase式も「文」ではなくて「式」であるため関数として宣言し運用することが可能です。
 
 
+```hs
+getGenderString gender_id = case gender_id of
+    "1" -> "man"
+    "2" -> "woman"
 
+main = do
+    let gender_id = "1"
+    print(getGenderString(gender_id)) 
+```
 
-
-
-
+上記の関数は`getGenderString`という関数名で条件式をラッピングしてます。
 
 
 
