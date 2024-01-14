@@ -2,6 +2,8 @@
 
 
 
+# Haskell 概要
+
 
 ## Dockerを使用したHaskellの環境構築手順【Haskell, Docker, docker-compose】
 
@@ -22,7 +24,7 @@ Haskellは関数型プログラミング言語に分類されますが、
 [https://minegishirei.hatenablog.com/entry/2023/11/22/085527:embed:cite]
 
 
-
+# Haskell 文法基礎
 
 ## Haskellの変数と型一覧
 
@@ -49,6 +51,17 @@ Haskellの真骨頂は関数型プログラミングにあります。
 [https://minegishirei.hatenablog.com/entry/2023/12/04/093533:embed:cite]
 
 
+
+
+
+
+
+
+
+# Haskell IO型
+
+
+
 ## Haskellにおける標準入力と標準出力
 
 ほとんどのプログラミングでは副作用は必要不可欠です。 Haskellの世界では純粋なコードの副作用から完全に分離されます。
@@ -63,6 +76,14 @@ Haskellにおいてのファイル読み込みは`openFile`関数を使用しま
 
 
 [https://minegishirei.hatenablog.com/entry/2023/12/15/093109:embed:cite]
+
+
+
+## Haskellのモナドの説明
+
+
+
+
 
 
 
