@@ -55,22 +55,14 @@ fmap func [a1, a2, a3...] = [func(a1), func(a2), func(a3)] - (1)
 
 
 
-## 
+## mapと文字列の準同型性
 
 
 ```hs
--- 整数に1を足す関数
-f :: Int -> Int
-f x = x + 1
-
--- 整数を2倍にする関数
-g :: Int -> Int
-g x = x * 2
-
 main = do
-    let myarray = [10, 11, 12, 13]
-    print ( fmap (f.g)  myarray )
-    print ( fmap  f (fmap (g)  myarray)  )
+    let mystring = "This is pen"
+    print ( fmap (length.(split " ")  mystring )
+    print ( fmap  length (fmap (split " ")  myarray)  )
 ```
 
 
