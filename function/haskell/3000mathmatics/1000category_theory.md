@@ -35,19 +35,25 @@ main = do
 
 
 
+## 
 
-fmap func [a1, a2, a3...] = [func(a1), func(a2), func(a3)]
 
 
-myarray = [a1, a2, a3...]
-とする。
+```
+fmap func [a1, a2, a3...] = [func(a1), func(a2), func(a3)] - (1)
+```
 
-(fmap f (fmap g myarray) )
-=> (fmap f (fmap g [a1, a2, a3...])) -- 関数 gに対して上を適応
-=> (fmap f ([g(a1), g(a2), g(a3)...]))
-=> [f(g(a1)), f(g(a2)), f(g(a3))...]
-=> [(f.g)(a1),  (f.g)(a2), (f.g)(a3)...]
-=> (fmap f.g [a1, a2, a3...])
+
+> myarray = [a1, a2, a3...]
+> とする。
+> 
+>    (fmap f (fmap g myarray) )
+> => (fmap f (fmap g [a1, a2, a3...]))   --- 関数gに対して(1)を適応
+> => (fmap f ([g(a1), g(a2), g(a3)...])) --- 関数fに対して(1)を適応
+> => [f(g(a1)), f(g(a2)), f(g(a3))...]
+> => [(f.g)(a1),  (f.g)(a2), (f.g)(a3)...]
+> => (fmap f.g [a1, a2, a3...])
+> => (fmap f.g myarray)
 
 
 
