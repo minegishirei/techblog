@@ -90,3 +90,5 @@ Haskellは関数型プログラミング言語に分類されますが、
 2. 残りの2割で副作用のあるコードを書き、ユーザーおよび外の世界との干渉を担当するべき
 
 page:https://minegishirei.hatenablog.com/entry/2023/11/22/085527
+
+page:https://qiita.com/minegishirei_v2/items/0ef9de89b5e73b4107a8
