@@ -41,6 +41,7 @@ main = do
 fmap func [a1, a2, a3...] = [func(a1), func(a2), func(a3)] - (1)
 ```
 
+(fmap f (fmap g myarray) ) = (fmap f.g myarray)
 
 > myarray = [a1, a2, a3...]
 > とする。
@@ -86,21 +87,53 @@ fmap (*2) (Just 4)
 = Just 8
 ```
 
-2) fmap (+1)((*2) (Just 4))の値を求めよ
+2) (fmap (+1) ( fmap (*2) (Just 4)) )の値を求めよ
 
 ```hs
-fmap (+1)((*2) (Just 4))
-= fmap (+1)
-
+(fmap (+1) ( fmap (*2) (Just 4)) )
+= (fmap (+1) ( Just 8) )
+= (Just 9)
 ```
 
 
-3) (fmap (+1) . fmap (*2)) (Just 4)の値を求めよ
+3) fmap ((+1).(*2)) (Just 4) の値を求めよ
+
+```hs
+fmap ((+1).(*2)) (Just 4)
+= (Just 4*2 + 1)
+= (Just 9)
+```
+
+4) 次を証明せよ
+
+```
+(fmap f (fmap g (Just x) ) ) = (fmap f.g (Just x))
+```
+
+
+```
+(fmap f (fmap g (Just x) ) ) 
+= (fmap f (Just g(x)) )
+= (Just f(g(x)))
+= (Just f.g(x))
+= (fmap f.g (Just x))
+```
 
 
 
 
 
+
+
+
+## 逆写像の一意制を示せ
+
+- f ∈ 圏(A,B)
+- g ∈ 圏(B,A)
+- g.f = 1(A)
+- f.g = 1(B)
+
+この時、AとBは同系である。
 
 
 
