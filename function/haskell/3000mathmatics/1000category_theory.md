@@ -68,11 +68,34 @@ main = do
 
 
 
+## fmapとmaybe型の準同型性
+
+maybe型におけるfmapの定義は以下の通り
+
+```hs
+fmap f (Just x) = Just (f x)
+fmap _ Nothing  = Nothing
+```
 
 
+1) fmap (*2) (Just 4) の値を求めよ
+
+```hs
+fmap (*2) (Just 4)
+= Just ( (*2) 4)
+= Just 8
+```
+
+2) fmap (+1)((*2) (Just 4))の値を求めよ
+
+```hs
+fmap (+1)((*2) (Just 4))
+= fmap (+1)
+
+```
 
 
-
+3) (fmap (+1) . fmap (*2)) (Just 4)の値を求めよ
 
 
 
