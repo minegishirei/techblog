@@ -12,14 +12,22 @@ HaskellはWindowsやMacの上に構築することも可能ですが、Dockerコ
 [https://minegishirei.hatenablog.com/entry/2023/11/21/085934:embed:cite]
 
 
-
-
 ## Haskellは関数型プログラミング
 
 Haskellは関数型プログラミング言語に分類されますが、
 関数型プログラミングは通常のプログラマーが持つ一般的な概念と比較して、ソフトウェアに対する全く異なるアプローチを提供します。
 
 [https://minegishirei.hatenablog.com/entry/2023/11/22/085527:embed:cite]
+
+
+## ghc, ghci, runghc 
+
+- ghc : 早いネイティブコードを生成する最適化コンパイラ。ghcで実行する際には、対象ソースをコンパイルした後、出来上がったバイナリファイルを実行する必要があります。
+- ghci : 対話型インタプリタ。デバッグやお試しなどで使います。
+- runghc : ghcと異なり、コンパイルの手順を踏まずにコードを実行する。2度手間ではないが、遅い。
+
+[https://minegishirei.hatenablog.com/entry/2024/01/18/091140:embed:cite]
+
 
 
 # Haskell 文法基礎

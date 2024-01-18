@@ -110,3 +110,4 @@ ghci main.hs
 
 
 
+page:https://minegishirei.hatenablog.com/entry/2024/01/18/091140
