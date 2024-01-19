@@ -136,27 +136,4 @@ False
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+page:https://minegishirei.hatenablog.com/entry/2024/01/19/200823
