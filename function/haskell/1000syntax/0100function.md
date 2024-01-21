@@ -16,6 +16,7 @@ Haskellの関数の構文は非常にシンプルです。
 
 -- 関数の型宣言
 -- 関数の本体
+
 ```hs
 functionName :: ArgumentType1 -> ArgumentType2 -> ... -> ReturnType
 functionName arg1 arg2 ... = 関数本体
