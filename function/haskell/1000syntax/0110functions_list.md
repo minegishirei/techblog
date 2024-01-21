@@ -5,6 +5,94 @@
 # listを扱うHaskellの関数
 
 
+## head関数
+
+head関数はリストの最初の要素を返します。
+
+```hs
+ghci> head [2,4,6,8]
+2
+```
+
+## tail関数
+
+tail関数は先頭を除く全ての要素を含むリストを返します。
+いわば、head関数の逆です。
+
+```hs
+ghci> tail [2,4,6,8]
+[4,6,8]
+```
+
+仮に返却される要素が一つであったとしても、要素が一つのリストとして返却されます。
+
+```hs
+ghci> tail [2,4]
+[4]
+```
+
+その秘密を`tail`関数の定義を`:type`コマンドで見てみましょう。
+
+```hs
+ghci> :type tail
+tail :: GHC.Stack.Types.HasCallStack => [a] -> [a]
+```
+
+型の定義を見ると、一つのリストからリストを返却していることがわかります。
+
+ちなみに、からのリストを入れるとエラーが発生します。
+
+```hs
+ghci> tail []
+*** Exception: Prelude.tail: empty list
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/List.hs:1644:3 in base:GHC.List
+  errorEmptyList, called at libraries/base/GHC/List.hs:130:28 in base:GHC.List
+  tail, called at <interactive>:21:1 in interactive:Ghci9
+```
+
+からのリストを指定されたときのエラーが用意されていますね。
+
+
+
+## last関数
+
+last関数は配列や文字列の最後の要素を返却します。
+
+```hs
+ghci> :type last
+last :: [a] -> a
+ghci> last "bar"
+'r'
+```
+
+
+
+## take関数とdrop関数
+
+`take`関数はリストの最初のk個の要素で構成されるサブリストを返します。
+
+反対に、`drop`関数はリストの最初のk個の要素を削除したサブリストを返します。
+
+```hs
+ghci> take 3 "foobar"
+"foo"
+ghci> drop 3 "foobar"
+"bar"
+```
+
+これらの関数は型を確認してみると、二つの引数 `3`と`foobar`が`Int -> [a]`に対応してます。
+
+
+```hs
+ghci> :type take
+take :: Int -> [a] -> [a]
+ghci> :type drop
+drop :: Int -> [a] -> [a]
+```
+
+
+
 
 
 ## lines関数
@@ -33,43 +121,6 @@ ghci> unlines ["foo", "bar"]
 "foo\nbar\n"
 ```
 
-
-
-## last関数
-
-last関数は配列や文字列の最後の要素を返却します。
-
-```hs
-ghci> :type last
-last :: [a] -> a
-ghci> last "bar"
-'r'
-```
-
-
-
-## take関数
-
-`take`関数はリストの最初のk個の要素で構成されるサブリストを返します。
-
-反対に、`drop`関数はリストの最初のk個の要素を削除したサブリストを返します。
-
-```hs
-ghci> take 3 "foobar"
-"foo"
-ghci> drop 3 "foobar"
-"bar"
-```
-
-これらの関数は型を確認してみると、二つの引数 `3`と`foobar`が`Int -> [a]`
-
-
-```hs
-ghci> :type take
-take :: Int -> [a] -> [a]
-ghci> :type drop
-drop :: Int -> [a] -> [a]
-```
 
 
 ## all関数とany関数
