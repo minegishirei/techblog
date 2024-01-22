@@ -92,7 +92,35 @@ drop :: Int -> [a] -> [a]
 ```
 
 
+## fst関数とsnd関数
 
+fst関数はタプルの一つ目の要素を返却します。
+
+```hs
+gchi> fst (1, 2)
+1
+```
+
+逆に、snd関数はタプルの二つ目の要素を返却します。
+
+```hs
+ghci> snd (1, 2)
+2
+```
+
+ちなみに、これらの関数の内容を`Hoogle`で調べてみると以下のような定義であることがわかります。
+
+```hs
+-- | Extract the first component of a pair.
+fst                     :: (a,b) -> a
+fst (x,_)               =  x
+
+-- | Extract the second component of a pair.
+snd                     :: (a,b) -> b
+snd (_,y)               =  y
+```
+
+from https://hackage.haskell.org/package/base-4.19.0.0/docs/Prelude.html#v:fst
 
 
 ## lines関数
