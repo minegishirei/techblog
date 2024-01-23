@@ -204,6 +204,51 @@ ghci> zip [12,72,93] "zippity"
 
 
 
+
+
+
+
+## Haskellにおける`++`は直積を表す。
+
+`+`は`Int型`同士の足し算にしか使用できず、`++`は`String型`同士の結合にしか使用できません。
+`python`や`java`はこのあたりの制約が緩いのですが、`Haskell`は型の制約をかなり厳しく指定します。
+
+以下のコードで`++`を`+`に変えた場合、エラーが出ると思います。
+
+```hs
+x :: String
+y :: String
+x = "Hello!."
+y = "This is Haskell code"
+main = print $ x ++ y
+```
+
+```
+[1 of 1] Compiling Main             ( strbar.hs, strbar.o )
+
+strbar.hs:5:16: error:
+    • No instance for (Num String) arising from a use of ‘+’
+    • In the second argument of ‘($)’, namely ‘x + y’
+      In the expression: print $ x + y
+      In an equation for ‘main’: main = print $ x + y
+  |
+5 | main = print $ x + y
+  |                ^^^^^
+```
+
+**この`++`は直積を表してます。**
+
+つまり、**`++`は集合と集合の演算で定義されており、計算結果は直積が返されます**
+
+たとえば以下のコードの実行結果は、二つの配列をつなげた結果となります。
+
+```hs
+[3, 1, 3] ++ [3, 7]
+```
+
+
+
+
 # 関数を引数に取る関数
 
 
