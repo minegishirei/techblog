@@ -66,6 +66,21 @@ lispで何ができるの？
 
 
 
+## Sci-lisp
+
+自作Lisp系処理機構、インタプリタを自分で作っている人
+
+https://github.com/chaploud/sci-lisp
+
+
+特に注意深く読んでみるべきなのは以下のコード
+
+https://github.com/chaploud/Sci-Lisp/blob/main/src/core/cli/repl.rs
+
+
+
+
+
 
 
 
