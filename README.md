@@ -24,7 +24,7 @@
 | [`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology) | 結局は人間の問題 | 合理的な問題は数学が全て解決する。解決できないことは人の問題 |
 
 
-## 筆者
+# 筆者
 
 [みねぎしれい](https://github.com/minegishirei)
 
@@ -33,6 +33,20 @@
 <a href="https://github.com/minegishirei">
 <img src="https://github.com/minegishirei/minegishirei/blob/main/img/github.png?raw=true">
 </a>
+
+## 職歴
+
+- Cardio Flow Design（2年：アルバイト）
+  - 心臓の血流解析を行う企業。2年ほどデスクトップアプリ（C#）の改修、テストを行う
+- ニトリホールディングス（3年：情報システム改革室）
+  - ODBC対応 : 保守切れとなる社内のデータベース接続方式を変更する対応。VBA,BV6で書かれた300以上のソースコードを改修する。
+  - 商品企画システム(PoC) : 商品企画プロセスを改善する社内のシステムを構築。フロントエンド~バックエンドまで担当
+  - その他保守運用 : ニトリネットの保守運用作業
+- 現職（人材業界）
+  - 派遣求人自動生成(PoC) : 求人サイトに掲載する文章の自動生成プロジェクトに参加。インフラ~バックエンドを担当
+  - 営業Webアプリ(アジャイル) : BtoB営業に使用するアプリの開発に参加。
+
+
 
 
 
