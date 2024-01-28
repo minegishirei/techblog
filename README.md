@@ -8,7 +8,7 @@
 「無駄な機能を付けない」「オリジナリティを出さない」「副作用を減らす」「物理的に早く動く」を守るため、`アジャイル`、`Docker`、`関数型プログラミング`、`Vim`を中心とした10xのための技術をまとめました。
 
 
-| Tech  | 目的     | 補足説明   | 
+| What | Why | Details | 
 | ------------ | ------------ | ---- | 
 | [`Agile`](https://minegishirei.hatenablog.com/entry/2023/01/27/164337) | 無駄な機能を付けない |     - あのExcelですら全体の80%の機能が使われていないそうです。これさえ意識すれば必要な作業量は1/5になります。<br>    - MVP(価値の判定が可能な最小限の成果物)を高速で作ることで、無駄なものを作りません。 | 
 | [`Docker`](https://minegishirei.hatenablog.com/entry/2023/09/02/213936)| オリジナリティを出さない | 0からコードを書くよりもすでに出来上がっているOSSのコード、コンテナイメージのほうがよいですね。| 
@@ -18,9 +18,13 @@
 
 これに加えて、私個人が大切にしたいのが二つの「人間」に関する課題
 
+| What | Why | Details | 
+| ------------ | ------------ | ---- | 
+| [`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology) | 結局は人間の問題 | |
+| | | |
 
 5. 人間中心のシステム設計
-    - キーワード）[`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology)
+    - キーワード）
 6. 結局最後は人の問題
     - 人間関係は最後の問題となる。
     - キーワード）[`エンジニア心理学`](https://qiita.com/organizations/engineering_psychology)
