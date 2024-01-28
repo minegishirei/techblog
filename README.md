@@ -20,14 +20,9 @@
 
 | What | Why | Details | 
 | ------------ | ------------ | ---- | 
-| [`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology) | 結局は人間の問題 | |
-| | | |
+| [`エンジニア心理学`](https://qiita.com/organizations/engineering_psychology) | 結局は人の問題 | |
+| [`エンジニアデザイン心理学`](https://qiita.com/organizations/engineer_design_psychology) | 結局は人間の問題 | 合理的な問題は数学が全て解決する。解決できないことは人の問題 |
 
-5. 人間中心のシステム設計
-    - キーワード）
-6. 結局最後は人の問題
-    - 人間関係は最後の問題となる。
-    - キーワード）[`エンジニア心理学`](https://qiita.com/organizations/engineering_psychology)
 
 ## 筆者
 
