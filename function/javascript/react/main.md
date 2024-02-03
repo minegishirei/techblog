@@ -27,7 +27,7 @@ const App = ({ text }) => (
 
 
 ```jsx
-const Button = (props, { text }) => (
+const MyButton = (props, { text }) => (
   <Button className="app-component" onClick={props.onClick}>
     {text}
   </Button>
