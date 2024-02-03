@@ -26,6 +26,18 @@ const App = ({ text }) => (
 ```
 
 
+```jsx
+const Button = (props, { text }) => (
+  <Button className="app-component" onClick={props.onClick}>
+    {text}
+  </Button>
+);
+```
+
+
+
+
+
 # 課題3 : 
 
 stateを管理する純粋な関数は以下の通り
