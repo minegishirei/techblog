@@ -39,10 +39,9 @@ const subCount = state => { ...state, count : state.count-1 }
 
 // 副作用マシマシコード
 const App = () => {
-    const [state, setState] = useState({});
-    const changeState = (change) = {change(state)}
-    const onClickCountUpButton =    () => {changeState(addCount)}
-    const onClickCountDownButton =  () => {changeState(subCount))}
+    const [state, setState] = useState({count:0});
+    const onClickCountUpButton =    () => {setState(addCount(state))}
+    const onClickCountDownButton =  () => {setState(subCount(state))}
     return (<>
         <MyButton onClick={onClickCountUpButton}>   {count} +1 </MyButton>
         <MyButton onClick={onClickCountDownButton}> {count} -1 </MyButton>
@@ -50,15 +49,21 @@ const App = () => {
 }
 ```
 
-純粋でないコンポーネントは以下の通り
+純粋でないと思うコンポーネントは以下の通り
+
+`onClick`の中にある`setCount`はStateを変化させてしまっているため、副作用がある。
+ここでの`state`は親要素のcountであり、グローバル変数を書き換えていると言っても過言ではない。
 
 ```jsx
 const MyButton = (props, { text }) => (
-  <Button className="app-component" onClick={props.}>
+  <Button className="app-component" onClick={props.setCount(props.count + 1)}>
     {text}
   </Button>
 );
 ```
+
+ちなみに、一つのコンポーネント内部で閉じた`state`であり、
+
 
 
 
