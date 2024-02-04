@@ -8,7 +8,9 @@
 
 対策 : 純粋関数を増やす + stateを引数に入れる + 辞書をまとめて変更する
 
-update関数 : state -> state
+```hs
+update : state -> state
+```
 
 
 
@@ -18,7 +20,7 @@ update関数 : state -> state
 コンポーネントを構成する純粋な関数は、以下の通り
 
 ```jsx
-const App = ({ text }) => (
+const Component = ({ text }) => (
   <div className="app-component">
     {text}
   </div>
@@ -40,8 +42,8 @@ const subCount = state => { ...state, count : state.count-1 }
 // 副作用マシマシコード
 const App = () => {
     const [state, setState] = useState({count:0});
-    const onClickCountUpButton =    () => {setState(addCount(state))}
-    const onClickCountDownButton =  () => {setState(subCount(state))}
+    const onClickCountUpButton   = () => {setState(addCount(state))}
+    const onClickCountDownButton = () => {setState(subCount(state))}
     return (<>
         <MyButton onClick={onClickCountUpButton}>   {count} +1 </MyButton>
         <MyButton onClick={onClickCountDownButton}> {count} -1 </MyButton>
