@@ -25,14 +25,43 @@ const App = ({ text }) => (
 );
 ```
 
-
 ```jsx
+// 純粋コンポーネントちゃん
 const MyButton = (props, { text }) => (
   <Button className="app-component" onClick={props.onClick}>
     {text}
   </Button>
 );
+
+// 純粋関数ちゃんたち
+const addCount = state => { ...state, count : state.count+1 }
+const subCount = state => { ...state, count : state.count-1 }
+
+// 副作用マシマシコード
+const App = () => {
+    const [state, setState] = useState({});
+    const changeState = (change) = {change(state)}
+    const onClickCountUpButton =    () => {changeState(addCount)}
+    const onClickCountDownButton =  () => {changeState(subCount))}
+    return (<>
+        <MyButton onClick={onClickCountUpButton}>{count} +1 </MyButton>
+        <MyButton onClick={onClickCountDownButton}>{count} -1 </MyButton>
+    </>)
+}
 ```
+
+純粋でないコンポーネントは以下の通り
+
+```jsx
+const MyButton = (props, { text }) => (
+  <Button className="app-component" onClick={props.}>
+    {text}
+  </Button>
+);
+```
+
+
+
 
 
 
