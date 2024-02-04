@@ -44,8 +44,8 @@ const App = () => {
     const onClickCountUpButton =    () => {changeState(addCount)}
     const onClickCountDownButton =  () => {changeState(subCount))}
     return (<>
-        <MyButton onClick={onClickCountUpButton}>{count} +1 </MyButton>
-        <MyButton onClick={onClickCountDownButton}>{count} -1 </MyButton>
+        <MyButton onClick={onClickCountUpButton}>   {count} +1 </MyButton>
+        <MyButton onClick={onClickCountDownButton}> {count} -1 </MyButton>
     </>)
 }
 ```
