@@ -62,6 +62,9 @@ Docker Desktop はハイパーバイザーを検出できません。
 
 ## 対応２：BIOSでの仮想化(virtualization)有効化
 
+https://support.lenovo.com/jp/ja/solutions/ht500006-how-to-enable-virtualization-technology-on-lenovo-computers
+
+
 
 
 
