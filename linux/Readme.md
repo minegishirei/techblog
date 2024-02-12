@@ -26,6 +26,10 @@ linuxには最高のコマンドラインツールがあります。
 
 参考記事 : https://qiita.com/midiambear/items/2b0f17b6859e88b4f7ca
 
+### コマンド実行補助ツール「f*ck」
+
+
+
 
 
 
