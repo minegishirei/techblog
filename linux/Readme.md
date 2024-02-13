@@ -34,6 +34,8 @@ linuxには最高のコマンドラインツールがあります。
 汚いコマンド名に反して、とても便利なコマンドです。
 
 
+[https://minegishirei.hatenablog.com/entry/2024/02/13/091342:embed:cite]
+
 
 
 
@@ -63,3 +65,4 @@ linuxには最高のコマンドラインツールがあります。
 
 
 
+from https://minegishirei.hatenablog.com/entry/2024/02/13/091117
