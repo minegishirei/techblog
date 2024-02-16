@@ -271,6 +271,88 @@ sysdigはterraformとcloudformationが用意されている。
 
 
 
+# AWSのBuildpacksをつかぅてDockerfileレスにできるのか?
+
+佐藤智樹さん
+
+## Buildpacks
+
+CX事業本部 製造ビジネステクノロジー部
+
+## AWS上でのコンテナセキュリティ概要
+
+ECS on Fargateについては以前この資料でまとめました。
+
+AWSで言うと、
+
+NetworkからApplicationまでを見なければならない
+
+
+## Dockerfileを書くベストプラクティスがたくさんある
+
+- 一時的なコンテナを作成
+- アプリケーションを切り離す...
+- レイヤーの数を最小限に
+
+やることが多い。
+
+
+Dockerfileの代替ツールの一つで、Dockerfileを使わずにOpen Container Intiative (OCI0)
+
+
+
+## 通常の世界
+
+ソースコード読み取り
+
+Dockerfile
+
+Container Image
+
+## CNBの世界
+
+ソースコードを読み取って、 Imageを自動的に作る
+
+
+## Google　Cloudの場合
+
+CNBの仕様を実装し、Google Cloudの各サービスにデプロイ可能なコンテナをビルドして構成するように設計されている
+
+
+## Azureの場合
+azure　cぃに　cnbの park cliが組み込まれている
+
+
+## AWS
+
+くそ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## CDB
+
+
+
 
 
 
