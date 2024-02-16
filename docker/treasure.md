@@ -352,6 +352,20 @@ azure　cぃに　cnbの park cliが組み込まれている
 
 
 
+# コンテナセキュリティの概要とデプロイフロ＾に組み込んだ後の課題
+
+
+## Gunosy
+
+SREチームマネージャー
+
+security hub芸人
+
+security hub, guardduty, サポート
+
+
+
+
 
 
 
