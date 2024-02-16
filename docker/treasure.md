@@ -336,6 +336,19 @@ azure　cぃに　cnbの park cliが組み込まれている
 
 
 
+? 理解の確認 package.jsonや requirements.txt
+
+? 中身は見えるのか Dockerfileはどこかにあるのか ?
+
+
+## 普及していない理由
+
+- CPUがarmあーきだと大変
+- 開発環境がソースによって変わってしまう
+- CNBの情報が少ない
+- Unix.socketを作成しないソフト(fintch)では使えない?
+- 脆弱性アラートが出た時の対応がむずい
+
 
 
 
