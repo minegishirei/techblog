@@ -336,7 +336,7 @@ azure　cぃに　cnbの park cliが組み込まれている
 
 
 
-? 理解の確認 package.jsonや requirements.txt
+- ? 理解の確認 package.jsonや requirements.txt
 
 - ? 中身は見えるのか Dockerfileはどこかにあるのか ?
     - 極めたらすごそう
