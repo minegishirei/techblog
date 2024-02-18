@@ -4,6 +4,8 @@
 
 - まずは以下のサイトを開く
 
+以下のリンクからインストーラーをダウンロードする。
+
 https://developer.hashicorp.com/vagrant/install
 
 - windowsのインストーラーがあるので、クリックしてインストーラーをダウンロードする
@@ -38,7 +40,13 @@ https://developer.hashicorp.com/vagrant/install
 
 <img src="https://github.com/minegishirei/store/blob/main/vagrant/install/7restart.png?raw=true">
 
+- powershellから以下のコマンドを打ってみる
 
+```sh
+vagrant -v
+```
+
+<img src="https://github.com/minegishirei/store/blob/main/vagrant/install/8powershell.png?raw=true">
 
 
 
