@@ -122,17 +122,17 @@ privileges and try again.
 # virtual box インストール
 
 
-https://app.vagrantup.com/ubuntu/boxes/trusty64
+- virtual boxのインストール
+
+<img src="https://github.com/minegishirei/store/blob/main/vagrant/install/100virtual_box.png?raw=true">
+
+<img src="https://github.com/minegishirei/store/blob/main/vagrant/install/101run.png?raw=true">
 
 
 
 
 
-
-
-
-
-#
+# vagrant実行
 
 
 ```sh
