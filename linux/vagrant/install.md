@@ -119,6 +119,10 @@ privileges and try again.
 
 
 
+# virtual box インストール
+
+
+https://app.vagrantup.com/ubuntu/boxes/trusty64
 
 
 
@@ -128,6 +132,12 @@ privileges and try again.
 
 
 
+#
+
+
+```sh
+vagrant box add centos/7
+```
 
 
 
