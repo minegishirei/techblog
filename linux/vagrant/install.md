@@ -137,6 +137,9 @@ https://app.vagrantup.com/ubuntu/boxes/trusty64
 
 ```sh
 vagrant box add centos/7
+vagrant init centos/7
+vagrant up
+vagrant ssh
 ```
 
 
