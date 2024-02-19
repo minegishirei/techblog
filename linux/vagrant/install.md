@@ -140,6 +140,7 @@ vagrant box add centos/7
 vagrant init centos/7
 vagrant up
 vagrant ssh
+vagrant halt
 ```
 
 
