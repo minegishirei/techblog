@@ -1,17 +1,24 @@
 
 
 
-Vagrantのインストール方法
 
-以下のリンクからインストーラーをダウンロードする。
+## Vagrantのインストールを行う
 
-https://developer.hashicorp.com/vagrant/install
+私はYoukiの環境構築を行う際、Vagrant / Virtualboxを使用しました。
 
+youkiプロジェクトのソースコードを確認すると、`Vagrantfile`がトップにあります。このファイルを活用して手軽にyouki環境を立ち上げることが出来ました。
 
+ですので、まずは以下のリンクを参考にVagrant / Virtualboxをインストールしてください。
+
+https://minegishirei.hatenablog.com/entry/2024/02/20/214426
+
+すでにVagrant / Virtualboxをインストールしている方は、次の項目に移動しましょう。
 
 
 
 ## ソースコードの入手
+
+ソースコードの入手のために、次のgitコマンドを実行してください。
 
 ```sh
 git clone https://github.com/containers/youki.git
@@ -34,78 +41,75 @@ Resolving deltas: 100% (16974/16974), done.
 
 ## プロジェクトディレクトリへ移動
 
-
 ```sh
  cd .\youki\
 ```
 
-`Vagrantfile`が確認できるディレクトリまで移動できればよい。
+`Vagrantfile`が確認できるディレクトリまで移動できれば成功です。
 
 
+## 起動
 
-
-## 使用しているOSイメージを確認
-
-次のコマンドで`Vagrantfile`に記述されているOSイメージを確認する。
+以下のコマンドを実行して、`youki`を立ち上げましょう。
 
 ```sh
-cat Vagrantfile
+vagrant up
 ```
 
-その中にある、`config.vm.box`の項目を探して、コピーしておく。
+ただし、私の場合は`404`エラーが出てしまいました...。
 
-```sh
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+```
+PS C:\Users\mineg\myworking\myworking\code\youki> vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'fedora/33-cloud-base' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'fedora/33-cloud-base'
+    default: URL: https://vagrantcloud.com/api/v2/vagrant/fedora/33-cloud-base
+==> default: Adding box 'fedora/33-cloud-base' (v33.20201019.0) for provider: virtualbox
+    default: Downloading: https://vagrantcloud.com/fedora/boxes/33-cloud-base/versions/33.20201019.0/providers/virtualbox/unknown/vagrant.box
+Download redirected to host: download.fedoraproject.org
+    default:
+An error occurred while downloading the remote file. The error
+message, if any, is reproduced below. Please fix this error and try
+again.
 
-Vagrant.configure("2") do |config|
-    config.vm.box = "fedora/33-cloud-base"  # ここ！
-    config.vm.synced_folder '.', '/vagrant', disabled: true
-
-    config.vm.provider "virtualbox" do |v|
-      v.memory = 2048
-      v.cpus = 2
-    end
-    config.vm.provision "shell", inline: <<-SHELL
-      set -e -u -o pipefail
-      yum update -y
-      yum install -y git gcc docker wget pkg-config systemd-devel dbus-devel elfutils-libelf-devel libseccomp-devel clang-devel openssl-devel
-      grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-      service docker start
-    SHELL
-
-    config.vm.provision "shell", privileged: false, inline: <<-SHELL
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-      echo "export PATH=$PATH:$HOME/.cargo/bin" >> ~/.bashrc
-
-      git clone https://github.com/containers/youki
-    SHELL
-  end
+The requested URL returned error: 404
 ```
 
 
-## `vagrant box add`コマンドを実行
+## 環境変数を変更して再チャレンジ
 
-以下のコマンドでOSイメージを取得（addの後にはOSイメージが入るので、前のステップで確認したイメージを張る）
+上記の内容について、githubにてissue形式でしつもんしました。
 
-```sh
-vagrant box add fedora/33-cloud-base
-```
+from https://github.com/containers/youki/issues/2693
 
-選択を迫られるので、適切な方を選ぶ（今回はvirtualboxを使用しているため、2を選択）
+上記のエラーが発生した場合は、`Vagrantfile`を修正して実行すればよいとのことでした。
 
 ```sh
-PS C:\Users\mineg\myworking\myworking\code\myworking\code\youki> vagrant box add fedora/33-cloud-base
-==> box: Loading metadata for box 'fedora/33-cloud-base'
-    box: URL: https://vagrantcloud.com/api/v2/vagrant/fedora/33-cloud-base
-This box can work with multiple providers! The providers that it
-can work with are listed below. Please review the list and choose
-the provider you will be working with.
+VAGRANT_VAGRANTFILE=Vagrantfile.containerd2youki vagrant up
+```
 
-1) libvirt
-2) virtualbox
+```sh
+$env:VAGRANT_VAGRANTFILE="Vagrantfile.containerd2youki"
+vagrant up
+```
 
-Enter your choice: 2
+実際、上記のコードで私の環境では動き出しました。
+
+ログを見ていると、ベースイメージを`ubuntu`に変更しているみたいです。
+
+```sh
+PS C:\Users\mineg\myworking\myworking\code\youki> $env:VAGRANT_VAGRANTFILE="Vagrantfile.containerd2youki"
+PS C:\Users\mineg\myworking\myworking\code\youki> vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'generic/ubuntu2204' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'generic/ubuntu2204'
+    default: URL: https://vagrantcloud.com/api/v2/vagrant/generic/ubuntu2204
+==> default: Adding box 'generic/ubuntu2204' (v4.3.12) for provider: virtualbox (amd64)
+    default: Downloading: https://vagrantcloud.com/generic/boxes/ubuntu2204/versions/4.3.12/providers/virtualbox/amd64/vagrant.box
 ```
 
 
@@ -122,7 +126,4 @@ Enter your choice: 2
 
 
 
-
-
-
-
+from https://minegishirei.hatenablog.com/entry/2024/02/22/091558

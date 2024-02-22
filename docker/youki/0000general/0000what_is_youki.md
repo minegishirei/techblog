@@ -72,3 +72,4 @@ from https://doc.rust-jp.rs/rust-nomicon-ja/meet-safe-and-unsafe.html
 
 
 
+from https://minegishirei.hatenablog.com/entry/2024/02/22/085916
