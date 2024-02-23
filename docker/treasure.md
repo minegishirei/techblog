@@ -2,6 +2,8 @@
 
 
 
+## マルチステージビルド
+
 マルチステージ ビルドmulti-stage build
 このチュートリアル内ではあまり深く扱いませんが、イメージ作成時に複数の 段階stage を使える大変強力なツールが マルチステージ ビルドmulti-stage build です。いくつかの利点があります。
 
@@ -18,13 +20,13 @@ https://docs.docker.jp/get-started/09_image_best.html#part9-next-steps
 
  - 公式ドキュメントはしっかり読んだ方がいい！
 
+## 0からコンテナを作成する
+
+https://docs.docker.jp/get-started/11_what_next.html#creating-a-container-from-scratch
 
 
 
-
-
-
-Hibiya.tech 
+# Hibiya.tech 
 
 DevelopersIOでブログを書くクラスメソッド社員が話したいことを話して、都度参加者とディスカッションを行う。
  -> 登壇したい方がいたら、アンケートに回答して登壇可能。
