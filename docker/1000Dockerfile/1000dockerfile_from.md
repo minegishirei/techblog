@@ -62,9 +62,10 @@ FROM myregistry/myimage:1.0
 `FROM`命令を使用してベースイメージを指定することで、その後のDockerfileでイメージをカスタマイズし、新しいカスタムイメージを構築することができます。
 
 
-## Dockerfile の FROM句詳細
+## Dockerfile の マルチステージビルドとは何か？
 
-Dockerfileの`FROM`命令に関連するいくつかの詳細なポイントを紹介します。
+Dockerfileのベストプラクティスの一つに、`マルチステージビルド`と呼ばれるものがあります。
+これはDockerfileのベースイメージに複数の選択肢を用意するアプローチで、例えばビルド時と実行時で異なるベースイメージを使用することができます。
 
 ### 1.  **`AS`キーワード**
 
@@ -84,6 +85,36 @@ FROM nginx:alpine AS production
 # 実行ステージでの設定とコンテンツのコピー
 ...
 ```
+
+### サンプル : Reactでビルドし、Nginxで本番実行する
+
+以下の例ではマルチステージビルドというアプローチで、react(nodeがベースイメージ)でビルドを行い、nginxで本番稼働させています。
+
+```Dockerfile
+# syntax=docker/dockerfile:1
+FROM node:18 AS build
+WORKDIR /app
+COPY package* yarn.lock ./
+RUN yarn install
+COPY public ./public
+COPY src ./src
+RUN yarn run build
+
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+```
+
+reactアプリケーションでは開発段階で`node.js`を使用し、webアプリケーションの開発を行いますが、
+reactのbuildで生成される最終成果物はHTML,CSS,JSの静的なファイルのみです。（本番段階ではnode.jsは不要になります）
+
+本番稼働のビルドステージではnodeではなく、nginxを使用し、reactによりビルドされた静的ファイルをコピーしています。
+
+from https://docs.docker.jp/get-started/09_image_best.html#react
+
+
+
+
+
 
 
 ### 2.  **マルチアーキテクチャのサポート**
@@ -112,3 +143,4 @@ FROM example.com/custom-image:1.0`
 
 
 
+from https://minegishirei.hatenablog.com/entry/2023/09/12/111814
