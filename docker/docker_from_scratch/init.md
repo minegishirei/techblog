@@ -96,7 +96,6 @@ go version go1.20.10 linux/amd64
 
 まずはコンテナを実行するコマンド`docker run`コマンドを作成しましょう。
 
-
 どんなエディターでもいいので、`container.go`を作成しましょう。
 
 ```sh
@@ -125,14 +124,13 @@ func main() {
 }
 func run() {
   fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
-  cmd := exec.Command(os.Args[2], os.Args[3:]...)\
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)
   cmd.Stdin = os.Stdin
   cmd.Stdout = os.Stdout
   cmd.Stderr = os.Stderr
   cmd.Run()
 }
 ```
-
 
 上記のファイルを用いてビルドを行います。
 
