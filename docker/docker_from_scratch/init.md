@@ -3,7 +3,7 @@
 
 
 
-## VagrantによるCentos7のインストール
+# VagrantによるCentos7のインストール
 
 
 ```sh
@@ -74,11 +74,109 @@ vagrant ssh
 sudo yum update -y
 ```
 
+アップデートができたらGo言語のインストールを行います。
+
+```sh
+yum install epel-release
+sudo yum install -y golang
+```
+
+Go言語が入ったことを確認。
+
+```sh
+[vagrant@localhost ~]$ go version
+go version go1.20.10 linux/amd64
+```
+
+
+
+# コンテナを0から作る
+
+## `docker run`を作成する
+
+まずはコンテナを実行するコマンド`docker run`コマンドを作成しましょう。
+
+
+どんなエディターでもいいので、`container.go`を作成しましょう。
+
+```sh
+sudo yum install vim
+vim container.go
+```
+
+中身は以下の通りです。
+
+```go
+package main
+import (
+  "fmt"
+  "os"
+  "os/exec"
+)
+// go run container.go run <cmd> <args>
+// docker run <cmd> <args>
+func main() {
+  switch os.Args[1] {
+    case "run":
+      run()
+    default:
+      panic("invalid command!!")
+  }
+}
+func run() {
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)\
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.Run()
+}
+```
+
+
+上記のファイルを用いてビルドを行います。
+
+```sh
+go build container.go
+```
+
+ビルドが完了したら早速実行してみましょう。
+新しく実行するコマンドは`echo "Hello World"`とします。
 
 
 ```sh
-sudo yum install -y golang
+./container run echo "Hello World"
 ```
+
+実行結果
+
+```sh
+[vagrant@localhost container_scratch]$ ./container run echo "Hello World"
+Running [echo Hello World] as PID 13454
+Hello World
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
