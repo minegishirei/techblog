@@ -155,6 +155,26 @@ Hello World
 ```
 
 
+```go
+func run() {
+    // コマンドとその引数を出力します
+    fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+
+    // 新しいコマンドを作成します
+    cmd := exec.Command(os.Args[2], os.Args[3:]...)
+
+    // 新しいコマンドの標準入力を設定します
+    cmd.Stdin = os.Stdin
+    // 新しいコマンドの標準出力を設定します
+    cmd.Stdout = os.Stdout
+    // 新しいコマンドの標準エラー出力を設定します
+    cmd.Stderr = os.Stderr
+
+    // 新しいコマンドを実行します
+    cmd.Run()
+}
+```
+
 
 
 
