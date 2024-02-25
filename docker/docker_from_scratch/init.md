@@ -97,6 +97,7 @@ go version go1.20.10 linux/amd64
 まずはコンテナを実行するコマンド`docker run`コマンドを作成しましょう。
 
 どんなエディターでもいいので、`container.go`を作成しましょう。
+（自分はvimを使いました↓）
 
 ```sh
 sudo yum install vim
@@ -157,6 +158,9 @@ Hello World
 
 ### コード解説
 
+上記のプログラムは、指定された引数をコマンドとして実行します。
+コンテナとみなせる新しいプロセスを作成することでコマンドを実行します。
+
 ```go
 func run() {
     // コマンドとその引数を出力します
@@ -177,28 +181,165 @@ func run() {
 }
 ```
 
+### 新しいプロセスを作ってみる
+
+`bin/bash`を使用して新しいプロセスを作成し、そのコンテナに専用のホスト名を割り当ててみましょう。
+理想のコンテナは元のOSとは異なるホスト名を割り当てれるはずです。
+
+
+- 元のOSで`hostname`実行。元のOSのホスト名が`localhost.localdomain`であることがわかる。
+
+```sh
+[vagrant@localhost 0]$ hostname
+localhost.localdomain
+```
+
+- `bin/bas`実行。新しいコンテナと新しいシェルが立ち上がる。
+
+```sh
+[vagrant@localhost 0]$ ./container run /bin/bash
+Running [/bin/bash] as PID 2056
+```
+
+- `hostname`実行。ホスト名が元OS同様、`localhost.localdomain`であることがわかる。
+
+```sh
+[vagrant@localhost 0]$ hostname
+localhost.localdomain
+```
+
+- `sudo hostname in-container`実行。ホスト名が変更された。
+
+```sh
+[vagrant@localhost 0]$ sudo hostname in-container
+[vagrant@localhost 0]$ hostname
+in-container
+```
+
+ここまでは想定通り、うごいている。
+しかし問題はここから。
+
+- `exit`実行。コンテナを終了し、元OSに出る。
+
+```sh
+[vagrant@localhost 0]$ exit
+exit
+```
+
+- `hostname`実行。コンテナの内部の変更のはずが、コンテナ外へ波及してしまっていた。
+
+```sh
+[vagrant@localhost 0]$ hostname
+in-container
+```
+
+これは、**このコンテナのホスト名が分離されていないために発生します。**
+
+
+# コンテナの名前空間を独立させる。
+
+先ほどは、コンテナのホスト名が分離されていないために、コンテナ内部の変更がコンテナ外へ影響を及ぼしてしまいました。
+コンテナとコンテナ外は明確に隔離されていることが望ましいです。
+
+**ホスト名の分離を作成するには、コンテナに新しい UTS 名前空間を割り当てることが得策です。**
+
+> uts namespaceとは、
+> ホスト名やNISドメイン名を分離する名前空間です。
+>
+> UTS は Unix Time-sharing System（UNIX で採用されていた、一台のコンピュータを複数のユーザで扱うための仕組み）の略ですが、今はその意味は失われているようです。時間も特に関係ありません。
+
+from https://qiita.com/thirdpenguin/items/61f1291f6ee804531328
+
+```go
+package main
+import (
+  "fmt"
+  "os"
+  "os/exec"
+  "syscall"
+)
+// go run container.go run <cmd> <args>
+// docker run <cmd> <args>
+func main() {
+  switch os.Args[1] {
+    case "run":
+      run()
+    default:
+      panic("invalid command!!")
+  }
+}
+func run() {
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.SysProcAttr = &syscall.SysProcAttr{
+    Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS,
+  }
+  cmd.Run()
+}
+```
+
+- Goファイルのビルドを行う。
+
+```sh
+[vagrant@localhost 0001split_process]$ go build container.go
+```
+
+- ホスト名を変更
+
+```sh
+[vagrant@in-container 0001split_process]$ sudo hostname test
+```
+
+これで、コンテナ内部の変更がホストOSに及んでいないことがわかると思います。
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```go
+package main
+import (
+  “fmt”
+  “os”
+  “os/exec”
+  “syscall”
+)
+// go run container.go run <cmd> <args>
+// docker run <cmd> <args>
+func main() {
+  switch os.Args[1] {
+    case “run”:
+      run()
+    case “child”:
+      child()
+    default:
+      panic(“invalid command!!”)
+  }
+}
+func run() {
+  fmt.Printf(“Running %v as PID %d \n”, os.Args[2:], os.Getpid())
+  args := append([]string{“child”}, os.Args[2:]…)
+  cmd := exec.Command(“/proc/self/exe”, args…)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.SysProcAttr = &syscall.SysProcAttr{
+    Cloneflags: syscall.CLONE_NEWUTS,
+  }
+  cmd.Run()
+}
+func child() {
+  fmt.Printf(“Running %v as PID %d \n”, os.Args[2:], os.Getpid())
+  syscall.Sethostname([]byte(“container-demo”))
+  cmd := exec.Command(os.Args[2], os.Args[3:]…)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.Run()
+}
+```
 
 
 
