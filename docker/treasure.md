@@ -2,6 +2,13 @@
 
 
 
+軽量なベースイメージ
+
+https://zenn.dev/tsucchiiinoko/articles/7c096f387e8251
+
+
+
+
 ## マルチステージビルド
 
 マルチステージ ビルドmulti-stage build
