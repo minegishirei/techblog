@@ -181,11 +181,13 @@ func run() {
 }
 ```
 
+上記のコードだと、ホストOSとの分離が薄いのではと思いますが、ここにさらなる分離要素を加えていきます。
+
+
 ### 新しいプロセスを作ってみる
 
 `bin/bash`を使用して新しいプロセスを作成し、そのコンテナに専用のホスト名を割り当ててみましょう。
 理想のコンテナは元のOSとは異なるホスト名を割り当てれるはずです。
-
 
 - 元のOSで`hostname`実行。元のOSのホスト名が`localhost.localdomain`であることがわかる。
 
@@ -275,7 +277,7 @@ func run() {
   cmd.Stdout = os.Stdout
   cmd.Stderr = os.Stderr
   cmd.SysProcAttr = &syscall.SysProcAttr{
-    Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS,
+    Cloneflags: syscall.CLONE_NEWNS
   }
   cmd.Run()
 }
@@ -295,33 +297,84 @@ func run() {
 
 これで、コンテナ内部の変更がホストOSに及んでいないことがわかると思います。
 
+```sh
+[vagrant@localhost 0001split_process]$ sudo ./container run bash
+Running [bash] as PID 3123
+[root@localhost 0001split_process]# hostname test
+[root@localhost 0001split_process]# hostname
+test
+[root@localhost 0001split_process]# exit
+exit
+[vagrant@localhost 0001split_process]$ hostname
+localhost.localdomain
+[vagrant@localhost 0001split_process]$
+```
 
+## ソース解説
+
+変更があった部分を重点的にコメントを付け加えました。
+最も重要な点は`cmd.SysProcAttr`の部分です。
+新しいプロセスを作成する際のシステムプロセス属性を設定しておりますが、その属性に`CLONE_NEWNS`フラグを使用しています。
+
+```go
+func run() {
+  // コマンドとそのPIDを出力する
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+
+  // 提供された引数で新しいコマンドを作成する
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)
+  
+  // コマンドの標準入力、出力、エラー出力のストリームを設定する
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  
+  // 新しいマウント名前空間を作成するためのシステムプロセス属性を設定する
+  cmd.SysProcAttr = &syscall.SysProcAttr{
+    Cloneflags: syscall.CLONE_NEWNS, // 新しいマウント名前空間を作成するためのCLONE_NEWNSフラグを使用する
+  }
+  
+  // コマンドを実行する
+  cmd.Run()
+}
+```
+
+`CLONE_NEWNS` について調べると、システムコール `unshare(2) `についての記事が見つかりました。
+
+https://man7.org/linux/man-pages/man2/unshare.2.html
+
+`unshare`システムコールは、新しいプロセスを生成する際に
+
+
+
+
+## 
 
 
 ```go
 package main
 import (
-  “fmt”
-  “os”
-  “os/exec”
-  “syscall”
+  "fmt"
+  "os"
+  "os/exec"
+  "syscall"
 )
 // go run container.go run <cmd> <args>
 // docker run <cmd> <args>
 func main() {
   switch os.Args[1] {
-    case “run”:
+    case "run":
       run()
-    case “child”:
+    case "child":
       child()
     default:
-      panic(“invalid command!!”)
+      panic("invalid command!!")
   }
 }
 func run() {
-  fmt.Printf(“Running %v as PID %d \n”, os.Args[2:], os.Getpid())
-  args := append([]string{“child”}, os.Args[2:]…)
-  cmd := exec.Command(“/proc/self/exe”, args…)
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+  args := append([]string{"child"}, os.Args[2:]...)
+  cmd := exec.Command("/proc/self/exe", args...)
   cmd.Stdin = os.Stdin
   cmd.Stdout = os.Stdout
   cmd.Stderr = os.Stderr
@@ -331,9 +384,9 @@ func run() {
   cmd.Run()
 }
 func child() {
-  fmt.Printf(“Running %v as PID %d \n”, os.Args[2:], os.Getpid())
-  syscall.Sethostname([]byte(“container-demo”))
-  cmd := exec.Command(os.Args[2], os.Args[3:]…)
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+  syscall.Sethostname([]byte("container-demo"))
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)
   cmd.Stdin = os.Stdin
   cmd.Stdout = os.Stdout
   cmd.Stderr = os.Stderr
