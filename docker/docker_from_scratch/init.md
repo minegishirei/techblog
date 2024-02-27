@@ -277,7 +277,7 @@ func run() {
   cmd.Stdout = os.Stdout
   cmd.Stderr = os.Stderr
   cmd.SysProcAttr = &syscall.SysProcAttr{
-    Cloneflags: syscall.CLONE_NEWNS
+    Cloneflags: syscall.CLONE_NEWUTS
   }
   cmd.Run()
 }
@@ -318,34 +318,30 @@ localhost.localdomain
 
 ```go
 func run() {
-  // コマンドとそのPIDを出力する
-  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+    // プロセスの実行とPIDの表示
+    fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
 
-  // 提供された引数で新しいコマンドを作成する
-  cmd := exec.Command(os.Args[2], os.Args[3:]...)
-  
-  // コマンドの標準入力、出力、エラー出力のストリームを設定する
-  cmd.Stdin = os.Stdin
-  cmd.Stdout = os.Stdout
-  cmd.Stderr = os.Stderr
-  
-  // 新しいマウント名前空間を作成するためのシステムプロセス属性を設定する
-  cmd.SysProcAttr = &syscall.SysProcAttr{
-    Cloneflags: syscall.CLONE_NEWNS, // 新しいマウント名前空間を作成するためのCLONE_NEWNSフラグを使用する
-  }
-  
-  // コマンドを実行する
-  cmd.Run()
+    // 実行するコマンドを作成
+    cmd := exec.Command(os.Args[2], os.Args[3:]...)
+
+    // コマンドの標準入力、標準出力、標準エラー出力を設定
+    cmd.Stdin = os.Stdin
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
+
+    // コマンドの実行時のシステム属性を設定
+    cmd.SysProcAttr = &syscall.SysProcAttr{
+        // CLONE_NEWUTSフラグを設定して新しいUTS名前空間を作成
+        Cloneflags: syscall.CLONE_NEWUTS,
+    }
+
+    // コマンドの実行
+    cmd.Run()
 }
 ```
 
-`CLONE_NEWNS` について調べると、システムコール `unshare(2) `についての記事が見つかりました。
-
-https://man7.org/linux/man-pages/man2/unshare.2.html
-
-`unshare`システムコールは、新しいプロセスを生成する際に
-
-
+`CLONE_NEWUTS` はホスト名と NIS ドメイン名を隔離させた新しいプロセスを作成するオプションです。
+このオプションにより、新しいUTS名前空間を作成することが可能です。
 
 
 ## 
