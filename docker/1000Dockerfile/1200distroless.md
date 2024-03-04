@@ -106,3 +106,4 @@ ENTRYPOINT ["sh", "-c", "python -uB -m gunicorn myapp.wisgi --config /app/gunico
 
 
 
+from https://minegishirei.hatenablog.com/entry/2024/03/04/131717?_gl=1*zeqeqf*_gcl_au*MTE5NzIyMjE1MC4xNzAzNDYyOTYx
