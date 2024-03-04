@@ -2,8 +2,9 @@
 
 
 
+# 事前準備
 
-# VagrantによるCentos7のインストール
+## 1. VagrantによるCentos7のインストール
 
 
 ```sh
@@ -66,7 +67,7 @@ vagrant ssh
 
 
 
-## go言語のインストール
+## 2. go言語のインストール
 
 仮想環境内部に接続出来たら、まずはパッケージのアップデートを行いましょう。
 
@@ -92,7 +93,7 @@ go version go1.20.10 linux/amd64
 
 # コンテナを0から作る
 
-## `docker run`を作成する
+## 1. `docker run`を作成する
 
 まずはコンテナを実行するコマンド`docker run`コマンドを作成しましょう。
 
@@ -184,7 +185,7 @@ func run() {
 上記のコードだと、ホストOSとの分離が薄いのではと思いますが、ここにさらなる分離要素を加えていきます。
 
 
-### 新しいプロセスを作ってみる
+### 現時点ではホスト名の分離はできていない
 
 `bin/bash`を使用して新しいプロセスを作成し、そのコンテナに専用のホスト名を割り当ててみましょう。
 理想のコンテナは元のOSとは異なるホスト名を割り当てれるはずです。
@@ -238,7 +239,7 @@ in-container
 これは、**このコンテナのホスト名が分離されていないために発生します。**
 
 
-# コンテナの名前空間を独立させる。
+# コンテナの名前空間を独立させ、ホスト名の変更を波及させない。
 
 先ほどは、コンテナのホスト名が分離されていないために、コンテナ内部の変更がコンテナ外へ影響を及ぼしてしまいました。
 コンテナとコンテナ外は明確に隔離されていることが望ましいです。
@@ -286,13 +287,15 @@ func run() {
 - Goファイルのビルドを行う。
 
 ```sh
-[vagrant@localhost 0001split_process]$ go build container.go
+go build container.go
 ```
+
+## ホスト名の変更をしてみる
 
 - ホスト名を変更
 
 ```sh
-[vagrant@in-container 0001split_process]$ sudo hostname test
+sudo hostname test
 ```
 
 これで、コンテナ内部の変更がホストOSに及んでいないことがわかると思います。
@@ -310,7 +313,7 @@ localhost.localdomain
 [vagrant@localhost 0001split_process]$
 ```
 
-## ソース解説
+### ソース解説
 
 変更があった部分を重点的にコメントを付け加えました。
 最も重要な点は`cmd.SysProcAttr`の部分です。
@@ -344,7 +347,132 @@ func run() {
 このオプションにより、新しいUTS名前空間を作成することが可能です。
 
 
-## 
+# ホスト名を自動的に割り当てる
+
+ここまでで、自作コンテナランタイムを行う過程で以下の分離を果たすことが出来ました。
+
+- プロセスの分離
+- ホスト名の分離
+
+しかし、以下の要素の解決はまだできていません。
+
+- ホスト名の自動生成
+- ファイルシステムの分離
+
+まずは、ホスト名の自動生成から行います。
+ホスト名の自動生成はDockerを使用していれば誰しもほしいと感じるはずです。
+
+
+```go
+// main 関数はコマンドライン引数を解析し、適切な関数を実行します。
+// run 関数は現在の実行可能ファイルを使用して特定の名前空間設定で子プロセスを作成します。
+// child 関数はホスト名を設定し、指定されたコマンドを別のプロセスで実行します。
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/exec"
+	"syscall"
+)
+
+// main 関数はコマンドライン引数を解析し、適切な関数を実行します。
+func main() {
+	switch os.Args[1] {
+	case "run":
+		run()
+	case "child":
+		child()
+	default:
+		panic("無効なコマンドです！！")
+	}
+}
+
+// run 関数は現在の実行可能ファイルを使用して特定の名前空間設定で子プロセスを作成します。
+func run() {
+	fmt.Printf("PID %d として %v を実行中\n", os.Getpid(), os.Args[2:])
+
+	// 子プロセス用の引数を準備します。
+	args := append([]string{"child"}, os.Args[2:]...)
+	cmd := exec.Command("/proc/self/exe", args...)
+
+	// 子プロセスの標準入力、出力、エラーを設定します。
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	// 子プロセスが新しいUTS名前空間を使用するように設定します。
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		Cloneflags: syscall.CLONE_NEWUTS,
+	}
+
+	// 子プロセスを実行します。
+	cmd.Run()
+}
+
+// child 関数はホスト名を設定し、指定されたコマンドを別のプロセスで実行します。
+func child() {
+	fmt.Printf("PID %d として %v を実行中\n", os.Getpid(), os.Args[2:])
+
+	// コンテナのホスト名を設定します。
+	syscall.Sethostname([]byte("container-demo"))
+
+	// 別のプロセスで指定されたコマンドを実行します。
+	cmd := exec.Command(os.Args[2], os.Args[3:]...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Run()
+}
+```
+
+今回はシステムコール`sethostname`を用いて コンテナのホスト名を設定しています。
+
+
+
+```sh
+[vagrant@localhost 0030hostname_assign]$ sudo ./container run bash
+PID 3348 として [bash] を実行中
+PID 3351 として [bash] を実行中
+[root@container-demo 0030hostname_assign]# hostname
+container-demo
+[root@container-demo 0030hostname_assign]# exit
+exit
+[vagrant@localhost 0030hostname_assign]$ hostname
+localhost.localdomain
+[vagrant@localhost 0030hostname_assign]$
+```
+
+無事に、ホスト名が自動で割り当てられていることが確認できました。
+
+しかしそれでも、コンテナはホスト マシンのプロセスを認識できます。
+
+```sh
+[vagrant@localhost 0030hostname_assign]$ sudo sleep 100 &
+[1] 3544
+[vagrant@localhost 0030hostname_assign]$ sudo ./container run bash
+PID 3549 として [bash] を実行中
+PID 3552 として [bash] を実行中
+[root@container-demo 0030hostname_assign]# ps
+  PID TTY          TIME CMD
+ 3544 pts/1    00:00:00 sudo
+ 3546 pts/1    00:00:00 sleep
+ 3547 pts/1    00:00:00 sudo
+ 3549 pts/1    00:00:00 container
+ 3552 pts/1    00:00:00 exe
+ 3555 pts/1    00:00:00 bash
+ 3570 pts/1    00:00:00 ps
+```
+
+次回はこの問題を解決していきたいと思います。
+
+
+
+# ファイルシステムの分離
+
+コンテナはホストマシンのプロセスを認識できる理由は「/proc」です。
+
+コンテナはホスト マシンと同じルート ファイル システムを使用しています。したがって、コンテナには別のルート ファイル システムが使用され、そこに `/proc` がマウントされます。
 
 
 ```go
@@ -355,40 +483,29 @@ import (
   "os/exec"
   "syscall"
 )
-// go run container.go run <cmd> <args>
-// docker run <cmd> <args>
-func main() {
+
+// コマンドのオプションによって実行内容を変更。
+func main(){
   switch os.Args[1] {
     case "run":
       run()
     case "child":
       child()
     default:
-      panic("invalid command!!")
+      panic("invalid command")
   }
 }
-func run() {
-  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
-  args := append([]string{"child"}, os.Args[2:]...)
-  cmd := exec.Command("/proc/self/exe", args...)
-  cmd.Stdin = os.Stdin
-  cmd.Stdout = os.Stdout
-  cmd.Stderr = os.Stderr
-  cmd.SysProcAttr = &syscall.SysProcAttr{
-    Cloneflags: syscall.CLONE_NEWUTS,
-  }
-  cmd.Run()
-}
-func child() {
-  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
-  syscall.Sethostname([]byte("container-demo"))
-  cmd := exec.Command(os.Args[2], os.Args[3:]...)
-  cmd.Stdin = os.Stdin
-  cmd.Stdout = os.Stdout
-  cmd.Stderr = os.Stderr
-  cmd.Run()
+
+func run(){
+  fmt.Printf("Runnning %v as PID %d \n", os.Args[2:], os.GetPID())
 }
 ```
+
+
+
+
+
+
 
 
 
