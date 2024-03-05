@@ -497,10 +497,38 @@ func main(){
 }
 
 func run(){
-  fmt.Printf("Runnning %v as PID %d \n", os.Args[2:], os.GetPID())
+  // os.GetPIDはプロセスIDを取得（現在のプロセスIDと同じ）
+  fmt.Printf("Runnning %v as PID %d \n", os.Args[2:], os.Getpid())
+  args := append([]string{"child"}, os.Args[2:]...)
+  cmd := exec.Command("/proc/self/exe", args...)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.SysProcAttr = &syscall.SysProcAttr{
+    Cloneflags : syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID,
+  }
+  cmd.Run()
+}
+func child(){
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+  syscall.Sethostname([]byte("container-demo"))
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.Run()
 }
 ```
 
+
+まず、コンテナはそのコンテナの中身のプロセスのみ視認できる必要があります。
+これは、PID名前空間を使用することで区別できます。
+
+```go
+  cmd.SysProcAttr = &syscall.SysProcAttr{
+    Cloneflags : syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID,
+  }
+```
 
 
 
