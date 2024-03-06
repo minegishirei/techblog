@@ -566,6 +566,9 @@ Running [bash] as PID 1
 コンテナはホストマシンと同じルートファイルシステムを使用しています。
 したがって、コンテナには別のルートファイル システムが用意され、そこに `/proc` がマウントされるべきです。
 
+/procディレクトリは、普通のファイルシステムと違い、ハードディスクやSSDなどのストレージ上ではなく、メモリの中に作られるファイルシステムです。
+linuxのプロセスはこの`/proc`配下にファイルorフォルダーとして格納され、管理されます。
+また、/procにあるファイルを編集すれば、システムをコントロールすることもできます。
 
 
 ```go
@@ -602,19 +605,43 @@ func run(){
   }
   cmd.Run()
 }
-func child(){
+func child() {
+  // コマンドライン引数の表示とプロセスIDの取得
   fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+
+  // ホスト名を設定
   syscall.Sethostname([]byte("container-demo"))
+
+  // 新しいプロセスの生成
   cmd := exec.Command(os.Args[2], os.Args[3:]...)
   cmd.Stdin = os.Stdin
   cmd.Stdout = os.Stdout
   cmd.Stderr = os.Stderr
+
+  // ルートファイルシステムの変更
   syscall.Chroot("/containerfs")
   os.Chdir("/")
+
+  // proc ファイルシステムのマウント
   syscall.Mount("proc", "proc", "proc", 0, "")
+
+  // コマンドの実行
   cmd.Run()
+
 }
+
 ```
+
+大幅に変更された`child()`関数を確認してみましょう。
+
+- まず、`chroot`コマンドでルートファイルシステムを変更していることが確認できます。
+    - chrootとは、「CHange ROOT」のことで、ルートディレクトリを変更する技術です。ここでのROOTとは特権ユーザではなく、ファイルシステムのルートディレクトリのことを指します。UNIX系のファイルシステムは、「/」すなわちルートディレクトリを頂上としたツリー構造をとっています。このルートディレクトリを、たとえばですが「/var/chroot/」ディレクトリに変更する技術が「chroot」です。
+    from https://linuc.org/study/knowledge/420/
+    - この技術によって、元の`/proc`フォルダーが見えなくなり、プロセスの隔離ができました。
+- 次に、`cd`コマンドでディレクトリの移動をしてます。
+    - 移動先は`/`ディレクトリで、コンテナの外側から見たときには`/containerfs`ディレクトリとなります。
+
+
 
 これで、PID 名前空間を使用してプロセス ID の分離が実現しました。同様に、ネットワークとユーザーの名前空間を使用して、ネットワークとユーザーを分離できます。
 
