@@ -530,9 +530,102 @@ func child(){
   }
 ```
 
+この状態でビルド&実行&プロセス確認をしてみましょう。
+
+```sh
+[vagrant@localhost 0040hostname]$ sudo sleep 100 &
+[1] 7382
+[vagrant@localhost 0040hostname]$ ps
+  PID TTY          TIME CMD
+ 7354 pts/0    00:00:00 bash
+ 7385 pts/0    00:00:00 ps
+[vagrant@localhost 0040hostname]$ sudo ps
+  PID TTY          TIME CMD
+ 7382 pts/0    00:00:00 sudo
+ 7384 pts/0    00:00:00 sleep
+ 7386 pts/0    00:00:00 sudo
+ 7388 pts/0    00:00:00 ps
+[vagrant@localhost 0040hostname]$ go build container.go
+[vagrant@localhost 0040hostname]$ sudo ./container run bash
+Runnning [bash] as PID 7404
+Running [bash] as PID 1
+[root@container-demo 0040hostname]# ps
+  PID TTY          TIME CMD
+ 7382 pts/0    00:00:00 sudo
+ 7384 pts/0    00:00:00 sleep
+ 7402 pts/0    00:00:00 sudo
+ 7404 pts/0    00:00:00 container
+ 7407 pts/0    00:00:00 exe
+ 7410 pts/0    00:00:00 bash
+ 7425 pts/0    00:00:00 ps
+```
+
+`syscall.CLONE_NEWPID`のオプションを付け加えても、ホストマシンのプロセスを認識してしまいました。
+
+コンテナはホストマシンのプロセスを認識できる理由は「/proc」です。
+コンテナはホストマシンと同じルートファイルシステムを使用しています。
+したがって、コンテナには別のルートファイル システムが用意され、そこに `/proc` がマウントされるべきです。
 
 
 
+```go
+package main
+import (
+  "fmt"
+  "os"
+  "os/exec"
+  "syscall"
+)
+
+// コマンドのオプションによって実行内容を変更。
+func main(){
+  switch os.Args[1] {
+    case "run":
+      run()
+    case "child":
+      child()
+    default:
+      panic("invalid command")
+  }
+}
+
+func run(){
+  // os.GetPIDはプロセスIDを取得（現在のプロセスIDと同じ）
+  fmt.Printf("Runnning %v as PID %d \n", os.Args[2:], os.Getpid())
+  args := append([]string{"child"}, os.Args[2:]...)
+  cmd := exec.Command("/proc/self/exe", args...)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  cmd.SysProcAttr = &syscall.SysProcAttr{
+    Cloneflags : syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID,
+  }
+  cmd.Run()
+}
+func child(){
+  fmt.Printf("Running %v as PID %d \n", os.Args[2:], os.Getpid())
+  syscall.Sethostname([]byte("container-demo"))
+  cmd := exec.Command(os.Args[2], os.Args[3:]...)
+  cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
+  syscall.Chroot("/containerfs")
+  os.Chdir("/")
+  syscall.Mount("proc", "proc", "proc", 0, "")
+  cmd.Run()
+}
+```
+
+これで、PID 名前空間を使用してプロセス ID の分離が実現しました。同様に、ネットワークとユーザーの名前空間を使用して、ネットワークとユーザーを分離できます。
+
+ここまで分離出来た結果を確認してみましょう。
+
+- UTS(Unix Time Sharing)名前空間: ホスト名とドメイン名
+- PID 名前空間: プロセス番号
+- マウント名前空間: マウント ポイント
+- IPC 名前空間: プロセス間通信リソース
+- ネットワーク名前空間: ネットワークリソース
+- ユーザー名前空間: ユーザーおよびグループの ID 番号
 
 
 
