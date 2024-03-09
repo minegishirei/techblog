@@ -39,6 +39,14 @@ https://www.udemy.com/terms/instructor/
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">商業出版の技術書でも電子書籍だったら定価500円でもいいんじゃないの？と思って、出版したのがこちら。<br>かなり売れたが、値段が安すぎるという批判もあった。また、よその出版社からは快く思われていない。 <a href="https://t.co/YYQxXKe2a9">pic.twitter.com/YYQxXKe2a9</a></p>&mdash; Yutaka Hirata (@yutakakn) <a href="https://twitter.com/yutakakn/status/1764977965904089535?ref_src=twsrc%5Etfw">March 5, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
+## 基礎的な体力
+
+- Docker, Linuxという基礎だけで十分。
+
+
+
+
+
 ## プログラミングだけでいいのか?
 
 
