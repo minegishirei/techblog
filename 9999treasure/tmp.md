@@ -2,6 +2,16 @@
 
 
 
+プレミアム講師の申請
+
+https://www.udemy.com/instructor/user/edit-instructor-info/
+
+Udemy 講師規約
+
+https://www.udemy.com/terms/instructor/
+
+
+
 ## やりたいこと
 
 - 内容：（副業の範囲内で）会社を建てたい
