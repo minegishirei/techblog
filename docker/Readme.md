@@ -193,6 +193,14 @@ Dockerのボリューム、イメージ、コンテナを削除する方法を�
 この場合、`docker export`コマンドを使用することで、ビルドしたDockerイメージを圧縮ファイルとして配ることがうできます。
 
 
+
+
+## docker本番稼働
+
+### [distrolessイメージを活用してECRスキャンの脆弱性を撲滅する。](https://minegishirei.hatenablog.com/entry/2024/03/04/131717)
+
+
+
 ## docker-composeの使い方
 
 #### docker-composeのインストール
@@ -202,3 +210,4 @@ Dockerのボリューム、イメージ、コンテナを削除する方法を�
 #### docker-compose.ymlのオプション一覧
 
 
+from https://minegishirei.hatenablog.com/entry/2023/09/02/213936
