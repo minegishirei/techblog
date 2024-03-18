@@ -1,8 +1,9 @@
 
 
-# dockerのbuildコマンドのオプション一覧
 
-dockerのbuildコマンドについて詳しく解説します。
+docker の build コマンドについて詳しく解説します。
+docker build コマンドは Dockerfile からオリジナルの Dockerイメージ を作成するコマンドです。
+
 dockerのイメージはDockerfileによって定義されますが、buildコマンドのオプションによってコントロールできます。
 
 
@@ -18,9 +19,11 @@ dockerのイメージはDockerfileによって定義されますが、buildコ�
 
 
 
-## `docker build -t, --tag=[]`オプション
+## `docker build -t, --tag=[]`オプション 
 
+`-t, --tag`オプションは、`docker build`コマンドにとって必須級のオプションです。
 Dockerの`docker build -t`または`--tag`オプションは、**ビルドされたイメージにタグを付けるために使用されます。イメージには、複数のタグを付けることができます。**
+この`タグ`はDockerイメージ
 
 `-t`または`--tag`オプションを使用するには、次のようにコマンドを実行します。
 
